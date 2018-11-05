@@ -1,0 +1,360 @@
+{% extends 'Pagina/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="home">
+
+        <!-- Hero Slider -->
+        <div class="hero_slider_container">
+            <div class="hero_slider owl-carousel">
+                
+                
+                <!------------------------SLIDER------------------------------------------------------------------->
+                <!------------------------------------------------------------------------------------------------->
+                <!-- Hero Slide -->
+                <div class="hero_slide">
+                    <div class="hero_slide_background" style="background-image:url({% static 'images/22.jpg' %})"></div>
+                    <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+                        <div class="hero_slide_content text-center">
+                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Tenemos la mejor <span>Educación</span> !</h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Slide -->
+                <div class="hero_slide">
+                    <div class="hero_slide_background" style="background-image:url({% static 'images/1.jpg' %})"></div>
+                    <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+                        <div class="hero_slide_content text-center">
+                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Tenemos la mejor <span>Educación</span> !</h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Slide -->
+                <div class="hero_slide">
+                    <div class="hero_slide_background" style="background-image:url({% static 'images/22.jpg' %})"></div>
+                    <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+                        <div class="hero_slide_content text-center">
+                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Tenemos la mejor <span>Educación</span> !</h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200">prev</span></div>
+            <div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200">next</span></div>
+        </div>
+
+    </div>
+    <div class="hero_boxes">
+        <div class="hero_boxes_inner">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 hero_box_col">
+                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                            <img src="{% static 'images/earth-globe.svg' %}" class="svg" alt="">
+                            <div class="hero_box_content">
+                                <h2 class="hero_box_title">Múltiples Carerras</h2>
+                                <a href="courses.html" class="hero_box_link">ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 hero_box_col">
+                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                            <img src="{% static 'images/books.svg' %}" class="svg" alt="">
+                            <div class="hero_box_content">
+                                <h2 class="hero_box_title">Aula Virtual</h2>
+                                <a href="courses.html" class="hero_box_link">ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 hero_box_col">
+                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                            <img src="{% static 'images/professor.svg' %}" class="svg" alt="">
+                            <div class="hero_box_content">
+                                <h2 class="hero_box_title">Actividades</h2>
+                                <a href="teachers.html" class="hero_box_link">ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="popular page_section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center">
+                        <h1>Grados</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row course_boxes">
+                
+                <!-- Popular Course Item -->
+                <div class="col-lg-4 course_box">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/11.jpg' %}" alt="Primaria">
+                        <div class="card-body text-center">
+                            <div class="card-title"><a href="courses.html">Primaria</a></div>
+                            <div class="card-text">más información...</div>
+                        </div>
+                        <div class="price_box d-flex flex-row align-items-center">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Course Item -->
+                <div class="col-lg-4 course_box">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/22.jpg' %}" alt="Colegio">
+                        <div class="card-body text-center">
+                            <div class="card-title"><a href="courses.html">Básico</a></div>
+                            <div class="card-text">más información...</div>
+                        </div>
+                        <div class="price_box d-flex flex-row align-items-center">
+                            <div class="course_author_image">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Course Item -->
+                <div class="col-lg-4 course_box">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/11.jpg' %}" alt="Colegio">
+                        <div class="card-body text-center">
+                            <div class="card-title"><a href="courses.html">Bachillerato</a></div>
+                            <div class="card-text">más información...</div>
+                        </div>
+                        <div class="price_box d-flex flex-row align-items-center">
+                            <div class="course_author_image">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </div>
+
+
+
+
+
+
+
+    <div class="register">
+
+        <div class="container-fluid">
+            
+            <div class="row row-eq-height">
+                <div class="col-lg-6 nopadding">
+                    
+                    <!-- Register--> 
+
+                    <div class="register_section d-flex flex-column align-items-center justify-content-center">
+                        <div class="register_content text-center">
+                            <h1 class="register_title">Register now and get a discount <span>50%</span> discount until 1 January</h1>
+                            <p class="register_text">In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum. Aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempo.</p>
+                            <div class="button button_1 register_button mx-auto trans_200"><a href="#">register now</a></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 nopadding">
+                    
+                    <!-- Search --->
+
+                    <div class="search_section d-flex flex-column align-items-center justify-content-center">
+                        <div class="search_background" style="background-image:url({% static 'images/search_background.jpg' %});"></div>
+                        <div class="search_content text-center">
+                            <h1 class="search_title">Search for your course</h1>
+                            <form id="search_form" class="search_form" action="post">
+                                <input id="search_form_name" class="input_field search_form_name" type="text" placeholder="Course Name" required="required" data-error="Course name is required.">
+                                <input id="search_form_category" class="input_field search_form_category" type="text" placeholder="Category">
+                                <input id="search_form_degree" class="input_field search_form_degree" type="text" placeholder="Degree">
+                                <button id="search_submit_button" type="submit" class="search_submit_button trans_200" value="Submit">search course</button>
+                            </form>
+                        </div> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services -->
+
+    <div class="services page_section">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center">
+                        <h1>Acerca del Colegio</h1>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+          
+
+
+            <div class="row services_row">
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/earth-globe.svg' %}" alt="">
+                    </div>
+                    <h3>Misión</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/exam.svg' %}" alt="">
+                    </div>
+                    <h3>Visión</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/books.svg' %}" alt="">
+                    </div>
+                    <h3>Nivel Académico</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/professor.svg' %}" alt="">
+                    </div>
+                    <h3>Maestros</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/blackboard.svg' %}" alt="">
+                    </div>
+                    <h3>Olimpiadas</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+                <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                    <div class="icon_container d-flex flex-column justify-content-end">
+                        <img src="{% static 'images/mortarboard.svg' %}" alt="">
+                    </div>
+                    <h3>Graduandos</h3>
+                    <p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+
+    <div class="testimonials page_section">
+        <!-- <div class="testimonials_background" style="background-image:url(images/testimonials_background.jpg)"></div> -->
+        <div class="testimonials_background_container prlx_parent">
+            <div class="testimonials_background prlx" style="background-image:url({% static 'images/1.jpg' %})"></div>
+        </div>
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center">
+                        <h1>Estudiantes</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    
+                    <div class="testimonials_slider_container">
+
+                        <!-- Testimonials Slider -->
+                        <div class="owl-carousel owl-theme testimonials_slider">
+                            
+                            <!-- Testimonials Item -->
+                            <div class="owl-item">
+                                <div class="testimonials_item text-center">
+                                    <div class="quote">“</div>
+                                    <p class="testimonials_text">In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                                    <div class="testimonial_user">
+                                        <div class="testimonial_image mx-auto">
+                                            <img src="{% static 'images/testimonials_user.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial_name">james cooper</div>
+                                        <div class="testimonial_title">Graduate Student</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonials Item -->
+                            <div class="owl-item">
+                                <div class="testimonials_item text-center">
+                                    <div class="quote">“</div>
+                                    <p class="testimonials_text">In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                                    <div class="testimonial_user">
+                                        <div class="testimonial_image mx-auto">
+                                            <img src="{% static 'images/testimonials_user.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial_name">james cooper</div>
+                                        <div class="testimonial_title">Graduate Student</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonials Item -->
+                            <div class="owl-item">
+                                <div class="testimonials_item text-center">
+                                    <div class="quote">“</div>
+                                    <p class="testimonials_text">In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.</p>
+                                    <div class="testimonial_user">
+                                        <div class="testimonial_image mx-auto">
+                                            <img src="{% static 'images/testimonials_user.jpg' %}" alt="">
+                                        </div>
+                                        <div class="testimonial_name">james cooper</div>
+                                        <div class="testimonial_title">Graduate Student</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
