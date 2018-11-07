@@ -330,6 +330,17 @@ class Asignacion_Materia (models.Model):
 class Asignacion_Acividade (models.Model):
 
     Asignacion_Materia = models.ForeignKey(Asignacion_Materia, on_delete=models.CASCADE)
+    Unidades = (
+    ('uni1', 'Primera Unidad'),
+    ('uni2', 'Segunda Unidad'),
+    ('uni3', 'Tercera Unidad'),
+    ('uni4', 'Cuarta Unidad'),
+    )
+    Unidad = models.CharField(
+        max_length=20,
+        choices=Unidades,
+        default='Primera Unidad',
+    )
     Tipos = (
     ('Act1', 'Actividad 1'),
     ('Act2', 'Actividad 2'),
