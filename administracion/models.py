@@ -102,8 +102,8 @@ class Alumno(models.Model):
     Estados = (
     ('Activo', 'Activo'),
     ('Inactivo', 'Inactivo'),
-    ('PendienteExamen', 'Pendiente Examen'),
-    ('PendienteInscripcion', 'PendienteInscripcion'),
+    ('PendienteExamen', 'Pendiente De Examen'),
+    ('PendienteInscripcion', 'Pendiente De Inscripcion'),
     )
     estado = models.CharField(
         max_length=20,
@@ -153,8 +153,8 @@ class Examene(models.Model):
     Boleta = models.CharField(max_length=200)
     Estados = (
     ('Pendiente', 'Pendiente'),
-    ('Aprovado', 'Aprovado'),
-    ('Reprovado', 'Reprovado'),
+    ('Aprobado', 'Aprobado'),
+    ('Reprobado', 'Reprobado'),
     )
     Comentario = models.CharField(max_length=200, blank=True, null=True)
     Estado_Examen = models.CharField(
@@ -170,6 +170,7 @@ class Pago(models.Model):
     Boleta = models.CharField(max_length=200)
     Cantidad = models.CharField(max_length=10, blank=True, null=True)
     Tipos = (
+    ('Seguro', 'Seguro'),
     ('Inscripcion', 'Inscripcion'),
     ('Enero', 'Enero'),
     ('Febrero', 'Febrero'),
@@ -183,6 +184,7 @@ class Pago(models.Model):
     ('Octubre', 'Octubre'),
     ('Noviembre', 'Noviembre'),
     ('Diciembre', 'Diciembre'),
+    ('Otro', 'Otro'),
     )
     Comentario = models.CharField(max_length=200, blank=True, null=True)
     Tipo_Pago = models.CharField(

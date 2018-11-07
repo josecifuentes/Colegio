@@ -1,0 +1,101 @@
+{% load static %}
+   
+
+   
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LOGIN-Colegio Nuevo Mundo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+<!--===============================================================================================-->  
+    <link rel="icon" type="image/png" href="{% static 'logs/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+     {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-b-160 p-t-50">
+
+                 <form class="login100-form validate-form" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <span class="login100-form-title p-b-43">
+                        Iniciar Session
+                    </span>
+                    
+                    <div class="wrap-input100 rs1 validate-input" data-validate = "Username is required">
+                        <td>{{ form.username.label_tag }}</td>
+                         <td>{{ form.username }}</td>
+                    </div>
+                    
+                    
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Password is required">
+                        <td>{{ form.password.label_tag }}</td>
+                         <td>{{ form.password }}</td>
+                    </div>
+
+                    
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Sign in
+                        </button>
+                    </div>
+                    
+                    <div class="text-center w-full p-t-23">
+                        <a href="#" class="txt1">
+                            Forgot password?
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    
+    
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'logs/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'logs/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'logs/js/main.js' %}"></script>
+
+</body>
+</html>
