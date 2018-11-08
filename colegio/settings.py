@@ -25,8 +25,7 @@ SECRET_KEY = '$d+bl(7raq=z&dybs$jhmr)rfb1_zgk6hyl=gdq+bp=p1cawtk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://colegionm.pythonanywhere.com/','http://localhost']
-
+ALLOWED_HOSTS = ['127.0.0.1', ' . pythonanywhere.com']
 
 # Application definition
 
