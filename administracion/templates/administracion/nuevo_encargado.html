@@ -1,8 +1,122 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
-    <h1>Nuevo Encargado</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Guardar</button>
-    </form>
+     <!---ENCARGADOS FORMULARIO--->
+                <!--- FORMULARIO ALUMNOS-->
+        <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>Ingresar Encargado</h1>
+                                </div>
+                            </div>
+                            <!---form--->
+                            <form action="{% url 'nuevo_encargado' %}" method="POST" class="post-form">{% csrf_token %}
+                                {% for non_field_error in form.non_field.errors %}
+                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                {% endfor %}
+                                                    <div class="form-group-inner">
+                                                        <div class="row">
+                                                            
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Nombres.id_for_label }}">Nombres:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                  {{form.Nombres}}
+                                                            </div>
+                                                           
+                                                            <!---apellidos---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Apellidos.id_for_label }}">Apellidos:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.Apellidos}}
+                                                            </div>
+                                                           <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono_celular.id_for_label }}">Teléfono Celular:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{form.telefono_celular}}
+                                                                </div>
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Dirección:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.direccion}}
+                                                            </div>
+                                                             <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono_casa.id_for_label }}">Teléfono Casa </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.telefono_casa}}
+                                                                </div>
+                                                            <br><br><br>
+                                                            <!---TRABAJO--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Trabajo.id_for_label }}">Trabajo</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Trabajo}}
+                                                            </div>
+                                                            <!---Teléfono Trabajo---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono_trabajo.id_for_label }}">Teléfono Trabajo </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{form.telefono_trabajo}}
+                                                                </div>
+                                                            </div><br><br><br>
+
+                                                            <!---DPI--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">DPI </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                  {{form.Dpi}}
+                                                                </div>
+                                                            </div>
+                                                            <!---ESTADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Estado Del Encargado:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{form.estado}}
+                                                                </div>
+                                                               
+                                                            </div>
+                                                    </div>
+
+                                                   <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    
+                            </form> 
+                            <!--- fin form :)--->     
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
 {% endblock %}

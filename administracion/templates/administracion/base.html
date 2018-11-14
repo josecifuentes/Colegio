@@ -54,6 +54,28 @@
         ============================================ -->
     <link rel="stylesheet" href="{% static 'css/calendar/fullcalendar.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/calendar/fullcalendar.print.min.css' %}">
+     <!-- touchspin CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/touchspin/jquery.bootstrap-touchspin.min.css' %}">
+      <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/datapicker/datepicker3.css' %}">
+    <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- select2 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+    <!-- chosen CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/chosen/bootstrap-chosen.css' %}">
+    <!-- ionRangeSlider CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/ionRangeSlider/ion.rangeSlider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionRangeSlider/ion.rangeSlider.skinFlat.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
     <!-- style CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -80,36 +102,60 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
-                            <a class="has-arrow" href="index.html">
+                            <a class="has-arrow" href="{% url 'dashboard'%}">
                                    <span class="educate-icon educate-home icon-wrap"></span>
                                    <span class="mini-click-non">Inicio</span>
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Principal" href="index.html"><span class="mini-sub-pro">Principal</span></a></li>
-                                <li><a title="Actividades" href="index-1.html"><span class="mini-sub-pro">Actividades</span></a></li>
-                                <li><a title="Alumnos" href="index-2.html"><span class="mini-sub-pro">Alumnos</span></a></li>
+                                <li><a title="Principal" href="{% url 'dashboard'%}"><span class="mini-sub-pro">Principal</span></a></li>
+                                <li><a title="Actividades" href="#"><span class="mini-sub-pro">Actividades</span></a></li>
+                                <li><a title="Alumnos" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Alumnos</span></a></li>
                              </ul>
                         </li>
+                        {% if perms.administracion.delete_grado %}
                         <li>
-                            <a title="Calendario Actividades" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Calendario</span></a>
+                            <a title="Calendario Actividades" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Calendario</span></a>
                         </li>
+                        {% endif %}
+                        {% if perms.administracion.delete_encargado %}
                         <li>
                             <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Encargados</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Todos Los Encargados" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
+                                <li><a title="Todos Los Encargados" href="{% url 'ver_encargados' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
+                                {% if perms.administracion.add_encargado %}
                                 <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Encargados</span></a></li>
-                                <li><a title="Asignar Encargados" href="{% url 'asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
+                                 {% endif %}
+                            {% if perms.administracion.add_encargados_alumnos %}
+                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
+                                {% endif %}
                             </ul>
                         </li>
+                        {% endif %}
+                        {% if perms.administracion.delete_alumno %}
                         <li>
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Estudiantes</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Estudiantes</span></a></li>
+                                <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
+                            {% if perms.administracion.add_alumno %}
                                 <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
-                                <li><a title="Editar Estudiantes" href="edit-student.html"><span class="mini-sub-pro">Editar Estudiantes</span></a></li>
-                                <li><a title="Papeleria" href="edit-student.html"><span class="mini-sub-pro">Papeleria</span></a></li>
+                            {% endif %}
+
+                            
+
+                                
                             </ul>
                         </li>
+                         {% endif %}
+                          {% if perms.administracion.delete_examene %}
+                         <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Examenes</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Courses" href="{% url 'ver_examenes' %}"><span class="mini-sub-pro">Todos Los Examenes</span></a></li>
+                                <li><a title="Add Courses" href="{% url 'agregar_examenes' %}"><span class="mini-sub-pro">Realizar Un Examen</span></a></li>
+                            </ul>
+                        </li>
+                         {% endif %}
+                         {% if perms.administracion.delete_materia %}
                         <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non"> Materias</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
@@ -119,6 +165,8 @@
                                 <li><a title="Asignar Materia" href="course-info.html"><span class="mini-sub-pro">Asignar Materia</span></a></li>
                             </ul>
                         </li>
+                         {% endif %}
+                         {% if perms.administracion.delete_grado %}
                          <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Grados</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
@@ -129,6 +177,8 @@
                                 
                             </ul>
                         </li>
+                         {% endif %}
+                         {% if perms.administracion.delete_aula %}
                         <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Aulas</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
@@ -138,6 +188,8 @@
                                 <li><a title="Asignacion De Aulas" href="edit-department.html"><span class="mini-sub-pro">Asignacion De Aulas</span></a></li>
                             </ul>
                         </li>
+                         {% endif %}
+                         {% if perms.administracion.delete_grado %}
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mensajeria</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
@@ -146,6 +198,20 @@
                                
                             </ul>
                         </li>
+                        {% endif %}
+                        {% if perms.administracion.delete_pago %}
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Pagos</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Ver Pagos Alumnos" href="{% url 'ver_pagos' %}"><span class="mini-sub-pro">Ver Pagos Alumnos</span></a></li>
+                                {% if perms.administracion.add_encargados_alumnos %}
+                                <li><a title="Agregar Pagos" href="{% url 'asignacion_pagos' %}"><span class="mini-sub-pro">Agregar Pagos</span></a></li>
+                                {% endif %}
+                                
+                            </ul>
+                        </li>
+                          {% endif %}
+                        {% if perms.administracion.delete_grado %}
                         <li>
                             
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Configuraciones</span></a>
@@ -158,7 +224,7 @@
                                 <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
                             </ul>
                         </li>
-                        
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -195,7 +261,7 @@
                                             <ul class="nav navbar-nav mai-top-nav">
                                                 <li class="nav-item"><a href="{% url 'dashboard'%}" class="nav-link">Pagina Principal</a>
                                                 </li>
-                                                <li class="nav-item"><a href="#" class="nav-link">Regresar Pagina Colegio</a>
+                                                <li class="nav-item"><a href="..\" class="nav-link">Regresar a La Pagina Del Colegio</a>
                                                 </li>
                                                 
                                                 
@@ -219,8 +285,8 @@
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span class="message-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.</p>
+                                                                        <h2>Prueba</h2>
+                                                                        <p>Prueba Del Mensaje.</p>
                                                                     </div>
                                                                 </a>
                                                             </li>
@@ -245,7 +311,7 @@
                                                                     <div class="notification-content">
                                                                         <span class="notification-date">16 Sept</span>
                                                                         <h2>Nombre</h2>
-                                                                        <p>Please done this project as soon possible.</p>
+                                                                        <p>P....</p>
                                                                     </div>
                                                                 </a>
                                                             </li>
@@ -263,7 +329,20 @@
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>TIPO CUENTA</a>
+                                                        <li><a href="#">
+
+                                                        <span class="edu-icon edu-home-admin author-log-ic">
+                                                            
+                                                        </span>
+
+                                        {% if 'Administracion' ==  request.user.groups.all.0.name %}  
+                                            Administracion
+                                        {% endif %}
+                                        {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
+                                            Secretaria
+                                        {% endif %}
+
+                                                    </a>
                                                         </li>
                                                         <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mi Perfil</a>
                                                         </li>
@@ -271,7 +350,7 @@
                                                         </li>
                                                         <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Configuracion</a>
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Cerrar Session</a>
+                                                        <li><a href="{% url 'logout' %}"><span class="edu-icon edu-locked author-log-ic"></span>Cerrar Session</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -488,14 +567,16 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Inicio <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <li><a data-toggle="collapse" data-target="#Charts" href="{% url 'dashboard'%}">Inicio <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="index.html">Principal</a></li>
-                                                <li><a href="index-1.html">Actividades</a></li>
-                                                <li><a href="index-3.html">Alumnos</a></li>
+                                                <li><a href="{% url 'dashboard'%}">Principal</a></li>
+                                                <li><a href="{% url 'dashboard'%}">Actividades</a></li>
+                                                <li><a href="{% url 'dashboard'%}">Alumnos</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="events.html">Clendario</a></li>
+                                       
+                                        <li><a href="#">Calendario</a></li>
+                                     
                                         <li><a data-toggle="collapse" data-target="#demoevent" href="#">Encargados <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demoevent" class="collapse dropdown-header-top">
                                                 <li><a href="all-professors.html">Ver Encargados</a>
@@ -509,12 +590,13 @@
                                         </li>
                                         <li><a data-toggle="collapse" data-target="#demopro" href="#">Estudiantes <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="all-students.html">Ver Estudiantes</a>
+                                                <li><a href="{% url 'dashboard'%}">Ver Estudiantes</a>
                                                 </li>
+                                                {% if 'administracion.add_alumno' in perms %}
                                                 <li><a href="add-student.html">Añadir Estudiantes</a>
                                                 </li>
-                                                <li><a href="edit-student.html">Editar Estudiantes</a>
-                                                </li>
+                                                {% endif %}
+
                                                 <li><a href="student-profile.html">Papeleria</a>
                                                 </li>
                                             </ul>
@@ -607,7 +689,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Inicio</a> <span class="bread-slash">/</span>
+                                            <li><a href="{% url 'dashboard'%}">Inicio</a> <span class="bread-slash">/</span>
                                             </li>
                                             <li><span class="bread-blod">Principal</span>
                                             </li>
@@ -676,6 +758,10 @@
     <!-- scrollUp JS
         ============================================ -->
     <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+     <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'js/scrollbar/mCustomScrollbar-active.js' %}"></script>
     <!-- counterup JS
         ============================================ -->
     <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
@@ -689,6 +775,48 @@
         ============================================ -->
     <script src="{% static 'js/metisMenu/metisMenu.min.js' %}"></script>
     <script src="{% static 'js/metisMenu/metisMenu-active.js' %}"></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src="{% static 'js/tab.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- colorpicker JS
+        ============================================ -->
+    <script src="{% static 'js/colorpicker/jquery.spectrum.min.js' %}"></script>
+    <script src="{% static 'js/colorpicker/color-picker-active.js' %}"></script>
+    <!-- datapicker JS
+        ============================================ -->
+    <script src="{% static 'js/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/datapicker/datepicker-active.js' %}"></script>
+    <!-- input-mask JS
+        ============================================ -->
+    <script src="{% static 'js/input-mask/jasny-bootstrap.min.js' %}"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'js/chosen/chosen-active.js' %}"></script>
+    <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'js/select2/select2-active.js' %}"></script>
+    <!-- ionRangeSlider JS
+        ============================================ -->
+    <script src="{% static 'js/ionRangeSlider/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'js/ionRangeSlider/ion.rangeSlider.active.js' %}"></script>
+    <!-- rangle-slider JS
+        ============================================ -->
+    <script src="{% static 'js/rangle-slider/jquery-ui-1.10.4.custom.min.js' %}"></script>
+    <script src="{% static 'js/rangle-slider/jquery-ui-touch-punch.min.js' %}"></script>
+    <script src="{% static 'js/rangle-slider/rangle-active.js' %}"></script>
+    <!-- knob JS
+        ============================================ -->
+    <script src="{% static 'js/knob/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/knob/knob-active.js' %}"></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src="{% static 'js/tab.js' %}"></script>
     <!-- morrisjs JS
         ============================================ -->
     <script src="{% static 'js/morrisjs/raphael-min.js' %}"></script>
@@ -704,25 +832,7 @@
     <script src="{% static 'js/calendar/moment.min.js' %}"></script>
     <script src="{% static 'js/calendar/fullcalendar.min.js' %}"></script>
     <script src="{% static 'js/calendar/fullcalendar-active.js' %}"></script>
-    <!-- plugins JS
-        ============================================ -->
-    <script src="{% static 'js/plugins.js' %}"></script>
-    <!-- main JS
-        ============================================ -->
-    <script src="{% static 'js/main.js' %}"></script>
-    <!-- tawk chat JS
-        ============================================ -->
-    <script src="{% static 'js/tawk-chat.js' %}"></script>
-
-
-    <!-- mCustomScrollbar JS
-        ============================================ -->
-    <script src="{% static 'js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script src="{% static 'js/scrollbar/mCustomScrollbar-active.js' %}"></script>
-    <!-- metisMenu JS
-        ============================================ -->
-    <script src="{% static 'js/metisMenu/metisMenu.min.js' %}"></script>
-    <script src="{% static 'js/metisMenu/metisMenu-active.js' %}"></script>
+  
     <!-- data table JS
         ============================================ -->
     <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>

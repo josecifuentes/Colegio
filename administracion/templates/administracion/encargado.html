@@ -1,0 +1,192 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+  
+      
+<!-- Single pro tab review Start-->
+        <div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Editar Informacion Basica</a></li>
+                                <li><a href="#reviews"> Editar Informacion De Trabajo</a></li>
+                                <li><a href="#INFORMATION">Asignacion De Alumnnos</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad">
+                                            <form method="POST" class="dropzone dropzone-custom needsclick add-professors" class="post-form">
+                                                {% csrf_token %}
+                                                {% for non_field_error in form.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                
+                                                              
+                                                              
+                                                                <div class="form-group">
+                                                                      <label class="login2 pull-left pull-left-pro">Nombres Del Encargado: </label>
+                                                                  <div class="input-mark-inner mg-b-22">
+                                                                  {{form.Nombres}}
+                                                                </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                     <label class="login2 pull-left pull-left-pro">Apellidos Del Encargado: </label>
+                                                                   {{form.Apellidos}}
+                                                                </div>
+                                                               <div class="form-group">
+                                                                    <label class="login2 pull-left pull-left-pro">Dpi: </label>
+                                                                    {{form.Dpi}}
+                                                                </div>
+                                                                
+ 
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="form-group">
+                                                                     <label class="login2 pull-left pull-left-pro">Direccion De Residencia: </label>
+                                                                   {{form.direccion}}
+                                                                </div>
+                                                                <div class="form-group edit-ta-resize res-mg-t-15">
+                                                                    <label class="login2 pull-left pull-left-pro">Telfono De Residencia: </label>
+                                                                    {{form.telefono_casa}}
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                     <label class="login2 pull-left pull-left-pro">Telefono Celular: </label>
+                                                                    {{form.telefono_celular}}
+                                                                </div>
+                                                                <div class="form-group">
+                                                                <label class="login2 pull-left pull-left-pro"for=" {{ form.estado.id_for_label }}">Estado Del Encargado:</label>
+                                                                 <div class="form-select-list">
+                                                                    {{form.estado}}
+                                                                </div>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Editar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="reviews">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="devit-card-custom">
+                                                            <div class="form-group">
+                                                                <label class="login2 pull-left pull-left-pro">Lugar De Trabajo: </label>
+                                                                {{form.Trabajo}}
+                                                            </div>
+                                                            <div class="form-group">
+                                                                 <label class="login2 pull-left pull-left-pro">Lugar De Trabajo: </label>
+                                                                {{form.telefono_trabajo}}
+                                                            </div>
+                                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Editar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                                <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                             <H1>Asignar Encargados</H1>
+                                               <div class="sparkline10-graph">
+                                <div class="static-table-list">
+                                    <table class="table border-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Encargado</th>
+                                                <th>Prentesco</th>
+                                                <th>Alumno</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for encargado in encargados%}
+                                            <tr>
+                                                <td>{{encargado.pk}}</td>
+                                                <td><a href="{% url 'encargado' pk=encargado.pk%}">{{encargado.encargado}}</a></td>
+                                                <td>{{encargado.parentesco}}</td>
+                                                <td><a href="{% url 'alumno_editar' pk=encargado.alumno.pk%}">{{encargado.alumno}}</a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br><br><br>
+                                            <div class="review-content-section">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="devit-card-custom">
+															
+                                                           <form action="{% url 'asignacion_alumno' pk=encargado.pk %}" method="POST" class="post-form">
+                                                                        {% csrf_token %}
+                                                {% for non_field_error in form.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form1.encargado.id_for_label }}">Alumno:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    {{ form1.alumno }}
+                                                              </div>
+                                                            </div>   
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Parentesco</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form1.parentesco}}
+                                                            </div>
+                                                            
+                                                            <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button href="#" class="btn btn-white" >Nuevo Encargado</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>   
+                                                    </form>
+													</div>
+												</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

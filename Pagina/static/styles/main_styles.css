@@ -411,7 +411,7 @@ section
 {
 	width: 279px;
 	height: 100%;
-	background: #ffb606;
+	background: #0951A2;
 }
 .header_side img
 {
@@ -453,7 +453,7 @@ section
 }
 .hamburger_container:hover i
 {
-	color: #ffb606;
+	color: #0951A2;
 }
 
 /*********************************
@@ -531,7 +531,7 @@ section
 }
 .menu_item a:hover
 {
-	color: #ffb606;
+	color: #0951A2;
 }
 .menu_close_container
 {
@@ -612,7 +612,7 @@ section
 }
 .menu_social_item a i:hover
 {
-	color: #ffb606;
+	color: #B2120D;
 }
 .menu_container.active .menu_social_container
 {
@@ -711,7 +711,7 @@ section
 }
 .hero_slide_content h1 span
 {
-	background: #ffb606;
+	background: #0951A2;
 	padding-left: 13px;
 	padding-right: 13px;
 	margin-left: -12px;
@@ -759,7 +759,7 @@ section
 }
 .hero_slider_nav:hover
 {
-	background: #ffb606;
+	background: #0951A2;
 }
 .hero_slider_nav:hover span
 {
@@ -811,7 +811,7 @@ section
 }
 .hero_box:hover
 {
-	background: #ffb606;
+	background: #0951A2;
 }
 .hero_box img
 {
@@ -821,7 +821,7 @@ section
 }
 .svg path
 {
-	fill: #ffb606;
+	fill: #B2120D;
 }
 .hero_box svg
 {

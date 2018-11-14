@@ -1,8 +1,177 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
-    <h1>Nuevo Alumno</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Guardar</button>
-    </form>
+  
+      
+
+
+
+    <!--- FORMULARIO ALUMNOS-->
+        <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>Ingresar Alumnos</h1>
+                                </div>
+                            </div>
+
+                            <!---form--->
+                            <form action="{% url 'nuevo_alumno' %}" method="POST" class="post-form">{% csrf_token %}
+                                {% for non_field_error in form.non_field.errors %}
+                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                {% endfor %}
+                                                    <div class="form-group-inner">
+                                                        <div class="row">
+
+
+                                                           <!---codigo  --->
+                                                           
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Codigo.id_for_label }}"> CODIGO: </label>   
+                                                        </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                        
+                                                        {{form.Codigo}}
+
+                                                                </div>
+                                                            </div>
+
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.Primer_Nombre.id_for_label }}">Primer Nombre:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Primer_Nombre}}
+                                                                {% for error in form.Primer_Nombre.errors %}
+                                                                    <p class="help is-danger">{{ error }}</p>
+                                                                {% endfor %}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Segundo_Nombre.id_for_label }}">Segundo Nombre:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+
+                                                                {{ form.Segundo_Nombre }}
+                                                            </div><br><br><br>
+
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Tercer_Nombre.id_for_label }}">Tercer Nombre:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{ form.Tercer_Nombre }}
+                                                            </div>
+                                                            <!---apellidos---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Primer_Apellido.id_for_label }}">Primer Apellido:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{ form.Primer_Apellido }}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Segundo_Apellido.id_for_label }}">Segundo Apellido:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                             {{ form.Segundo_Apellido }}
+                                                            </div>
+                                                            <!---GRADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Grado.id_for_label }}">Grado:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    
+                                                                         {{ form.Grado }}
+                                                                    
+                                                                      
+                                                              </div>
+                                                            
+                                                            </div>
+                                                            <!---Seccion---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Seccion.id_for_label }}">Seccion:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{ form.Seccion }}
+                                                                </div> 
+                                                              
+                                                            </div> 
+                                                            <!---GÉNERO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Genero.id_for_label }}">Género:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{ form.Genero }}
+                                                                </div> 
+                                                              
+                                                            </div> 
+                                                            <!---Fecha de Nacimiento---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+                                                            </div> 
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
+                                                                <div class="input-group date">
+                                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                 {{form.nacimiento}}
+                                                                </div>
+                                                            </div> 
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.direccion.id_for_label }}">Dirección:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.direccion}}
+                                                            </div>
+                                                             <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.telefono.id_for_label }}">Teléfono: </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{ form.telefono }}
+                                                                </div>
+                                                            </div>
+                                                            <!---ESTADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Estado Del Alumno:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{form.estado}}
+                                                                </div>
+                                                               
+                                                            </div>
+                                                 </div>
+
+
+                                                        
+                                                         	
+                                                   <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                 
+    							</form>
+                            <!--- fin form :)--->     
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
+
+
+         <!---FIN FORMULLARIO ALUMNOS--->
 {% endblock %}

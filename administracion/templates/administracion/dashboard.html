@@ -1,6 +1,5 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
-
 <!-- Static Table Start -->
         <div class="data-table-area mg-b-15">
             <div class="container-fluid">
@@ -9,7 +8,7 @@
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                    <h1>Tabla <span class="table-project-n">Alumnos</span> Pendientes De Examen</h1>
+                                    <h1>Tabla <span class="table-project-n">Alumnos</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline13-graph">
@@ -42,7 +41,12 @@
                                         {% for alumno in alumnos %}
                                             <tr>
                                                 <td></td>
-                                                <td><a href="{% url 'estudiante' pk=alumno.pk %}">{{ alumno.Codigo }}</a></td>
+                                                {% if perms.administracion.change_alumno %}
+                                                <td><a href="{% url 'alumno_editar' pk=alumno.pk %}">{{ alumno.Codigo }}</a></td>
+                                                {% else %}
+                                                <td>{{ alumno.Codigo }}</td>
+                                                {% endif %}
+
                                                 <td>{{ alumno.Primer_Nombre }}</td>
                                                 <td>{{ alumno.Segundo_Nombre }}</td>
                                                 <td>{{ alumno.Primer_Apellido }}</td>

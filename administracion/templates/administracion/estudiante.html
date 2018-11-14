@@ -1,7 +1,10 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
+ 
+                                                        
 
-    <!-- Single pro tab review Start-->
+   <!-- VER EDITAR Y ASIGNAR ENCARGADO--->
+   <!--CUADRO IZQUIERDA-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -10,146 +13,416 @@
                             <div class="profile-img">
                                 <img src="img/profile/1.jpg" alt="" />
                             </div>
-                            <div class="profile-details-hr">
+                                <div class="profile-details-hr">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Código</b><br /> {{alumno.Codigo}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Nombre</b><br /> {{ alumno.Primer_Nombre }} {{ alumno.Primer_Apellido }}</p>
+                                            <p><b>Grado</b><br /> {{alumno.Grado}}</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Primer Nombre</b><br /> {{alumno.Primer_Nombre}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>Segundo Nombre</b><br /> {{alumno.Segundo_Nombre}}</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Primer Apellido</b><br /> {{alumno.Primer_Apellido}}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Grado</b><br /> {{ alumno.Grado }}</p>
+                                            <p><b>Segundo Apellido</b><br /> {{alumno.Segundo_Apellido}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                            <p><b>Esado</b><br /> {{ alumno.estado }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Telefono</b><br /> {{ alumno.telefono }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="address-hr">
-                                            <p><b>Direccion</b><br /> {{ alumno.direccion }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
+                    <!-- FIN CUADRO IZQUIERDA-->
+                    <!--  Cuadro Principal-->
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Modificar Alumno</a></li>
+                                <li class="active"><a href="#editaralumnos">Editar</a></li>
+                                <li><a href="#encargados"> Encargados</a></li>
+                                <li><a href="#papeleria">Papeleria</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="product-tab-list tab-pane fade active in" id="editaralumnos">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <input name="Primer_Nombre" type="text" class="form-control" placeholder="Primer Nombre">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Primer Nombre:">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input name="Segundo_Nombre" type="text" class="form-control" placeholder="Segundo Nombre">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Segundo Nombre">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Address">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Date of Birth">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Department">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="number" class="form-control" placeholder="Pincode">
-                                                        </div>
-                                                        
+                                                <!---FORMULARIO EDITAR ALUMNOS--->
+
+
+                                               <div class="col-lg-12">
+                                                <H1>Editar Alumno</H1>
+                                                <br><br>
+                    <form method="POST" class="post-form">
+                        {% csrf_token %}
+                                                {% for non_field_error in form.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
+                                                        <!---codigo--->
+
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro" for="{{ form.Codigo.id_for_label }}">Código: </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{form.Codigo}}
+                                                                </div>
+                                                            </div>
+                                                         <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Primer_Nombre.id_for_label }}">Primer Nombre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.Primer_Nombre}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Segundo_Nombre.id_for_label }}">Segundo Nombre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Segundo_Nombre}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Tercer_Nombre.id_for_label }}">Tercer Nombre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Tercer_Nombre}}
+                                                            </div>
+                                                            <!---apellidos---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Primer_Apellido.id_for_label }}">Primer Apellido</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Primer_Apellido}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Segundo_Apellido.id_for_label }}">Segundo Apellido</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Segundo_Apellido}}
+                                                            </div>
+                                                            <!---GRADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Grado.id_for_label }}">Grado</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    {{form.Grado}}
+                                                              </div>
+                                                            </div> 
+                                                            <!---Seccion---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Seccion.id_for_label }}">Seccion:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{ form.Seccion }}
+                                                                </div> 
+                                                              
+                                                            </div>   
+                                                            <!---GÉNERO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Genero.id_for_label }}">Género</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                   {{form.Genero}}
+                                                              </div>
+                                                            </div> 
+                                                            <!---Fecha de Nacimiento---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.nacimiento.id_for_label }}">Fecha de Nacimiento</label>
+                                                            </div> 
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
+                                                                <div class="input-group date">
+                                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                 {{form.nacimiento}}
+                                                                </div>
+                                                            </div> 
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Dirección</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.direccion}}
+                                                            </div>
+                                                             <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono.id_for_label }}">Teléfono </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{form.telefono}}
+                                                                </div>
+                                                            </div><br><br><br>
+                                                            <!---ESTADO--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Estado Del Alumno:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{form.estado}}
+                                                                </div>
+                                                               
+                                                            </div>
+                                                            
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group sm-res-mg-15 tbpf-res-mg-15">
-                                                            <input type="text" class="form-control" placeholder="Segundo Nombre">
+
+                                                   <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                       <a href="..\..\"> <button class="btn btn-white">Cancelar</button></a>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar Cambios</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <select class="form-control">
-																<option>Select Gender</option>
-																<option>Male</option>
-																<option>Female</option>
-															</select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <select class="form-control">
-																	<option>Select country</option>
-																	<option>India</option>
-																	<option>Pakistan</option>
-																	<option>Amerika</option>
-																	<option>China</option>
-																	<option>Dubai</option>
-																	<option>Nepal</option>
-																</select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <select class="form-control">
-																	<option>Select state</option>
-																	<option>Gujarat</option>
-																	<option>Maharastra</option>
-																	<option>Rajastan</option>
-																	<option>Maharastra</option>
-																	<option>Rajastan</option>
-																	<option>Gujarat</option>
-																</select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <select class="form-control">
-																	<option>Select city</option>
-																	<option>Surat</option>
-																	<option>Baroda</option>
-																	<option>Navsari</option>
-																	<option>Baroda</option>
-																	<option>Surat</option>
-																</select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Website URL">
-                                                        </div>
-                                                        <input type="number" class="form-control" placeholder="Mobile no.">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="payment-adress mg-t-15">
-                                                            <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15">Editar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    </div> 
+                                                    </form>
+                                                    <!---Fin Formulario Alumnos---> 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+                                <div class="product-tab-list tab-pane fade" id="encargados">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                               <H1>Asignar Encargados</H1>
+                                               <div class="sparkline10-graph">
+                                <div class="static-table-list">
+                                    <table class="table border-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Encargado</th>
+                                                <th>Prentesco</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for encargado in encargados%}
+                                            <tr>
+                                                <td>{{encargado.pk}}</td>
+                                                <td><a href="{% url 'encargado' pk=encargado.pk%}">{{encargado.encargado}}</a></td>
+                                                <td>{{encargado.parentesco}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                               <!---Seleccionar encargado---><br><br><br>
+
+
+                                                 <form action="{% url 'asignacion_encargado' pk=alumno.pk %}" method="POST" class="post-form">
+                                                                        {% csrf_token %}
+                                                {% for non_field_error in form.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form1.encargado.id_for_label }}">Encargado:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    {{ form1.encargado }}
+                                                              </div>
+                                                            </div>   
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Parentesco</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form1.parentesco}}
+                                                            </div>
+                                                            
+                                                            <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button href="#" class="btn btn-white" type="submit">Nuevo Encargado</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>   
+                                                    </form>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="papeleria">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <H1>Papeleria</H1>
+                                                <div class="col-lg-15">
+                                                <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre de Padre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre de Madre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Alérgias</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Enfermedades</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Grupo Sanguíneo</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre Doctor</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <input type="text" class="form-control" />
+                                                            </div><br><br><br>
+                                                            <!---Teléfono--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Teléfono Doctor </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 <input type="text" class="form-control" data-mask="999-99999" placeholder="Máximo 8 dígitos...">
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Partida de Nacimiento</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
+                                                                         <option value="ej1">Entregada</option>
+                                                                         <option value="ej2">No entregado</option>
+                                                                    </select>
+                                                              </div>
+                                                            </div> 
+                                                            <!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Pre Primaria</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
+                                                                         <option value="ej1">Entregada</option>
+                                                                         <option value="ej2">No entregado</option>
+                                                                    </select>
+                                                              </div>
+                                                            </div><!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Primaria</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
+                                                                         <option value="ej1">Entregada</option>
+                                                                         <option value="ej2">No entregado</option>
+                                                                    </select>
+                                                              </div>
+                                                            </div>
+                                                            <!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Básico</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
+                                                                         <option value="ej1">Entregada</option>
+                                                                         <option value="ej2">No entregado</option>
+                                                                    </select>
+                                                              </div>
+                                                            </div>
+                                                            <!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Bachillerato</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
+                                                                         <option value="ej1">Entregada</option>
+                                                                         <option value="ej2">No entregado</option>
+                                                                    </select>
+                                                              </div>
+                                                            </div>
+                                                            <!---COMENTARIOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Comentario </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-1"class="form-group res-mg-t-15">
+                                                                    <textarea name="description" placeholder="Comentario"></textarea>
+                                                                </div>
+                                                            </div>   
+
+                                                           <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <a href="..\..\"><button class="btn btn-white">Cancelar</button></a>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>       
+
+                                                </div>            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- fiiiiiiiiiiiiiiiiiiiiiiiiiiiiinn-->
 {% endblock %}

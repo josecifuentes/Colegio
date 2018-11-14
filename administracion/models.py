@@ -76,14 +76,23 @@ class Materia(models.Model):
         return '%s' % (self.Nombre_Materia)
 
 class Alumno(models.Model):
-    Creado = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    Creado = models.ForeignKey('auth.User', on_delete=models.CASCADE,blank=True, null=True)
     Codigo = models.CharField(max_length=200,null=True,blank=True)
-    Primer_Nombre = models.CharField(max_length=200)
-    Segundo_Nombre = models.CharField(max_length=200)
+    Primer_Nombre = models.CharField(max_length=200,)
+    Segundo_Nombre = models.CharField(max_length=200, blank=True, null=True)
     Tercer_Nombre = models.CharField(max_length=200,null=True,blank=True)
-    Primer_Apellido = models.CharField(max_length=200)
-    Segundo_Apellido = models.CharField(max_length=200)
+    Primer_Apellido = models.CharField(max_length=200,blank=True, null=True)
+    Segundo_Apellido = models.CharField(max_length=200,blank=True, null=True)
     Grado = models.ForeignKey(Grado, on_delete=models.CASCADE)
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
     HOMBRE = 'Hombre'
     MUJER = 'Mujer'
     GENEROS = (
@@ -118,7 +127,7 @@ class Alumno(models.Model):
         self.save()
 
     def __str__(self):
-        return '%s %s %s %s' % (self.Primer_Nombre, self.Segundo_Nombre, self.Primer_Apellido, self.Segundo_Apellido)
+        return '%s %s %s %s %s %s' % (self.Codigo,self.Primer_Nombre, self.Segundo_Nombre, self.Primer_Apellido, self.Segundo_Apellido, self.Grado)
 
 class Encargado(models.Model):
     Nombres = models.CharField(max_length=200)
@@ -162,14 +171,22 @@ class Examene(models.Model):
         choices=Estados,
         default='Pendiente',
     )
+    fechaingreso = models.DateTimeField(
+        blank=True, null=True)
+
+    def publish(self):
+        self.fechaingreso = timezone.now()
+        self.save()
     def __str__(self):
         return '%s %s %s' % (self.Boleta, self.Alumno, self.Estado_Examen)
+   
 
 class Pago(models.Model):
     Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
     Boleta = models.CharField(max_length=200)
     Cantidad = models.CharField(max_length=10, blank=True, null=True)
     Tipos = (
+    ('Examen', 'Examen'),
     ('Seguro', 'Seguro'),
     ('Inscripcion', 'Inscripcion'),
     ('Enero', 'Enero'),
@@ -182,8 +199,6 @@ class Pago(models.Model):
     ('Agosto', 'Agosto'),
     ('Septiembre', 'Septiembre'),
     ('Octubre', 'Octubre'),
-    ('Noviembre', 'Noviembre'),
-    ('Diciembre', 'Diciembre'),
     ('Otro', 'Otro'),
     )
     Comentario = models.CharField(max_length=200, blank=True, null=True)
@@ -206,6 +221,7 @@ class Papeleria(models.Model):
     Enfermedades = models.CharField(max_length=200, blank=True, null=True)
     Nombre_Doctor = models.CharField(max_length=200, blank=True, null=True)
     Telefono_Doctor = models.CharField(max_length=200, blank=True, null=True)
+    Cui = models.CharField(max_length=200, blank=True, null=True)
     Tipos = (
     ('Recibido', 'Recibido'),
     ('No_Entregado', 'No Entregado'),
@@ -389,16 +405,16 @@ class MateriaAdmin (admin.ModelAdmin):
 
     inlines = (Asignacion_MateriaInLine,)
 
-class Ecargados_alumnos (models.Model):
+class Encargados_alumnos (models.Model):
 
     alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-
     encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
+    parentesco = models.CharField(max_length=130,blank=True, null=True)
 
 
-class Ecargados_alumnosInLine(admin.TabularInline):
+class Encargados_alumnosInLine(admin.TabularInline):
 
-    model = Ecargados_alumnos
+    model = Encargados_alumnos
 
 #muestra un campo extra al momento de insertar, como indicación que se pueden ingresar N actores.
 
@@ -407,10 +423,9 @@ class Ecargados_alumnosInLine(admin.TabularInline):
 
 class AlumnoAdmin(admin.ModelAdmin):
 
-    inlines = (Ecargados_alumnosInLine,)
+    inlines = (Encargados_alumnosInLine,)
 
 
 class EncargadoAdmin (admin.ModelAdmin):
 
-    inlines = (Ecargados_alumnosInLine,)
-
+    inlines = (Encargados_alumnosInLine,)

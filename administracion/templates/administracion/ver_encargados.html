@@ -1,0 +1,66 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+
+
+<!-- Static Table Start -->
+        <div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1>Tabla <span class="table-project-n">Encargados</span></h1>
+                                </div>
+                            </div>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control dt-tb">
+                                            <option value="">Exportar Normal</option>
+                                            <option value="all">Exportar Todo</option>
+                                            <option value="selected">Exportar Seleccionados</option>
+                                        </select>
+                                    </div>
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="state" data-checkbox="true"></th>
+                                                <th data-field="pnombre">Nombres</th>
+                                                <th data-field="papellido" data-editable="true">Apellidos</th>
+                                                <th data-field="phone" data-editable="true">Telefono Celular</th>
+                                                <th data-field="date" data-editable="true">Direccion</th>
+                                                <th data-field="tcasa" data-editable="true">Telefono Casa</th>
+                                                <th data-field="trabajo" data-editable="true">Lugar De Trabajo</th>
+                                                <th data-field="ttrabajo" data-editable="true">Telefono De Trabajo</th>
+                                                <th data-field="dpi" data-editable="true">DPI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        {% for encargado in Encargados %}
+                                            <tr>
+                                                <td></td>
+                                               <td><a href="{% url 'encargado' pk=encargado.pk %}">{{ encargado.Nombres }}</a></td>
+                                                <td>{{ encargado.Apellidos }}</td>
+                                                <td>{{ encargado.telefono_celular }}</td>
+                                                <td>{{ encargado.direccion }}</td>
+                                                <td>{{ encargado.telefono_casa }}</td>
+                                                <td>{{ encargado.Trabajo }}</td>
+                                                <td>{{ encargado.telefono_trabajo }}</td>
+                                                <td>{{ encargado.Dpi }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Static Table End -->
+        
+{% endblock %}
