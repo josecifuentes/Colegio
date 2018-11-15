@@ -18,10 +18,18 @@
                             </div>
 
                             <!---form--->
-                            <form action="{% url 'nuevo_alumno' %}" method="POST" class="post-form">{% csrf_token %}
-                                {% for non_field_error in form.non_field.errors %}
-                                p.<help class="is-danger">{{ non_field_error}}</help>
-                                {% endfor %}
+                            <form action="{% url 'nuevo_alumno' %}" method="POST" class="post-form">
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
+        
                                                     <div class="form-group-inner">
                                                         <div class="row">
 
@@ -111,7 +119,7 @@
                                                             </div> 
                                                             <!---Fecha de Nacimiento---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
                                                             </div> 
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
                                                                 <div class="input-group date">

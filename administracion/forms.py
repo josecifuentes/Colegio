@@ -114,7 +114,7 @@ class agregar_papeleriaForm(forms.ModelForm):
             'Partida_Nacimiento': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Comentarios': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba Alguna Anotacion'}),
           }  
-
+          
 class agregar_examenesForm(forms.ModelForm):
 
     class Meta:

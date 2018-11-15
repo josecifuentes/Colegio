@@ -12,6 +12,15 @@
                             </div>
  
     <form method="POST" class="post-form">{% csrf_token %}
+        {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Guardar</button>
     </form>

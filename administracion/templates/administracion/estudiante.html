@@ -77,9 +77,15 @@
                                                 <br><br>
                     <form method="POST" class="post-form">
                         {% csrf_token %}
-                                                {% for non_field_error in form.non_field.errors %}
-                                                p.<help class="is-danger">{{ non_field_error}}</help>
-                                                {% endfor %}
+                                                {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
                                                         <!---codigo--->
 
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -224,11 +230,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for encargado in encargados%}
+                                            {% for encar in encargados%}
                                             <tr>
-                                                <td>{{encargado.pk}}</td>
-                                                <td><a href="{% url 'encargado' pk=encargado.pk%}">{{encargado.encargado}}</a></td>
-                                                <td>{{encargado.parentesco}}</td>
+                                                <td>{{encar.encargado.pk}}</td>
+                                                <td><a href="{% url 'encargado' pk=encar.encargado.pk %}">{{encar.encargado}}</a></td>
+                                                <td>{{encar.parentesco}}</td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
@@ -239,10 +245,15 @@
 
 
                                                  <form action="{% url 'asignacion_encargado' pk=alumno.pk %}" method="POST" class="post-form">
-                                                                        {% csrf_token %}
-                                                {% for non_field_error in form1.non_field.errors %}
-                                                p.<help class="is-danger">{{ non_field_error}}</help>
-                                                {% endfor %}
+                                                                        {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form1.encargado.id_for_label }}">Encargado:</label>
                                                             </div>

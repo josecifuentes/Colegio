@@ -164,6 +164,7 @@ def nuevo_alumno(request):
             post.published_date = timezone.now()
             post.save()
             return redirect('alumno_editar', pk=post.pk)
+
     else:
         form = AlumnoForm()
     return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados})

@@ -14,9 +14,15 @@
                             </div>
                             <!---form--->
                             <form action="{% url 'nuevo_encargado' %}" method="POST" class="post-form">{% csrf_token %}
-                                {% for non_field_error in form.non_field.errors %}
-                                p.<help class="is-danger">{{ non_field_error}}</help>
-                                {% endfor %}
+                               {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
                                                     <div class="form-group-inner">
                                                         <div class="row">
                                                             
