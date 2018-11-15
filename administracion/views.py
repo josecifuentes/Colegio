@@ -44,6 +44,11 @@ def asignacion_pagos(request):
         form = asignacion_pagosForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            if post.Tipo_Pago == "Inscripcion":
+                modificar= AlumnoForm(instance=post.Alumno)
+                al = modificar.save(commit=False)
+                al.estado="Activo"
+                al.save()
             post.save()
             return redirect('ver_pagos')
     else:
@@ -158,9 +163,9 @@ def nuevo_alumno(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('estudiante', pk=post.pk)
+            return redirect('alumno_editar', pk=post.pk)
     else:
-           form = AlumnoForm()
+        form = AlumnoForm()
     return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados})
 
 @login_required

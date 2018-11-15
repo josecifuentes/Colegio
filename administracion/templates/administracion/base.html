@@ -206,7 +206,7 @@
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Pagos</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Ver Pagos Alumnos" href="{% url 'ver_pagos' %}"><span class="mini-sub-pro">Ver Pagos Alumnos</span></a></li>
-                                {% if perms.administracion.add_encargados_alumnos %}
+                                {% if perms.administracion.add_pago %}
                                 <li><a title="Agregar Pagos" href="{% url 'asignacion_pagos' %}"><span class="mini-sub-pro">Agregar Pagos</span></a></li>
                                 {% endif %}
                                 

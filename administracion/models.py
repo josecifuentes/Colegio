@@ -77,7 +77,7 @@ class Materia(models.Model):
 
 class Alumno(models.Model):
     Creado = models.ForeignKey('auth.User', on_delete=models.CASCADE,blank=True, null=True)
-    Codigo = models.CharField(max_length=200,null=True,blank=True)
+    Codigo = models.CharField(max_length=200,null=True,blank=True, unique =True)
     Primer_Nombre = models.CharField(max_length=200,)
     Segundo_Nombre = models.CharField(max_length=200, blank=True, null=True)
     Tercer_Nombre = models.CharField(max_length=200,null=True,blank=True)
@@ -158,7 +158,7 @@ class Encargado(models.Model):
         return '%s %s' % (self.Nombres, self.Apellidos)
 
 class Examene(models.Model):
-    Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, unique=True)
+    Alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE)
     Boleta = models.CharField(max_length=200)
     Estados = (
     ('Pendiente', 'Pendiente'),
