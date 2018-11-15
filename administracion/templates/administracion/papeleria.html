@@ -1,0 +1,185 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <title>
+            Papeleria Alumnos
+        </title>
+         <link rel="shortcut icon" type="image/x-icon" href="{% static 'administracion/img/favicon.ico' %}">
+    <!-- chosen CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/chosen/bootstrap-chosen.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'administracion/css/select2/select2.min.css' %}">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+        <script src="https://code.jquery.com/jquery-1.12.4.js">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js">
+        </script>
+
+    </head>
+    <body>
+        <br/>
+        <div class="container">
+            <div class="panel panel-primary" style="width:900px;margin:0px auto">
+
+
+              <div class="panel-heading">Papeleria Alumnos</div>
+              <div class="panel-body">
+
+
+                <form action="{% url 'agregar_papeleria' pk=alumno.pk %}" method="POST" class="post-form">
+                                                                        {% csrf_token %}
+                                                {% for non_field_error in form.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre de Padre:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Padre}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre de Madre</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Madre}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Alérgias</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Alergias}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Enfermedades</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Enfermedades}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Grupo Sanguíneo</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Tipo_Sangre}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Nombre Doctor</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Nombre_Doctor}}
+                                                            </div><br><br><br>
+                                                            <!---Teléfono--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Teléfono Doctor </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form.Telefono_Doctor}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <!---Teléfono--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Cui </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form.Cui}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Pre Primaria </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                               {{form.Certificado_Pre_Primaria}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Primaria </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form.Certificado_Primaria}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Básico </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                               {{form.Certificado_Basico}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Certificado de Bachillerato </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form.Certificado_Bachillerato}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Partida de Nacimiento </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form.Partida_Nacimiento}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <!---CERTIFICADOS--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Comentario</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    {{form.Comentarios}}
+                                                              </div>
+                                                            </div> 
+                                                            <br><br><br> 
+                                                                <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <a href="..\..\..\..\"><button class="btn btn-white">Cancelar</button></a>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>   
+                                                    </form>
+
+
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!-- input-mask JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/input-mask/jasny-bootstrap.min.js' %}"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
+      <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'administracion/js/select2/select2-active.js' %}"></script>

@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria 
 from .forms import AlumnoForm,agregar_papeleriaForm
 from .forms import EncargadoForm,agregar_examenesForm
-from .forms import asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
+from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, Template
@@ -30,6 +30,10 @@ def ver_encargados(request):
     return render(request, 'administracion/ver_encargados.html', {'Encargados': Encargados})
 
 @login_required
+def no_pago(request):
+    return render(request, 'administracion/no_pago.html')
+
+@login_required
 def ver_pagos(request):
     pagos = Pago.objects.all()
     return render(request, 'administracion/ver_pagos.html', {'pagos': pagos})
@@ -48,16 +52,86 @@ def asignacion_pagos(request):
 
 @login_required
 def agregar_examenes(request):
+    a=False
     if request.method == "POST":
         form = agregar_examenesForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.fechaingreso = timezone.now()
-            post.save()
-            return redirect('ver_examenes')
+            try:
+                pago= Pago.objects.filter(Alumno=post.Alumno)
+                for p in pago:
+                    if p.Tipo_Pago == "Examen":
+                        a=True
+            except Pago.DoesNotExist:
+                return redirect('no_pago')
+            if a == True:
+                if post.Estado_Examen == "Aprobado":
+                    modificar= AlumnoForm(instance=post.Alumno)
+                    al = modificar.save(commit=False)
+                    al.estado="PendienteInscripcion"
+                    al.save()
+                if post.Estado_Examen == "Reprobado":
+                    modificar= AlumnoForm(instance=post.Alumno)
+                    al = modificar.save(commit=False)
+                    al.estado="Inactivo"
+                    al.save()
+                post.fechaingreso = timezone.now()
+                post.save()
+                return redirect('ver_examenes')
+            else:
+                return redirect('no_pago')
     else:
         form = agregar_examenesForm()
     return render(request, 'administracion/agregar_examenes.html', {'form': form})
+
+def error(request):
+    form = MyForm()
+    if request.method=='POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            alumno = cd.get('codigo')
+            try:
+                alumnos = Alumno.objects.get(Codigo=alumno)
+            except Alumno.DoesNotExist:
+                return redirect('error')
+            return redirect('papeleria', pk=alumnos.pk)
+    else:
+        form = MyForm()
+    return render(request, 'administracion/error_404.html', {'form': form})
+
+def buscar_papeleria(request):
+    form = MyForm()
+    if request.method=='POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            alumno = cd.get('codigo')
+            try:
+                alumnos = Alumno.objects.get(Codigo=alumno)
+            except Alumno.DoesNotExist:
+                return redirect('error')
+            return redirect('papeleria', pk=alumnos.pk)
+    else:
+        form = MyForm()
+    return render(request, 'administracion/buscar_alumno.html', {'form': form})
+
+def papelerias(request, pk):
+    alumno = Alumno.objects.get(pk=pk)
+    try:
+        papeleria= Papeleria.objects.get(Alumno=alumno)
+    except Papeleria.DoesNotExist:
+        papeleria=None
+    if request.method == "POST":
+        form = agregar_papeleriaForm(request.POST, instance=papeleria)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.alumno = Alumno.objects.get(pk=pk)
+            post.save()
+            return redirect('dashboard')
+    else:
+        form= agregar_papeleriaForm(instance=papeleria)
+    return render(request, 'administracion/papeleria.html', {'form': form,'alumno':alumno})
 
 @login_required
 def ver_examenes(request):
@@ -90,20 +164,6 @@ def nuevo_alumno(request):
     return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados})
 
 @login_required
-def agergar_papeleria(request, pk):
-    if request.method == "POST":
-        form = agregar_papeleriaForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.alumno = Alumno.objects.get(pk=pk)
-            post.save()
-            return redirect('encargado', pk=pk)
-    else:
-        form = nueva_asignacion_encargadoForm()
-    return render(request, 'administracion/asignacion_encargado.html', {'form': form})
-
-
-@login_required
 def nuevo_encargado(request):
     if request.method == "POST":
         form = EncargadoForm(request.POST)
@@ -118,7 +178,7 @@ def nuevo_encargado(request):
 
 @login_required
 def encargado(request, pk):
-    encargado = get_object_or_404(Encargado, pk=pk)
+    encargado = Encargado.objects.get(pk=pk)
     encargados=Encargados_alumnos.objects.filter(encargado=encargado).distinct()
     if request.method == "POST":
         form = EncargadoForm(request.POST, instance=encargado)
@@ -130,10 +190,37 @@ def encargado(request, pk):
         form1 = asignacion_alumnoForm(instance=encargado)
     return render(request, 'administracion/encargado.html', {'form': form,'form1': form1, 'encargado': encargado, 'encargados': encargados})
 
+def agregar_papeleria(request, pk):
+    alumnos = get_object_or_404(Alumno, pk=pk)
+    try:
+        papeleria= Papeleria.objects.get(Alumno=alumnos)
+    except Papeleria.DoesNotExist:
+        papeleria=None
+    if request.method == "POST":
+        form = agregar_papeleriaForm(request.POST, instance=papeleria)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.Alumno = Alumno.objects.get(pk=pk)
+            post.save()
+            user = request.user
+            if user.is_authenticated:
+                return redirect('dashboard')
+            else:
+                return redirect('buscar_papeleria')
+               
+    else:
+        form = agregar_papeleriaForm(instance=papeleria)
+    return render(request, 'administracion/estudiante.html', {'form': form})
+
 @login_required  
 def alumno_editar(request, pk):
     alumno = get_object_or_404(Alumno, pk=pk)
     encargados=Encargados_alumnos.objects.filter(alumno=alumno).distinct()
+    try:
+        papeleria= Papeleria.objects.get(Alumno=alumno)
+    except Papeleria.DoesNotExist:
+        papeleria=None
+
     if request.method == "POST":
         form = AlumnoForm(request.POST, instance=alumno)
         if form.is_valid():
@@ -145,7 +232,8 @@ def alumno_editar(request, pk):
     else:
         form = AlumnoForm(instance=alumno)
         form1 = asignacion_encargadoForm(instance=alumno)
-    return render(request, 'administracion/estudiante.html', {'form': form,'form1': form1,'alumno': alumno,'encargados': encargados})
+        form2= agregar_papeleriaForm(instance=papeleria)
+    return render(request, 'administracion/estudiante.html', {'form': form,'form1': form1,'form2': form2,'alumno': alumno,'encargados': encargados})
 
 @login_required
 def nueva_asignacion_encargado(request):
@@ -167,7 +255,7 @@ def asignacion_encargado(request, pk):
             post = form.save(commit=False)
             post.alumno = Alumno.objects.get(pk=pk)
             post.save()
-            return redirect('encargado', pk=post.pk)
+            return redirect('dashboard')
     else:
         form = asignacion_encargadoForm()
     return render(request, 'administracion/asignacion_encargado.html', {'form': form})

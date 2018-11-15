@@ -96,9 +96,8 @@ class agregar_papeleriaForm(forms.ModelForm):
 
     class Meta:
         model = Papeleria
-        fields = ('Alumno','Padre','Madre','Alergias','Enfermedades','Nombre_Doctor','Telefono_Doctor', 'Cui','Partida_Nacimiento','Certificado_Pre_Primaria','Certificado_Primaria','Certificado_Basico','Certificado_Bachillerato','Tipo_Sangre','Comentarios')
+        fields = ('Padre','Madre','Alergias','Enfermedades','Nombre_Doctor','Telefono_Doctor', 'Cui','Partida_Nacimiento','Certificado_Pre_Primaria','Certificado_Primaria','Certificado_Basico','Certificado_Bachillerato','Tipo_Sangre','Comentarios')
         widgets = {
-            'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
             'Padre': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione El Padre Del Alumno...'}),
             'Madre': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione La Madre Del Alumno...'}),
             'Alergias': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Liste Las Alergias Del Alumno, Separe Por ,'}),
@@ -109,10 +108,11 @@ class agregar_papeleriaForm(forms.ModelForm):
             'Partida_Nacimiento': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Certificado_Pre_Primaria': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Certificado_Primaria': forms.Select(attrs={'class': 'form-control custom-select-value'}),
+            'Certificado_Basico': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Certificado_Bachillerato': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Tipo_Sangre': forms.Select(attrs={'class': 'form-control custom-select-value'}),
             'Partida_Nacimiento': forms.Select(attrs={'class': 'form-control custom-select-value'}),
-            'Comentarios': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba La Cantidad Total Del Pago'}),
+            'Comentarios': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba Alguna Anotacion'}),
           }  
 
 class agregar_examenesForm(forms.ModelForm):
@@ -126,3 +126,7 @@ class agregar_examenesForm(forms.ModelForm):
             'Comentario': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Comentario Al Pago Del Alumno'}),
             'Estado_Examen': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione El Pago...'}),
         }  
+
+class MyForm(forms.Form): #Notar que no hereda de forms.ModelForm
+    
+    codigo = forms.CharField()

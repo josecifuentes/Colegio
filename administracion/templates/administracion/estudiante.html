@@ -240,7 +240,7 @@
 
                                                  <form action="{% url 'asignacion_encargado' pk=alumno.pk %}" method="POST" class="post-form">
                                                                         {% csrf_token %}
-                                                {% for non_field_error in form.non_field.errors %}
+                                                {% for non_field_error in form1.non_field.errors %}
                                                 p.<help class="is-danger">{{ non_field_error}}</help>
                                                 {% endfor %}
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -285,41 +285,46 @@
                                                 <H1>Papeleria</H1>
                                                 <div class="col-lg-15">
                                                 <!---nombres---><br><br><br>
+                                                <form action="{% url 'agregar_papeleria' pk=alumno.pk %}" method="POST" class="post-form">
+                                                                        {% csrf_token %}
+                                                {% for non_field_error in form2.non_field.errors %}
+                                                p.<help class="is-danger">{{ non_field_error}}</help>
+                                                {% endfor %}
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Nombre de Padre</label>
+                                                                <label class="login2 pull-right pull-right-pro">Nombre de Padre:</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Padre}}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Nombre de Madre</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Madre}}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Alérgias</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Alergias}}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Enfermedades</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Enfermedades}}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Grupo Sanguíneo</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Tipo_Sangre}}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Nombre Doctor</label>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <input type="text" class="form-control" />
+                                                                {{form2.Nombre_Doctor}}
                                                             </div><br><br><br>
                                                             <!---Teléfono--->
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -328,7 +333,17 @@
                                                             
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 <div class="input-mark-inner mg-b-22">
-                                                                 <input type="text" class="form-control" data-mask="999-99999" placeholder="Máximo 8 dígitos...">
+                                                                {{form2.Telefono_Doctor}}
+                                                                </div>
+                                                            </div><br><br><br> 
+                                                            <!---Teléfono--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro">Cui </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                {{form2.Cui}}
                                                                 </div>
                                                             </div><br><br><br> 
                                                             <!---CERTIFICADOS--->
@@ -337,10 +352,7 @@
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
-                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
-                                                                         <option value="ej1">Entregada</option>
-                                                                         <option value="ej2">No entregado</option>
-                                                                    </select>
+                                                                    {{form2.Partida_Nacimiento}}
                                                               </div>
                                                             </div> 
                                                             <!---CERTIFICADOS--->
@@ -349,10 +361,7 @@
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
-                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
-                                                                         <option value="ej1">Entregada</option>
-                                                                         <option value="ej2">No entregado</option>
-                                                                    </select>
+                                                                    {{form2.Certificado_Pre_Primaria}}
                                                               </div>
                                                             </div><!---CERTIFICADOS--->
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -360,10 +369,7 @@
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
-                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
-                                                                         <option value="ej1">Entregada</option>
-                                                                         <option value="ej2">No entregado</option>
-                                                                    </select>
+                                                                    {{form2.Certificado_Primaria}}
                                                               </div>
                                                             </div>
                                                             <!---CERTIFICADOS--->
@@ -372,10 +378,7 @@
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
-                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
-                                                                         <option value="ej1">Entregada</option>
-                                                                         <option value="ej2">No entregado</option>
-                                                                    </select>
+                                                                    {{form2.Certificado_Basico}}
                                                               </div>
                                                             </div>
                                                             <!---CERTIFICADOS--->
@@ -384,21 +387,20 @@
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
-                                                                    <select data-placeholder="Seleccione..." class="chosen-select" tabindex="-1">
-                                                                         <option value="ej1">Entregada</option>
-                                                                         <option value="ej2">No entregado</option>
-                                                                    </select>
+                                                                   {{form2.Certificado_Bachillerato}}
                                                               </div>
                                                             </div>
+
                                                             <!---COMENTARIOS--->
+                                                            
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Comentario </label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-1"class="form-group res-mg-t-15">
-                                                                    <textarea name="description" placeholder="Comentario"></textarea>
-                                                                </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                    {{form2.Comentarios}}
+                                                                
                                                             </div>   
-
+                                                        
                                                            <div class="form-group-inner">
                                                         <div class="login-btn-inner">
                                                             <div class="row">
@@ -412,7 +414,7 @@
                                                             </div>
                                                         </div>
                                                     </div>       
-
+                                                    </form>
                                                 </div>            
                                             </div>
                                         </div>

@@ -158,7 +158,7 @@ class Encargado(models.Model):
         return '%s %s' % (self.Nombres, self.Apellidos)
 
 class Examene(models.Model):
-    Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, unique=True)
     Boleta = models.CharField(max_length=200)
     Estados = (
     ('Pendiente', 'Pendiente'),
@@ -178,7 +178,7 @@ class Examene(models.Model):
         self.fechaingreso = timezone.now()
         self.save()
     def __str__(self):
-        return '%s %s %s' % (self.Boleta, self.Alumno, self.Estado_Examen)
+        return '%s %s %s %s' % (self.Boleta, self.Alumno, self.Estado_Examen, self.fechaingreso)
    
 
 class Pago(models.Model):
@@ -214,7 +214,7 @@ class Pago(models.Model):
         unique_together = (("Alumno", "Tipo_Pago"),)
 
 class Papeleria(models.Model):
-    Alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE)
+    Alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE, unique=True)
     Padre = models.ForeignKey(Encargado, on_delete=models.CASCADE, blank=True, null=True, related_name='Padre')
     Madre = models.ForeignKey(Encargado, on_delete=models.CASCADE, blank=True, null=True, related_name='Madre')
     Alergias = models.CharField(max_length=200, blank=True, null=True)
@@ -273,7 +273,7 @@ class Papeleria(models.Model):
     Comentarios = models.CharField(max_length=200, blank=True, null=True)
     
     def __str__(self):
-        return '%s %s %s' % (self.Boleta, self.Alumno, self.Tipo_Pago)
+        return '%s %s' % (self.Cui, self.Alumno)
 
 class Personal(models.Model):
     Primer_Nombre = models.CharField(max_length=200)

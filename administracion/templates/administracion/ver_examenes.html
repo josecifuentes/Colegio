@@ -31,6 +31,7 @@
                                                 <th data-field="palumno" data-editable="true">Boleta:</th>
                                                 <th data-field="date" data-editable="true">Comentario:</th>
                                                 <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
+                                                <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,6 +43,7 @@
                                                 <td>{{ examen.Boleta }}</td>
                                                 <td>{{ examen.Comentario }}</td>
                                                 <td>{{ examen.Estado_Examen }}</td>
+                                                <td>{{ examen.fechaingreso }}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
