@@ -13,7 +13,8 @@
                                 </div>
                             </div>
                             <!---form--->
-                            <form action="{% url 'nuevo_encargado' %}" method="POST" class="post-form">{% csrf_token %}
+                            <form action="{% url 'nuevo_encargado' %}" method="POST" class="post-form">
+                                {% csrf_token %}
                                {% if form.errors %}
                                 <div class="alert-icon shadow-inner wrap-alert-b">
                             <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
