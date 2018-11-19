@@ -108,6 +108,7 @@ class Alumno(models.Model):
            blank=False, null=False)
     direccion = models.CharField(max_length=200, blank=True, null=True)
     telefono = models.CharField(max_length=200, blank=True, null=True)
+    telefono2 = models.CharField(max_length=200, blank=True, null=True)
     Estados = (
     ('Activo', 'Activo'),
     ('Inactivo', 'Inactivo'),

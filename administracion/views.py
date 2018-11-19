@@ -163,7 +163,7 @@ def nuevo_alumno(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('alumno_editar', pk=post.pk)
+            return redirect('../../alumno/nuevo/')
 
     else:
         form = AlumnoForm()

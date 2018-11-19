@@ -9,9 +9,9 @@ class AlumnoForm(forms.ModelForm):
 
     class Meta:
         model = Alumno
-        fields = ('Codigo', 'Primer_Nombre', 'Segundo_Nombre', 'Tercer_Nombre', 'Primer_Apellido', 'Segundo_Apellido', 'Grado','Seccion', 'Genero', 'nacimiento', 'direccion', 'telefono', 'estado')
+        fields = ('Codigo', 'Primer_Nombre', 'Segundo_Nombre', 'Tercer_Nombre', 'Primer_Apellido', 'Segundo_Apellido', 'Grado','Seccion', 'Genero', 'nacimiento', 'direccion', 'telefono','telefono2', 'estado')
         widgets = {
-        	'Codigo': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-999','placeholder': 'Máximo 7 dígitos...'}),
+        	'Codigo': forms.TextInput(attrs={'class': 'form-control','data-mask': '*9999-999','placeholder': 'Máximo 7 dígitos...'}),
   			'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Nombre Del Alumno'}),
  			'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Nombre Del Alumno'}),
  			'Tercer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Tercer Nombre Del Alumno'}),
@@ -23,6 +23,7 @@ class AlumnoForm(forms.ModelForm):
  			'nacimiento': forms.TextInput(attrs={'class': 'form-control','value': '01/01/2000'}),
 			'direccion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba La Direccion Del Alumno'}),
  			'telefono': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
+            'telefono2': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
   			'estado': forms.Select(attrs={'class': 'form-control custom-select-value'}),
         }
 
