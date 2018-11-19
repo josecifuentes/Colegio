@@ -11,7 +11,7 @@ class AlumnoForm(forms.ModelForm):
         model = Alumno
         fields = ('Codigo', 'Primer_Nombre', 'Segundo_Nombre', 'Tercer_Nombre', 'Primer_Apellido', 'Segundo_Apellido', 'Grado','Seccion', 'Genero', 'nacimiento', 'direccion', 'telefono','telefono2', 'estado')
         widgets = {
-        	'Codigo': forms.TextInput(attrs={'class': 'form-control','data-mask': '*9999-999','placeholder': 'Máximo 7 dígitos...'}),
+        	'Codigo': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese Un Codigo Valido Ej.2019-000...'}),
   			'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Nombre Del Alumno'}),
  			'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Nombre Del Alumno'}),
  			'Tercer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Tercer Nombre Del Alumno'}),
