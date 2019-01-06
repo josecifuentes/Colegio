@@ -24,4 +24,7 @@ urlpatterns = [
     path('cerrarsession/', views.cerrar, name='cerrar'),
     path('alumno/error/', views.error, name='error'),
     path('examenes/error/', views.no_pago, name='no_pago'),
+    path('calendario/', views.calendario, name='calendario'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]

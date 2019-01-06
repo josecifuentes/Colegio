@@ -52,14 +52,16 @@
     <link rel="stylesheet" href="{% static 'administracion/css/metisMenu/metisMenu-vertical.css' %}">
     <!-- calendar CSS
         ============================================ -->
-    <link rel="stylesheet" href="{% static 'administracion/css/calendar/fullcalendar.min.css' %}">
-    <link rel="stylesheet" href="{% static 'administracion/css/calendar/fullcalendar.print.min.css' %}">
+   
      <!-- touchspin CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/touchspin/jquery.bootstrap-touchspin.min.css' %}">
       <!-- datapicker CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/datapicker/datepicker3.css' %}">
+    <!-- fullcalendar CSS
+        ============================================ -->
+   
     <!-- modals CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/modals.css' %}">
@@ -114,7 +116,7 @@
                         </li>
                         {% if perms.administracion.delete_grado %}
                         <li>
-                            <a title="Calendario Actividades" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Calendario</span></a>
+                            <a title="Calendario Actividades" href="{% url 'calendario'%}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Calendario</span></a>
                         </li>
                         {% endif %}
                         {% if perms.administracion.delete_encargado %}
@@ -273,8 +275,10 @@
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
                                             <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
                                                 <li class="nav-item dropdown">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i><span class="indicator-ms"></span></a>
+                                                    
                                                     <div role="menu" class="author-message-top dropdown-menu animated zoomIn">
                                                         <div class="message-single-top">
                                                             <h1>Mensajes</h1>
@@ -298,7 +302,9 @@
                                                             <a href="#">Ver Todos Los Mensajes</a>
                                                         </div>
                                                     </div>
-                                                </li>
+                                                  
+                                                </li>  {% endif %}
+                                                {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
                                                 <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
                                                     <div role="menu" class="notification-author dropdown-menu animated zoomIn">
                                                         <div class="notification-single-top">
@@ -323,15 +329,24 @@
                                                             <a href="#">Ver Todas Las Notificaciones</a>
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </li> {% endif %}
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                            <img src="{% static 'administracion/img/product/pro4.jpg' %}" alt="" />
+                                {% if 'Alumno' ==  request.user.groups.all.0.name %}  
+                                            <img src="{% static 'administracion/img/profile/alumnoM.png' %}" alt="" />
+                                        {% endif %}
+                                {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
+                                        <img src="{% static 'administracion/img/profile/secretaria.png' %}" alt="" />
+                                {% endif %}
+                                {% if 'Maestro' ==  request.user.groups.all.0.name %}  
+                                        <img src="{% static 'administracion/img/profile/MaestroM.png' %}" alt="" />
+                                {% endif %}
+                                                            
                                                             <span class="admin-name">{{ user.username }}</span>
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#">
+                                                        <li>
 
                                                         <span class="edu-icon edu-home-admin author-log-ic">
                                                             
@@ -341,12 +356,12 @@
                                             Administracion
                                         {% endif %}
                                         {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
-                                            Secretaria
+                                            <font color='Blue'>Secretaria</font>
                                         {% endif %}
 
-                                                    </a>
+                                                    
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mi Perfil</a>
+                                                        <li><a href="{% url 'perfil' %}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mi Perfil</a>
                                                         </li>
                                                         <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>Notas</a>
                                                         </li>
@@ -831,10 +846,9 @@
     <script src="{% static 'administracion/js/sparkline/sparkline-active.js' %}"></script>
     <!-- calendar JS
         ============================================ -->
-    <script src="{% static 'administracion/js/calendar/moment.min.js' %}"></script>
-    <script src="{% static 'administracion/js/calendar/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'administracion/js/calendar/fullcalendar-active.js' %}"></script>
-  
+
+
+ 
     <!-- data table JS
         ============================================ -->
     <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
@@ -869,7 +883,7 @@
     <script src="{% static 'administracion/js/main.js' %}"></script>
     <!-- tawk chat JS
         ============================================ -->
-    <script src="{% static 'administracion/js/tawk-chat.js' %}"></script>
+    </script>
 
 
 </body>

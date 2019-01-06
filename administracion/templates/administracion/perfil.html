@@ -1,0 +1,204 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+{% with tipo=request.user.groups.all.0.name  %} 
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="profile-info-inner">
+                            <div class="profile-img">
+                                
+
+ 								 
+                                {% if 'Alumno' ==  request.user.groups.all.0.name %}  
+                                            <img src="{% static 'administracion/img/profile/alumnoM.png' %}" alt="" />       
+                                {% endif %}
+                                {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
+                                        <img src="{% static 'administracion/img/profile/secretaria.png' %}" alt="" />
+                                {% endif %}
+                                {% if 'Maestro' ==  request.user.groups.all.0.name %}  
+                                        <img src="{% static 'administracion/img/profile/MaestroM.png' %}" alt="" />
+                                {% endif %}
+                                
+                            </div>
+                            <div class="profile-details-hr">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="address-hr">
+                                            <p><b>Codigo</b><br /> {{ perfil.Codigo }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>Primer Nombre</b><br /> {{ perfil.Primer_Nombre }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Segundo Nombre</b><br /> {{ perfil.Segundo_Nombre }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>Primer Apellido</b><br /> {{ perfil.Primer_Apellido }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Segundo Apellido</b><br /> {{ perfil.Segundo_Apellido }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="address-hr">
+                                            <p><b>Direccion</b><br /> {{ perfil.direccion }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Informacion General</a></li>
+                                <li><a href="#reviews"> Grado</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Codigo</b><br /> {{ perfil.Codigo }} </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Primer Nombre</b><br /> {{ perfil.Primer_Nombre }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Segundo Nombre</b><br /> {{ perfil.Segundo_Nombre }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Tercer Nombre</b><br /> {{ perfil.Tercer_Nombre }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Primer Apellido</b><br /> {{ perfil.Primer_Apellido }} </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Segundo Apellido</b><br /> {{ perfil.Segundo_Apellido }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Email</b><br /> {{ perfil.Email }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Genero</b><br /> {{ perfil.Genero }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Direccion</b><br /> {{ perfil.direccion }} </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Telefono</b><br /> {{ perfil.telefono }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Telefono 2</b><br /> {{ perfil.telefono2 }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Nacimiento</b><br /> {{ perfil.nacimiento }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Estado</b><br /> {{ perfil.estado }} </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Fecha De ingreso</b><br /> {{ perfil.fechaingreso }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Usuario</b><br /> {{ perfil.Usuario }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="reviews">
+                                    <div class="row mg-b-15">
+                                                    <div class="col-lg-12">
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="skill-title">
+                                                                    <h2>{{ perfil.Grado }}</h2>
+                                                                    <hr />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ex-pro">
+                                                            <ul>
+                                                                <h4>Seccion:</h4>
+                                                                <li><i class="fa fa-angle-right"></i> {{ perfil.Seccion }}</li>
+                                                                <h4>Maestro Encargado:</h4>
+                                                                <li><i class="fa fa-angle-right"></i> No Asignado.</li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endwith %}
+{% endblock %}

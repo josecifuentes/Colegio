@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria 
+from .models import Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade 
 from .forms import AlumnoForm,agregar_papeleriaForm
 from .forms import EncargadoForm,agregar_examenesForm
 from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
@@ -17,12 +17,34 @@ def dashboard(request):
     a = False;
     for g in query_set:
         if g.name=="Administracion":
-            a=True
-    if a:
-        alumnos = Alumno.objects.filter(estado__iexact='PendienteExamen')
+           return render(request, 'administracion/dashboard_Administracion.html')
+        if g.name=="Secretaria":
+           return render(request, 'administracion/dashboard_Secretaria.html')
+        if g.name=="Alumno":
+           return render(request, 'administracion/dashboard_Alumno.html')
+    return render(request, 'administracion/dashboard.html')
+
+@login_required
+def calendario(request):
+    actividad = Actividade.objects.all()
+    return render(request, 'administracion/actividades.html', {'actividad': actividad})
+
+@login_required
+def perfil(request):
+    query_set = Group.objects.filter(user = request.user)
+    a = "NO"
+    for g in query_set:
+        if g.name=="Alumno":
+            a="Alumno"
+    if a=="Alumno":
+        try:
+            perfil = Alumno.objects.get(Usuario=request.user)
+        except Alumno.DoesNotExist:
+            perfil=None
     else:
-        alumnos = Alumno.objects.all()
-    return render(request, 'administracion/dashboard.html', {'alumnos': alumnos})
+        perfil=None
+    return render(request, 'administracion/perfil.html', {'perfil': perfil})
+
 
 @login_required
 def ver_encargados(request):

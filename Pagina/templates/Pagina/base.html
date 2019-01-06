@@ -16,6 +16,8 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/news_responsive.css' %}">
 <!------ Include the above in your HEAD tag ---------->
 
 
@@ -42,7 +44,7 @@
                 <div class="main_nav">
                     <ul class="main_nav_list">
                         <li class="main_nav_item"><a href="{% url 'post_list'%}">Inicio</a></li>
-                        <li class="main_nav_item"><a href="noti.php"><font color="red">Actividades</font></a></li>
+                        <li class="main_nav_item"><a href="{% url 'acti' pk=1 %}"><font color="red">Actividades</font></a></li>
                         <li class="main_nav_item"><a href="administracion/alumno/buscar">Papelerias Papas</a></li>
                         
                         <li class="main_nav_item"><a href="http://virtual.colegionuevomundo.edu.gt">Aula Virtual</a></li>
@@ -159,7 +161,7 @@
                         <div class="logo_container">
                             <div class="logo">
                                 <img src="{% static 'images/logo.png' %}" alt="">
-                                <span>course</span>
+                                <span>Colegio Nuevo Mundo</span>
                             </div>
                         </div>
 
@@ -194,21 +196,22 @@
                             <ul>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'images/placeholder.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+                                        <img src="{% static 'images/placeholder.svg' %}" >
                                     </div>
-                                    15 Av. 7-09 Zona 3, Quetgo.
+                                    <a href="https://www.google.com.gt/maps/place/Colegio+Nuevo+Mundo+%2F+Mi+Peque%C3%B1o+Mundo/@14.8467932,-91.5188437,18.75z/data=!4m12!1m6!3m5!1s0x858e98199adc78eb:0x270a18372bbc8a0b!2sLatam+Hotel+Plaza+Pradera+Quetzaltenango!8m2!3d14.849896!4d-91.536071!3m4!1s0x0:0x7e2f609d219e952c!8m2!3d14.8470119!4d-91.5189672">15 Av. 7-09 Zona 3, Quetzaltenango.</a>
                                 </li>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g' %}images/smartphone.svg" alt="https://www.flaticon.com/authors/lucy-g">
+                                        <img src="{% static 'images/smartphone.svg' %}">
                                     </div>
-                                    +502 7767 6989
+                                    <a href="tel:+502 7767 6989">+502 7767 6989</a>
                                 </li>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'images/envelope.svg' %}" alt="">
+                                        <img src="{% static 'images/envelope.svg' %}" >
                                     </div>
-                                    secretaria@colegionuevomundo.edu.gt
+                                    <a href="mailto: secretaria@colegionuevomundo.edu.gt"> secretaria@colegionuevomundo.edu.gt</a>
+                                   
                                 </li>
 
                             </ul>

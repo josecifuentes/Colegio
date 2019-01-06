@@ -76,13 +76,13 @@ class Materia(models.Model):
         return '%s' % (self.Nombre_Materia)
 
 class Alumno(models.Model):
-    Creado = models.ForeignKey('auth.User', on_delete=models.CASCADE,blank=True, null=True)
     Codigo = models.CharField(max_length=200,null=True,blank=True, unique =True)
     Primer_Nombre = models.CharField(max_length=200,)
     Segundo_Nombre = models.CharField(max_length=200, blank=True, null=True)
     Tercer_Nombre = models.CharField(max_length=200,null=True,blank=True)
     Primer_Apellido = models.CharField(max_length=200,blank=True, null=True)
     Segundo_Apellido = models.CharField(max_length=200,blank=True, null=True)
+    Email = models.CharField(max_length=200,blank=True, null=True)
     Grado = models.ForeignKey(Grado, on_delete=models.CASCADE)
     SECCIONES = (
         ('A', 'A'),
@@ -114,6 +114,7 @@ class Alumno(models.Model):
     ('Inactivo', 'Inactivo'),
     ('PendienteExamen', 'Pendiente De Examen'),
     ('PendienteInscripcion', 'Pendiente De Inscripcion'),
+    ('PendientePago', 'Pendiente De Pago'),
     )
     estado = models.CharField(
         max_length=20,
@@ -122,7 +123,7 @@ class Alumno(models.Model):
     )
     fechaingreso = models.DateTimeField(
         blank=True, null=True)
-
+    Usuario = models.OneToOneField('auth.User', on_delete=models.CASCADE,blank=True, null=True)
     def publish(self):
         self.fechaingreso = timezone.now()
         self.save()
@@ -389,6 +390,35 @@ class Asignacion_Acividade (models.Model):
 
     def __str__(self):
         return '%s %s' % (self.Asignacion_Materia, self.Ponderacion)
+
+class Actividade (models.Model):
+    Titulo = models.CharField(max_length=120)
+    Descripcion = models.CharField(max_length=300)
+    Especifico = models.CharField(max_length=500,blank=True, null=True)
+    Lugar = models.CharField(max_length=120,
+        blank=True, null=True)
+    Fecha_Inicio = models.CharField(max_length=120,
+        blank=True, null=True)
+    Fecha_Fin = models.CharField(max_length=120,
+        blank=True, null=True)
+    grupos = (
+        ('estu-preprimaria', 'Estudiantes Pre-Primaria'),
+        ('estu-primaria', 'Estudiantes Primaria'),
+        ('estu-basico', 'Estudiantes Basico'),
+        ('estu-bach', 'Estudiantes Bachillerato'),
+        ('prof-preprimaria', 'Profesores Pre-Primaria'),
+        ('prof-primaria', 'Profesores Primaria'),
+        ('prof-basico', 'Profesores Basico'),
+        ('profbach', 'Profesores Bachillerato'),
+        ('todos', 'Todos'),
+        )
+    Grupo = models.CharField(
+        max_length=30,
+        choices=grupos,
+        default='Todos',
+        )
+    def __str__(self):
+        return '%s %s %s %s' % (self.Titulo,self.Grupo, self.Fecha_Inicio, self.Fecha_Fin)
 
 class Asignacion_MateriaInLine(admin.TabularInline):
 

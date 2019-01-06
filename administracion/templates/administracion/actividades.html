@@ -1,0 +1,96 @@
+
+{% load static %}
+
+ <meta charset='utf-8' />
+     <link href="{% static 'administracion/calendario/fullcalendar.min.css' %}" rel="stylesheet"/>
+     <link href="{% static 'administracion/calendario/fullcalendar.print.min.css' %}" rel="stylesheet" media="print" />
+
+    <script src="{% static 'administracion/calendario/lib/moment.min.js' %}"></script>
+    <script src="{% static 'administracion/calendario/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'administracion/calendario/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'administracion/calendario/locale-all.js' %}"></script>
+  
+<script>
+
+  $(document).ready(function() {
+    var initialLocaleCode = 'es';
+	var todayDate = moment().startOf('day');
+	var YM = todayDate.format('YYYY-MM');
+	var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
+	var TODAY = todayDate.format('YYYY-MM-DD');
+	var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listMonth'
+      },
+      defaultDate: TODAY,
+      locale: initialLocaleCode,
+      buttonIcons: true, // show the prev/next text
+      weekNumbers: true,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+    {% for act in actividad %}
+        {
+          title: '{{act.Titulo}}',
+          url: 'http://google.com/',
+          start: '{{act.Fecha_Inicio}}',
+          end: '{{act.Fecha_Fin}}'
+        },
+    {% endfor %}
+         {
+          title: 'Navidad',
+          url: 'http://google.com/',
+          start: '2018-12-24'+'T16:00:00',
+          end: '2018-12-25'+'T18:00:00'
+        }
+      ]
+    });
+
+    // build the locale selector's options
+    $.each($.fullCalendar.locales, function(localeCode) {
+      $('#locale-selector').append(
+        $('<option/>')
+          .attr('value', localeCode)
+          .prop('selected', localeCode == initialLocaleCode)
+          .text(localeCode)
+      );
+    });
+
+    // when the selected option changes, dynamically change the calendar option
+    $('#locale-selector').on('change', function() {
+      if (this.value) {
+        $('#calendar').fullCalendar('option', 'locale', this.value);
+      }
+    });
+  });
+
+</script>
+<style>
+
+  #calendar {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+
+</style>
+
+
+
+
+ <div class="calender-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="calender-inner">
+                            
+  <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

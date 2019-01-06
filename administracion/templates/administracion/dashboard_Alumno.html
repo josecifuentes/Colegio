@@ -1,0 +1,198 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <body>
+
+<div class="product-sales-area mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-sales-chart">
+                            <div class="portlet-title">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="caption pro-sl-hd">
+                                            <span class="caption-subject"><b>Promedio De Notas</b></span>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <ul class="list-inline cus-product-sl-rp">
+                                <li>
+                                    <h5><i class="fa fa-circle" style="color: #006DF0;"></i>Nota Mas Alta</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle" style="color: #f90a0a;"></i>Nota Mas Baja</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle" style="color: #65b12d;"></i>Promedio General</h5>
+                                </li>
+                            </ul>
+                            <div id="grafica"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="analysis-progrebar res-mg-t-30 mg-ub-10 res-mg-b-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="analysis-progrebar-content">
+                                <h5>Nota Mas Alta</h5>
+                                <h2 class="storage-right"><span class="counter">98</span> Pts.</h2>
+                                <div class="progress progress-mini ug-1">
+                                    <div style="width: 98%;" class="progress-bar"></div>
+                                </div>
+                                <div class="m-t-sm small">
+                                    <p>Primera Unidad: <font color='Blue'><span class="counter">98</span></font></p>
+                                    <p>Segunda Unidad: <font color='Blue'><span class="counter">0</span></font></p>
+                                    <p>Tercera Unidad: <font color='Blue'><span class="counter">0</span></font> </p>
+                                    <p>Cuarta Unidad:  <font color='Blue'><span class="counter">0</span></font></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analysis-progrebar reso-mg-b-30 res-mg-b-30 res-mg-t-30 mg-ub-10 tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="analysis-progrebar-content">
+                                <h5>Promedio General</h5>
+                                <h2 class="storage-right"><span class="counter">86.70</span> Pts.</h2>
+                                <div class="progress progress-mini ug-3">
+                                    <div style="width: 86.70%;" class="progress-bar progress-bar-danger"></div>
+                                </div>
+                                <div class="m-t-sm small">
+                                    <p>Primera Unidad: <font color='green'><span class="counter">86.70</span></font></p>
+                                    <p>Segunda Unidad: <font color='green'><span class="counter">0</span></font></p>
+                                    <p>Tercera Unidad: <font color='green'><span class="counter">0</span></font> </p>
+                                    <p>Cuarta Unidad:  <font color='green'><span class="counter">0</span></font></p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="analysis-progrebar res-mg-t-30 table-dis-n-pro tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="analysis-progrebar-content">
+                                <h5>Nota Mas Baja</h5>
+                                <h2 class="storage-right"><span class="counter">60</span> Pts.</h2>
+                                <div class="progress progress-mini ug-4">
+                                    <div style="width: 60%;" class="progress-bar progress-bar-danger"></div>
+                                </div>
+                                <div class="m-t-sm small">
+                                   <p>Primera Unidad: <font color='Red'><span class="counter">60</span></font></p>
+                                    <p>Segunda Unidad: <font color='Red'><span class="counter">0</span></font></p>
+                                    <p>Tercera Unidad: <font color='Red'><span class="counter">0</span></font> </p>
+                                    <p>Cuarta Unidad:  <font color='Red'><span class="counter">0</span></font></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Notas Primera Unidad</h3>
+                            <ul class="basic-list">
+                                <li>Idioma Español <span class="pull-right label-danger label-1 label">95 Pts</span></li>
+                                <li>Ciencias Sociales <span class="pull-right label-purple label-2 label">86 Pts</span></li>
+                                <li>Musica <span class="pull-right label-success label-3 label">82 Pts</span></li>
+                                <li>Ciencias Naturales <span class="pull-right label-info label-4 label">65 Pts</span></li>
+                                <li>Educacion Fisica <span class="pull-right label-warning label-5 label">98 Pts</span></li>
+                                <li>Computacion <span class="pull-right label-purple label-6 label">59 Pts</span></li>
+                                <li>Ingles <span class="pull-right label-purple label-7 label">80 Pts</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="white-box res-mg-t-30 table-mg-t-pro-n">
+                            <h3 class="box-title">Promedio Notas Primera Unidad</h3>
+                            <ul class="country-state">
+                                <li>
+                                    <h2><span class="counter">98</span> Pts</h2> <small>Nota Mas Alta (Educacion Fisica)</small>
+                                    <div class="pull-right">98 Pts <i class="fa fa-level-up text-danger ctn-ic-1"></i></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger ctn-vs-1" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:98%;"> <span class="sr-only">98 Pts Complete</span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2><span class="counter">95</span> Pts</h2> <small>Nota Mas Alta (Idioma Español)</small>
+                                    <div class="pull-right">95 Pts <i class="fa fa-level-up text-success ctn-ic-2"></i></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info ctn-vs-2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:95%;"> <span class="sr-only">95 Pts</span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2><span class="counter">86.70</span> Pts</h2> <small>Promedio General</small>
+                                    <div class="pull-right">86.70 Pts <i class="fa fa-level-up text-success ctn-ic-3"></i></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success ctn-vs-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:86.70%;"> <span class="sr-only">86.70 Pts</span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2><span class="counter">59</span> Pts</h2> <small>Nota Mas Baja(Computacion)</small>
+                                    <div class="pull-right">59 Pts <i class="fa fa-level-down text-success ctn-ic-4"></i></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success ctn-vs-4" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:59%;"> <span class="sr-only">59 Pts</span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2><span class="counter">65</span> Pts</h2> <small>Nota Mas Baja(Ciencias Naturales)</small>
+                                    <div class="pull-right">65 Pts <i class="fa fa-level-up text-success ctn-ic-5"></i></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-inverse ctn-vs-5" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:65%;"> <span class="sr-only">65 Pts</span></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="courses-inner res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="courses-title">
+                                <a href="#"><img src="img/courses/1.jpg" alt="" /></a>
+                                <h2>Informacion Del Estudiante:</h2>
+                            </div>
+                            <div class="courses-alaltic">
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-university"></i></span> <b>Grado:</b>Quinto Bachillerato Computacion</span>
+                                <br>
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-address-card"></i></span> 50</span>
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
+                            </div>
+                            <div class="course-des">
+                                <p><span><i class="fa fa-clock"></i></span> <b>Duracion:</b> 6 Months</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Profesor:</b> Jane Doe</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Estudiantes:</b> 100+</p>
+                            </div>
+                            <div class="product-buttons">
+                                <button type="button" class="button-default cart-btn">Ver Perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+    <script>
+     $(function($){
+         $('#grafica').highcharts({
+             title:{text:'Notas Por Unidad'},
+             xAxis:{categories:['Primera Unidad','Segunda Unidad','Tercera Unidad','Cuarta Unidad']},
+             yAxis:{title:'Porcentaje %',plotLines:[{value:0,width:1,color:'#0951a2'}]},
+             tooltip:{valueSuffix:' Puntos'},
+             series:[
+             {type: 'spline',name: 'Nota Mas Alta',data: [98, 0, 0, 0], color:'#006DF0'},
+             {type: 'spline',name: 'Nota Mas Baja',data: [60,0, 0,0], color:'#f90a0a'},
+             {type: 'spline',name: 'Promedio General',data: [86.70,0, 0,0], color:'#65b12d'}
+           ],
+             plotOptions:{line:{dataLabels:{enabled:true}}}
+         });
+     });
+    </script>
+</body>
+{% endblock %}
