@@ -1,4 +1,5 @@
-
+{% extends 'administracion/base.html' %}
+{% block content %}
 {% load static %}
 
  <meta charset='utf-8' />
@@ -9,17 +10,42 @@
     <script src="{% static 'administracion/calendario/lib/jquery.min.js' %}"></script>
     <script src="{% static 'administracion/calendario/fullcalendar.min.js' %}"></script>
     <script src="{% static 'administracion/calendario/locale-all.js' %}"></script>
-  
+ 
+<style>
+
+  #calendario {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+
+</style>
+
+
+
+ <div class="calender-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="calender-inner">
+                            
+  <div id='calendario'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
 <script>
 
   $(document).ready(function() {
     var initialLocaleCode = 'es';
-	var todayDate = moment().startOf('day');
-	var YM = todayDate.format('YYYY-MM');
-	var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
-	var TODAY = todayDate.format('YYYY-MM-DD');
-	var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-    $('#calendar').fullCalendar({
+  var todayDate = moment().startOf('day');
+  var YM = todayDate.format('YYYY-MM');
+  var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
+  var TODAY = todayDate.format('YYYY-MM-DD');
+  var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
+    $('#calendario').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
@@ -63,34 +89,11 @@
     // when the selected option changes, dynamically change the calendar option
     $('#locale-selector').on('change', function() {
       if (this.value) {
-        $('#calendar').fullCalendar('option', 'locale', this.value);
+        $('#calendario').fullCalendar('option', 'locale', this.value);
       }
     });
   });
 
 </script>
-<style>
 
-  #calendar {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 10px;
-  }
-
-</style>
-
-
-
-
- <div class="calender-area mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="calender-inner">
-                            
-  <div id='calendar'></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% endblock %}

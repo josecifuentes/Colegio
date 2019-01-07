@@ -17,16 +17,39 @@ def dashboard(request):
     a = False;
     for g in query_set:
         if g.name=="Administracion":
-           return render(request, 'administracion/dashboard_Administracion.html')
+            alumnos=Alumno.objects.filter(Estado__iexact="PendienteExamen")
+            return render(request, 'administracion/dashboard_Administracion.html')
         if g.name=="Secretaria":
-           return render(request, 'administracion/dashboard_Secretaria.html')
+            alumnos=Alumno.objects.all()
+            return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
         if g.name=="Alumno":
-           return render(request, 'administracion/dashboard_Alumno.html')
+            return render(request, 'administracion/dashboard_Alumno.html')
     return render(request, 'administracion/dashboard.html')
 
 @login_required
 def calendario(request):
+    query_set = Group.objects.filter(user = request.user)
+    a = False;
     actividad = Actividade.objects.all()
+    for g in query_set:
+        if g.name=="Administracion":
+            actividad = Actividade.objects.all()
+        if g.name=="Secretaria":
+            actividad = Actividade.objects.all()
+        if g.name=="Alumno":
+            try:
+                perfil = Alumno.objects.get(Usuario=request.user)
+                grado=str(perfil.Grado);
+                if "Diversificado" in grado:
+                    actividad = Actividade.objects.filter(Grupo__iexact="estu-bach") | Actividade.objects.filter(Grupo__iexact='Todos')
+                if "Basico" in grado:
+                    actividad = Actividade.objects.filter(Grupo__iexact="estu-basico") | Actividade.objects.filter(Grupo__iexact='Todos')
+                if "Primaria" in grado:
+                    actividad = Actividade.objects.filter(Grupo__iexact="estu-primaria") | Actividade.objects.filter(Grupo__iexact='Todos')
+                if "Pre-Primaria" in grado:
+                    actividad = Actividade.objects.filter(Grupo__iexact="estu-preprimaria") | Actividade.objects.filter(Grupo__iexact='Todos')
+            except Alumno.DoesNotExist:
+                perfil=None
     return render(request, 'administracion/actividades.html', {'actividad': actividad})
 
 @login_required

@@ -110,8 +110,8 @@
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="Principal" href="{% url 'dashboard'%}"><span class="mini-sub-pro">Principal</span></a></li>
-                                <li><a title="Actividades" href="#"><span class="mini-sub-pro">Actividades</span></a></li>
-                                <li><a title="Alumnos" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Alumnos</span></a></li>
+                                <li><a title="Actividades" href="{% url 'calendario'%}"><span class="mini-sub-pro">Actividades</span></a></li>
+                                <li><a title="Notas" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Notas</span></a></li>
                              </ul>
                         </li>
                         {% if perms.administracion.delete_grado %}
@@ -751,9 +751,7 @@
         </div>
     </div>
 
-    <!-- jquery
-        ============================================ -->
-    <script src="{% static 'administracion/js/vendor/jquery-1.12.4.min.js' %}"></script>
+   
     <!-- bootstrap JS
         ============================================ -->
     <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
@@ -864,7 +862,7 @@
     <script src="{% static 'administracion/js/editable/jquery.mockjax.js' %}"></script>
     <script src="{% static 'administracion/js/editable/mock-active.js' %}"></script>
     <script src="{% static 'administracion/js/editable/select2.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/moment.min.js' %}"></script>
+    
     <script src="{% static 'administracion/js/editable/bootstrap-datetimepicker.js' %}"></script>
     <script src="{% static 'administracion/js/editable/bootstrap-editable.js' %}"></script>
     <script src="{% static 'administracion/js/editable/xediable-active.js' %}"></script>
