@@ -1,11 +1,12 @@
 {% extends 'Pagina/base.html' %}
 {% load static %}
 {% block content %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'styles/actividades.css' %}">
 
 <div class="home">
 		<div class="home_background_container prlx_parent">
-			<div class="home_background prlx" style="background-image:url({% static 'images/back.jpg' %})"></div>
+			<div class="home_background prlx" style="background-image:url({% static 'images/info.jpg' %})"></div>
 		</div>
 		<div class="home_content">
 			<h1>Actividades</h1>
@@ -48,6 +49,41 @@
 									{% ifequal mes '01' %}
 					         		<div class="event_month">Enero</div>
 					   					  {% endifequal %}
+									{% ifequal mes '02' %}
+					         		<div class="event_month">Febrero</div>
+					   					  {% endifequal %}
+									{% ifequal mes '03' %}
+					         		<div class="event_month">Marzo</div>
+					   					  {% endifequal %}
+					   				{% ifequal mes '04' %}
+					         		<div class="event_month">Abril</div>
+					   					  {% endifequal %}
+					   				{% ifequal mes '05' %}
+					         		<div class="event_month">Mayo</div>
+					   					  {% endifequal %}
+									{% ifequal mes '06' %}
+					         		<div class="event_month">Junio</div>
+					   					  {% endifequal %}
+									
+									{% ifequal mes '07' %}
+					         		<div class="event_month">Julio</div>
+					   					  {% endifequal %}
+									{% ifequal mes '08' %}
+					         		<div class="event_month">Agosto</div>
+					   					  {% endifequal %}
+									{% ifequal mes '09' %}
+					         		<div class="event_month">Septiembre</div>
+					   					  {% endifequal %}
+									{% ifequal mes '10' %}
+					         		<div class="event_month">Octubre</div>
+					   					  {% endifequal %}
+									{% ifequal mes '11' %}
+					         		<div class="event_month">Noviembre</div>
+					   					  {% endifequal %}
+									{% ifequal mes '12' %}
+					         		<div class="event_month">Diciembre</div>
+					   					  {% endifequal %}
+									
 									
 								</div>
 							</div>
@@ -62,7 +98,7 @@
 
 							<div class="col-lg-4 order-lg-3 order-1">
 								<div class="event_image">
-									<img src="{% static 'images/Evento.jpg' %}" class="imagen_evento">
+									<img src="{% static 'images/logoblanco.jpg' %}" class="imagen_evento">
 								</div>
 							</div>
 

@@ -62,7 +62,7 @@
     {% for act in actividad %}
         {
           title: '{{act.Titulo}}',
-          url: 'http://google.com/',
+          url: '{% url 'calendario_info' pk=act.pk %}',
           start: '{{act.Fecha_Inicio}}',
           end: '{{act.Fecha_Fin}}'
         },

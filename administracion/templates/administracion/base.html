@@ -34,6 +34,9 @@
     <!-- meanmenu icon CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/meanmenu.min.css' %}">
+    <!-- buttons CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/buttons.css' %}">
     <!-- main CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/main.css' %}">
@@ -87,6 +90,33 @@
     <!-- modernizr JS
         ============================================ -->
     <script src="{% static 'administracion/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'administracion/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<!-- wow JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/wow.min.js' %}"></script>
+
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/owl.carousel.min.js' %}"></script>
+
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/jquery-price-slider.js' %}"></script>
+
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/jquery.scrollUp.min.js' %}"></script>
+    <!-- notifications CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/notifications/Lobibox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'administracion/css/notifications/notifications.css' %}">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'administracion/css/data-table/bootstrap-editable.css' %}">
+
 </head>
 
 <body>
@@ -94,51 +124,120 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Start Header menu area -->
+
+    
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="{% url 'dashboard'%}"><img class="main-logo" src="{% static 'img/logo/logo.png' %}" alt="" /></a>
+                <a href="{% url 'dashboard'%}"><img class="main-logo" src="{% static 'images/logob.jpg' %}" alt="" /></a>
                 <strong><a href="{% url 'dashboard'%}"><img src="{% static 'administracion/img/logo/logosn.png' %}" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
+                    {% if "Inicio" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
                         <li class="active">
-                            <a class="has-arrow" href="{% url 'dashboard'%}">
+                            <a class="has-arrow" href="#">
                                    <span class="educate-icon educate-home icon-wrap"></span>
                                    <span class="mini-click-non">Inicio</span>
-                                </a>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
+                                {% if "Principal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
                                 <li><a title="Principal" href="{% url 'dashboard'%}"><span class="mini-sub-pro">Principal</span></a></li>
-                                <li><a title="Actividades" href="{% url 'calendario'%}"><span class="mini-sub-pro">Actividades</span></a></li>
-                                <li><a title="Notas" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Notas</span></a></li>
-                             </ul>
+                                {% endif %}
+
+                                
+
+                            </ul>
                         </li>
-                        {% if perms.administracion.delete_grado %}
+                    {% endif %}
+
+
+                        {% if "Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
-                            <a title="Calendario Actividades" href="{% url 'calendario'%}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Calendario</span></a>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-charts icon-wrap"></span> <span class="mini-click-non">Notas</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+
+                                {% if "Actividades" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
+                                <li><a title="Actividades" href="{% url 'actividades_cursos'%}"><span class="mini-sub-pro">Actividades</span></a></li>
+                                {% endif %}
+                            {% if "Ver Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Notas" href="{% url 'notas' %}"><span class="mini-sub-pro">Ver Notas</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Encargados" href="{% url 'notas' %}"><span class="mini-sub-pro">Añadir Notas</span></a></li>
+                                 {% endif %}
+                            {% if "Modificar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Modificar Nota" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Modificar Una Nota</span></a></li>
+                                {% endif %}
+                            </ul>
                         </li>
                         {% endif %}
-                        {% if perms.administracion.delete_encargado %}
+                         {% if "Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Encargados</span></a>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Calendario</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Ver Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Encargados" href="{% url 'calendario' %}"><span class="mini-sub-pro">Ver Calendario</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Calendario</span></a></li>
+                                 {% endif %}
+                            {% if "Eliminar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Eliminar Actividad</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if "Horarios" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Horarios</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
+                            {% endif %}
+                            {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Agregar Horario clase" href="{% url 'horas' %}"><span class="mini-sub-pro">Agregar Horarios de Clases</span></a></li>
+                            {% endif %}
+                             {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Eliminar horario clase" href="#"><span class="mini-sub-pro">Eliminar horarios de clase</span></a></li>
+                            {% endif %}
+                            {% if "Horarios de consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Horarios de consulta" href="#"><span class="mini-sub-pro">Ver Horarios de consulta</span></a></li>
+                            {% endif %}
+                            {% if "Agregar horario consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Agregar horario consulta" href="#"><span class="mini-sub-pro">Agregar horarios de Consultas</span></a></li>
+                            {% endif %}
+                             {% if "Eliminar horario consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Eliminar horario consulta" href="#"><span class="mini-sub-pro">Eliminar horarios de consulta</span></a></li>
+                            {% endif %}
+                            </ul>
+                        </li>
+                         {% endif %}
+                        {% if "Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Encargados</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Ver Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los Encargados" href="{% url 'ver_encargados' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
-                                {% if perms.administracion.add_encargado %}
+                                 {% endif %}
+                                {% if "Agregar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Encargados</span></a></li>
                                  {% endif %}
-                            {% if perms.administracion.add_encargados_alumnos %}
+                            {% if "Asignar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
                                 {% endif %}
                             </ul>
                         </li>
                         {% endif %}
-                        {% if perms.administracion.delete_alumno %}
+                         {% if "Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Estudiantes</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
-                            {% if perms.administracion.add_alumno %}
+                                     {% endif %}
+                            {% if "Agregar Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
                             {% endif %}
 
@@ -148,74 +247,122 @@
                             </ul>
                         </li>
                          {% endif %}
-                          {% if perms.administracion.delete_examene %}
+                          {% if "Examen Admision" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                          <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Examenes</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="{% url 'ver_examenes' %}"><span class="mini-sub-pro">Todos Los Examenes</span></a></li>
-                                {% if perms.administracion.add_examene %}
+                                {% if "Todos Los Examenes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Examenes" href="{% url 'ver_examenes' %}"><span class="mini-sub-pro">Todos Los Examenes</span></a></li>
+                                 {% endif %}
+                                {% if "Realizar Un Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Add Courses" href="{% url 'agregar_examenes' %}"><span class="mini-sub-pro">Realizar Un Examen</span></a></li>
                                 {% endif %}
                             </ul>
                         </li>
                          {% endif %}
-                         {% if perms.administracion.delete_materia %}
+                         {% if "Materias" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non"> Materias</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Todas Las Materias" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todas Las Materias" href="all-courses.html"><span class="mini-sub-pro">Todas Las Materias</span></a></li>
+                                {% endif %}
+                                {% if "Agregar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Materia" href="add-course.html"><span class="mini-sub-pro">Añadir Materia</span></a></li>
+                                {% endif %}
+                                {% if "Editar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Editar Materia" href="edit-course.html"><span class="mini-sub-pro">Editar Materia</span></a></li>
+                                {% endif %}
+                                {% if "Asignar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Asignar Materia" href="course-info.html"><span class="mini-sub-pro">Asignar Materia</span></a></li>
+                                {% endif %}
                             </ul>
                         </li>
                          {% endif %}
-                         {% if perms.administracion.delete_grado %}
+                         {% if "Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                          <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Grados</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Todos Los Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los Grados" href="library-assets.html"><span class="mini-sub-pro">Todos Los Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Grados" href="add-library-assets.html"><span class="mini-sub-pro">Añadir Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Editar Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Editar Grados" href="edit-library-assets.html"><span class="mini-sub-pro">Editar Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Asignacion De Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Asignacion De Grados" href="edit-library-assets.html"><span class="mini-sub-pro">Asignacion De Grados</span></a></li>
+                                 {% endif %}
                                 
                             </ul>
                         </li>
                          {% endif %}
-                         {% if perms.administracion.delete_aula %}
+                          {% if "Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Aulas</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                 {% if "Listado De Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Listado De Aulas" href="departments.html"><span class="mini-sub-pro">Listado De Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Agregar Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Aulas" href="add-department.html"><span class="mini-sub-pro">Añadir Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Editar Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Editar Aulas" href="edit-department.html"><span class="mini-sub-pro">Editar Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Asignacion De Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Asignacion De Aulas" href="edit-department.html"><span class="mini-sub-pro">Asignacion De Aulas</span></a></li>
+                                 {% endif %}
                             </ul>
                         </li>
                          {% endif %}
-                         {% if perms.administracion.delete_grado %}
+                         {% if "Mensajeria" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mensajeria</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                 {% if "Buzon De Entrada" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Buzon De Entrada</span></a></li>
+                                 {% endif %}
+                                 {% if "Escribir Mensaje" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Escribir Mensaje" href="mailbox-view.html"><span class="mini-sub-pro">Escribir Mensaje</span></a></li>
+                                 {% endif %}
                                
                             </ul>
                         </li>
                         {% endif %}
-                        {% if perms.administracion.delete_pago %}
+                      {% if "Pagos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Pagos</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Ver Pagos Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Ver Pagos Alumnos" href="{% url 'ver_pagos' %}"><span class="mini-sub-pro">Ver Pagos Alumnos</span></a></li>
-                                {% if perms.administracion.add_pago %}
+                                {% endif %}
+                                {% if "Agregar Pago" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Agregar Pagos" href="{% url 'asignacion_pagos' %}"><span class="mini-sub-pro">Agregar Pagos</span></a></li>
                                 {% endif %}
                                 
                             </ul>
                         </li>
                           {% endif %}
-                        {% if perms.administracion.delete_grado %}
+                        {% if "Usuarios" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Usuarios</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                {% if "Ver Pagos Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Permisos" href="{% url 'asignar_permisos' %}"><span class="mini-sub-pro">Asignar Permisos</span></a></li>
+                                {% endif %}
+                                <li><a title="Alerts" href="alerts.html"><span class="mini-sub-pro">Alerts</span></a></li>
+                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
+                                <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
+                                <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
+                                <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if "Configuraciones" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Configuraciones</span></a>
@@ -229,6 +376,7 @@
                             </ul>
                         </li>
                         {% endif %}
+                        
                     </ul>
                 </nav>
             </div>
@@ -241,7 +389,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="{% static 'administracion/img/logo/logo.png' %}" alt="" /></a>
+                        <a href="index.html"><img class="main-logo" src="{% static 'administracion/img/logo/logosn.png' %}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -265,7 +413,7 @@
                                             <ul class="nav navbar-nav mai-top-nav">
                                                 <li class="nav-item"><a href="{% url 'dashboard'%}" class="nav-link">Pagina Principal</a>
                                                 </li>
-                                                <li class="nav-item"><a href="..\" class="nav-link">Regresar a La Pagina Del Colegio</a>
+                                                <li class="nav-item"><a href="http:\\www.colegionuevomundo.edu.gt" class="nav-link">Regresar a La Pagina Del Colegio</a>
                                                 </li>
                                                 
                                                 
@@ -358,6 +506,9 @@
                                         {% if 'Secretaria' ==  request.user.groups.all.0.name %}  
                                             <font color='Blue'>Secretaria</font>
                                         {% endif %}
+                                        {% if 'Alumno' ==  request.user.groups.all.0.name %}  
+                                            <font color='red'>Alumno</font>
+                                        {% endif %}
 
                                                     
                                                         </li>
@@ -393,17 +544,7 @@
                                                                     <div class="notes-list-area notes-menu-scrollbar">
                                                                         <ul class="notes-menu-list">
                                                                             <li>
-                                                                                <a href="#">
-                                                                                    <div class="notes-list-flow">
-                                                                                        <div class="notes-img">
-                                                                                            <img src="{% static 'administracion/img/contact/4.jpg' %}" alt="" />
-                                                                                        </div>
-                                                                                        <div class="notes-content">
-                                                                                            <p> The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
-                                                                                            <span>Yesterday 2:45 pm</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
+                                                                                
                                                                             </li>
                                                                             
                                                                         </ul>
@@ -414,27 +555,12 @@
                                                                 <div class="projects-settings-wrap">
                                                                     <div class="note-heading-indicate">
                                                                         <h2><i class="fa fa-cube"></i> Ultimas Notas</h2>
-                                                                        <p> Tienes 20 Notas 5 Sin Confirmar.</p>
+                                                                        <p> Tienes 0 Nota(s) Sin Confirmar.</p>
                                                                     </div>
                                                                     <div class="project-st-list-area project-st-menu-scrollbar">
                                                                         <ul class="projects-st-menu-list">
                                                                             <li>
-                                                                                <a href="#">
-                                                                                    <div class="project-list-flow">
-                                                                                        <div class="projects-st-heading">
-                                                                                            <h2>Web Development</h2>
-                                                                                            <p> The point of using Lorem Ipsum is that it has a more or less normal.</p>
-                                                                                            <span class="project-st-time">1 hours ago</span>
-                                                                                        </div>
-                                                                                        <div class="projects-st-content">
-                                                                                            <p>Completion with: 28%</p>
-                                                                                            <div class="progress progress-mini">
-                                                                                                <div style="width: 28%;" class="progress-bar progress-bar-danger hd-tp-1"></div>
-                                                                                            </div>
-                                                                                            <p>Project end: 4:00 pm - 12.06.2014</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
+                                                                                
                                                                             </li>
                                                                             
                                                                         </ul>
@@ -722,6 +848,8 @@
         <div class="analytics-sparkle-area">
             <div class="container-fluid">
                 <div class="row">
+
+
                     {% block content %}
                     {% endblock %}
                     
@@ -732,122 +860,42 @@
             </div>
         </div>
         
-        
-        
-        
-        
-        
-        
-        <div class="footer-copyright-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Jose Cifuentes</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-   
-    <!-- bootstrap JS
+ <!-- bootstrap JS
         ============================================ -->
     <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
-    <!-- wow JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/wow.min.js' %}"></script>
-    <!-- price-slider JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/jquery-price-slider.js' %}"></script>
-    <!-- meanmenu JS
+
+    <!-- meanmenu JS MENUS DESPLEGABLES
         ============================================ -->
     <script src="{% static 'administracion/js/jquery.meanmenu.js' %}"></script>
-    <!-- owl.carousel JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/owl.carousel.min.js' %}"></script>
+
     <!-- sticky JS
         ============================================ -->
     <script src="{% static 'administracion/js/jquery.sticky.js' %}"></script>
-    <!-- scrollUp JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/jquery.scrollUp.min.js' %}"></script>
-     <!-- mCustomScrollbar JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script src="{% static 'administracion/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
+
+    
     <!-- counterup JS
         ============================================ -->
     <script src="{% static 'administracion/js/counterup/jquery.counterup.min.js' %}"></script>
     <script src="{% static 'administracion/js/counterup/waypoints.min.js' %}"></script>
     <script src="{% static 'administracion/js/counterup/counterup-active.js' %}"></script>
-    <!-- mCustomScrollbar JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script src="{% static 'administracion/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
+    
     <!-- metisMenu JS
         ============================================ -->
     <script src="{% static 'administracion/js/metisMenu/metisMenu.min.js' %}"></script>
     <script src="{% static 'administracion/js/metisMenu/metisMenu-active.js' %}"></script>
-    <!-- tab JS
+        <!-- mCustomScrollbar JS
         ============================================ -->
-    <script src="{% static 'administracion/js/tab.js' %}"></script>
-    <!-- icheck JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/icheck/icheck.min.js' %}"></script>
-    <script src="{% static 'administracion/js/icheck/icheck-active.js' %}"></script>
-    <!-- colorpicker JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/colorpicker/jquery.spectrum.min.js' %}"></script>
-    <script src="{% static 'administracion/js/colorpicker/color-picker-active.js' %}"></script>
-    <!-- datapicker JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/datapicker/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'administracion/js/datapicker/datepicker-active.js' %}"></script>
-    <!-- input-mask JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/input-mask/jasny-bootstrap.min.js' %}"></script>
-    <!-- chosen JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
-    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
-    <!-- select2 JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/select2/select2.full.min.js' %}"></script>
-    <script src="{% static 'administracion/js/select2/select2-active.js' %}"></script>
-    <!-- ionRangeSlider JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/ionRangeSlider/ion.rangeSlider.min.js' %}"></script>
-    <script src="{% static 'administracion/js/ionRangeSlider/ion.rangeSlider.active.js' %}"></script>
-    <!-- rangle-slider JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/rangle-slider/jquery-ui-1.10.4.custom.min.js' %}"></script>
-    <script src="{% static 'administracion/js/rangle-slider/jquery-ui-touch-punch.min.js' %}"></script>
-    <script src="{% static 'administracion/js/rangle-slider/rangle-active.js' %}"></script>
-    <!-- knob JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/knob/jquery.knob.js' %}"></script>
-    <script src="{% static 'administracion/js/knob/knob-active.js' %}"></script>
-    <!-- tab JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/tab.js' %}"></script>
-    <!-- morrisjs JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/morrisjs/raphael-min.js' %}"></script>
-    <script src="{% static 'administracion/js/morrisjs/morris.js' %}"></script>
-    <script src="{% static 'administracion/js/morrisjs/morris-active.js' %}"></script>
-    <!-- morrisjs JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
-    <script src="{% static 'administracion/js/sparkline/jquery.charts-sparkline.js' %}"></script>
-    <script src="{% static 'administracion/js/sparkline/sparkline-active.js' %}"></script>
-    <!-- calendar JS
-        ============================================ -->
+    <script src="{% static 'administracion/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'administracion/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
 
-
- 
-    <!-- data table JS
+    
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/main.js' %}"></script>
+        
+        
+    
+     <!-- data table JS
         ============================================ -->
     <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
     <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
@@ -857,32 +905,22 @@
     <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
     <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
     <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
-    <!--  editable JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/editable/jquery.mockjax.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/mock-active.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/select2.js' %}"></script>
-    
-    <script src="{% static 'administracion/js/editable/bootstrap-datetimepicker.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/bootstrap-editable.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/xediable-active.js' %}"></script>
-    <!-- Chart JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/chart/jquery.peity.min.js' %}"></script>
-    <script src="{% static 'administracion/js/peity/peity-active.js' %}"></script>
-    <!-- tab JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/tab.js' %}"></script>
-    <!-- plugins JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/plugins.js' %}"></script>
-    <!-- main JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/main.js' %}"></script>
-    <!-- tawk chat JS
-        ============================================ -->
-    </script>
+        
+        
+        <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2018. All rights reserved. <a href="#">Colegio Nuevo Mundo</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+   
 
 </body>
 

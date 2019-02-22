@@ -1,0 +1,78 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+{% load index %}
+    
+                         
+                                                            
+<div class="courses-area">
+            <div class="container-fluid">
+                <div class="row mg-b-15">
+                	{% for curso in cursos %}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                       <div class="courses-inner mg-t-30">
+                            <div class="courses-title">
+                            	{% if curso.Grado.Nivel == "Diversificado" %}
+                                <a href="#"><img src="{% static 'administracion/img/courses/diversificado.jpg' %}" alt=""></a>
+                                {%endif%}
+                                {% if curso.Grado.Nivel == "Basico" %}
+                                <a href="#"><img src="{% static 'administracion/img/courses/basico.jpg' %}" alt=""></a>
+                                {%endif%}
+                                {% if curso.Grado.Nivel == "Primaria" %}
+                                <a href="#"><img src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
+                                {%endif%}
+                                <h2>{{curso.Materia}}</h2>
+                                <br>
+                            </div>
+        
+                            <div class="courses-alaltic">
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> {{Datos|index:forloop.counter0}} Estudiante(s)</span>
+                              
+                            </div>
+                  
+                            <div class="course-des">
+                            	<p><span><i class="fa fa-clock"></i></span> <b>Grado:</b> </p>{{curso.Grado.Nombre_Grado}}
+                                <p><span><i class="fa fa-clock"></i></span> <b>Nivel:</b> </p>{{curso.Grado.Nivel}}
+
+                                <p><span><i class="fa fa-clock"></i></span> <b>Seccion:</b> </p>{{curso.Seccion}}
+
+                            
+							<p><span><i class="fa fa-clock"></i></span> <b>Maestro Encargado:</b></p>
+							{{asignacion|index:forloop.counter0}}
+                               
+                            </div>
+
+                           <div class="course-des">
+
+                                            <div class="form-select-list">
+                                                <h1>UNIDAD:</h1>
+<form method = "POST" action = "{% url 'asignacion_notas' pk=curso.Grado.pk %}">
+{% csrf_token %}
+                        <select class="form-control custom-select-value" name="unidad">
+                                                <option value="uni1">Primera Unidad</option>
+                                                <option value="uni2">Segunda Unidad</option>
+                                                   <option value="uni3">Tercera Unidad</option>
+                                                   <option value="uni4">Cuarta Unidad</option>
+                        </select>
+                                                                
+                                            </div>
+                            </div>
+                                                            
+                                                        
+                            <div class="product-buttons">
+                            	<center>
+                    <button type = "submit" class="button-default cart-btn">Asignar Notas</button>
+                                </center>
+                            </div>
+
+</form>
+                        </div>
+
+                    </div>
+{% endfor %}
+                </div>
+                
+            </div>
+ </div>
+
+{% endblock %}

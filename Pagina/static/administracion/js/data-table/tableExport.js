@@ -18,7 +18,7 @@
         csvUseBOM:         true,
         displayTableName:  false,
         escape:            false,
-        excelFileFormat:   'xlshtml',     // xmlss = XML Spreadsheet 2003 file format (XMLSS), xlshtml = Excel 2000 html format
+        excelFileFormat:   'xlsx',     // xmlss = XML Spreadsheet 2003 file format (XMLSS), xlshtml = Excel 2000 html format
         excelstyles:       [],            // e.g. ['border-bottom', 'border-top', 'border-left', 'border-right']
         fileName:          'COLEGIO NUEVO MUNDO',
         htmlContent:       false,
@@ -34,8 +34,8 @@
           autotable: {
             styles: {
               cellPadding: 2,
-              rowHeight:   12,
-              fontSize:    8,
+              rowHeight:   25,
+              fontSize:    20,
               fillColor:   255,           // color value or 'inherit' to use css background-color from html table
               textColor:   50,            // color value or 'inherit' to use css color from html table
               fontStyle:   'normal',      // normal, bold, italic, bolditalic or 'inherit' to use css font-weight and fonst-style from html table
@@ -92,7 +92,7 @@
         theadSelector:     'tr',
         tableName:         'myTableName',
         type:              'csv',         // 'csv', 'tsv', 'txt', 'sql', 'json', 'xml', 'excel', 'doc', 'png' or 'pdf'
-        worksheetName:     'Worksheet'
+        worksheetName:     'Notas'
       };
 
       var FONT_ROW_RATIO = 1.15;

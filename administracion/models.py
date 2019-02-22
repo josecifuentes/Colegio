@@ -318,15 +318,16 @@ class Personal(models.Model):
     Igss = models.CharField(max_length=30)
     Fecha_Inicio_Labores = models.DateField(
         blank=True, null=True)
-    Nivel_Academico = models.CharField(max_length=50)
-    Titulo = models.CharField(max_length=50)
-    Cedula_Docente = models.CharField(max_length=50)
-    Registro_Escalafonario = models.CharField(max_length=50)
-    Salario = models.CharField(max_length=50)
+    Nivel_Academico = models.CharField(max_length=50,blank=True, null=True)
+    Titulo = models.CharField(max_length=50,blank=True, null=True)
+    Cedula_Docente = models.CharField(max_length=50,blank=True, null=True)
+    Registro_Escalafonario = models.CharField(max_length=50,blank=True, null=True)
+    Salario = models.CharField(max_length=50,blank=True, null=True)
     Hora_Entrada = models.TimeField(blank=True, null=True)
     Hora_Salida = models.TimeField(blank=True, null=True)
     fechaingreso = models.DateTimeField(blank=True, null=True)
-
+    email= models.CharField(max_length=50,blank=True, null=True)
+    Usuario = models.OneToOneField('auth.User', on_delete=models.CASCADE,blank=True, null=True)
     def publish(self):
         self.fechaingreso = timezone.now()
         self.save()
@@ -342,10 +343,19 @@ class Asignacion_Materia (models.Model):
 
     Personal  = models.ForeignKey(Personal, on_delete=models.CASCADE)
 
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
     def __str__(self):
-        return '%s %s %s' % (self.Grado, self.Materia, self.Personal)
+        return '%s %s %s %s' % (self.Grado, self.Seccion,self.Materia, self.Personal)
     class Meta:
-        unique_together = (("Grado", "Materia"),)
+        unique_together = (("Grado", "Materia","Seccion"),)
 
 class Asignacion_Acividade (models.Model):
 
@@ -380,17 +390,32 @@ class Asignacion_Acividade (models.Model):
         default='Actividad 1',
     )
     Descripcion_Actividad =  models.CharField(max_length=200)
-    Ponderacion = models.IntegerField(
-        default=1,
-        validators=[
-            MaxValueValidator(60),
-            MinValueValidator(1)
-        ]
-     )
+    Ponderacion = models.CharField(max_length=3)
 
     def __str__(self):
         return '%s %s' % (self.Asignacion_Materia, self.Ponderacion)
-
+    class Meta:
+        unique_together = (("Asignacion_Materia", "Unidad", "Nombre_Actividad"),)
+class Asignacion_Punteo (models.Model):
+    Asignacion_Acividades=models.ForeignKey(Asignacion_Acividade, on_delete=models.CASCADE)
+    Alumno=models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    Nota= models.IntegerField(
+        default=0,
+        )
+    Estados = (
+        ('Pendiente', 'Pendiente'),
+        ('No_Aprobado', 'No Aprobado'),
+        ('Aprobado', 'Aprobado'),
+        )
+    Estado = models.CharField(
+        max_length=20,
+        choices=Estados,
+        default='No_Aprobado',
+        )
+    def __str__(self):
+        return '%s %s %s' % (self.Asignacion_Acividades,self.Alumno, self.Nota)
+    class Meta:
+        unique_together = (("Asignacion_Acividades", "Alumno"),)
 class Actividade (models.Model):
     Titulo = models.CharField(max_length=120)
     Descripcion = models.CharField(max_length=300)
@@ -402,6 +427,7 @@ class Actividade (models.Model):
     Fecha_Fin = models.CharField(max_length=120,
         blank=True, null=True)
     grupos = (
+        ('estudiantes', 'Estudiantes'),
         ('estu-preprimaria', 'Estudiantes Pre-Primaria'),
         ('estu-primaria', 'Estudiantes Primaria'),
         ('estu-basico', 'Estudiantes Basico'),
@@ -417,8 +443,70 @@ class Actividade (models.Model):
         choices=grupos,
         default='Todos',
         )
+    Grado = models.ForeignKey(Grado, on_delete=models.CASCADE,blank=True, null=True)
     def __str__(self):
         return '%s %s %s %s' % (self.Titulo,self.Grupo, self.Fecha_Inicio, self.Fecha_Fin)
+
+class Permiso(models.Model):
+    Nombre = models.CharField(max_length=50)
+    Descripcion = models.CharField(max_length=200)
+    def __str__(self):
+        return '%s' % (self.Nombre)
+
+class Asignacion_Permiso (models.Model):
+
+    Permiso = models.ForeignKey(Permiso, on_delete=models.CASCADE)
+    Usuario = models.ForeignKey('auth.User', on_delete=models.CASCADE,blank=True, null=True)
+    Estados = (
+        ('Activo', 'Activo'),
+        ('Inactivo', 'Inactivo'),
+        )
+    Estado = models.CharField(
+        max_length=10,
+        choices=Estados,
+        default='Activo',
+        )
+    def __str__(self):
+        return '%s' % (self.Permiso)
+    class Meta:
+        unique_together = (("Permiso", "Usuario"),)
+
+class Asignacion_Grado (models.Model):
+
+    Grado = models.ForeignKey(Grado, on_delete=models.CASCADE)
+
+    Personal  = models.ForeignKey(Personal, on_delete=models.CASCADE)
+
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
+    def __str__(self):
+        return '%s %s %s' % (self.Grado, self.Seccion, self.Personal)
+    class Meta:
+        unique_together = (("Grado", "Seccion"),)
+
+class horas(models.Model):
+    Niveles = (
+        ('Pre-Primaria','Pre-Primaria'),
+        ('Primaria', 'Primaria'),
+        ('Basico', 'Basico'),
+        ('Diversificado', 'Diversificado'),
+            )
+    Nivel = models.CharField(
+        max_length=100,
+        choices=Niveles,
+        default='Pre-Primaria',
+        )
+    hora_inicio = models.CharField(max_length=50)
+    hora_fin = models.CharField(max_length=50)
+    def __str__(self):
+        return '%s %s' % (self.Nivel, self.hora)    
 
 class Asignacion_MateriaInLine(admin.TabularInline):
 

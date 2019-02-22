@@ -1,0 +1,148 @@
+
+{% load static %}
+<link href='https://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
+    <link href="{% static 'horario/style.css' %}" rel="stylesheet">
+
+<style type="text/css">
+
+  .logo{
+    background-color: white;
+  }
+
+</style>
+
+<div id="menu" class="col-md-12 text-right">
+      <div class="container">
+        <a class="btn btn-primary" href=".."><i class="fa fa-home" aria-hidden="true"></i> Regresar</a>
+        {% if "Horarios Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+          <a class="btn btn-primary" href="{% url 'horarios' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</a>
+        {%else%}
+        <a class="btn btn-primary" href="{% url 'horarios_grado' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</a>
+        {%endif%}  
+            {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+          <button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o"></i> Nuevo Horario</button>
+          {%endif%}
+      </div>
+    </div>
+    <!-- menu -->
+<center>
+  <div class="logo">
+<img src="{% static 'images/logoblanco.jpg' %}" height="100" width="200"></center>
+</div>
+    
+    <!-- container -->
+
+
+
+<!-- modal nuevo horario -->
+<div class="modal fade animated bounceInLeft" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close cancel-new" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-calendar"></i> Nuevo Horario</h4>
+      </div>
+      <div class="modal-body">
+        
+         <form id="horariofrm">
+            <label>Grado:</label>
+            <select class="form-control" name="minutos">
+                <option></option>
+                <option value="15">15 Minutos</option>
+                <option value="30">30 Minutos</option>
+                <option value="35">35 Minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="60">1 Hora</option>
+            </select>
+            <label>Curso:</label>
+            <select class="form-control" name="minutos">
+                <option></option>
+                <option value="15">15 Minutos</option>
+                <option value="30">30 Minutos</option>
+                <option value="35">35 Minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="60">1 Hora</option>
+            </select>
+            <label>Dias:</label>
+            <div id="days-list" class="col-sm-12">
+               <a data-day="1" class="day-option">Lunes</a>
+               <a data-day="2" class="day-option">Martes</a>
+               <a data-day="3" class="day-option">Miercoles</a>
+               <a data-day="4" class="day-option">Jueves</a>
+               <a data-day="5" class="day-option">Viernes</a>
+            </div>
+            <input id="days-chose" class="form-control" type="text" name="days" >
+            <label>Periodo:</label>
+            <select class="form-control" name="minutos">
+                <option></option>
+                <option value="15">15 Minutos</option>
+                <option value="30">30 Minutos</option>
+                <option value="35">35 Minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="60">1 Hora</option>
+            </select>
+         </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="create-horario btn btn-success"><i class="fa fa-calendar-check-o"></i> Crear</button>
+        <button type="button" class="cancel-new btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal nuevo horario -->
+
+ <div class="container" >
+         <div class="panel panel-info" style="margin-top: 20px;">
+           <div class="panel-heading"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</div>
+           <div class="panel-body nopadding">
+                <table class="table table-striped">
+                      <thead class="messages-table-header">
+                         <tr>
+                           <th><i class="fa fa-angle-double-right"></i> Grado</th>
+                           <th><i class="fa fa-angle-double-right"></i> Nivel</th>
+                            <th><i class="fa fa-angle-double-right"></i> Seccion</th>
+                           <th><i class="fa fa-angle-double-right"></i> Acciones</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                <tr id="1">
+                <td>Primero</td>
+                <td>Basico</td>
+                <td>"A"</td>
+                <td>
+                  <button data-id="1" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</button>
+                  <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
+                  <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+                </td>
+              </tr>
+               </tbody>
+          </table>
+          <p></p>
+<div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
+<div class="btn-group" role="group" >
+           </div>
+         </div>
+      </div>
+
+   
+
+
+<!-- alert danger -->
+<div id="alert-error"><i class="fa fa-times fa-2x"></i></div>
+<!-- alert danger -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'horario/js/jquery.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'horario/js/bootstrap.min.js' %}"></script>
+    <!-- datetimepicker -->
+    <script src="{% static 'horario/js/moment-with-locales.js' %}"></script>
+    <script src="{% static 'horario/js/bootstrap-datetimepicker.js' %}"></script>
+    <!-- validate -->
+    <script src="{% static 'horario/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'horario/js/additional-methods.min.js' %}"></script>
+    <!-- script -->
+    <script src="{% static 'horario/js/script.js' %}"></script>

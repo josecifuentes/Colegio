@@ -1,0 +1,281 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+  <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline12-list">
+                            <div class="sparkline12-hd">
+                                <div class="main-sparkline12-hd">
+                                    <h1>Listado de Permisos de {{usuario.Primer_Nombre}}  {{usuario.Segundo_Nombre}}  {{usuario.Primer_Apellido}} {{usuario.Segundo_Apellido}}</h1>
+                                </div>
+                            </div>
+                            <div class="sparkline12-graph">
+                                <div class="basic-login-form-ad">
+								<div class="form-group-inner">
+									<form method = "POST" action = "{% url 'listado_permisos' pk=usuario.pk%}">
+										{% csrf_token %}
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <label class="login2 pull-right pull-right-pro"><span class="educate-icon educate-home icon-wrap"></span><font size="5">Inicio</font></label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                                <div class="bt-df-checkbox pull-left">
+                                                                	<div class="row">
+                                                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <center>
+                                                                                <label>
+			<input type="checkbox"  {% if "Inicio" in asignado|stringformat:"s" %} checked="" {%endif%} name="Inicio"> <i></i> <span class="basic-ds-n"></span> Inicio </label>
+																					</center>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                	<div class="row">
+                                                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+										<input type="checkbox" {% if "Principal" in asignado|stringformat:"s" %} checked="" {%endif%} name="Principal"> <i></i> <span class="basic-ds-n"></span> Principal </label>
+																					<p>Se utiliza para visualizar el dashboard inicial de todo usuario, por defecto no puede ser deshabilitado.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        
+                                                                    
+                                                                    
+                                                                    
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <center>
+                                                        <h1>-----------------------------------------------------------</h1></center>
+                                                        </center>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                <label class="login2 pull-right pull-right-pro"><span class="educate-icon educate-charts icon-wrap"></span> <font size="5">Notas</font></label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                                <div class="bt-df-checkbox pull-left">
+                                                                    <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <center>
+                                                                                <label>
+            <input type="checkbox"  {% if "Notas" in asignado|stringformat:"s" %} checked="" {%endif%} name="Notas"> <i></i> <span class="basic-ds-n"></span> Notas </label>
+                                                                                    </center>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+<div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+                                                <input type="checkbox" {% if "Actividades" in asignado|stringformat:"s" %} checked="" {%endif%} name="Actividades"> <i></i> Actividades</label>
+                                                                                        <p>Se utiliza para visualizar y asignar las actividades de los cursos asignados a cada maestro.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                	<div class="row">
+                                                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Ver Notas" in asignado|stringformat:"s" %} checked="" {%endif%} name="Ver Notas"> <i></i> <span class="basic-ds-n"></span> Ver Notas </label>
+																					<p>Se utiliza para visualizar Notas (solo si tiene asignado cursos y/o materias).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Agregar Notas" in asignado|stringformat:"s" %} checked="" {%endif%} name="Agregar Notas"> <i></i> Añadir Notas</label>
+																						<p>Se utiliza para agregar Notas a alumnos (solo si tiene asignado cursos y/o materias).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Modificar Notas" in asignado|stringformat:"s" %} checked="" {%endif%} name="Modificar Notas"> <i></i> Modificar Notas</label>
+																						<p>Se utiliza para visualizar todas las notas de todos los maestros y la posibilidad de modificarlas.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+														
+														<center>
+                                                        <h1>-----------------------------------------------------------</h1></center>
+                                                        </center>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <label class="login2 pull-right pull-right-pro"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span>  <font size="5">Calendario</font></label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                                <div class="bt-df-checkbox pull-left">
+                                                                    <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <center>
+                                                                                <label>
+            <input type="checkbox"  {% if "Calendario" in asignado|stringformat:"s" %} checked="" {%endif%} name="Calendario"> <i></i> <span class="basic-ds-n"></span> Calendario </label>
+                                                                                    </center>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                	<div class="row">
+                                                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Ver Calendario" in asignado|stringformat:"s" %} checked="" {%endif%} name="Ver Calendario"> <i></i> <span class="basic-ds-n"></span> Ver Calendario </label>
+																					<p>Se utiliza para visualizar Actividades agendadas en el calendario del colegio (si se es maestro encargado de un grado podra visualizar los añadidos).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Agregar Calendario" in asignado|stringformat:"s" %} checked="" {%endif%} name="Agregar Calendario"> <i></i> Añadir Calendario</label>
+																						<p>Se utiliza para agregar Actividades por grupo al calendario del colegio, si se es maestro y tiene grado encargado, podra agregar actividades al calendario del grado para los alumnos (solo si tiene asignado cursos y/o materias).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+			<input type="checkbox" {% if "Eliminar Calendario" in asignado|stringformat:"s" %} checked="" {%endif%} name="Eliminar Calendario"> <i></i> Eliminar Actividad</label>
+																						<p>Se utiliza para eliminar cualquier actividad creada.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <center>
+                                                        <h1>-----------------------------------------------------------</h1></center>
+                                                        </center>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <label class="login2 pull-right pull-right-pro"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span>  <font size="5">Horarios</font></label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                                <div class="bt-df-checkbox pull-left">
+                                                                    <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <center>
+                                                                                <label>
+            <input type="checkbox"  {% if "Horarios" in asignado|stringformat:"s" %} checked="" {%endif%} name="Horarios"> <i></i> <span class="basic-ds-n"></span> Horarios </label>
+                                                                                    </center>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+
+                                                                    <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Horarios de clase" in asignado|stringformat:"s" %} checked="" {%endif%} name="Horarios de clase"> <i></i> <span class="basic-ds-n"></span> Ver Horarios de Clase </label>
+                                                                                    <p>Se utiliza para visualizar Horarios de clase del colegio (si se es maestro visualizara su horario personal y podra visualizar del grado que el maestro decida).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Agregar Horario clase" in asignado|stringformat:"s" %} checked="" {%endif%} name="Agregar Horario clase"> <i></i> Agregar Horario clase</label>
+                                                                                        <p>Se utiliza para Agregar Horario de clase al sistema, todos los usuarios tendran acceso al horario segun esten asignados a los grados.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Eliminar horario clase" in asignado|stringformat:"s" %} checked="" {%endif%} name="Eliminar horario clase"> <i></i> Eliminar horario clase</label>
+                                                                                        <p>Se utiliza para eliminar cualquier Horario de clase creado con anterioridad.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                 
+                                                                    <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Horarios de consulta" in asignado|stringformat:"s" %} checked="" {%endif%} name="Horarios de consulta"> <i></i> <span class="basic-ds-n"></span> Ver Horarios de consulta</label>
+                                                                                    <p>Se utiliza para visualizar Horarios de consulta de los maestros segun el grado asignado, (si se es maestro visualizara su horario personal asignado).</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Agregar horario consulta" in asignado|stringformat:"s" %} checked="" {%endif%} name="Agregar horario consulta"> <i></i>Agregar horario consulta</label>
+                                                                                        <p>Se utiliza para Agregar horario consulta al sistema, todos los usuarios tendran acceso al horario segun esten asignados a los grados.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                            <div class="i-checks pull-left">
+                                                                                <label>
+            <input type="checkbox" {% if "Eliminar horario consulta" in asignado|stringformat:"s" %} checked="" {%endif%} name="Eliminar horario consulta"> <i></i> Eliminar horario de consulta</label>
+                                                                                        <p>Se utiliza para eliminar cualquier horario de consulta creado con anterioridad.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+<div class="product-buttons">
+                                <center>
+                    <button type = "submit" class="button-default cart-btn" >Asignar Permisos</button>
+                                </center>
+                            	</div>
+
+</form>
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+ 							</div>
+                          </div>
+
+<script src="{% static 'administracion/js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'administracion/js/icheck/icheck-active.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+   <div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                        <form method = "POST" action = "{% url 'asignar_permisos'%}">
+{% csrf_token %}
+                            <div class="sparkline13-hd">
+                            	<h1>Seleccione Un Usuario:</h1>
+                                Para asignar permisos porfavor seleccione un usuario y luego presione el boton  "ver permisos".
+                            	<select data-placeholder="Seleccione Un Usuario..." class="chosen-select" name="usuario">
+                            	{% for usuario in Usuarios %}
+								<option value="{{usuario.pk}}">{{usuario.Usuario}} {{usuario.Primer_Nombre}} {{usuario.Segundo_Nombre}} {{usuario.Primer_Apellido}} {{usuario.Segundo_Apellido}}</option>
+								{%endfor%}
+                            	</select>
+                            </div>
+                            <br>
+                            	 <div class="product-buttons">
+                                <center>
+                    <button type = "submit" class="button-default cart-btn">Ver Permisos</button>
+                                </center>
+                            	</div>
+                      </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+{% endblock %}

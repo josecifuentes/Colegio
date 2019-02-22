@@ -1,0 +1,122 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+<script type="text/javascript">
+            $(function () {
+                $('#time').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+
+    <!--- FORMULARIO ALUMNOS-->
+        <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>Ingresar Horarios Por Nivel</h1>
+                                </div>
+                            </div>
+
+                            <!---form--->
+                            <form action="{% url 'horas' %}" method="POST" class="post-form">
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
+        
+                                                    <div class="form-group-inner">
+                                                        <div class="row">
+
+
+                                                           <!---codigo  --->
+                                                           
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Nivel.id_for_label }}"> Nivel: </label>   
+                                                        </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                        
+                                                        {{form.Nivel}}
+
+                                                                </div>
+                                                            </div>
+
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Inicio:</label>
+                                                            </div>
+                                                           
+
+                                                            <div class='col-sm-6'>
+												            <div class="form-group">
+												                <div class='input-group date' id='time'>
+												                    {{form.hora_inicio}}
+
+												                    <span class="input-group-addon">
+												                        <span class="glyphicon glyphicon-time"></span>
+												                    </span>
+												                </div>
+												            </div>
+												       		</div><br><br><br>
+
+
+
+
+                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Fin:</label>
+                                                            </div>
+
+
+
+                                                            <div class='col-sm-6'>
+												            <div class="form-group">
+												                <div class='input-group date' id='time'>
+												                    {{form.hora_fin}}
+
+												                    <span class="input-group-addon">
+												                        <span class="glyphicon glyphicon-time"></span>
+												                    </span>
+												                </div>
+												            </div>
+												       		</div><br><br><br>
+                                                            
+                                                 </div>
+
+
+                                                        
+                                                         	
+                                                   <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                 </div>
+    							</form>
+                            <!--- fin form :)--->     
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
+
+
+{% endblock %}

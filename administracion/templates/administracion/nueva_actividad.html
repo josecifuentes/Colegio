@@ -1,0 +1,159 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+{% load index %}
+
+
+<script type="text/javascript">
+    window.onload = function() {
+    {% if errores %}
+    Lobibox.notify('error', {
+                    showClass: 'zoomInUp',
+                    hideClass: 'zoomOutDown',
+                    delay: 15000,
+                    msg: '{{errores}}'
+                });
+    {% endif %}
+    {% if informacion %}
+        Lobibox.notify('success', {
+                    showClass: 'rollIn',
+                    hideClass: 'rollOut',
+                    msg: '{{informacion}}'
+                });                        
+     {% endif %}
+     {% if info %}
+        Lobibox.notify('warning', {
+                    showClass: 'bounceIn',
+                    hideClass: 'bounceOut',
+                    msg: '{{info}}'
+                });                        
+     {% endif %}
+};
+            
+
+</script>
+<form action="{% url 'nueva_actividad' pk=curso.Grado.pk %}" method="POST" class="post-form">
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            	</div>
+                        		</div>
+                              {% endif %}
+
+ <div class="login-form-area edu-pd mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                	<div class="col-lg-4">
+                        <div class="sparkline11-list mt-b-30">
+                            <div class="sparkline11-hd">
+                                <div class="main-sparkline11-hd">
+                                	{% with uni="Unidad" %}
+                                    <center><h1>Actividades Asignadas Actualmente En La 
+                                    	{{unidad|buscar}}
+                                </h1></center>
+                                </div>
+                            </div>
+                            <div class="sparkline11-graph">
+                                <div class="static-table-list">
+                                    <table class="table sparkle-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre Actividad</th>
+                                                <th>Ponderacion</th>
+                                                <th>% Asignado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	{%for actividad in actividades %}
+                                            <tr>
+                                                <td>{{actividad.Nombre_Actividad}}</td>
+                                                <td>{{actividad.Ponderacion}}</td>
+                                                <td><span class="pie">{{actividad.Ponderacion|porcentaje}}</span>
+                                                </td>
+                                                
+                                            </tr>
+                                            {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Agregar Nueva Actividad</h2>
+                             <label>Unidad Asignada: </label>
+                            <div class="chosen-select-single mg-b-15">
+                                  
+                                                                    
+                  <input type="text" disabled class="form-control" placeholder="{{unidad|buscar}}" style="text-align: center;" />
+                                                                    
+                                                                      
+                                                {%endwith%}        
+                           </div>
+                            <label>Seleccione La Actividad A Asignar</label>
+                           <div class="chosen-select-single mg-b-15">
+                                               
+                                     {{ form.Nombre_Actividad }}
+                           </div>
+                  <label>Describa A Continuacion La Actividad:</label>
+                                     {{ form.Descripcion_Actividad }}
+                                    <br>
+                         <label>Seleccione La Ponderacion De La Actividad</label>
+                                  <div class="touchspin-inner">
+                                            {{ form.Ponderacion }}
+
+                                        </div>
+                                        <br>
+                                               <center>
+
+                   <button type="submit" class="btn btn-custon-rounded-three btn-primary"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Agregar Nueva Actividad</button>
+                                </center>            
+                        </div>
+
+                    </div>
+                     
+                </div>
+
+            </div>
+  </div>
+</form>
+                <!-- touchspin JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
+    <script src="{% static 'administracion/js/touchspin/touchspin-active.js' %}"></script>
+
+    <!-- input-mask JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/input-mask/jasny-bootstrap.min.js' %}"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
+
+ <!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+
+    <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'administracion/js/select2/select2-active.js' %}"></script>
+     <!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+<!-- peity JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'administracion/js/peity/peity-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'administracion/js/sparkline/sparkline-active.js' %}"></script>
+{% endblock %}

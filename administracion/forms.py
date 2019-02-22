@@ -1,5 +1,5 @@
 from django import forms
-from .models import Alumno, Grado, Pago, Papeleria
+from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas
 from .models import Encargado, Examene
 from .models import Encargados_alumnos
 from django.contrib.auth.forms import AuthenticationForm
@@ -131,3 +131,46 @@ class agregar_examenesForm(forms.ModelForm):
 class MyForm(forms.Form): #Notar que no hereda de forms.ModelForm
     
     codigo = forms.CharField()
+
+class Asignacion_AcividadeForm(forms.ModelForm):
+
+    class Meta:
+        model = Asignacion_Acividade
+        fields = ('Nombre_Actividad','Descripcion_Actividad','Ponderacion')
+        widgets = {
+            'Nombre_Actividad': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Una Actividad...'}),
+            'Descripcion_Actividad': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Describa a Continuacion Como Se Calificara La Actividad'}),
+            'Ponderacion': forms.TextInput(attrs={'class': 'touchspin1'}),
+        }  
+
+class Asignacion_PunteoForm(forms.ModelForm):
+
+    class Meta:
+        model = Asignacion_Punteo
+        fields = ('Alumno','Nota')
+        widgets = {
+            'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
+            'Nota': forms.TextInput(attrs={'class': 'touchspin1'}),
+        }  
+
+class Asignacion_PermisoForm(forms.ModelForm):
+
+    class Meta:
+        model = Asignacion_Permiso
+        fields = ('Permiso','Usuario','Estado')
+        widgets = {
+            'Permiso': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Permiso...'}),
+            'Usuario': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Usuario...'}),
+            'Estado': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un estado...'}),
+        }  
+
+class horasForm(forms.ModelForm):
+
+    class Meta:
+        model = horas
+        fields = ('Nivel','hora_inicio','hora_fin')
+        widgets = {
+            'Nivel': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Nivel...'}),
+            'hora_inicio': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
+            'hora_fin': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de Fin'}),
+              }  

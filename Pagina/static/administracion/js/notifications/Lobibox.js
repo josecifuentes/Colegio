@@ -844,7 +844,7 @@ var Lobibox = Lobibox || {};
     });
     Lobibox.alert.OPTIONS = {
         warning: {
-            title: 'Warning'
+            title: 'Informacion'
         },
         info: {
             title: 'Information'
@@ -1537,7 +1537,7 @@ var Lobibox = Lobibox || {};
         },
         success: {
             'class': 'lobibox-notify-success',
-            'title': 'Success',
+            'title': 'Realizado Con Exito',
             sound: 'sound2'
         },
         error: {
@@ -1547,7 +1547,7 @@ var Lobibox = Lobibox || {};
         },
         warning: {
             'class': 'lobibox-notify-warning',
-            'title': 'Warning',
+            'title': 'Informacion',
             sound: 'sound5'
         },
         info: {

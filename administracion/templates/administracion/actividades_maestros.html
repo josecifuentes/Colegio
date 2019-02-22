@@ -1,0 +1,78 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+{% load index %}
+    
+                         
+                                                            
+<div class="courses-area">
+            <div class="container-fluid">
+                <div class="row mg-b-15">
+                    {% for curso in cursos %}
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                            <div class="panel-body custom-panel-jw">
+                               
+                                {% if curso.Grado.Nivel == "Diversificado" %}
+                                <img  src="{% static 'administracion/img/courses/diversificado.jpg' %}" alt=""></a>
+                                {%endif%}
+                                {% if curso.Grado.Nivel == "Basico" %}
+                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/basico.jpg' %}" alt=""></a>
+                                {%endif%}
+                                {% if curso.Grado.Nivel == "Primaria" %}
+                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
+                                {%endif%}
+<center>
+                                <h3>{{curso.Materia}}</h3></center>
+                                <br>
+                                Grado: <p class="all-pro-ad">{{curso.Grado}}
+                                 {%if curso.Grado.Nivel != "Diversificado" %}
+                                                Seccion  "{{curso.Seccion}}"{%endif%}</p>
+                                                
+
+                                <p>
+                                    <div class="form-select-list">
+                                                <center><h3>UNIDAD:</h3></center>
+<form method = "POST" action = "{% url 'asignacion_actividades' pk=curso.Grado.pk %}">
+{% csrf_token %}
+                        <select class="form-control custom-select-value" name="unidad">
+                                                <option value="uni1">Primera Unidad</option>
+                                                <option value="uni2">Segunda Unidad</option>
+                                                   <option value="uni3">Tercera Unidad</option>
+                                                   <option value="uni4">Cuarta Unidad</option>
+                        </select>
+                                                                
+                                            </div>
+                                </p>
+                            </div>
+                             <div class="panel-footer contact-footer">
+                                <div class="professor-stds-int">
+                                    <div class="professor-stds">
+                                        <div class="contact-stat"><span>Seccion: </span> <strong> {{curso.Seccion}}  </strong></div>
+                                    </div>
+                                    <div class="professor-stds">
+                                    <div class="contact-stat"><span>\Actividad: </span> <strong>         {{asignacion|index:forloop.counter0}} </strong></div>
+                                    </div>
+                                    <div class="professor-stds">
+                                        <div class="contact-stat"><span>\Alumnos: </span> <strong>    {{Datos|index:forloop.counter0}} </strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="product-buttons">
+                                <center>
+                    <button type = "submit" class="button-default cart-btn">Asignar Actividades</button>
+                                </center>
+                            </div>
+
+</form>
+                    </div>
+{% endfor %}
+
+                </div>
+                
+            </div>
+ </div>
+
+{% endblock %}

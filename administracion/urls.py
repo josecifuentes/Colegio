@@ -25,6 +25,23 @@ urlpatterns = [
     path('alumno/error/', views.error, name='error'),
     path('examenes/error/', views.no_pago, name='no_pago'),
     path('calendario/', views.calendario, name='calendario'),
+    path('calendario/<int:pk>', views.calendario_info, name='calendario_info'),
+    path('horario/', views.horario, name='horario'),
+    path('horarios/', views.horarios, name='horarios'),
+    path('horas/', views.horas, name='horas'),
+    path('horarios/grado', views.horarios_grado, name='horarios_grado'),
     path('perfil/', views.perfil, name='perfil'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('Notas/', views.notas, name='notas'),
+    path('asignacion/notas/<int:pk>', views.asignacion_notas, name='asignacion_notas'),
+    path('actividades/', views.actividades_cursos, name='actividades_cursos'),
+    path('asignacion/actividades/<int:pk>', views.asignacion_actividades, name='asignacion_actividades'),
+    path('actividades/nuevo/<int:pk>', views.nueva_actividad, name='nueva_actividad'),
+    path('actividades/eliminar/<int:pk>', views.eliminar_actividad, name='eliminar_actividad'),
+    path('notas/actualizar/<int:pk>', views.estado_nota, name='estado_nota'),
+    path('asignacion/notas/ponderar/', views.ponderar, name='ponderar'),
+    path('asignacion/permisos/', views.asignar_permisos, name='asignar_permisos'),
+    path('asignacion/permisos/asignar/<int:pk>', views.listado_permisos, name='listado_permisos'),
+
+    
 ]

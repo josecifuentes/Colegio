@@ -1,0 +1,200 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+{% load index %}
+
+<!-- bootstrap JS
+        ============================================ -->
+    
+<script>
+        $(document).ready(function() {
+
+     
+    //toggle `popup` / `inline` mode
+    $.fn.editable.defaults.mode = 'popup';     
+    
+    //make username editable
+    {% for alumno in alumnos %}
+    {% for nota in Notas %}
+    {%if alumno.pk == nota.Alumno%}
+    $('#Nota{{ alumno.pk }}{{ nota.Actividad }}').editable({
+         
+            params: {
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                model:'Asignacion_Punteo',
+                Actividad: '{{ nota.Actividad }}',
+                alumno:'{{ alumno.pk }}'
+            },
+            url: 'ponderar/',
+            error: function(response, newValue) {
+                return response.responseText;
+            },
+            success: function(response, newValue) {
+                if(!response.success) return response.error_msg;
+            }
+        
+        });
+    {%endif%}
+    {%endfor%}
+    {%endfor%}
+});
+
+
+    </script>
+      <div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1><b>Cuadro </b><span class="table-project-n">De Notas Por Curso </span></h1>
+                                    <p><b>Curso: </b>{{curso.Materia}}</p>
+                                    <p><b>Grado:</b> {{curso.Grado}}</p>
+                                    <p><b>Seccion:</b> {{curso.Seccion}}</p>
+                                    <p><b>Unidad:</b> {{unidad}}</p>
+                                    
+                                    
+                                </div>
+<div class="login-form-area edu-pd mg-b-15">
+            <div class="container-fluid">
+
+                {%if Estado == "No Aprobado" %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Publicar Notas</h2>
+                           <div class="modal-area-button">
+                                <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModalhdbgcl">Publicar todas las notas</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                {%else%}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Estado Notas</h2>
+                           {{Estado}}
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+
+                <div id="PrimaryModalhdbgcl" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-1">
+                                        <h4 class="modal-title">Asignar Una Nota Al Curso En La {{unidad}}</h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <i class="educate-icon educate-checked modal-check-pro"></i>
+                                        <h2>Asignar Una Nota!</h2>
+                                        <p>Estas a punto de asignar notas del curso <font color="red">{{curso.Materia}} </font>del grado <font color="red">{{curso.Grado}} 
+                                        {% if curso.Grado.Nivel != "Diversificado" %}
+                                        seccion {{curso.Seccion}}{%endif%}</font> a la <font color="red">{{unidad}}</font>, Estas notas seran asignadas por las actividades que se encuentran en la tabla de abajo, al asignar notas no podras eliminar la actividad asignada a un alumno, y se nesecitara confirmacion de la nota para poder ser publicada, deseas continuar?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a data-dismiss="modal" href="#">Cancelar</a>
+                                        <a href="{% url 'estado_nota' pk=curso.Grado.pk %}">Asignar  Notas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+
+
+
+                            </div>
+                        <div class="sparkline8-list">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>{{curso.Materia}}</h1>
+                                </div>
+                            </div>
+                            <div class="sparkline8-graph">
+                                <div class="static-table-list">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Apellidos Del Alumno</th>
+                                                <th>Nombres Del Alumno</th>
+                                                {% for actividad in actividades %}
+                                                <th>{{ actividad.Nombre_Actividad|actividad }}</th>
+                                                {% endfor %}
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                         <tbody>          
+                                        {% for alumno in alumnos %}
+                                            <tr>
+                                                
+                                              
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ alumno.Primer_Apellido }} {{ alumno.Segundo_Apellido }}</td>
+                                                <td>{{ alumno.Primer_Nombre }}
+                                                {%if alumno.Segundo_Nombre%} 
+                                                 {{ alumno.Segundo_Nombre }}
+                                                 {%endif%}
+                                                 </td>
+                                            {% for nota in Notas %}
+                                        {%if alumno.pk == nota.Alumno%}
+
+                            <td><a href="#" id="Nota{{ alumno.pk }}{{ nota.Actividad }}" data-type="text" data-pk="{{ nota.pk }}" data-placement="right" data-title="Ingrese La Nota De {{nota.act|actividad}}">{{nota.Punteo}}</a></td>
+                            {%endif%}
+                                            {% endfor %}
+                                               <td>{{total|index:forloop.counter0}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+
+                      
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         </body> 
+    
+    <!--  editable JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/editable/jquery.mockjax.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/mock-active.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/select2.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/moment.min.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/bootstrap-datetimepicker.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/editable/xediable-active.js' %}"></script>
+ 
+
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
+ <!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+
+
+{% endblock %}

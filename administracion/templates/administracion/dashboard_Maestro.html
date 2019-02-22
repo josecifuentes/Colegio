@@ -1,0 +1,124 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+{% load index %}
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <body>
+        
+        <div class="traffic-analysis-area">
+            <div class="container-fluid">
+                <div class="row">
+                {%for materia in materias %}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="social-media-edu">
+                            <i class="fa fa-chalkboard"></i>
+                            <div class="social-edu-ctn">
+                                <h3>{{materia.Materia.Nombre_Materia}}</h3>
+                                <p>{{materia.Grado.Nombre_Grado}} {{materia.Grado.Nivel}}{% if materia.Grado.Nivel != "Diversificado" %}
+                                        seccion {{materia.Seccion}}{%endif%} </p>
+                            </div>
+                        </div>
+                    </div>
+                 {%endfor%}   
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="library-book-area mg-t-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12">
+                        <div class="single-cards-item">
+                            <div class="single-product-image">
+                                <a href="#"><img src="{% static 'administracion/img/product/fondoimg.jpg' %}" alt=""></a>
+                            </div>
+                            <div class="single-product-text">
+                                <img src="{% static 'administracion/img/profile/MaestroM.png' %}" alt="">
+                                <h4><a class="cards-hd-dn" href="{% url 'perfil' %}">{{ user.username }}</a></h4>
+                                <h5>Maestro Colegio Nuevo Mundo</h5>
+                               
+                               
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="cards-dtn">
+                                            <h3><span class="counter">{{cursos}}</span></h3>
+                                            <p>Cursos Asignados</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="cards-dtn">
+                                            <h3>Grado Encargado</h3>
+                                            {%if encargado%}
+                                                {%for asignado in encargado %}
+                                                <p>{{asignado.Grado}} 
+
+                                                {%if asignado.Grado.Nivel != "Diversificado" %}
+                                                Seccion  "{{asignado.Seccion}}"{%endif%}</p>
+                                                {%endfor%}
+                                            {%else %}
+                                            <p>No Asignado</p>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel shadow-inner hbgblue bg-4 res-tablet-mg-t-30 dk-res-t-pro-30">
+                            <div class="panel-body">
+                                <div class="text-center content-bg-pro">
+                                    <h3>Actividades Recientes</h3>
+                                    <p class="text-big font-light">
+                                        Actividades del mes de {{mes|mes}}
+                                    </p>
+                                    <small>
+                                                Las actividades listadas son del mes actual.
+                                            </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="hpanel shadow-inner responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="table-responsive wd-tb-cr">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Actividad</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for actividad in actual %}
+                                            <tr>
+                                                <td>
+                                                    <span class="text-success font-bold">{{actividad.Titulo}}</span>
+                                                </td>
+                                                <td>{{actividad.Fecha_Inicio|slice:"8:10"}}</td>
+                                            </tr>
+                                            {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="courses-area mg-b-15">
+            
+        </div>
+
+
+</body>
+{% endblock %}
