@@ -1,7 +1,27 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
+{% load static %}
 
-
+<script type="text/javascript">
+    window.onload = function() {
+    {% if errores %}
+    Lobibox.notify('error', {
+                    showClass: 'zoomInUp',
+                    hideClass: 'zoomOutDown',
+                    delay: 1000,
+                    msg: '{{errores}}'
+                });
+    {% endif %}
+    {% if mensajes %}
+        Lobibox.notify('success', {
+                    showClass: 'rollIn',
+                    hideClass: 'rollOut',
+                    msg: '{{mensajes}}'
+                });                        
+     {% endif %}
+    
+};
+</script>
 <script type="text/javascript">
             $(function () {
                 $('#time').datetimepicker({
@@ -259,4 +279,38 @@
                 </div>   
             </div>   
         </div>
+         <!-- touchspin JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
+    <script src="{% static 'administracion/js/touchspin/touchspin-active.js' %}"></script>
+
+    <!-- input-mask JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/input-mask/jasny-bootstrap.min.js' %}"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
+
+ <!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+
+    <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'administracion/js/select2/select2-active.js' %}"></script>
+     <!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+<!-- peity JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'administracion/js/peity/peity-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'administracion/js/sparkline/sparkline-active.js' %}"></script>
 {% endblock %}

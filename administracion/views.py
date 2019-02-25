@@ -683,14 +683,21 @@ def asignar_usuariosAlumnos(request):
 
 @login_required
 def nuevopersonal(request):
+    errores=None
+    mensajes=None
     if request.method == "POST":
         form = PersonalForm(request.POST)
         if form.is_valid():
-            usuario = User.objects.create_user(username=request.POST['Usuario'],password="Colegio123")
+            if(request.POST['Usuario']):
+                usuario = User.objects.create_user(username=request.POST['Usuario'],password="Colegio123")
             post = form.save(commit=False)
-            post.Usuario=User.objects.get(username=request.POST['Usuario'])
+            if(request.POST['Usuario']):
+                post.Usuario=User.objects.get(username=request.POST['Usuario'])
             post.save()
-            return redirect('dashboard')
+            mensajes="Se ha guardado con exito!"
+            form = PersonalForm()
+        else:
+            errores="No se ha podido guardar revise los campos para continuar..."
     else:
         form = PersonalForm()
-    return render(request, 'administracion/nuevopersonal.html', {'form': form})
+    return render(request, 'administracion/nuevopersonal.html', {'form': form,'mensajes': mensajes,'errores': errores})
