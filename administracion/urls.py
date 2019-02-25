@@ -42,6 +42,7 @@ urlpatterns = [
     path('asignacion/notas/ponderar/', views.ponderar, name='ponderar'),
     path('asignacion/permisos/', views.asignar_permisos, name='asignar_permisos'),
     path('asignacion/permisos/asignar/<int:pk>', views.listado_permisos, name='listado_permisos'),
-
+    path('asignacion/usuarios/alumnos/', views.asignar_usuariosAlumnos, name='asignar_usuariosAlumnos'),
+    path('nuevo/personal/', views.nuevopersonal, name='nuevopersonal'),
     
 ]

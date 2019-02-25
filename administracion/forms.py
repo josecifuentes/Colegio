@@ -1,7 +1,7 @@
 from django import forms
 from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas
 from .models import Encargado, Examene
-from .models import Encargados_alumnos
+from .models import Encargados_alumnos,Personal
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 
@@ -174,3 +174,38 @@ class horasForm(forms.ModelForm):
             'hora_inicio': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
             'hora_fin': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de Fin'}),
               }  
+
+class PersonalForm(forms.ModelForm):
+
+    class Meta:
+        model = Personal
+        fields = ('Primer_Nombre', 'Segundo_Nombre', 'Primer_Apellido', 'Segundo_Apellido',
+         'Telefono_Casa', 'Telefono_Celular', 'Direccion','Dpi', 'Estado_Civil', 
+         'Fecha_Nacimiento', 'Lugar_Nacimiento', 'No_Hijos','Nit',
+          'Fecha_Inicio_Labores','Nivel_Academico', 'Titulo', 'Cedula_Docente',
+          'Registro_Escalafonario', 'Salario','Hora_Entrada', 'Hora_Salida','email')
+        widgets = {
+            'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Nombre Del Alumno'}),
+            'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Nombre Del Alumno'}),
+            'Primer_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Apellido Del Alumno'}),
+            'Segundo_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Apellido Del Alumno'}),
+            'Telefono_Casa': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
+            'Telefono_Celular': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
+            'Direccion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese la direccion'}),
+            'Dpi': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese el Dpi'}),
+            'Estado_Civil': forms.Select(attrs={'class': 'form-control custom-select-value'}),
+            'Fecha_Nacimiento': forms.TextInput(attrs={'class': 'form-control','value': '01/01/2000'}),
+            'Lugar_Nacimiento': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese lugar de nacimiento'}),
+            'No_Hijos': forms.Select(attrs={'class': 'form-control custom-select-value'}),
+            'Nit': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese el nit'}),
+            'Fecha_Inicio_Labores': forms.TextInput(attrs={'class': 'form-control','value': '01/01/2000'}),
+            'Nivel_Academico': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese el nivel academico'}),
+            'Titulo':  forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese el titulo que tiene'}),
+            'Cedula_Docente': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese la cedula de docente'}),
+            'Registro_Escalafonario':  forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese el registro escalafonario'}),
+            'Salario':  forms.TextInput(attrs={'class': 'form-control','data-mask': '9999','placeholder': 'Máximo 4 dígitos...'}),
+            'Hora_Entrada': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de entrada'}),
+            'Hora_Salida':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de salida'}),
+            'email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el email'}),
+            
+        }

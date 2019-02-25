@@ -1,0 +1,262 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+
+
+<script type="text/javascript">
+            $(function () {
+                $('#time').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+
+     <!---ENCARGADOS FORMULARIO--->
+                <!--- FORMULARIO ALUMNOS-->
+        <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>Ingresar Personal</h1>
+                                </div>
+                            </div>
+                            <!---form--->
+                            <form action="{% url 'nuevopersonal' %}" method="POST" class="post-form">
+                                {% csrf_token %}
+                               {% if form.errors %}
+                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                            </div>
+                        </div>
+                              {% endif %}
+                                                    <div class="form-group-inner">
+                                                        <div class="row">
+                                                            
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Nombres.id_for_label }}">Primer Nombre:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                  {{form.Primer_Nombre}}
+                                                            </div>
+                                                           
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Nombres.id_for_label }}">Segundo Nombre:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                  {{form.Segundo_Nombre}}
+                                                            </div>
+                                                            <!---apellidos---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Apellidos.id_for_label }}">Primer Apellido:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.Primer_Apellido}}
+                                                            </div>
+                                                            <!---apellidos---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Apellidos.id_for_label }}">Segundo Apellido:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.Segundo_Apellido}}
+                                                            </div>
+                                                             <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono_casa.id_for_label }}">Teléfono Casa </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 {{form.Telefono_Casa}}
+                                                                </div>
+                                                           <!---Teléfono---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.telefono_celular.id_for_label }}">Teléfono Celular:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                 {{form.Telefono_Celular}}
+                                                                </div>
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Dirección:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Direccion}}
+                                                            </div>
+                                                            <!---DPI--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">DPI </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                  {{form.Dpi}}
+                                                                </div>
+                                                            </div>
+                                                            <!---ESTADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Estado Civil:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{form.Estado_Civil}}
+                                                                </div>
+                                                               
+                                                            </div>
+                                                             <!---Fecha de Nacimiento---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+                                                            </div> 
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
+                                                                <div class="input-group date">
+                                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                 {{form.Fecha_Nacimiento}}
+                                                                </div>
+                                                            </div> 
+
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Lugar de nacimiento:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Lugar_Nacimiento}}
+                                                            </div>
+                                                            <!---ESTADO---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Numero de hijos:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{form.No_Hijos}}
+                                                                </div>
+                                                               
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Nit:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Nit}}
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Fecha Inicio de Labores:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Fecha_Inicio_Labores}}
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Nivel Academico:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Nivel_Academico}}
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Titulo:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Titulo}}
+                                                            </div>
+                                                            <!---DPI--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">Cedula Docente </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                  {{form.Cedula_Docente}}
+                                                                </div>
+                                                            </div>
+                                                            <!---Dirección---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Registro escalafonario:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Registro_Escalafonario}}
+                                                            </div>
+                                                            <!---DPI--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">Salario </label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                                  {{form.Salario}}
+                                                                </div>
+                                                            </div>
+                                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Entrada:</label>
+                                                            </div>
+                                                        
+                                                            <div class='col-sm-6'>
+                                                                <div class="form-group">
+                                                                    <div class='input-group date' id='time'>
+                                                                        {{form.Hora_Entrada}}
+
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-time"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div><br><br><br>
+
+                                            <!---nombres---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Salida:</label>
+                                                            </div>
+                                                        
+                                                            <div class='col-sm-6'>
+                                                                <div class="form-group">
+                                                                    <div class='input-group date' id='time'>
+                                                                        {{form.Hora_Salida}}
+
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-time"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div><br><br><br>
+                                                <!---Dirección--->
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">email:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.email}}
+                                                            </div><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Usuario:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" name="Usuario" class="form-control" placeholder="Ingrese un usuario valido" >
+                                                            </div><br><br><br>
+                                                    </div>
+
+                                                   <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    
+                            </form> 
+                            <!--- fin form :)--->     
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
+{% endblock %}

@@ -111,6 +111,7 @@ class Alumno(models.Model):
     telefono2 = models.CharField(max_length=200, blank=True, null=True)
     Estados = (
     ('Activo', 'Activo'),
+    ('Registro', 'Registro'),
     ('Inactivo', 'Inactivo'),
     ('PendienteExamen', 'Pendiente De Examen'),
     ('PendienteInscripcion', 'Pendiente De Inscripcion'),
@@ -124,6 +125,7 @@ class Alumno(models.Model):
     fechaingreso = models.DateTimeField(
         blank=True, null=True)
     Usuario = models.OneToOneField('auth.User', on_delete=models.CASCADE,blank=True, null=True)
+
     def publish(self):
         self.fechaingreso = timezone.now()
         self.save()
@@ -279,13 +281,13 @@ class Papeleria(models.Model):
 
 class Personal(models.Model):
     Primer_Nombre = models.CharField(max_length=200)
-    Segundo_Nombre = models.CharField(max_length=200, default='N/A')
+    Segundo_Nombre = models.CharField(max_length=200, default='N/A',blank=True, null=True)
     Primer_Apellido = models.CharField(max_length=200)
     Segundo_Apellido = models.CharField(max_length=200, default='N/A')
     Telefono_Casa = models.CharField(max_length=200, blank=True, null=True)
     Telefono_Celular = models.CharField(max_length=200, blank=True, null=True)
-    Direccion = models.CharField(max_length=128)
-    Dpi = models.CharField(max_length=20)
+    Direccion = models.CharField(max_length=128,blank=True, null=True)
+    Dpi = models.CharField(max_length=20,blank=True, null=True)
     Tipos = (
     ('Soltero', 'Soltero'),
     ('Casado', 'Casado'),
@@ -296,10 +298,12 @@ class Personal(models.Model):
         max_length=20,
         choices=Tipos,
         default='Soltero',
+        blank=True, 
+        null=True,
     )
     Fecha_Nacimiento = models.DateField(
         blank=True, null=True)
-    Lugar_Nacimiento = models.CharField(max_length=128)
+    Lugar_Nacimiento = models.CharField(max_length=128,blank=True, null=True)
     hijos = (
     ('sin', 'Sin Hijos'),
     ('1', '1'),
@@ -314,8 +318,8 @@ class Personal(models.Model):
         choices=hijos,
         default='sin',
     )
-    Nit = models.CharField(max_length=20)
-    Igss = models.CharField(max_length=30)
+    Nit = models.CharField(max_length=20,blank=True, null=True)
+    Igss = models.CharField(max_length=30,blank=True, null=True)
     Fecha_Inicio_Labores = models.DateField(
         blank=True, null=True)
     Nivel_Academico = models.CharField(max_length=50,blank=True, null=True)

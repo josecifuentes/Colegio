@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo
 from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm
-from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm
+from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm
 from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -10,6 +10,7 @@ from django.template import RequestContext, Template
 from django.contrib.auth import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from django.apps import apps
 import datetime
@@ -652,3 +653,44 @@ def asignacion_alumno(request, pk):
 def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+@login_required
+def asignar_usuariosAlumnos(request):
+    alumnos = Alumno.objects.all()
+    for alumno in alumnos:
+        if(alumno.Codigo):
+            if(alumno.Usuario):
+                print("hola")
+            else:
+                try:
+                    if(User.objects.get(username=alumno.Codigo)):
+                        modificar = AlumnoForm(instance=alumno)
+                        al = modificar.save(commit=False)
+                        al.estado = "Registro"
+                        al.Usuario=User.objects.get(username=alumno.Codigo)
+                        al.save()
+                except User.DoesNotExist:
+                    usuario = User.objects.create_user(username=alumno.Codigo,password="Colegio123")
+                    modificar = AlumnoForm(instance=alumno)
+                    al = modificar.save(commit=False)
+                    al.estado = "Registro"
+                    al.Usuario=User.objects.get(username=alumno.Codigo)
+                    al.save()
+        else:
+            print("No se puede")
+               
+    return render(request, 'administracion/usuarioasignado.html')
+
+@login_required
+def nuevopersonal(request):
+    if request.method == "POST":
+        form = PersonalForm(request.POST)
+        if form.is_valid():
+            usuario = User.objects.create_user(username=request.POST['Usuario'],password="Colegio123")
+            post = form.save(commit=False)
+            post.Usuario=User.objects.get(username=request.POST['Usuario'])
+            post.save()
+            return redirect('dashboard')
+    else:
+        form = PersonalForm()
+    return render(request, 'administracion/nuevopersonal.html', {'form': form})

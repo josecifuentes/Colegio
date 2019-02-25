@@ -372,11 +372,18 @@
                                 <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
                                 <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
                                 <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
-                                <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
+                                <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De usuarios</span></a></li>
                             </ul>
                         </li>
                         {% endif %}
-                        
+                        <li>
+                            
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Configuraciones</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                
+                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Asignacion De Personal</span></a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
