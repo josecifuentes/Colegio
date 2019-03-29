@@ -1,5 +1,5 @@
 from django.contrib import admin
-from administracion.models import Asignacion_Punteo,Asignacion_Grado,Asignacion_Permiso,Permiso,Aula, Grado, Materia, GradoAdmin, MateriaAdmin, Alumno, Encargado, EncargadoAdmin, AlumnoAdmin, Examene, Pago, Papeleria, Personal, Asignacion_Materia, Asignacion_Acividade,Actividade
+from administracion.models import Periodo,horas,Asignacion_Punteo,Asignacion_Grado,Asignacion_Permiso,Permiso,Aula, Grado, Materia, GradoAdmin, MateriaAdmin, Alumno, Encargado, EncargadoAdmin, AlumnoAdmin, Examene, Pago, Papeleria, Personal, Asignacion_Materia, Asignacion_Acividade,Actividade
 
 #Registramos nuestras clases principales.
 admin.site.register(Aula)
@@ -18,3 +18,5 @@ admin.site.register(Permiso)
 admin.site.register(Asignacion_Permiso)
 admin.site.register(Asignacion_Grado)
 admin.site.register(Asignacion_Punteo)
+admin.site.register(horas)
+admin.site.register(Periodo)

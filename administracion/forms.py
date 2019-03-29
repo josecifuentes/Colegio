@@ -1,10 +1,12 @@
 from django import forms
 from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas
-from .models import Encargado, Examene
+from .models import Encargado, Examene,Actividade
 from .models import Encargados_alumnos,Personal
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
-
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.admin import widgets
+import datetime
 class AlumnoForm(forms.ModelForm):
 
     class Meta:
@@ -207,5 +209,38 @@ class PersonalForm(forms.ModelForm):
             'Hora_Entrada': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de entrada'}),
             'Hora_Salida':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de salida'}),
             'email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el email'}),
+            
+        }
+class calendarioForm(forms.ModelForm):
+
+    class Meta:
+        model = Actividade
+        fields = ('Titulo','Descripcion','Especifico','Lugar','Fecha_Inicio','Fecha_Fin','Grupo')
+        widgets = {
+            'Grupo': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Grupo...'}),
+            'Titulo': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el titulo que le dara a la actividad','autocomplete':'off'}),
+            'Descripcion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Describa brevemente la actividad','autocomplete':'off'}),
+            'Especifico': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Describa con detalles la actividad','autocomplete':'off'}),
+            'Lugar': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el lugar de la actividad','autocomplete':'off'}),
+            'Fecha_Inicio': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione la fecha de Inicio',}),
+            'Fecha_Fin': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione la fecha de finalizacion',}),
+              } 
+
+class InicioForm(forms.ModelForm):
+
+    class Meta:
+        model = Alumno
+        fields = ('Primer_Nombre', 'Segundo_Nombre', 'Tercer_Nombre', 'Primer_Apellido', 'Segundo_Apellido', 'Genero', 'nacimiento', 'direccion', 'telefono','telefono2')
+        widgets = {
+            'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Nombre Del Alumno','readonly':'true'}),
+            'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','readonly':'true'}),
+            'Tercer_Nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'Primer_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Apellido Del Alumno','readonly':'true'}),
+            'Segundo_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Apellido Del Alumno','readonly':'true'}),
+            'Genero': forms.Select(attrs={'class': 'form-control custom-select-value'}),
+            'nacimiento': forms.TextInput(attrs={'class': 'form-control','readonly':'true'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999'}),
+            'telefono2': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999'}),
             
         }

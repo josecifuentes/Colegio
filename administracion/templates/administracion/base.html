@@ -181,10 +181,10 @@
                                 <li><a title="Todos Los Encargados" href="{% url 'calendario' %}"><span class="mini-sub-pro">Ver Calendario</span></a></li>
                                  {% endif %}
                                 {% if "Agregar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Calendario</span></a></li>
+                                <li><a title="Añadir Calendario" href="{% url 'agregar_calendario' %}"><span class="mini-sub-pro">Añadir Calendario</span></a></li>
                                  {% endif %}
                             {% if "Eliminar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Eliminar Actividad</span></a></li>
+                                <li><a title="eliminar_calendario" href="{% url 'eliminar_calendario' %}"><span class="mini-sub-pro">Eliminar Actividad en calendario</span></a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -193,12 +193,13 @@
                         <li>
                              <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Horarios</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Agregar horas clase" href="{% url 'hora' %}"><span class="mini-sub-pro">Agregar horas de Clases</span></a></li>
+                            {% endif %}
                             {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
                             {% endif %}
-                            {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                            <li><a title="Agregar Horario clase" href="{% url 'horas' %}"><span class="mini-sub-pro">Agregar Horarios de Clases</span></a></li>
-                            {% endif %}
+                            
                              {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Eliminar horario clase" href="#"><span class="mini-sub-pro">Eliminar horarios de clase</span></a></li>
                             {% endif %}
@@ -351,12 +352,16 @@
                             
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Usuarios</span></a>
                             <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
-                                {% if "Ver Pagos Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                {% if "Asignar Permisos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Permisos" href="{% url 'asignar_permisos' %}"><span class="mini-sub-pro">Asignar Permisos</span></a></li>
                                 {% endif %}
-                                <li><a title="Alerts" href="alerts.html"><span class="mini-sub-pro">Alerts</span></a></li>
-                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
-                                <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
+                                {% if "Asignar Personal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Asignacion De Personal</span></a></li>
+                                {% endif %}
+                                {% if "Asignar Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De Alumnos</span></a></li>
+                                {% endif %}
+                                <li><a title="Buttons" href="{% url 'crear_permisos' %}"><span class="mini-sub-pro">Crear Permisos</span></a></li>
                                 <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
                                 <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
                             </ul>
@@ -376,14 +381,7 @@
                             </ul>
                         </li>
                         {% endif %}
-                        <li>
-                            
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Configuraciones</span></a>
-                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
-                                
-                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Asignacion De Personal</span></a></li>
-                            </ul>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>

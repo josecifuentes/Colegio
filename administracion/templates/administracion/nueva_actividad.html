@@ -32,7 +32,7 @@
             
 
 </script>
-<form action="{% url 'nueva_actividad' pk=curso.Grado.pk %}" method="POST" class="post-form">
+<form action="{% url 'nueva_actividad' pk=curso.pk %}" method="POST" class="post-form">
                                 {% csrf_token %}
                                 {% if form.errors %}
                                 <div class="alert-icon shadow-inner wrap-alert-b">

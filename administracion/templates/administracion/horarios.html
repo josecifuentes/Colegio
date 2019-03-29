@@ -45,14 +45,12 @@
       <div class="modal-body">
         
          <form id="horariofrm">
-            <label>Grado:</label>
-            <select class="form-control" name="minutos">
+            <label>Nivel:</label>
+            <select class="form-control" name="nivel">
                 <option></option>
-                <option value="15">15 Minutos</option>
-                <option value="30">30 Minutos</option>
-                <option value="35">35 Minutos</option>
-                <option value="45">45 minutos</option>
-                <option value="60">1 Hora</option>
+                {%for n in nivel%}
+                <option value="{{n}}">{{n}}</option>
+                {%endfor%}
             </select>
             <label>Curso:</label>
             <select class="form-control" name="minutos">
@@ -92,7 +90,9 @@
   </div>
 </div>
 <!-- modal nuevo horario -->
-
+ {%for grado in grados %}
+ {{grado}}
+ {%endfor%}
  <div class="container" >
          <div class="panel panel-info" style="margin-top: 20px;">
            <div class="panel-heading"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</div>
@@ -107,17 +107,35 @@
                          </tr>
                       </thead>
                       <tbody>
-                <tr id="1">
-                <td>Primero</td>
-                <td>Basico</td>
-                <td>"A"</td>
-                <td>
-                  <button data-id="1" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</button>
-                  <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
-                  <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
-                </td>
-              </tr>
+                {%for grado in grados %}
+                {% if grado.Nivel == "Diversificado" or grado.Nombre_Grado == "Pre-Kinder"%}
+                  <tr id="1">
+                  <td>{{grado.Nombre_Grado}}</td>
+                  <td>{{grado.Nivel}}</td>
+                  <td>Unica</td>
+                  <td>
+                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
+                    <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
+                    <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+                  </td>
+                  </tr>
+                {%else%}
+                  {%for sec in secciones %}
+                  <tr id="1">
+                  <td>{{grado.Nombre_Grado}}</td>
+                  <td>{{grado.Nivel}}</td>
+                  <td>"{{sec}}"</td>
+                  <td>
+                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
+                    <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
+                    <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+                  </td>
+                  </tr>
+                  {%endfor%}
+                {%endif%}
+              {%endfor%}
                </tbody>
+              
           </table>
           <p></p>
 <div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
@@ -125,8 +143,6 @@
            </div>
          </div>
       </div>
-
-   
 
 
 <!-- alert danger -->

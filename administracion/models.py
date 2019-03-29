@@ -431,7 +431,8 @@ class Actividade (models.Model):
     Fecha_Fin = models.CharField(max_length=120,
         blank=True, null=True)
     grupos = (
-        ('estudiantes', 'Estudiantes'),
+        ('estudiantes', 'Todos los Estudiantes'),
+        ('profesores', 'Todos los Profesores'),
         ('estu-preprimaria', 'Estudiantes Pre-Primaria'),
         ('estu-primaria', 'Estudiantes Primaria'),
         ('estu-basico', 'Estudiantes Basico'),
@@ -510,8 +511,38 @@ class horas(models.Model):
     hora_inicio = models.CharField(max_length=50)
     hora_fin = models.CharField(max_length=50)
     def __str__(self):
-        return '%s %s' % (self.Nivel, self.hora)    
+        return '%s %s' % (self.Nivel, self.hora_inicio)    
+    class Meta:
+        unique_together = (("Nivel", "hora_inicio"),)
 
+class Periodo(models.Model):
+    horas = models.ForeignKey(horas, on_delete=models.DO_NOTHING)
+    asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
+    Dias = (
+        ('Lunes','Lunes'),
+        ('Martes','Martes'),
+        ('Miercoles','Miercoles'),
+        ('Jueves','Jueves'),
+        ('Viernes','Viernes'),
+            )
+    dia = models.CharField(
+        max_length=100,
+        choices=Dias,
+        default='Lunes',
+        ) 
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
+    def __str__(self):
+        return '%s %s' % (self.horas, self.asignacion_materias)   
+    class Meta:
+        unique_together = (("asignacion_materias","dia", "horas"),)
 class Asignacion_MateriaInLine(admin.TabularInline):
 
     model = Asignacion_Materia

@@ -33,7 +33,7 @@
                                 <p>
                                     <div class="form-select-list">
                                                 <center><h3>UNIDAD:</h3></center>
-<form method = "POST" action = "{% url 'asignacion_actividades' pk=curso.Grado.pk %}">
+<form method = "POST" action = "{% url 'asignacion_actividades' pk=curso.pk %}">
 {% csrf_token %}
                         <select class="form-control custom-select-value" name="unidad">
                                                 <option value="uni1">Primera Unidad</option>

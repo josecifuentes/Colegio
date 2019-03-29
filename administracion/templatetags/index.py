@@ -26,7 +26,10 @@ def actividad(value):
 		data="Actividad 9"
 	if value == "Act10":
 		data="Actividad 10"
+	if value == "Exa":
+		data="Examen Final"
 	return data    
+
 @register.filter 
 def mes(value):
 	data= "Enero"

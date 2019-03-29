@@ -6,6 +6,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('inicio/confirmacion/', views.inicio, name='inicio'),
     path('alumno/<int:pk>/', views.alumno_editar, name='alumno_editar'),
     path('encargado/asignacion/nuevo/', views.nueva_asignacion_encargado, name='nueva_asignacion_encargado'),
     path('encargado/<int:pk>/', views.encargado, name='encargado'),
@@ -28,7 +29,7 @@ urlpatterns = [
     path('calendario/<int:pk>', views.calendario_info, name='calendario_info'),
     path('horario/', views.horario, name='horario'),
     path('horarios/', views.horarios, name='horarios'),
-    path('horas/', views.horas, name='horas'),
+    path('hora/', views.hora, name='hora'),
     path('horarios/grado', views.horarios_grado, name='horarios_grado'),
     path('perfil/', views.perfil, name='perfil'),
     path('dashboard/', views.dashboard, name='dashboard'),
@@ -44,5 +45,12 @@ urlpatterns = [
     path('asignacion/permisos/asignar/<int:pk>', views.listado_permisos, name='listado_permisos'),
     path('asignacion/usuarios/alumnos/', views.asignar_usuariosAlumnos, name='asignar_usuariosAlumnos'),
     path('nuevo/personal/', views.nuevopersonal, name='nuevopersonal'),
+    path('calendario/agregar/', views.agregar_calendario, name='agregar_calendario'),
+    path('calendario/modificar/<int:pk>', views.modificar_calendario, name='modificar_calendario'),
+    path('calendario/eliminar/', views.eliminar_calendario, name='eliminar_calendario'),
+    path('calendario/eliminar/<int:pk>', views.eliminado_calendario, name='eliminado_calendario'), 
+    path('usuario/contra/', views.cambio_contra, name='cambio_contra'), 
+    path('horarios/listado/<int:pk>', views.horarios_listado, name='horarios_listado'), 
+    path('permisos/agregar/', views.crear_permisos, name='crear_permisos'), 
     
 ]

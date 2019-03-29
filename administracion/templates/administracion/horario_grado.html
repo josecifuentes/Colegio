@@ -12,9 +12,13 @@
 </style>
 
 <div id="menu" class="col-md-12 text-right">
-      <div class="container">
+     <div class="container">
         <a class="btn btn-primary" href=".."><i class="fa fa-home" aria-hidden="true"></i> Regresar</a>
-          <a class="btn btn-primary" href="{% url 'horarios_grado' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</a>
+        {% if "Horarios Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+          <a class="btn btn-primary" href="{% url 'horarios' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</a>
+        {%else%}
+        <a class="btn btn-primary" href="{% url 'horarios_grado' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Lista de Horarios</a>
+        {%endif%}  
             {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
           <button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="fa fa-calendar-check-o"></i> Nuevo Horario</button>
           {%endif%}
@@ -88,207 +92,27 @@
           <th><i class="fa fa-angle-right"></i> Miercoles</th>
           <th><i class="fa fa-angle-right"></i> Jueves</th>
           <th><i class="fa fa-angle-right"></i> Viernes</th>
-    
-<tr id="1">
+          {% for x in hora %}
+      <tr id="1">
 
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">7:30-8:15</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         COMPUTACION
-      </td>
-       <td class="td-line">
-         COMPUTACION
-      </td>
-       <td class="td-line">
-         COMPUTACION
-      </td>
-       <td class="td-line">
-         COMPUTACION
-      </td>
-       <td class="td-line">
-         COMPUTACION
+      <td class="td-time">
+          <div id="1" class="timeblock">
+            
+          <strong id="1">{{x.hora_inicio}}-{{x.hora_fin}}</strong>
+          </div>
       </td>
 
-</tr>
- <tr id="1">
+           {% for periodo in periodos %}
+           {% if periodo.hora == x.hora_inicio%}
+            <td class="td-line">
+              {{periodo.materia}}
+            </td>
+            {%endif%}
+          {%endfor%}
 
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">8:15-9:00</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">9:00-9:45</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">9:45-10:15</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">10:15-11:00</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">11:00-11:45</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">11:45-12:30</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
-<tr id="1">
-
-<td class="td-time">
-    <div id="1" class="timeblock">
-    <strong id="1">12:30-13:15</strong>
-    </div>
-</td>
-
-      <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-       <td class="td-line">
-         Periodo 1
-      </td>
-
-</tr>
+          
+      </tr>
+       {%endfor%}
 </thead>
 </table>
 </div>

@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo
-from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm
-from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm
+from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas
+from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm
+from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
 from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -13,9 +13,31 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from django.apps import apps
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 import datetime
-
 unidad= None
+
+@login_required
+def inicio(request):
+    alumno=Alumno.objects.get(Usuario=request.user)
+    try:
+        maestro= Asignacion_Grado.objects.get(Grado=alumno.Grado)
+    except Exception as e:
+        maestro="No asignado"   
+    if request.method == "POST":
+        form = InicioForm(request.POST, instance=alumno)
+        print(form)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.estado="Registro"
+            post.save()
+            return redirect('cambio_contra')
+    else:
+        form = InicioForm(instance=alumno)
+    return render(request, 'administracion/inicio.html',{'form':form,'alumno':alumno,'maestro':maestro})
+
 @login_required
 def dashboard(request):
     today = datetime.datetime.now() 
@@ -30,7 +52,61 @@ def dashboard(request):
             alumnos=Alumno.objects.all()
             return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
         if g.name=="Alumno":
-            return render(request, 'administracion/dashboard_Alumno.html')
+            try:
+                Notas = []
+                a = "uni1"
+                notaalta = {}
+                notaalta['nota'] = 0
+                notaalta['Materia'] = "N/A"
+                notaalta2 = {}
+                notaalta2['nota'] = 0
+                notabaja = {}
+                notabaja['nota'] = 100
+                promedio = {}
+                promedio['nota'] = 0
+                alumno=Alumno.objects.get(Usuario=request.user)
+                if(alumno.estado=="Registro"):
+                    return redirect('inicio')
+                materias= Asignacion_Materia.objects.filter(Grado=alumno.Grado)
+                try:
+                    maestro= Asignacion_Grado.objects.get(Grado=alumno.Grado)
+                except Exception as e:
+                    maestro=None
+                for materia in materias:
+                    nota = {}
+                    nota['Materia'] = materia.Materia
+                    nota['nota'] = 0
+                    nota['Estado'] = None
+                    actividades=Asignacion_Acividade.objects.filter(Asignacion_Materia=materia,Unidad=a)
+                    for actividad in actividades:
+                        try:
+                            punteo=Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad,Alumno=alumno)
+                            nota['nota'] = nota['nota'] + punteo.Nota
+                            nota['Estado'] = punteo.Estado
+                        except Asignacion_Punteo.DoesNotExist:
+                            nota['nota'] = nota['nota'] + 0
+                            nota['Estado'] = "No_Aprobado"
+                    if(notaalta['nota']<nota['nota']):
+                        if notaalta['Materia'] != "N/A":
+                            notaalta2['nota']=notaalta['nota']
+                            notaalta2['Materia']=notaalta['Materia']
+                        notaalta['nota']=nota['nota']
+                        notaalta['Materia']=materia.Materia
+                    if(nota['nota']!=0):
+                        if(notabaja['nota']>=nota['nota']):
+                            notabaja['nota']=nota['nota']
+                            notabaja['Materia']=materia.Materia
+                    promedio['nota']=promedio['nota']+nota['nota'];
+                    Notas.append(nota)
+                try:
+                    promedio['nota'] = round(float(promedio['nota'] / materias.count()), 2)
+                except Exception as e:
+                    promedio['nota']=0 
+                if(notaalta['nota']==0):
+                    notabaja['nota'] = 0
+            except Asignacion_Grado.DoesNotExist:
+                    actividades=None
+            return render(request, 'administracion/dashboard_Alumno.html',{ 'Notas':Notas,'notaalta':notaalta,'notaalta2':notaalta2,'notabaja':notabaja,'alumno':alumno,'maestro':maestro,'promedio':promedio })
         if g.name=="Maestro":
             mes = today.month
             actividades=Actividade.objects.filter(Grupo__iexact='Todos')
@@ -40,10 +116,10 @@ def dashboard(request):
                     acti['Titulo']=act.Titulo
                     acti['Fecha_Inicio']=act.Fecha_Inicio
                     actual.append(acti)
-            encargado=Asignacion_Grado.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
-            materias=Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
-            cursos = materias.count()
-            return render(request, 'administracion/dashboard_Maestro.html', {'mes': mes,'cursos': cursos,'actual': actual,'materias': materias,'encargado': encargado})
+                encargado=Asignacion_Grado.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
+                materias=Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
+                cursos = materias.count()
+        return render(request, 'administracion/dashboard_Maestro.html', {'mes': mes,'cursos': cursos,'actual': actual,'materias': materias,'encargado': encargado})
     return render(request, 'administracion/dashboard_Secretaria.html')
 @login_required
 def actividades_cursos(request):
@@ -78,9 +154,9 @@ def asignacion_actividades(request, pk):
         if a=="uni4":
             unidad="CUARTA UNIDAD"
         request.session['unidad'] = a
-        curso=Asignacion_Materia.objects.get(Grado=Grado.objects.get(pk=pk), Personal=Personal.objects.get(Usuario=request.user))
+        curso=Asignacion_Materia.objects.get(pk=pk)
         actividades= Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=a)
-        request.session['grado']=pk
+        request.session['grado']=curso.Grado.pk
         if request.session['informacion']:
             info= request.session['informacion']
         else:
@@ -96,13 +172,14 @@ def asignacion_actividades(request, pk):
 @login_required
 def nueva_actividad(request, pk):
     request.session['informacion']= None
-    curso = Asignacion_Materia.objects.get(Grado=Grado.objects.get(pk=pk), Personal=Personal.objects.get(Usuario=request.user))
+    curso = Asignacion_Materia.objects.get(pk=pk)
     asignaciones = Asignacion_Acividade.objects.filter(Asignacion_Materia = curso)
     errores = None
     informacion= None
     info= None
     total= int(0)
     unidad = request.session['unidad']
+    print(asignaciones)
     actividades=Asignacion_Acividade.objects.filter(Asignacion_Materia = curso,Unidad=unidad)
     if request.method == "POST":
         form = Asignacion_AcividadeForm(request.POST)
@@ -117,22 +194,25 @@ def nueva_actividad(request, pk):
                         total=int(total)+int(asi.Ponderacion)
                     if post.Unidad == asi.Unidad and post.Nombre_Actividad == asi.Nombre_Actividad:  
                         paso= False;
-                        errores="Ya Tienes Creado Esta Actividad Si Deseas Editarla Regresa Al Listado De Actividades"      
+                        errores="Ya tienes creado esta actividad si deseas editarla regresa al listado de actividades"      
                 if paso:
-                    total=int(total)+int(post.Ponderacion)
-                    if total>100:
-                        total=int(total)-100-int(post.Ponderacion)
-                        if total < 0: 
-                            total = int(total)*-1
-                        errores="La Ponderacion De Todas Las Actividades Suma Mas De 100 Puntos Te Restan " + str(total) + " Puntos Para Asignar Esta Unidad."      
-                    else:
-                        post.save()
-                        total = 100-int(total)
-                        if total == 0:
-                            info="Esa Unidad Ya Esta Asignada Completamente"
+                    if int(post.Ponderacion)>0:
+                        total=int(total)+int(post.Ponderacion)
+                        if total>100:
+                            total=int(total)-100-int(post.Ponderacion)
+                            if total < 0: 
+                                total = int(total)*-1
+                            errores="La ponderacion de todas las actividades suma mas de 100 puntos te restan " + str(total) + " puntos para asignar esta unidad."      
                         else:
-                            info="Te Quedan " + str(total) + " Puntos Para Asignar Esta Unidad"
-                        informacion="Se Ha Guardado Con Exito Esta Actividad"   
+                            post.save()
+                            total = 100-int(total)
+                            if total == 0:
+                                info="Esa unidad ya esta asignada completamente"
+                            else:
+                                info="Te quedan " + str(total) + " puntos para asignar esta unidad"
+                            informacion="Se ha guardado con exito esta actividad"
+                    else:
+                        errores="La ponderacion de la nota debe ser mayor a 0 para poder ingresarla" 
     else:
         form = Asignacion_AcividadeForm()
     return render(request, 'administracion/nueva_actividad.html',{'form':form, 'curso': curso, 'errores': errores, 'informacion': informacion, 'info':info, 'unidad':unidad, 'actividades':actividades})
@@ -197,11 +277,11 @@ def asignacion_notas(request, pk):
         if a=="uni4":
             unidad="CUARTA UNIDAD"
         request.session['unidad'] = a
-        curso=Asignacion_Materia.objects.get(Grado=Grado.objects.get(pk=pk), Personal=Personal.objects.get(Usuario=request.user))
+        curso=Asignacion_Materia.objects.get(pk=pk)
         actividades= Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=a)
-        alumnos=Alumno.objects.filter(Grado=Grado.objects.get(pk=pk))
+        alumnos = Alumno.objects.filter(Grado=curso.Grado)
         Notas = []
-        total=[]
+        total = []
         tot=int(0)
         estado="No Aprobado"
         for alumno in alumnos:
@@ -305,29 +385,183 @@ def calendario(request):
                 perfil=None
     return render(request, 'administracion/actividades.html', {'actividad': actividad})
 @login_required
+def agregar_calendario(request):
+    errores=None
+    mensajes=None
+    dat = datetime.datetime.now()
+    hoy = dat.strftime('%Y-%m-%d-T%H:%M')
+    if request.method == "POST":
+        form = calendarioForm(request.POST)
+        existe = False
+        try:
+            calendario = Actividade.objects.filter(Fecha_Inicio__range=(request.POST['Fecha_Inicio'], request.POST['Fecha_Fin']))
+            if calendario:
+                existe = True
+        except Actividade.DoesNotExist:
+            existe = False
+        if(existe):
+            errores="No se ha podido ingresar la actividad, ya existe una actividad en esa hora y ese dia."
+        else:
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                mensajes="Se ha guardado la Actividad con exito!"
+                form = calendarioForm()
+            else:
+                errores="No se ha podido ingresar la Actividad ya existe o no esta en una fecha valida"
+    else:
+        form = calendarioForm()
+    return render(request, 'administracion/agregar_calendario.html',{'form': form,'errores': errores,'hoy': hoy,'mensajes': mensajes})
+@login_required
+def modificar_calendario(request,pk):
+    errores=None
+    mensajes=None
+    if 'mensajes' in request.session:
+        mensajes=request.session['mensajes']
+    dat = datetime.datetime.now()
+    hoy = dat.strftime('%Y-%m-%d-T%H:%M')
+    calendario=Actividade.objects.get(pk=pk)
+    if request.method == "POST":
+        form = calendarioForm(request.POST, instance=calendario)
+        existe = False
+        try:
+            calendario = Actividade.objects.filter(Fecha_Inicio__range=(request.POST['Fecha_Inicio'], request.POST['Fecha_Fin']))
+            if calendario:
+                existe = True
+        except Actividade.DoesNotExist:
+            existe = False
+        if(existe):
+            errores="No se ha podido ingresar la actividad, ya existe una actividad en esa hora y ese dia."
+        else:
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                request.session['mensajes']="Se ha modifciado la Actividad en el calendario con exito!"
+                return redirect('modificar_calendario',pk=pk)
+            else:
+                errores="No se ha podido ingresar la Actividad ya existe o no esta en una fecha valida"
+    else:
+        form = calendarioForm(instance=calendario)
+    return render(request, 'administracion/modificar_calendario.html',{'form': form,'errores': errores,'hoy': hoy,'mensajes': mensajes,'calendario': calendario})
+
+@login_required
 def calendario_info(request,pk):
     actividad = Actividade.objects.get(pk=pk)
     return render(request, 'administracion/calendario_info.html',{'actividad': actividad})
-
+@login_required
+def eliminar_calendario(request):
+    actividades = Actividade.objects.all()
+    return render(request, 'administracion/eliminar_calendario.html',{'actividades': actividades})
+@login_required
+def eliminado_calendario(request,pk):
+    errores=None
+    mensajes=None
+    actividades = Actividade.objects.all()
+    try:
+        Actividade.objects.get(pk=pk).delete()
+        mensajes="Se ha eliminado la Actividad del calendario con exito!"
+    except Exception as e:
+       errores="¡Error!, no se ha podido eliminar la actividad"
+    
+    return render(request, 'administracion/eliminar_calendario.html',{'actividades': actividades,'errores': errores,'mensajes': mensajes})
 @login_required
 def horario(request):
     return render(request, 'administracion/horario.html')
 @login_required
-def horas(request):
+def hora(request):
+    errores=None
+    mensajes=None
+    h = horas.objects.all()
     if request.method == "POST":
         form = horasForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+        existe = False
+        for x in h:
+            try:
+                if(x.Nivel==request.POST['Nivel']):
+                    horainicio=datetime.datetime.strptime(x.hora_inicio,"%H:%M")
+                    horafinal=datetime.datetime.strptime(x.hora_fin,"%H:%M")
+                    if(((datetime.datetime.strptime(request.POST['hora_inicio'],"%H:%M") >= horainicio) and (datetime.datetime.strptime(request.POST['hora_inicio'],"%H:%M") < horafinal)) or ((datetime.datetime.strptime(request.POST['hora_fin'],"%H:%M") >= horainicio) and (datetime.datetime.strptime(request.POST['hora_fin'],"%H:%M") < horafinal))):
+                        existe = True
+            except Exception as e:
+                print(e)
+                existe = True
+        if(existe):
+            errores="No se ha podido ingresar la hora, ya existe una hora en este periodo."
+        else:
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                mensajes="Se ha guardado la hora con exito!"
+                form = horasForm()
+            else:
+                errores="No se ha podido ingresar la hora ya existe para este nivel..."
     else:
         form = horasForm()
-    return render(request, 'administracion/horas.html',{'form': form})
+    return render(request, 'administracion/horas.html',{'form': form,'errores': errores,'mensajes': mensajes})
 @login_required
 def horarios(request):
-    return render(request, 'administracion/horarios.html')
+    grados=Grado.objects.all()
+    secciones = []
+    secciones.append("A")
+    secciones.append("B")
+    nivel = []
+    nivel.append("Pre-Primaria")
+    nivel.append("Primaria")
+    nivel.append("Basico")
+    nivel.append("Diversificado")
+    return render(request, 'administracion/horarios.html',{'grados':grados,'secciones':secciones,'nivel':nivel})
+@login_required
+def horarios_listado(request,pk):
+    grado = Grado.objects.get(pk=pk)
+    hora = horas.objects.filter(Nivel=grado.Nivel)
+    periodo = Periodo.objects.filter(asignacion_materias__Grado=grado,)
+    periodos = []
+    asignado = False
+    for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
+        for x in hora:
+            p = {}
+            for y in periodo:
+                if (x == y.horas) and (d == y.dia):
+                    p['hora'] = y.horas.hora_inicio
+                    p['materia'] = y.asignacion_materias.Materia
+                    p['dia'] = y.dia
+                    asignado = True
+                    break
+            if asignado == False:
+                p['hora'] = x.hora_inicio
+                p['materia'] = "No Asignado"
+                p['dia'] = d
+                asignado = False
+            else:
+                asignado = False
+            periodos.append(p)
+    return render(request, 'administracion/horario_grado.html', {'hora': hora,'periodos': periodos})
 @login_required
 def horarios_grado(request):
-    return render(request, 'administracion/horario_grado.html')
+    perfil = Alumno.objects.get(Usuario=request.user)
+    hora = horas.objects.filter(Nivel=perfil.Grado.Nivel)
+    periodo = Periodo.objects.filter(asignacion_materias__Grado=perfil.Grado,)
+    periodos = []
+    asignado = False
+    for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
+        for x in hora:
+            p = {}
+            for y in periodo:
+                if (x == y.horas) and (d == y.dia):
+                    p['hora'] = y.horas.hora_inicio
+                    p['materia'] = y.asignacion_materias.Materia
+                    p['dia'] = y.dia
+                    asignado = True
+                    break
+            if asignado == False:
+                p['hora'] = x.hora_inicio
+                p['materia'] = "No Asignado"
+                p['dia'] = d
+                asignado = False
+            else:
+                asignado = False
+            periodos.append(p)
+    return render(request, 'administracion/horario_grado.html', {'hora': hora,'periodos': periodos})
 
 @login_required
 def perfil(request):
@@ -655,8 +889,29 @@ def cerrar(request):
     return HttpResponseRedirect('/')
 
 @login_required
+def crear_permisos(request):
+    perm = Permiso.objects.all()
+    for x in ("Horarios","Eliminar horario consulta","Eliminar horario clase","Agregar horario consulta",
+        "Agregar Horario clase","Horarios de consulta","Horarios de clase","Ver Notas","Modificar Notas",
+        "Agregar Notas","Eliminar Calendario","Agregar Calendario",
+        "Ver Calendario","Pagos","Escribir Mensaje","Buzon De Entrada","Super Usuario","Configuraciones",
+        "Agregar Pago","Ver Pagos Alumnos","Mensajeria","Asignacion De Aulas","Editar Aulas",
+        "Agregar Aulas","Listado De Aulas","Aulas","Asignacion De Grados","Editar Grados",
+        "Agregar Grados","Todos Los Grados","Grados","Asignar Materia","Editar Materia",
+        "Agregar Materia","Todas Las Materias","Materias","Realizar Un Examen","Todos Los Examenes",
+        "Examen Admision","Agregar Estudiantes","Ver Estudiantes","Estudiantes","Asignar Encargados",
+        "Agregar Encargados","Ver Encargados","Encargados","Calendario","Notas",
+        "Actividades","Principal","Inicio","correo"):
+        if(x in perm):
+            print(x)
+        else:
+            print("hola")    
+    return render(request, 'administracion/usuarioasignado.html')
+
+@login_required
 def asignar_usuariosAlumnos(request):
     alumnos = Alumno.objects.all()
+    
     for alumno in alumnos:
         if(alumno.Codigo):
             if(alumno.Usuario):
@@ -665,9 +920,20 @@ def asignar_usuariosAlumnos(request):
                 try:
                     if(User.objects.get(username=alumno.Codigo)):
                         modificar = AlumnoForm(instance=alumno)
+                        usuario = User.objects.get(username=alumno.Codigo)
                         al = modificar.save(commit=False)
                         al.estado = "Registro"
-                        al.Usuario=User.objects.get(username=alumno.Codigo)
+                        al.Usuario=usuario
+                        g = Group.objects.get(name='Alumno') 
+                        g.user_set.add(usuario)
+                        for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                            print(x)
+                            permisos=Asignacion_PermisoForm()
+                            pe = permisos.save(commit=False)
+                            pe.Permiso=Permiso.objects.get(Nombre=x)
+                            pe.Usuario=usuario
+                            pe.Estado = "Activo"
+                            pe.save()
                         al.save()
                 except User.DoesNotExist:
                     usuario = User.objects.create_user(username=alumno.Codigo,password="Colegio123")
@@ -675,6 +941,15 @@ def asignar_usuariosAlumnos(request):
                     al = modificar.save(commit=False)
                     al.estado = "Registro"
                     al.Usuario=User.objects.get(username=alumno.Codigo)
+                    g = Group.objects.get(name='Alumno') 
+                    g.user_set.add(User.objects.get(username=alumno.Codigo))
+                    for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                        permisos=Asignacion_PermisoForm()
+                        pe = permisos.save(commit=False)
+                        pe.Permiso=Permiso.objects.get(Nombre=x)
+                        pe.Usuario=User.objects.get(username=alumno.Codigo)
+                        pe.Estado = "Activo"
+                        pe.save()
                     al.save()
         else:
             print("No se puede")
@@ -701,3 +976,26 @@ def nuevopersonal(request):
     else:
         form = PersonalForm()
     return render(request, 'administracion/nuevopersonal.html', {'form': form,'mensajes': mensajes,'errores': errores})
+
+@login_required
+def cambio_contra(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Tu contraseña a sido cambiada exitosamente!')
+            modificar = AlumnoForm(instance=Alumno.objects.get(Usuario=request.user))
+            al = modificar.save(commit=False)
+            al.estado = "Activo"
+            al.save()
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Porfavor corrija los siguientes erroes.')
+            print(request)
+    else:
+        form = PasswordChangeForm(request.user)
+        print(form)
+    return render(request, 'registration/cambio_contra.html', {'form': form})
+
+    

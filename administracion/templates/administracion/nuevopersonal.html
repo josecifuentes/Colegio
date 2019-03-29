@@ -8,7 +8,7 @@
     Lobibox.notify('error', {
                     showClass: 'zoomInUp',
                     hideClass: 'zoomOutDown',
-                    delay: 1000,
+                    delay: 1500,
                     msg: '{{errores}}'
                 });
     {% endif %}
@@ -22,13 +22,6 @@
     
 };
 </script>
-<script type="text/javascript">
-            $(function () {
-                $('#time').datetimepicker({
-                    format: 'LT'
-                });
-            });
-        </script>
 
      <!---ENCARGADOS FORMULARIO--->
                 <!--- FORMULARIO ALUMNOS-->
@@ -109,7 +102,7 @@
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.Direccion}}
                                                             </div>
-                                                            <!---DPI--->
+                                                            <!---DPI---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">DPI </label>
                                                             </div>
@@ -167,9 +160,13 @@
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Fecha Inicio de Labores:</label>
                                                             </div>    
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                {{form.Fecha_Inicio_Labores}}
-                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
+                                                                <div class="input-group date">
+                                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                 {{form.Fecha_Inicio_Labores}}
+                                                                </div>
+                                                            </div> 
+                                                            
                                                             <!---Dirección---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Nivel Academico:</label>
@@ -184,7 +181,7 @@
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.Titulo}}
                                                             </div>
-                                                            <!---DPI--->
+                                                            <!---DPI---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">Cedula Docente </label>
                                                             </div>
@@ -200,7 +197,7 @@
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.Registro_Escalafonario}}
                                                             </div>
-                                                            <!---DPI--->
+                                                            <!---DPI---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro" for="{{ form.Dpi.id_for_label }}">Salario </label>
                                                             </div>
@@ -214,37 +211,40 @@
                                                                 <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Entrada:</label>
                                                             </div>
                                                         
-                                                            <div class='col-sm-6'>
+                                                           <div class='col-sm-6'>
                                                                 <div class="form-group">
-                                                                    <div class='input-group date' id='time'>
-                                                                        {{form.Hora_Entrada}}
+                                    <div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
+                                        {{form.Hora_Entrada}}
 
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-time"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div><br><br><br>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
 
-                                            <!---nombres---><br><br><br>
+                                                          </div><br><br><br>
+
+                                            <!---nombres--->
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro"for="{{ form.horainicio.id_for_label }}">Hora Salida:</label>
                                                             </div>
                                                         
-                                                            <div class='col-sm-6'>
+                        <div class='col-sm-6'>
                                                                 <div class="form-group">
-                                                                    <div class='input-group date' id='time'>
-                                                                        {{form.Hora_Salida}}
+                                    <div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
+                                        {{form.Hora_Salida}}
 
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-time"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div><br><br><br>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                                          </div><br><br><br>
+
                                                 <!---Dirección--->
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">email:</label>
+                                                                <label class="login2 pull-right pull-right-pro" for="{{ form.direccion.id_for_label }}">Email:</label>
                                                             </div>    
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.email}}
@@ -279,6 +279,104 @@
                 </div>   
             </div>   
         </div>
+ 
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'administracion/hora/dist/bootstrap-clockpicker.min.css' %}">
+
+
+<style type="text/css">
+.navbar h3 {
+    color: #f5f5f5;
+    margin-top: 14px;
+}
+.hljs-pre {
+    background: #f8f8f8;
+    padding: 3px;
+}
+.footer {
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    padding: 40px 0;
+}
+.input-group {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+$('.clockpicker').clockpicker();
+</script>
+
+
+<script type="text/javascript" src="{% static 'administracion/hora/dist/bootstrap-clockpicker.min.js' %}"></script>
+<script type="text/javascript">
+$('.clockpicker').clockpicker()
+    .find('input').change(function(){
+        console.log(this.value);
+    });
+var input = $('#single-input').clockpicker({
+    placement: 'bottom',
+    align: 'left',
+    autoclose: true,
+    'default': 'now'
+});
+
+$('.clockpicker-with-callbacks').clockpicker({
+        donetext: 'Done',
+        init: function() { 
+            console.log("colorpicker initiated");
+        },
+        beforeShow: function() {
+            console.log("before show");
+        },
+        afterShow: function() {
+            console.log("after show");
+        },
+        beforeHide: function() {
+            console.log("before hide");
+        },
+        afterHide: function() {
+            console.log("after hide");
+        },
+        beforeHourSelect: function() {
+            console.log("before hour selected");
+        },
+        afterHourSelect: function() {
+            console.log("after hour selected");
+        },
+        beforeDone: function() {
+            console.log("before done");
+        },
+        afterDone: function() {
+            console.log("after done");
+        }
+    })
+    .find('input').change(function(){
+        console.log(this.value);
+    });
+
+
+if (/mobile/i.test(navigator.userAgent)) {
+    $('input').prop('readOnly', true);
+}
+</script>
+
+
+
+
+
+
+
+                                    <!-- datapicker JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'administracion/js/datapicker/datepicker-active.js' %}"></script>
          <!-- touchspin JS
         ============================================ -->
     <script src="{% static 'administracion/js/touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
