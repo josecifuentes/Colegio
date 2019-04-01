@@ -1,5 +1,5 @@
 from django import forms
-from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas
+from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso
 from .models import Encargado, Examene,Actividade
 from .models import Encargados_alumnos,Personal
 from django.contrib.auth.forms import AuthenticationForm
@@ -244,3 +244,13 @@ class InicioForm(forms.ModelForm):
             'telefono2': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999'}),
             
         }
+
+class permisoForm(forms.ModelForm):
+
+    class Meta:
+        model = Permiso
+        fields = ('Nombre','Descripcion')
+        widgets = {
+            'Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
+            'Descripcion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
+              }  

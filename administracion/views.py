@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas
-from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm
+from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
 from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
 from django.contrib.auth.decorators import login_required
@@ -901,11 +901,16 @@ def crear_permisos(request):
         "Agregar Materia","Todas Las Materias","Materias","Realizar Un Examen","Todos Los Examenes",
         "Examen Admision","Agregar Estudiantes","Ver Estudiantes","Estudiantes","Asignar Encargados",
         "Agregar Encargados","Ver Encargados","Encargados","Calendario","Notas",
-        "Actividades","Principal","Inicio","correo"):
-        if(x in perm):
-            print(x)
+        "Actividades","Principal","Inicio"):
+        comp=Permiso.objects.filter(Nombre=x).exists()
+        if comp:
+            print("Error no se puede crear")
         else:
-            print("hola")    
+            modificar = permisoForm()
+            al = modificar.save(commit=False)
+            al.Nombre=x
+            al.Descripcion=x
+            al.save()
     return render(request, 'administracion/usuarioasignado.html')
 
 @login_required
