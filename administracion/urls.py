@@ -52,5 +52,7 @@ urlpatterns = [
     path('usuario/contra/', views.cambio_contra, name='cambio_contra'), 
     path('horarios/listado/<int:pk>', views.horarios_listado, name='horarios_listado'), 
     path('permisos/agregar/', views.crear_permisos, name='crear_permisos'), 
+    path('permisos/alumnos/', views.permisos_estudiante, name='permisos_estudiante'), 
+    
     
 ]

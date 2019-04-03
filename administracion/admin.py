@@ -1,6 +1,14 @@
 from django.contrib import admin
 from administracion.models import Periodo,horas,Asignacion_Punteo,Asignacion_Grado,Asignacion_Permiso,Permiso,Aula, Grado, Materia, GradoAdmin, MateriaAdmin, Alumno, Encargado, EncargadoAdmin, AlumnoAdmin, Examene, Pago, Papeleria, Personal, Asignacion_Materia, Asignacion_Acividade,Actividade
 
+
+
+class AlumnoAdmin(admin.ModelAdmin):
+    # con esto añades un campo de texto que te permite realizar la busqueda, puedes añadir mas de un atributo por el cual se filtrará
+    search_fields = ['Primer_Nombre', 'Primer_Apellido']
+    # con esto añadiras una lista desplegable con la que podras filtrar (activo es un atributo booleano)
+    list_filter = ['Primer_Nombre']
+
 #Registramos nuestras clases principales.
 admin.site.register(Aula)
 admin.site.register(Grado, GradoAdmin)

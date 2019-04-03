@@ -931,14 +931,17 @@ def asignar_usuariosAlumnos(request):
                         al.Usuario=usuario
                         g = Group.objects.get(name='Alumno') 
                         g.user_set.add(usuario)
-                        for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
-                            print(x)
-                            permisos=Asignacion_PermisoForm()
-                            pe = permisos.save(commit=False)
-                            pe.Permiso=Permiso.objects.get(Nombre=x)
-                            pe.Usuario=usuario
-                            pe.Estado = "Activo"
-                            pe.save()
+                        try:
+                            for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                                print(x)
+                                permisos=Asignacion_PermisoForm()
+                                pe = permisos.save(commit=False)
+                                pe.Permiso=Permiso.objects.get(Nombre=x)
+                                pe.Usuario=usuario
+                                pe.Estado = "Activo"
+                                pe.save()
+                        except Exception as e:
+                            print("Error no se puede crear")
                         al.save()
                 except User.DoesNotExist:
                     usuario = User.objects.create_user(username=alumno.Codigo,password="Colegio123")
@@ -1003,4 +1006,28 @@ def cambio_contra(request):
         print(form)
     return render(request, 'registration/cambio_contra.html', {'form': form})
 
-    
+
+
+@login_required
+def permisos_estudiante(request):
+    form = MyForm()
+    if request.method=='POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            alumno = cd.get('codigo')
+            try:
+                alumnos = Alumno.objects.get(Codigo=alumno)
+                for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                    permisos=Asignacion_PermisoForm()
+                    pe = permisos.save(commit=False)
+                    pe.Permiso=Permiso.objects.get(Nombre=x)
+                    pe.Usuario=User.objects.get(username=alumnos.Codigo)
+                    pe.Estado = "Activo"
+                    pe.save()
+            except Alumno.DoesNotExist:
+                return redirect('error')
+            return render(request, 'administracion/usuarioasignado.html')
+    else:
+        form = MyForm()
+    return render(request, 'administracion/buscar_alumno.html', {'form': form})
