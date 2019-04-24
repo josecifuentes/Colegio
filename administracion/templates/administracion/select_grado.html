@@ -1,0 +1,43 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+   <div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                        <form method = "POST" action = "{% url 'ver_alumnos_grados'%}">
+{% csrf_token %}
+                            <div class="sparkline13-hd">
+                            	<h1>Seleccione Un Grado:</h1>
+                                Seleccione el grado que quiere ver el listado.
+                            	<select data-placeholder="Seleccione Un grado..." class="chosen-select" name="grado">
+                            	{% for grado in grados %}
+								<option value="{{grado.pk}}"> {{grado.Nombre_Grado}} {{grado.Nivel}} </option>
+								{%endfor%}
+                            	</select>
+                                <h1>Seleccione Una Seccion:</h1>
+                                Seleccione la seccion del grado.
+                                <select data-placeholder="Seleccione Un grado..." class="chosen-select" name="seccion">
+                               
+                                <option value="A">Seccion A </option>
+                                <option value="B">Seccion B </option>
+                                
+                                </select>
+                            </div>
+                            <br>
+                            	 <div class="product-buttons">
+                                <center>
+                    <button type = "submit" class="button-default cart-btn">Ver Listado de alumnos</button>
+                                </center>
+                            	</div>
+                      </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+{% endblock %}

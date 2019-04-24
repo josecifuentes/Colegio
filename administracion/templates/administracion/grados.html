@@ -1,0 +1,76 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            {{ form.grado.label_tag }} 
+            {{ form.grado }}
+        </div>
+        <div>
+            {{ form.horas.label_tag }} 
+            {{ form.horas }}
+        </div>
+        <div>
+            {{ form.materia.label_tag }} 
+            {{ form.materia }}
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#grado").on("change", get_grados);
+        });
+
+        function getMunicipios() {
+            var estadoId = $("#grado").val();
+            if (estadoId) {
+                // Eliminamos las opciones anteriores del select
+                $("#id_municipio").html("");
+                var request = $.ajax({
+                    type: "GET",
+                    url: "{% url 'get_municipios' %}",
+                    data: {
+                        "estado_id": estadoId,
+                    },
+                });
+                request.done(function(response) {
+                    // Agregamos los resultados al select
+                    $("#id_proceso").html(response.municipios);
+                    $("#id_localidad").html("<option value='' selected='selected'>---------</option>");
+                    $("#id_municipio, #id_localidad").trigger("change");
+                });
+            } else {
+                $("#id_municipio").html("<option value='' selected='selected'>---------</option>");
+                $("#id_localidad").html("<option value='' selected='selected'>---------</option>");
+                $("#id_municipio, #id_localidad").trigger("change");
+            }
+        }    
+
+        function getLocalidades() {
+            var municipioId = $("#id_municipio").val();
+            if (municipioId) {
+                // Eliminamos las opciones anteriores del select
+                $("#id_localidad").html("");
+                var request = $.ajax({
+                    type: "GET",
+                    url: "{% url 'get_localidades' %}",
+                    data: {
+                        "municipio_id": municipioId,
+                    },
+                });
+                request.done(function(response) {
+                    // Agregamos los resultados al select
+                    $("#id_localidad").html(response.localidades);
+                    $("#id_localidad").trigger("change");
+                });
+            } else {
+                $("#id_localidad").html("<option value='' selected='selected'>---------</option>");
+                $("#id_localidad").trigger("change");
+            }
+        }
+    </script>
+</body>
+{% endblock %}

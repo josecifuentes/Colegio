@@ -360,6 +360,7 @@ class Asignacion_Materia (models.Model):
         return '%s %s %s %s' % (self.Grado, self.Seccion,self.Materia, self.Personal)
     class Meta:
         unique_together = (("Grado", "Materia","Seccion"),)
+        ordering = ["Grado"]
 
 class Asignacion_Acividade (models.Model):
 

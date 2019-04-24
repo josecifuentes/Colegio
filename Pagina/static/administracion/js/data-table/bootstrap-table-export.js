@@ -8,14 +8,14 @@
     var sprintf = $.fn.bootstrapTable.utils.sprintf;
 
     var TYPE_NAME = {
-        json: 'JSON',
+        
         xml: 'XML',
         png: 'PNG',
         csv: 'CSV',
         txt: 'TXT',
         sql: 'SQL',
         doc: 'MS-Word',
-        excel: 'MS-Excel',
+        excel: 'Documento de Excel',
         xlsx: 'MS-Excel (OpenXML)',
         powerpoint: 'MS-Powerpoint',
         pdf: 'PDF'
@@ -25,7 +25,7 @@
         showExport: false,
         exportDataType: 'basic', // basic, all, selected
         // 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'powerpoint', 'pdf'
-        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],
+        exportTypes: ['json', 'excel'],
         exportOptions: {}
     });
 

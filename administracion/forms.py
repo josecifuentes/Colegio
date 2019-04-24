@@ -1,5 +1,5 @@
 from django import forms
-from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso
+from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
 from .models import Encargado, Examene,Actividade
 from .models import Encargados_alumnos,Personal
 from django.contrib.auth.forms import AuthenticationForm
@@ -254,3 +254,22 @@ class permisoForm(forms.ModelForm):
             'Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
             'Descripcion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Seleccione Hora de inicio'}),
               }  
+
+class GradonivelForm(forms.Form):
+    grado = forms.ModelChoiceField(
+        label=u'Grados', 
+        queryset=Grado.objects.all()
+    )
+    horas = forms.ModelChoiceField(
+        label=u'Horas', 
+        queryset=horas.objects.all()
+    )
+    materia = forms.ModelChoiceField(
+        label=u'Materia', 
+        queryset=Asignacion_Materia.objects.all()
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(GradonivelForm, self).__init__(*args, **kwargs)
+        self.fields['grado'].queryset = Municipio.objects.none()
+        self.fields['horas'].queryset = Localidad.objects.none()

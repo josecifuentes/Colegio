@@ -13,7 +13,7 @@
                                 Para asignar permisos porfavor seleccione un usuario y luego presione el boton  "ver permisos".
                             	<select data-placeholder="Seleccione Un Usuario..." class="chosen-select" name="usuario">
                             	{% for usuario in Usuarios %}
-								<option value="{{usuario.pk}}">{{usuario.Usuario}} {{usuario.Primer_Nombre}} {{usuario.Segundo_Nombre}} {{usuario.Primer_Apellido}} {{usuario.Segundo_Apellido}}</option>
+								<option value="{{usuario.pk}}">{{usuario.Usuario}} {{usuario.Primer_Nombre}}  {{usuario.Segundo_Nombre}} {{usuario.Primer_Apellido}} {{usuario.Segundo_Apellido}}</option>
 								{%endfor%}
                             	</select>
                             </div>

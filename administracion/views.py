@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas
 from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
-from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm
+from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, Template
@@ -511,12 +511,13 @@ def horarios(request):
     nivel.append("Diversificado")
     return render(request, 'administracion/horarios.html',{'grados':grados,'secciones':secciones,'nivel':nivel})
 @login_required
-def horarios_listado(request,pk):
+def horarios_listado(request,pk,sec):
     grado = Grado.objects.get(pk=pk)
     hora = horas.objects.filter(Nivel=grado.Nivel)
     periodo = Periodo.objects.filter(asignacion_materias__Grado=grado,)
     periodos = []
     asignado = False
+    print(sec)
     for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
         for x in hora:
             p = {}
@@ -1031,3 +1032,27 @@ def permisos_estudiante(request):
     else:
         form = MyForm()
     return render(request, 'administracion/buscar_alumno.html', {'form': form})
+@login_required
+def ver_alumnos_grados(request):
+    if request.method == "POST":
+        grado=request.POST['grado']
+        secc=request.POST['seccion']
+        if grado:
+            try:
+                alumnos = Alumno.objects.filter(Grado=Grado.objects.get(pk=grado), Seccion=secc)
+            except Exception as e:
+                print("NO")
+                alumnos= None
+            return render(request, 'administracion/alumnos_grado.html', {'alumnos': alumnos})
+    else:
+        grados= Grado.objects.all()
+    return render(request, 'administracion/select_grado.html', {'grados': grados})
+
+
+def grados_horas(request):
+    form = GradonivelForm()
+    if request.method == 'POST':
+        form = GradonivelForm(request.POST)
+        if form.is_valid():
+            print("Valido")
+    return render(request, 'grados.html', {'form': form})

@@ -238,6 +238,9 @@
                                 {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
                                      {% endif %}
+                                {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Alumnos grados" href="{% url 'ver_alumnos_grados' %}"><span class="mini-sub-pro">Ver Estudiantes por Grado</span></a></li>
+                                     {% endif %}
                             {% if "Agregar Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
                             {% endif %}

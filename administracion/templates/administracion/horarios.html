@@ -114,7 +114,7 @@
                   <td>{{grado.Nivel}}</td>
                   <td>Unica</td>
                   <td>
-                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
+                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk sec='A'%}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
                     <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
                     <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
                   </td>
@@ -126,7 +126,7 @@
                   <td>{{grado.Nivel}}</td>
                   <td>"{{sec}}"</td>
                   <td>
-                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
+                    <a target="_blank" href="{% url 'horarios_listado' pk=grado.pk sec=sec%}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Ver Horario</a>
                     <a target="_blank" href="#" class="imprimir btn btn-sm btn-warning"><i class="fa fa-print"></i> Imprimir</a>
                     <button data-id="#" class="delhorario btn btn-sm btn-danger"><i class="fa fa-times"></i> Eliminar</button>
                   </td>

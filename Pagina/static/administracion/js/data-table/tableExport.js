@@ -92,7 +92,7 @@
         theadSelector:     'tr',
         tableName:         'myTableName',
         type:              'csv',         // 'csv', 'tsv', 'txt', 'sql', 'json', 'xml', 'excel', 'doc', 'png' or 'pdf'
-        worksheetName:     'Notas'
+        worksheetName:     'Hoja 1'
       };
 
       var FONT_ROW_RATIO = 1.15;
