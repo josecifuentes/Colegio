@@ -199,7 +199,9 @@
                             {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
                             {% endif %}
-                            
+                            {% if "Horarios de examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Horarios de examenes" href="{% url 'horario_examen' %}"><span class="mini-sub-pro">Ver Horarios de examen</span></a></li>
+                            {% endif %}
                              {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Eliminar horario clase" href="#"><span class="mini-sub-pro">Eliminar horarios de clase</span></a></li>
                             {% endif %}
@@ -397,7 +399,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="{% static 'administracion/img/logo/logosn.png' %}" alt="" /></a>
+                        <a href="/administracion"><img class="main-logo" src="{% static 'administracion/img/logo/logosn.png' %}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -718,105 +720,264 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="{% url 'dashboard'%}">Inicio <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul class="collapse dropdown-header-top">
-                                                <li><a href="{% url 'dashboard'%}">Principal</a></li>
-                                                <li><a href="{% url 'dashboard'%}">Actividades</a></li>
-                                                <li><a href="{% url 'dashboard'%}">Alumnos</a></li>
-                                            </ul>
-                                        </li>
-                                       
-                                        <li><a href="#">Calendario</a></li>
-                                     
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Encargados <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">Ver Encargados</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Añadir Encargados</a>
-                                                </li>
-                                                <li><a href="edit-professor.html">Editar Encargados</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Estudiantes <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="{% url 'dashboard'%}">Ver Estudiantes</a>
-                                                </li>
-                                                {% if 'administracion.add_alumno' in perms %}
-                                                <li><a href="add-student.html">Añadir Estudiantes</a>
-                                                </li>
-                                                {% endif %}
 
-                                                <li><a href="student-profile.html">Papeleria</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Materias <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">Todas Las Materias</a>
-                                                </li>
-                                                <li><a href="add-course.html">Añadir Materias</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Editar Materias</a>
-                                                </li>
-                                                <li><a href="course-profile.html">Asignar Materias</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demolibra" href="#">Grados <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demolibra" class="collapse dropdown-header-top">
-                                                <li><a href="library-assets.html">Todos Los Grados</a>
-                                                </li>
-                                                <li><a href="add-library-assets.html">Añadir Grados</a>
-                                                </li>
-                                                <li><a href="edit-library-assets.html">Editar Grados</a>
-                                                </li>
-                                                <li><a href="edit-library-assets.html">Asignacion De Grados</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demodepart" href="#">Aulas <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demodepart" class="collapse dropdown-header-top">
-                                                <li><a href="departments.html">Listado Aulas</a>
-                                                </li>
-                                                <li><a href="add-department.html">Añadir Aulas</a>
-                                                </li>
-                                                <li><a href="edit-department.html">Editar Aulas</a>
-                                                </li>
-                                                <li><a href="edit-department.html">Asignacion De Aulas</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mensajeria <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demo" class="collapse dropdown-header-top">
-                                                <li><a href="mailbox.html">Buzon De Entrada</a>
-                                                </li>
-                                                <li><a href="mailbox-view.html">Escribir Mensaje</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </li>
-                                        
-                                        <li><a data-toggle="collapse" data-target="#Appviewsmob" href="#">Configuraciones <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Appviewsmob" class="collapse dropdown-header-top">
-                                                <li><a href="basic-form-element.html">Basic Form Elements</a>
-                                                </li>
-                                                <li><a href="advance-form-element.html">Advanced Form Elements</a>
-                                                </li>
-                                                <li><a href="password-meter.html">Password Meter</a>
-                                                </li>
-                                                <li><a href="multi-upload.html">Multi Upload</a>
-                                                </li>
-                                                <li><a href="tinymc.html">Text Editor</a>
-                                                </li>
-                                                <li><a href="dual-list-box.html">Dual List Box</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                    </ul>
+
+ {% if "Inicio" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
+                        <li class="active">
+                            <a class="has-arrow" href="#">
+                                   <span class="educate-icon educate-home icon-wrap"></span>
+                                   <span class="mini-click-non">Inicio</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                {% if "Principal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
+                                <li><a title="Principal" href="{% url 'dashboard'%}"><span class="mini-sub-pro">Principal</span></a></li>
+                                {% endif %}
+
+                                
+
+                            </ul>
+                        </li>
+                    {% endif %}
+
+
+                        {% if "Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-charts icon-wrap"></span> <span class="mini-click-non">Notas</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+
+                                {% if "Actividades" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s"%}
+                                <li><a title="Actividades" href="{% url 'actividades_cursos'%}"><span class="mini-sub-pro">Actividades</span></a></li>
+                                {% endif %}
+                            {% if "Ver Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Notas" href="{% url 'notas' %}"><span class="mini-sub-pro">Ver Notas</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Encargados" href="{% url 'notas' %}"><span class="mini-sub-pro">Añadir Notas</span></a></li>
+                                 {% endif %}
+                            {% if "Modificar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Modificar Nota" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Modificar Una Nota</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                         {% if "Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Calendario</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Ver Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Encargados" href="{% url 'calendario' %}"><span class="mini-sub-pro">Ver Calendario</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Calendario" href="{% url 'agregar_calendario' %}"><span class="mini-sub-pro">Añadir Calendario</span></a></li>
+                                 {% endif %}
+                            {% if "Eliminar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="eliminar_calendario" href="{% url 'eliminar_calendario' %}"><span class="mini-sub-pro">Eliminar Actividad en calendario</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if "Horarios" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Horarios</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Agregar Horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Agregar horas clase" href="{% url 'hora' %}"><span class="mini-sub-pro">Agregar horas de Clases</span></a></li>
+                            {% endif %}
+                            {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
+                            {% endif %}
+                            {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Horarios de examenes" href="{% url 'horario_examen' %}"><span class="mini-sub-pro">Ver Horarios de examen</span></a></li>
+                            {% endif %}
+                             {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Eliminar horario clase" href="#"><span class="mini-sub-pro">Eliminar horarios de clase</span></a></li>
+                            {% endif %}
+                            {% if "Horarios de consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Horarios de consulta" href="#"><span class="mini-sub-pro">Ver Horarios de consulta</span></a></li>
+                            {% endif %}
+                            {% if "Agregar horario consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            <li><a title="Agregar horario consulta" href="#"><span class="mini-sub-pro">Agregar horarios de Consultas</span></a></li>
+                            {% endif %}
+                             {% if "Eliminar horario consulta" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Eliminar horario consulta" href="#"><span class="mini-sub-pro">Eliminar horarios de consulta</span></a></li>
+                            {% endif %}
+                            </ul>
+                        </li>
+                         {% endif %}
+                        {% if "Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Encargados</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Ver Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Encargados" href="{% url 'ver_encargados' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Encargados</span></a></li>
+                                 {% endif %}
+                            {% if "Asignar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                         {% if "Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Estudiantes</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
+                                     {% endif %}
+                                {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Alumnos grados" href="{% url 'ver_alumnos_grados' %}"><span class="mini-sub-pro">Ver Estudiantes por Grado</span></a></li>
+                                     {% endif %}
+                            {% if "Agregar Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
+                            {% endif %}
+
+                            
+
+                                
+                            </ul>
+                        </li>
+                         {% endif %}
+                          {% if "Examen Admision" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                         <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Examenes</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Todos Los Examenes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Examenes" href="{% url 'ver_examenes' %}"><span class="mini-sub-pro">Todos Los Examenes</span></a></li>
+                                 {% endif %}
+                                {% if "Realizar Un Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Add Courses" href="{% url 'agregar_examenes' %}"><span class="mini-sub-pro">Realizar Un Examen</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                         {% endif %}
+                         {% if "Materias" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non"> Materias</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Todas Las Materias" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todas Las Materias" href="all-courses.html"><span class="mini-sub-pro">Todas Las Materias</span></a></li>
+                                {% endif %}
+                                {% if "Agregar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Materia" href="add-course.html"><span class="mini-sub-pro">Añadir Materia</span></a></li>
+                                {% endif %}
+                                {% if "Editar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Editar Materia" href="edit-course.html"><span class="mini-sub-pro">Editar Materia</span></a></li>
+                                {% endif %}
+                                {% if "Asignar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignar Materia" href="course-info.html"><span class="mini-sub-pro">Asignar Materia</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                         {% endif %}
+                         {% if "Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                         <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Grados</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Todos Los Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Grados" href="library-assets.html"><span class="mini-sub-pro">Todos Los Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Grados" href="add-library-assets.html"><span class="mini-sub-pro">Añadir Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Editar Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Editar Grados" href="edit-library-assets.html"><span class="mini-sub-pro">Editar Grados</span></a></li>
+                                 {% endif %}
+                                {% if "Asignacion De Grados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignacion De Grados" href="edit-library-assets.html"><span class="mini-sub-pro">Asignacion De Grados</span></a></li>
+                                 {% endif %}
+                                
+                            </ul>
+                        </li>
+                         {% endif %}
+                          {% if "Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Aulas</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                 {% if "Listado De Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Listado De Aulas" href="departments.html"><span class="mini-sub-pro">Listado De Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Agregar Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Aulas" href="add-department.html"><span class="mini-sub-pro">Añadir Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Editar Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Editar Aulas" href="edit-department.html"><span class="mini-sub-pro">Editar Aulas</span></a></li>
+                                 {% endif %}
+                                 {% if "Asignacion De Aulas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignacion De Aulas" href="edit-department.html"><span class="mini-sub-pro">Asignacion De Aulas</span></a></li>
+                                 {% endif %}
+                            </ul>
+                        </li>
+                         {% endif %}
+                         {% if "Mensajeria" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mensajeria</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                 {% if "Buzon De Entrada" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Buzon De Entrada</span></a></li>
+                                 {% endif %}
+                                 {% if "Escribir Mensaje" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Escribir Mensaje" href="mailbox-view.html"><span class="mini-sub-pro">Escribir Mensaje</span></a></li>
+                                 {% endif %}
+                               
+                            </ul>
+                        </li>
+                        {% endif %}
+                      {% if "Pagos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Pagos</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                {% if "Ver Pagos Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Pagos Alumnos" href="{% url 'ver_pagos' %}"><span class="mini-sub-pro">Ver Pagos Alumnos</span></a></li>
+                                {% endif %}
+                                {% if "Agregar Pago" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Agregar Pagos" href="{% url 'asignacion_pagos' %}"><span class="mini-sub-pro">Agregar Pagos</span></a></li>
+                                {% endif %}
+                                
+                            </ul>
+                        </li>
+                          {% endif %}
+                        {% if "Usuarios" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Usuarios</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                {% if "Asignar Permisos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Permisos" href="{% url 'asignar_permisos' %}"><span class="mini-sub-pro">Asignar Permisos</span></a></li>
+                                {% endif %}
+                                {% if "Asignar Personal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Asignacion De Personal</span></a></li>
+                                {% endif %}
+                                {% if "Asignar Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De Alumnos</span></a></li>
+                                {% endif %}
+                                <li><a title="Buttons" href="{% url 'crear_permisos' %}"><span class="mini-sub-pro">Crear Permisos</span></a></li>
+                                <li><a title="Tabs" href="{% url 'permisos_estudiante' %}"><span class="mini-sub-pro">Asignar permisos a estudiantes</span></a></li>
+                                <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if "Configuraciones" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Configuraciones</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Notifications" href="notifications.html"><span class="mini-sub-pro">Notifications</span></a></li>
+                                <li><a title="Alerts" href="alerts.html"><span class="mini-sub-pro">Alerts</span></a></li>
+                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
+                                <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
+                                <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
+                                <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De usuarios</span></a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+
+                                 
+
+
+
                                 </nav>
                             </div>
                         </div>

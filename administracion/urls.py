@@ -31,6 +31,7 @@ urlpatterns = [
     path('horarios/', views.horarios, name='horarios'),
     path('hora/', views.hora, name='hora'),
     path('horarios/grado', views.horarios_grado, name='horarios_grado'),
+    path('horarios/examen', views.horario_examen, name='horario_examen'),
     path('perfil/', views.perfil, name='perfil'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('Notas/', views.notas, name='notas'),

@@ -69,7 +69,7 @@
                                                         </div>
                                                         <div class="col-lg-8">
                                                             <p class="text-left"><strong>{{ user.username }}</strong></p>
-                                                            <p class="text-left small">correoElectronico@email.com</p>
+                                                            <p class="text-left small">Administracion Colegio Nuevo Mundo</p>
                                                             <p class="text-left">
                                                                 <a href="/administracion" class="btn btn-primary btn-block btn-sm">Entrar Sistema</a>
                                                             </p>
@@ -123,8 +123,34 @@
         </div>
 
         <!-- Menu Items -->
-        
+        <div class="menu_inner menu_mm">
+            <div class="menu menu_mm">
+                <ul class="menu_list menu_mm">
+                    <li class="menu_item menu_mm"><a href="{% url 'post_list'%}">Inicio</a></li>
+                    <li class="menu_item menu_mm"><a href="#">Actividades</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="menu_item menu_mm"><a href="/administracion">Entrar al sistema</a></li>
+                           <li class="menu_item menu_mm"><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                            {% else %}
+                                 <li class="menu_item menu_mm"><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+                            {% endif %}
+                    
+                </ul>
 
+                <!-- Menu Social -->
+                
+                <div class="menu_social_container menu_mm">
+                    <ul class="menu_social menu_mm">
+                        
+                        <li class="menu_social_item menu_mm"><a href="https://www.facebook.com/edumipequenomundo/"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="menu_copyright menu_mm">Colegio Mi Pequeño Mundo y Nuevo Mundo</div>
+            </div>
+
+        </div>
     </div>
     
     <!-- Home -->

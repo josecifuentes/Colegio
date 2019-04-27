@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas
+from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
 from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
 from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
@@ -356,7 +356,7 @@ def ponderar(request):
         return JsonResponse(_data)
     except Exception as e:
         _data = {'success': False,
-                'error_msg': f'Error Al Ingresar datos: {e}'}
+                'error_msg': 'Error Al Ingresar datos'}
         return JsonResponse(_data)
 
 @login_required
@@ -514,10 +514,10 @@ def horarios(request):
 def horarios_listado(request,pk,sec):
     grado = Grado.objects.get(pk=pk)
     hora = horas.objects.filter(Nivel=grado.Nivel)
-    periodo = Periodo.objects.filter(asignacion_materias__Grado=grado,)
+    periodo = Periodo.objects.filter(asignacion_materias__Grado=grado,Seccion=sec)
     periodos = []
     asignado = False
-    print(sec)
+
     for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
         for x in hora:
             p = {}
@@ -541,7 +541,7 @@ def horarios_listado(request,pk,sec):
 def horarios_grado(request):
     perfil = Alumno.objects.get(Usuario=request.user)
     hora = horas.objects.filter(Nivel=perfil.Grado.Nivel)
-    periodo = Periodo.objects.filter(asignacion_materias__Grado=perfil.Grado,)
+    periodo = Periodo.objects.filter(asignacion_materias__Grado=perfil.Grado)
     periodos = []
     asignado = False
     for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
@@ -563,6 +563,32 @@ def horarios_grado(request):
                 asignado = False
             periodos.append(p)
     return render(request, 'administracion/horario_grado.html', {'hora': hora,'periodos': periodos})
+@login_required
+def horario_examen(request):
+    perfil = Alumno.objects.get(Usuario=request.user)
+    hora = horas.objects.filter(Nivel=perfil.Grado.Nivel)
+    periodo = HorarioExamen.objects.filter(asignacion_materias__Grado=perfil.Grado)
+    periodos = []
+    asignado = False
+    for d in ("Lunes","Martes","Miercoles","Jueves","Viernes"):
+        for x in hora:
+            p = {}
+            for y in periodo:
+                if (x == y.horas) and (d == y.dia):
+                    p['hora'] = y.horas.hora_inicio
+                    p['materia'] = y.asignacion_materias.Materia
+                    p['dia'] = y.dia
+                    asignado = True
+                    break
+            if asignado == False:
+                p['hora'] = x.hora_inicio
+                p['materia'] = "-"
+                p['dia'] = d
+                asignado = False
+            else:
+                asignado = False
+            periodos.append(p)
+    return render(request, 'administracion/horarios_examenes.html', {'hora': hora,'periodos': periodos})
 
 @login_required
 def perfil(request):

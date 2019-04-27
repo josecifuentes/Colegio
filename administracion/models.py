@@ -543,7 +543,37 @@ class Periodo(models.Model):
     def __str__(self):
         return '%s %s' % (self.horas, self.asignacion_materias)   
     class Meta:
+        unique_together = ("asignacion_materias","dia", "horas")
+
+class HorarioExamen(models.Model):
+    horas = models.ForeignKey(horas, on_delete=models.DO_NOTHING)
+    asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
+    Dias = (
+        ('Lunes','Lunes'),
+        ('Martes','Martes'),
+        ('Miercoles','Miercoles'),
+        ('Jueves','Jueves'),
+        ('Viernes','Viernes'),
+            )
+    dia = models.CharField(
+        max_length=100,
+        choices=Dias,
+        default='Lunes',
+        ) 
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
+    def __str__(self):
+        return '%s %s' % (self.horas, self.asignacion_materias)   
+    class Meta:
         unique_together = (("asignacion_materias","dia", "horas"),)
+        
 class Asignacion_MateriaInLine(admin.TabularInline):
 
     model = Asignacion_Materia
