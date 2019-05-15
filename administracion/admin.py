@@ -5,7 +5,7 @@ from administracion.models import HorarioExamen,Periodo,horas,Asignacion_Punteo,
 
 class AlumnoAdmin(admin.ModelAdmin):
     # con esto añades un campo de texto que te permite realizar la busqueda, puedes añadir mas de un atributo por el cual se filtrará
-    search_fields = ['Primer_Nombre', 'Primer_Apellido']
+    search_fields = ['Primer_Nombre', 'Primer_Apellido','Codigo']
     # con esto añadiras una lista desplegable con la que podras filtrar (activo es un atributo booleano)
     list_filter = ['Primer_Nombre']
 

@@ -153,6 +153,17 @@ class Asignacion_PunteoForm(forms.ModelForm):
         widgets = {
             'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
             'Nota': forms.TextInput(attrs={'class': 'touchspin1'}),
+        } 
+
+class Asignacion_notasForm(forms.ModelForm):
+
+    class Meta:
+        model = Asignacion_Punteo
+        fields = ('Alumno','Nota','Estado')
+        widgets = {
+            'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
+            'Nota': forms.TextInput(attrs={'class': 'touchspin1'}),
+            'Estado': forms.Select(attrs={'class': 'form-control custom-select-value'}),
         }  
 
 class Asignacion_PermisoForm(forms.ModelForm):

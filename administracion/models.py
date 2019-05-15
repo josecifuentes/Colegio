@@ -415,7 +415,7 @@ class Asignacion_Punteo (models.Model):
     Estado = models.CharField(
         max_length=20,
         choices=Estados,
-        default='No_Aprobado',
+        default='No Aprobado',
         )
     def __str__(self):
         return '%s %s %s' % (self.Asignacion_Acividades,self.Alumno, self.Nota)

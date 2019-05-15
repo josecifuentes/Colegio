@@ -55,5 +55,10 @@ urlpatterns = [
     path('permisos/agregar/', views.crear_permisos, name='crear_permisos'), 
     path('permisos/alumnos/', views.permisos_estudiante, name='permisos_estudiante'), 
     path('alumnos/grados/', views.ver_alumnos_grados, name='ver_alumnos_grados'), 
+    path('asignacion/notas/estado/<int:pk>/<int:act>', views.asignar_notas, name='asignar_notas'),
+    path('actividades/grados/<int:pk>/<slug:sec>', views.actividades_grados, name='actividades_grados'),
+    path('notas/grados/<int:pk>/<slug:sec>', views.notas_grados, name='notas_grados'), 
+    path('usuarios/formato/', views.formato_usuarios, name='formato_usuarios'), 
     url(r'^ajax/get_grados/$', get_grados, name='get_grados'),
+
 ]

@@ -58,12 +58,25 @@
                                 </div>
 <div class="login-form-area edu-pd mg-b-15">
             <div class="container-fluid">
-
-                {%if Estado == "No Aprobado" %}
+                {%if Estado == "Aprobado" %}
+                    <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Estado Notas</h2>
+                            {% if "Super Usuario" in Permisos|stringformat:"s"%}
+                            Las notas de este curso estan <font color="green">Aprobadas</font>
+                            {%else%}
+                           ¡Felicidades el estado de tus notas es <font color="green">{{Estado}}!</font>
+                           {%endif%}
+                        </div>
+                    </div>
+                </div>
+                {%elif Estado == "No Aprobado" %}
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details shadow-reset">
                             <h2>Publicar Notas</h2>
+
                            <div class="modal-area-button">
                                 <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModalhdbgcl">Publicar todas las notas</a>
                             </div> 
@@ -80,12 +93,25 @@
                     </div>
                 </div>
                 {%endif%}
+{% if "Super Usuario" in Permisos|stringformat:"s"%}
+<center>
+                {%if Estado != "Aprobado" %}
+                <a href="#" data-toggle="modal" data-target="#Aprobar" type="button" class="btn btn-custon-rounded-two btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Aprobar notas</a>
+                {%endif%}
+                {%if Estado != "Pendiente" %}
+                 <a href="#" data-toggle="modal" data-target="#Pendientes" type="button" class="btn btn-custon-rounded-four btn-warning"><i class="fa fa-exclamation-triangle edu-warning-danger" aria-hidden="true"></i> Notas pendientes</a>
+                 {%endif%}
+                 {%if Estado != "No Aprobado" %}
+                 <a href="#" data-toggle="modal" data-target="#Noaprobado" type="button" class="btn btn-custon-rounded-four btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> No aprobar notas</a>
+                 {%endif%}
+</center>
+{%endif%}
 
                 <div id="PrimaryModalhdbgcl" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header header-color-modal bg-color-1">
-                                        <h4 class="modal-title">Asignar Una Nota Al Curso En La {{unidad}}</h4>
+                                        <h4 class="modal-title">Asignar una nota al curso {{curso.Materia}} en la {{unidad}}</h4>
                                         <div class="modal-close-area modal-close-df">
                                             <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                                         </div>
@@ -99,11 +125,82 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a data-dismiss="modal" href="#">Cancelar</a>
-                                        <a href="#">Asignar  Notas</a>
+                                        <a href="{% url 'asignar_notas' pk=curso.pk act=2%}">Asignar Notas</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+<div id="Noaprobado" class="modal modal-edu-general FullColor-popup-DangerModal PrimaryModal-bgcolor fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                                        <h2>Notas no aprobadas del curso {{curso.Materia}} en la unidad {{unidad}}</h2>
+                                        <h2>Notas no aprobadas!</h2>
+                                        <p>Esta a punto de asignar las notas del curso <font color="red">{{curso.Materia}} </font>del grado <font color="red">{{curso.Grado}} 
+                                        {% if curso.Grado.Nivel != "Diversificado" %}
+                                        seccion {{curso.Seccion}}{%endif%}</font> a la <font color="red">{{unidad}}</font> en estado no aprobadas, Estas notas podran ser modificadas y asignadas, los alumnos podran visualizar dichas notas parcialmente, deseas continuar?</p>
+                                    </div>
+                                    <div class="modal-footer footer-modal-admin danger-md">
+                                        <a data-dismiss="modal" href="#">Cancelar</a>
+                                        <a href="{% url 'asignar_notas' pk=curso.pk act=1%}">Continuar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+<div id="Pendientes" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-4">
+                                        <h4 class="modal-title">Notas Pendientes del curso {{curso.Materia}} en la unidad {{unidad}}</h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-warning modal-check-pro information-icon-pro"></span>
+                                        <h2>Notas pendientes!</h2>
+                                        <p>Esta a punto de asignar las notas del curso <font color="red">{{curso.Materia}} </font>del grado <font color="red">{{curso.Grado}} 
+                                        {% if curso.Grado.Nivel != "Diversificado" %}
+                                        seccion {{curso.Seccion}}{%endif%}</font> a la <font color="red">{{unidad}}</font> en estado pendiente, Estas notas no podran ser modificadas ni publicadas, los alumnos podran visualizar dichas notas parcialmente, deseas continuar?</p>
+                                    </div>
+                                    <div class="modal-footer danger-md">
+                                        <a data-dismiss="modal" href="#">Cancelar</a>
+                                        <a href="{% url 'asignar_notas' pk=curso.pk act=2%}">Asignar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            <div id="Aprobar" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-1">
+                                        <h4 class="modal-title">Aprobar notas del curso {{curso.Materia}} en la unidad {{unidad}}</h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <i class="educate-icon educate-checked modal-check-pro"></i>
+                                        <h2>Aprobar notas!</h2>
+                                        <p>Esta a punto de aprobar notas del curso <font color="red">{{curso.Materia}} </font>del grado <font color="red">{{curso.Grado}} 
+                                        {% if curso.Grado.Nivel != "Diversificado" %}
+                                        seccion {{curso.Seccion}}{%endif%}</font> a la <font color="red">{{unidad}}</font>, Estas notas seran asignadas por las actividades que se encuentran en la tabla de abajo, al aprobar estas notas los alumnos podran visualizar dichas notas, deseas continuar?</p>
+                                    </div>
+                                    <div class="modal-footer warning-md">
+                                        <a data-dismiss="modal" href="#">Cancelar</a>
+                                        <a href="{% url 'asignar_notas' pk=curso.pk act=3%}">Aprobar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
             </div>
         </div>
@@ -118,7 +215,7 @@
                                 </div>
                             </div>
                             <div class="sparkline8-graph">
-                                <div class="static-table-list">
+                                <div class="table-responsive static-table-list">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -146,7 +243,14 @@
                                             {% for nota in Notas %}
                                         {%if alumno.pk == nota.Alumno%}
 
-                            <td><a href="#" id="Nota{{ alumno.pk }}{{ nota.Actividad }}" data-type="text" data-pk="{{ nota.pk }}" data-placement="right" data-title="Ingrese La Nota De {{nota.act|actividad}}">{{nota.Punteo}}</a></td>
+                            <td>
+                                {%if Estado == "No Aprobado" %}
+
+                                <a href="#" id="Nota{{ alumno.pk }}{{ nota.Actividad }}" data-type="text" data-pk="{{ nota.pk }}" data-placement="right" data-title="Ingrese La Nota De {{nota.act|actividad}}">{{nota.Punteo}}</a>
+                                {%else%}
+                                {{nota.Punteo}}
+                                {%endif%}
+                            </td>
                             {%endif%}
                                             {% endfor %}
                                                <td>{{total|index:forloop.counter0}}</td>

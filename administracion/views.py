@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
 from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
-from .forms import MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
+from .forms import Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, Template
@@ -17,6 +17,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 import datetime
+from django.db import IntegrityError
 unidad= None
 
 @login_required
@@ -46,8 +47,8 @@ def dashboard(request):
     a = False;
     for g in query_set:
         if g.name=="Administracion":
-            alumnos=Alumno.objects.filter(Estado__iexact="PendienteExamen")
-            return render(request, 'administracion/dashboard_Administracion.html',{'alumnos': alumnos})
+            
+            return render(request, 'administracion/dashboard_Administracion.html')
         if g.name=="Secretaria":
             alumnos=Alumno.objects.all()
             return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
@@ -121,10 +122,96 @@ def dashboard(request):
                 cursos = materias.count()
         return render(request, 'administracion/dashboard_Maestro.html', {'mes': mes,'cursos': cursos,'actual': actual,'materias': materias,'encargado': encargado})
     return render(request, 'administracion/dashboard_Secretaria.html')
+ 
+@login_required
+def notas_grados(request, pk,sec):
+    if request.method == "POST":
+        a = request.POST['unidad']
+    else:
+        a = request.session['unidad']
+    grado = Grado.objects.get(pk=pk)
+    mate = Asignacion_Materia.objects.filter(Grado=grado,Seccion=sec)
+    alumnos=[]
+    promedio = []
+    total=0
+    promedionota=0
+    al = Alumno.objects.filter(Grado=grado,Seccion=sec)
+    for alumno in al:
+        promedionota=0
+        for materia in mate:
+            nota={}
+            total=0
+            nota['alumno']=alumno.pk
+            nota['materia']=materia.Materia.pk
+            try:
+                asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=materia,Unidad=a)
+                for punteo in asig:
+                    total=total+Asignacion_Punteo.objects.get(Asignacion_Acividades=punteo,Alumno=alumno).Nota
+            except Asignacion_Punteo.DoesNotExist:
+                total=0
+            nota['nota']=total
+            promedionota=promedionota+total
+            alumnos.append(nota)
+        promedionota=promedionota/mate.count()
+        promedio.append(promedionota)
+
+    return render(request, 'administracion/notas_grados.html',{'grado':grado,'alumnos':al,'notas':alumnos,'materias':mate,'promedio':promedio})
+
+@login_required
+def actividades_grados(request, pk,sec):
+    request.session['informacion']= None
+    materias=[]
+    grado = Grado.objects.get(pk=pk)
+    mate = Asignacion_Materia.objects.filter(Grado=grado,Seccion=sec)
+    seccion = sec
+    if request.method == "POST":
+        a = request.POST['unidad']
+    request.session['unidad'] = a
+    for a in mate:
+        try:
+            asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
+            act = asig.count()
+        except Asignacion_Materia.DoesNotExist:
+            act = 0
+        m ={}
+        m['Materia'] = a.Materia
+        m['Maestro'] = a.Personal
+        m['actividades'] = act
+        m['pk']=a.pk
+        materias.append(m)
+    return render(request, 'administracion/actividades_grado.html',{'grado':grado,'materias':materias,'seccion':seccion})
 @login_required
 def actividades_cursos(request):
     try:
-        cursos = Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
+        try:
+            cursos = Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
+        except Personal.DoesNotExist:
+            grados=[]
+            secciones = []
+            secciones.append("A")
+            secciones.append("B")
+            g = Grado.objects.all()
+            act = 0
+            estado = 0
+            for grado in g:
+                for secc in secciones:
+                    actividad={}
+                    actividad['Nivel']=grado.Nivel
+                    actividad['Nombre_Grado'] = grado.Nombre_Grado
+                    actividad['Seccion'] = secc
+                    actividad['pk'] = grado.pk
+                    materia = Asignacion_Materia.objects.filter(Grado=grado,Seccion=secc)
+                    for a in materia:
+                        asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
+                        act = act + asig.count()
+                        estado = estado + Asignacion_Punteo.objects.filter(Asignacion_Acividades = asig[:1],Estado="Aprobado").values('Estado').distinct().count()
+                    maestros = materia.values('Personal').distinct().count()
+                    actividad['Maestros'] = maestros
+                    cursos = materia.values('Materia').distinct().count()
+                    actividad['Cursos'] = cursos
+                    actividad['Actividad'] = act
+                    grados.append(actividad)
+            return render(request, 'administracion/listado_actividades.html', {'secciones':secciones,'grados':grados})
         Datos = []
         asignacion = []
         for curso in cursos:
@@ -144,7 +231,7 @@ def asignacion_actividades(request, pk):
         if request.method == "POST":
             a = request.POST['unidad']
         else:
-            a= request.session['unidad']
+            a = request.session['unidad']
         if a=="uni1":
             unidad="PRIMERA UNIDAD"
         if a=="uni2":
@@ -153,17 +240,14 @@ def asignacion_actividades(request, pk):
             unidad="TERCERA UNIDAD"
         if a=="uni4":
             unidad="CUARTA UNIDAD"
-        request.session['unidad'] = a
         curso=Asignacion_Materia.objects.get(pk=pk)
         actividades= Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=a)
-        request.session['grado']=curso.Grado.pk
-        if request.session['informacion']:
+        request.session['grado']=curso.pk
+        try:
             info= request.session['informacion']
-        else:
-            info = None
-        if request.session['errores']:
             errores= request.session['errores']
-        else:
+        except Exception as e:
+            info = None
             errores = None
     except Asignacion_Acividade.DoesNotExist:
             actividades=None
@@ -239,6 +323,35 @@ def notas(request):
             a="Alumno"
         if g.name=="Maestro":
             a="Maestro"
+        if g.name=="Administracion":
+            a="administracion"
+    if a == "administracion":
+        grados=[]
+        secciones = []
+        secciones.append("A")
+        secciones.append("B")
+        g = Grado.objects.all()
+        act = 0
+        estado = 0
+        for grado in g:
+            for secc in secciones:
+                actividad={}
+                actividad['Nivel']=grado.Nivel
+                actividad['Nombre_Grado'] = grado.Nombre_Grado
+                actividad['Seccion'] = secc
+                actividad['pk'] = grado.pk
+                materia = Asignacion_Materia.objects.filter(Grado=grado,Seccion=secc)
+                for a in materia:
+                    asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
+                    act = act + asig.count()
+                    estado = estado + Asignacion_Punteo.objects.filter(Asignacion_Acividades = asig[:1],Estado="Aprobado").values('Estado').distinct().count()
+                maestros = materia.values('Personal').distinct().count()
+                actividad['Maestros'] = maestros
+                cursos = materia.values('Materia').distinct().count()
+                actividad['Cursos'] = cursos
+                actividad['Actividad'] = act
+                grados.append(actividad)
+        return render(request, 'administracion/listado_notas.html', {'secciones':secciones,'grados':grados})
     if a=="Maestro":
         try:
             cursos = Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
@@ -252,12 +365,73 @@ def notas(request):
                     asi = "No Asignado"
                 asignacion.append(asi)
                 Datos.append(alumno.count())
-               
+            return render(request, 'administracion/Notas_Maestros.html', {'cursos': cursos,'asignacion': asignacion,'Datos': Datos})   
         except Asignacion_Materia.DoesNotExist:
             cursos=None
+    if a=="Alumno":
+        notas=[]
+        unidades=[]
+        promedio=0
+        alumno = Alumno.objects.get(Usuario=request.user)
+        try:
+            gia = Asignacion_Grado.objects.get(Grado=alumno.Grado,Seccion=alumno.Seccion)
+        except Exception as e:
+            gia = "No asignado"
+        materias = Asignacion_Materia.objects.filter(Grado=alumno.Grado)
+        for unidad in ("uni1","uni2","uni3","uni4","prome"):
+            unidades.append(unidad)
+            for materia in materias:
+                nota={}
+                total=0
+                try:
+                    asi = Asignacion_Acividade.objects.filter(Asignacion_Materia=materia,Unidad=unidad)
+                    for actividad in asi:
+                        try:
+                            punteo=Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad,Alumno=alumno)
+                            total=total+punteo.Nota
+                        except Exception as e:
+                            total=0
+                except Exception as e:
+                    total=0
+                nota['unidad']=unidad
+                nota['materia']=materia.Materia
+                if unidad == "prome":
+                    tot=0
+                    for un in notas:
+                        if un['materia']==materia.Materia:
+                            tot=tot+un['total']
+                    nota['total']=tot/4
+                else:
+                    nota['total']=total
+                notas.append(nota)
+
+        return render(request, 'administracion/notas_alumnos.html',{'alumno':alumno,'gia':gia,'materias':materias,'notas':notas,'unidades':unidades})
     else:
         cursos=None
-    return render(request, 'administracion/Notas_Maestros.html', {'cursos': cursos,'asignacion': asignacion,'Datos': Datos})
+    return render(request, 'administracion/vacio.html')
+@login_required
+def asignar_notas(request,pk,act):
+    curso = Asignacion_Materia.objects.get(pk=pk)
+    unidad = request.session['unidad']
+    alumnos = Alumno.objects.filter(Grado=curso.Grado)
+    if act==1:
+        estado="No Aprobado"
+    if act==2:
+        estado="Pendiente"
+    if act==3:
+        estado="Aprobado"
+    for alumno in alumnos:
+        actividades = Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=unidad)
+        for actividad in actividades:
+            try:
+                nota=Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad,Alumno=alumno)
+                estados=Asignacion_notasForm(instance=nota)
+                pe = estados.save(commit=False)
+                pe.Estado = estado
+                pe.save()
+            except Exception as e:
+                a=None
+    return redirect('asignacion_notas',pk=pk)
 
 @login_required
 def asignacion_notas(request, pk):
@@ -291,17 +465,23 @@ def asignacion_notas(request, pk):
                 nota['Actividad'] = actividad.pk
                 nota['act'] = actividad.Nombre_Actividad
                 try:
-                    nota['pk'] = Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad, Alumno=alumno).pk
-                    nota['Punteo'] = Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad, Alumno=alumno).Nota
-                    estado = Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad, Alumno=alumno).Estado
+                    punteo = Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad, Alumno=alumno)
+                    nota['pk'] = punteo.pk
+                    nota['Punteo'] = punteo.Nota
+                    nota['estado'] = punteo.Estado
                 except Asignacion_Punteo.DoesNotExist:
                     nota['pk']="0"
                     nota['Punteo'] ="0"
-                    estado="No Aprobado"
+                    nota['estado'] = "No Aprobado"
                 tot=int(tot)+int(nota['Punteo'])
                 Notas.append(nota)
             total.append(tot)
             tot=0
+        for x in Notas:
+            if x['estado'] == "Pendiente":
+                estado="Pendiente"
+            if x['estado'] == "Aprobado":
+                estado="Aprobado"
     except Asignacion_Acividade.DoesNotExist:
             actividades=None
     return render(request, 'administracion/asignacion_notas.html', {'curso': curso, 'actividades': actividades, 'alumnos': alumnos,'Notas' : Notas,'total' : total,'unidad' : unidad,'Estado' : estado})
@@ -322,7 +502,7 @@ def estado_nota(request,pk):
     except Exception as e:
         a=None
     return render(request, 'administracion/nueva_nota.html', {'notas': notas})
-
+@login_required
 def ponderar(request):
     try:
         int(request.POST['value'])
@@ -942,12 +1122,11 @@ def crear_permisos(request):
 
 @login_required
 def asignar_usuariosAlumnos(request):
-    alumnos = Alumno.objects.all()
-    
+    alumnos = Alumno.objects.all()   
     for alumno in alumnos:
         if(alumno.Codigo):
             if(alumno.Usuario):
-                print("hola")
+                print(alumno.usuario)
             else:
                 try:
                     if(User.objects.get(username=alumno.Codigo)):
@@ -960,12 +1139,11 @@ def asignar_usuariosAlumnos(request):
                         g.user_set.add(usuario)
                         try:
                             for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
-                                print(x)
                                 permisos=Asignacion_PermisoForm()
                                 pe = permisos.save(commit=False)
                                 pe.Permiso=Permiso.objects.get(Nombre=x)
                                 pe.Usuario=usuario
-                                pe.Estado = "Activo"
+                                pe.Estado = "Registro"
                                 pe.save()
                         except Exception as e:
                             print("Error no se puede crear")
@@ -1018,7 +1196,7 @@ def cambio_contra(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            update_session_auth_hash(request, user)  # Important! 
             messages.success(request, 'Tu contraseña a sido cambiada exitosamente!')
             modificar = AlumnoForm(instance=Alumno.objects.get(Usuario=request.user))
             al = modificar.save(commit=False)
@@ -1032,8 +1210,6 @@ def cambio_contra(request):
         form = PasswordChangeForm(request.user)
         print(form)
     return render(request, 'registration/cambio_contra.html', {'form': form})
-
-
 
 @login_required
 def permisos_estudiante(request):
@@ -1058,6 +1234,7 @@ def permisos_estudiante(request):
     else:
         form = MyForm()
     return render(request, 'administracion/buscar_alumno.html', {'form': form})
+
 @login_required
 def ver_alumnos_grados(request):
     if request.method == "POST":
@@ -1074,11 +1251,67 @@ def ver_alumnos_grados(request):
         grados= Grado.objects.all()
     return render(request, 'administracion/select_grado.html', {'grados': grados})
 
-
 def grados_horas(request):
     form = GradonivelForm()
     if request.method == 'POST':
         form = GradonivelForm(request.POST)
         if form.is_valid():
             print("Valido")
-    return render(request, 'grados.html', {'form': form})
+    return render(request, 'administracion/grados.html', {'form': form})
+
+def formato_usuarios(request):
+    alumnos = Alumno.objects.all()   
+    for alumno in alumnos:
+        if(alumno.Codigo):
+            if "-" in alumno.Codigo:
+                cambio=alumno.Codigo.replace("-" , "")
+                try:
+                    if User.objects.filter(username=cambio).count()>0:
+                            print("NO SE PUEDE YA EXISTE MEEEN")
+                    else:
+                        usuario=User.objects.get(username=alumno.Codigo)
+                        usuario.username=cambio
+                        usuario.save()
+                        modificar= AlumnoForm(instance=alumno)
+                        al = modificar.save(commit=False)
+                        print(alumno.Codigo)
+                        al.Codigo=cambio
+                        print(al.Codigo)
+                        al.save()
+                        print("si se pudo")
+                except User.DoesNotExist:
+                    try:
+                        if User.objects.filter(username=cambio).count()>0:
+                            print("NO SE PUEDE YA EXISTE MEEEN")
+                        else:
+                            usuario = User.objects.create_user(username=cambio,password="Colegio123")
+                            modificar = AlumnoForm(instance=alumno)
+                            j = modificar.save(commit=False)
+                            j.estado = "Registro"
+                            j.Usuario=User.objects.get(username=cambio)
+                            g = Group.objects.get(name='Alumno') 
+                            g.user_set.add(User.objects.get(username=cambio))
+                            for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                                permisos=Asignacion_PermisoForm()
+                                pe = permisos.save(commit=False)
+                                pe.Permiso=Permiso.objects.get(Nombre=x)
+                                pe.Usuario=User.objects.get(username=cambio)
+                                pe.Estado = "Activo"
+                                pe.save()
+                            j.save()
+                            modificar= AlumnoForm(instance=alumno)
+                            al = modificar.save(commit=False)
+                            print(alumno.Codigo)
+                            al.Codigo=cambio
+                            print(al.Codigo)
+                            al.save()
+                            print("si se pudo")
+                    except Exception as e:
+                        u = User.objects.get(username = alumno.Codigo)
+                        u.delete()
+                        print("no se pudo?")
+                        print(e)
+                    
+                    
+                
+    return render(request, 'administracion/vacio.html')

@@ -1,0 +1,43 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="courses-area">
+            <div class="container-fluid">
+            	<center><h1>Listado de materias del grado {{grado}} 
+            		{%if grado.Nivel == "Diversificado"%}
+
+            		{%else%}
+            		"{{seccion}}"
+            		{%endif%}
+
+            	</h1></center>
+            	
+                <div class="row mg-b-15">
+                	{% for materia in materias %}
+				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="text-center content-box">
+                                    <h2 class="m-b-xs">{{materia.Materia}}</h2>
+                                    <p class="font-bold text-success">Maestro encargado:{{materia.Maestro}}</p>
+                                    <div class="m icon-box">
+                                        <i class="educate-icon educate-star-half"></i>
+                                    </div>
+                                    <p class="small mg-t-box">
+                                        No. de actividades: {{materia.actividades}}
+                                    </p>
+                                    <a href="{% url 'asignacion_notas' pk=materia.pk %}" class="btn btn-success widget-btn-1 btn-sm">Ver actividades</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
+                    </div>
+
+                    {%endfor%}
+                    </div>
+                    
+                </div>
+                </div>
+
+{% endblock %}

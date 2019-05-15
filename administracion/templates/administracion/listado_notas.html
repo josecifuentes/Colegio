@@ -1,0 +1,98 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="courses-area">
+            <div class="container-fluid">
+                <div class="row">
+                    {% for grado in grados %}
+
+
+                    {% if grado.Nivel == "Diversificado" and grado.Seccion == "B" %}
+
+                    {%else%}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="courses-inner res-mg-b-30">
+                          <center>
+                            <div class="courses-title">
+                                {% if grado.Nivel == "Diversificado" %}
+                                <img  src="{% static 'administracion/img/courses/diversificado.jpg' %}" alt=""></a>
+                                <h2>{{grado.Nombre_Grado}}</h2>
+                                {%endif%}
+                                {% if grado.Nivel == "Basico" %}
+                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/basico.jpg' %}" alt=""></a>
+
+                                <h2>{{grado.Nombre_Grado}} {{grado.Nivel}} "{{grado.Seccion}}" </h2>
+                                {%endif%}
+                                {% if grado.Nivel == "Primaria" %}
+                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
+                                <h2>{{grado.Nombre_Grado}} {{grado.Nivel}} "{{grado.Seccion}}" </h2>
+                                {%endif%}
+                                {% if grado.Nivel == "Pre-Primaria" %}
+                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
+                                <h2>{{grado.Nombre_Grado}} "{{grado.Seccion}}"</h2>
+                                {%endif%}
+
+                            </div>
+                            <div class="courses-alaltic">
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-users"></i></span> Maestros: {{grado.Maestros}}</span>
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-book"></i></span> Cursos: {{grado.Cursos}}</span>
+                                
+                            </div>
+                            <div class="course-des">
+                                <p><span><i class="fa fa-tasks"></i></span> <b>Actividades:</b> {{grado.Actividad}}</p>
+                                <p><span><i class="fa fa-list-ol"></i></span> <b>No. notas asignadas:</b> 0</p>
+                                
+                            </div>
+                            <p>
+                                    <div class="form-select-list">
+                                                <center><h3>UNIDAD:</h3></center>
+
+<form method = "POST" action = "{% url 'notas_grados' pk=grado.pk sec=grado.Seccion%}">
+{% csrf_token %}
+                        <select class="form-control custom-select-value" name="unidad">
+                                                <option value="uni1">Primera Unidad</option>
+                                                <option value="uni2">Segunda Unidad</option>
+                                                   <option value="uni3">Tercera Unidad</option>
+                                                   <option value="uni4">Cuarta Unidad</option>
+                        </select>
+                                                                
+                                            </div>
+                                </p>
+                            
+                        <div class="product-buttons">
+                                <center>
+                    <button type = "submit" class="button-default cart-btn">Ver notas</button>
+                                </center>
+                            </div>
+
+</form>
+                   
+                            </center>
+                        
+                    </div>
+<p></p>
+
+</div>
+
+
+
+
+
+
+
+                    {%endif%}
+              
+                    {% endfor %}
+                    
+                   
+                </div>
+                <div class="row mg-b-15">
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

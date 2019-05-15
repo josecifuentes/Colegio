@@ -1,0 +1,57 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+{% load index %}
+
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline10-list mt-b-30">
+                            <div class="sparkline10-hd">
+                                <div class="main-sparkline10-hd">
+                                    <center><h1>Cuadro general de notas {{alumno.Primer_Nombre}} 
+                                    {{alumno.Segundo_Nombre}} 
+                                    {{alumno.Primer_Apellido}} {{alumno.Segundo_Apellido}}</h1></center>
+                                     <center><h1>Maestro encargado:  {{gia.Personal}} </h1></center>
+                                </div>
+                            </div>
+                            <div class="sparkline10-graph">
+                                <div class="table-responsive static-table-list">
+                                    <table class="table border-table">
+                                        <thead>
+                                            <tr>
+                                            	<th>#</th>
+                                            	<th>Materia</th>
+                                                <th>Primera Unidad</th>
+                                                <th>Segunda Unidad</th>
+                                                <th>Tercera Unidad</th>
+                                                <th>Cuarta Unidad</th>
+                                                <th>Promedio General</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	
+                                        	{% for materia in materias %}
+                                        	<tr>
+                                            	<td>{{ forloop.counter }}</td>
+                                               	<td>{{ materia.Materia }}</td>
+                                               	{% for unidad in unidades %}
+	                                               	{% for nota in notas %}
+	                                               			{%if nota.materia == materia.Materia%}
+		                                               			{%if nota.unidad == unidad%}
+		                                               				<center></center><td>{{ nota.total }}</td>
+		                                               			{%endif%}
+	                                               			{%endif%}
+                                               		{%endfor%}
+                                               	{%endfor%}
+                                            </tr>
+                                            {%endfor%}
+                                            
+                                               
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}

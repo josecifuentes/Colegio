@@ -162,14 +162,9 @@
                                 <li><a title="Actividades" href="{% url 'actividades_cursos'%}"><span class="mini-sub-pro">Actividades</span></a></li>
                                 {% endif %}
                             {% if "Ver Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Ver Notas" href="{% url 'notas' %}"><span class="mini-sub-pro">Ver Notas</span></a></li>
+                                <li><a title="Ver Notas" href="{% url 'notas' %}"><span class="mini-sub-pro">Notas</span></a></li>
                                  {% endif %}
-                                {% if "Agregar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Añadir Encargados" href="{% url 'notas' %}"><span class="mini-sub-pro">Añadir Notas</span></a></li>
-                                 {% endif %}
-                            {% if "Modificar Notas" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Modificar Nota" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Modificar Una Nota</span></a></li>
-                                {% endif %}
+                                
                             </ul>
                         </li>
                         {% endif %}
@@ -199,7 +194,7 @@
                             {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
                             {% endif %}
-                            {% if "Horarios de examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                            {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Horarios de examenes" href="{% url 'horario_examen' %}"><span class="mini-sub-pro">Ver Horarios de examen</span></a></li>
                             {% endif %}
                              {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
@@ -383,6 +378,7 @@
                                 <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
                                 <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
                                 <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De usuarios</span></a></li>
+                                <li><a title="Accordion" href="{% url 'formato_usuarios' %}"><span class="mini-sub-pro">formaato usuarios</span></a></li>
                             </ul>
                         </li>
                         {% endif %}
