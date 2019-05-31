@@ -240,6 +240,7 @@ def asignacion_actividades(request, pk):
             unidad="TERCERA UNIDAD"
         if a=="uni4":
             unidad="CUARTA UNIDAD"
+        request.session['unidad'] = a
         curso=Asignacion_Materia.objects.get(pk=pk)
         actividades= Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=a)
         request.session['grado']=curso.pk
@@ -358,7 +359,7 @@ def notas(request):
             Datos = []
             asignacion = []
             for curso in cursos:
-                alumno   = Alumno.objects.filter(Grado=curso.Grado)
+                alumno   = Alumno.objects.filter(Grado=curso.Grado,Seccion=curso.Seccion)
                 try:
                     asi = Asignacion_Grado.objects.get(Grado=curso.Grado).Personal
                 except Exception as e:
@@ -413,7 +414,7 @@ def notas(request):
 def asignar_notas(request,pk,act):
     curso = Asignacion_Materia.objects.get(pk=pk)
     unidad = request.session['unidad']
-    alumnos = Alumno.objects.filter(Grado=curso.Grado)
+    alumnos = Alumno.objects.filter(Grado=curso.Grado,Seccion=curso.Seccion)
     if act==1:
         estado="No Aprobado"
     if act==2:
@@ -453,7 +454,7 @@ def asignacion_notas(request, pk):
         request.session['unidad'] = a
         curso=Asignacion_Materia.objects.get(pk=pk)
         actividades= Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=a)
-        alumnos = Alumno.objects.filter(Grado=curso.Grado)
+        alumnos = Alumno.objects.filter(Grado=curso.Grado,Seccion=curso.Seccion)
         Notas = []
         total = []
         tot=int(0)
