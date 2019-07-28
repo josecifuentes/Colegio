@@ -544,22 +544,26 @@ class Periodo(models.Model):
         return '%s %s' % (self.horas, self.asignacion_materias)   
     class Meta:
         unique_together = ("asignacion_materias","dia", "horas")
-
+class notas_examenes(models.Model):
+    Texto = models.CharField(
+        max_length=50,
+        blank=True, 
+        null=True
+    )
+    Nivel = models.CharField(
+        max_length=100,
+        default='Todos',
+        )
+    Activo = models.CharField(
+        max_length=1,
+        default='N',
+        )
+    def __str__(self):
+        return '%s %s' % (self.Texto, self.Nivel)   
 class HorarioExamen(models.Model):
     horas = models.ForeignKey(horas, on_delete=models.DO_NOTHING)
     asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
-    Dias = (
-        ('Lunes','Lunes'),
-        ('Martes','Martes'),
-        ('Miercoles','Miercoles'),
-        ('Jueves','Jueves'),
-        ('Viernes','Viernes'),
-            )
-    dia = models.CharField(
-        max_length=100,
-        choices=Dias,
-        default='Lunes',
-        ) 
+    dia = models.DateTimeField(blank=True, null=True)
     SECCIONES = (
         ('A', 'A'),
         ('B', 'B'),
@@ -573,7 +577,25 @@ class HorarioExamen(models.Model):
         return '%s %s' % (self.horas, self.asignacion_materias)   
     class Meta:
         unique_together = (("asignacion_materias","dia", "horas"),)
-        
+
+class ContenidoExamen(models.Model):
+    asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
+    SECCIONES = (
+        ('A', 'A'),
+        ('B', 'B'),
+    )
+    Seccion = models.CharField(
+        max_length=7,
+        choices=SECCIONES,
+        default='A',
+    )
+    contenido = models.CharField(max_length=100)
+    pagina = models.CharField(max_length=100,blank=True,null=True)
+    def __str__(self):
+        return '%s %s' % (self.asignacion_materias, self.contenido)   
+    class Meta:
+        unique_together = (("asignacion_materias","contenido"))
+
 class Asignacion_MateriaInLine(admin.TabularInline):
 
     model = Asignacion_Materia

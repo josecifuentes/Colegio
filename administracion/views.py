@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.utils import timezone
-from .models import Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
-from .forms import AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
+from .models import ContenidoExamen,Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
+from .forms import ContenidoExamenForm,AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
-from .forms import Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
+from .forms import GradoCursosForm,Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, Template
@@ -16,10 +17,31 @@ from django.apps import apps
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-import datetime
+import datetime, locale
+from datetime import  timedelta
 from django.db import IntegrityError
 unidad= None
 
+
+def vista_Grados(request):
+    form = GradoCursosForm()
+    if request.method == 'POST':
+        print(request.POST['Seccion'])
+        f = ContenidoExamenForm()
+        post = f.save(commit=False)
+        post.asignacion_materias = Asignacion_Materia.objects.get(pk=request.POST['Materias'])
+        post.Seccion = request.POST['Seccion']
+        post.contenido = request.POST['contenido']
+        post.pagina = request.POST['pagina']
+        post.save()
+    return render(request, 'administracion/agregar_contenidoExamen.html', {
+        'form': form
+    })
+
+def days_between(d1, d2):
+    return abs(d2 - d1).days
+
+locale.setlocale(locale.LC_ALL, 'Spanish_Spain.1252')
 @login_required
 def inicio(request):
     alumno=Alumno.objects.get(Usuario=request.user)
@@ -147,6 +169,7 @@ def notas_grados(request, pk,sec):
                 asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=materia,Unidad=a)
                 for punteo in asig:
                     total=total+Asignacion_Punteo.objects.get(Asignacion_Acividades=punteo,Alumno=alumno).Nota
+                    estado= punteo.Estado
             except Asignacion_Punteo.DoesNotExist:
                 total=0
             nota['nota']=total
@@ -745,7 +768,48 @@ def horarios_grado(request):
             periodos.append(p)
     return render(request, 'administracion/horario_grado.html', {'hora': hora,'periodos': periodos})
 @login_required
+def contenido_examen(request):
+    grado = Alumno.objects.get(Usuario=request.user).Grado
+    Seccion = Alumno.objects.get(Usuario=request.user).Seccion
+    cursos = Asignacion_Materia.objects.filter(Grado=grado,Seccion=Seccion)
+    contenido = []
+    for curso in cursos:
+        p = {}
+        conteni = ContenidoExamen.objects.filter(asignacion_materias=curso)
+        if conteni.count()<1 :
+            p['curso'] = curso
+            p['contenido'] = "No Asignado"
+            p['paginas'] = "No Asignado"
+            contenido.append(p) 
+        c = None    
+        contador = 0
+        for cont in conteni:
+            if c == cont.asignacion_materias:
+                p['curso'] = cont.asignacion_materias
+                p['contenido'] = p['contenido'] + " <br> " + cont.contenido
+                if cont.pagina != None:
+                    p['paginas'] = p['paginas'] + " <br> " + cont.pagina
+                    contador = contador + 1
+                else:
+                    p['paginas'] = p['paginas'] + " <br> " + "-"
+                    contador = contador + 1
+            else:
+                if (contador == 0 and p != None) or contador>1:
+                    contenido.append(p)
+                    contador = 0
+                p['curso'] = cont.asignacion_materias
+                p['contenido'] = cont.contenido
+                if cont.pagina == None:
+                    print("hola")
+                    p['paginas'] = " "
+                else:
+                    p['paginas'] = cont.pagina
+            c = cont.asignacion_materias  
+    return render(request, 'administracion/contenido_examen.html',{'cursos':cursos,'contenido':contenido})
+
+@login_required
 def horario_examen(request):
+    today = datetime.datetime.now() 
     perfil = Alumno.objects.get(Usuario=request.user)
     hora = horas.objects.filter(Nivel=perfil.Grado.Nivel)
     periodo = HorarioExamen.objects.filter(asignacion_materias__Grado=perfil.Grado)
@@ -755,10 +819,17 @@ def horario_examen(request):
         for x in hora:
             p = {}
             for y in periodo:
-                if (x == y.horas) and (d == y.dia):
+                dia = "NO"
+                di = y.dia
+                dia = di.strftime('%A')
+                dia = dia.capitalize()
+                w =di.strftime('%m/%d/%Y')
+                s = today.strftime('%m/%d/%Y')
+                print(days_between(di,today))
+                if (x == y.horas) and (d == dia):
                     p['hora'] = y.horas.hora_inicio
                     p['materia'] = y.asignacion_materias.Materia
-                    p['dia'] = y.dia
+                    p['dia'] = dia
                     asignado = True
                     break
             if asignado == False:

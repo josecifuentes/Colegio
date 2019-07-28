@@ -3,7 +3,9 @@ from . import views
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path, include
-from .ajax import get_grados
+from .ajax import get_materias
+
+
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('inicio/confirmacion/', views.inicio, name='inicio'),
@@ -59,6 +61,8 @@ urlpatterns = [
     path('actividades/grados/<int:pk>/<slug:sec>', views.actividades_grados, name='actividades_grados'),
     path('notas/grados/<int:pk>/<slug:sec>', views.notas_grados, name='notas_grados'), 
     path('usuarios/formato/', views.formato_usuarios, name='formato_usuarios'), 
-    url(r'^ajax/get_grados/$', get_grados, name='get_grados'),
+    path('contenidos/examen/', views.contenido_examen, name='contenido_examen'), 
+    path('contenidos/examenes/', views.vista_Grados, name='vista_Grados'),
+    url(r'^ajax/get_materias/$', get_materias, name='get_materias'),
 
 ]

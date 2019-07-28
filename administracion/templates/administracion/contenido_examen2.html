@@ -1,0 +1,115 @@
+{% load static %}
+{% load index %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Contenido Examenes</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'administracion/contenido/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+
+
+
+
+<style type="text/css">
+
+  .logo{
+    background-color: white;
+  }
+body {
+  background-image: url("{% static 'administracion/contenido/images/bg.jpg' %}");
+  background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+}
+</style>
+
+<body>
+	
+<div id="menu" class="col-md-12 text-right">
+     <div class="container">
+        <a class="btn btn-primary" href="..\.."><i class="fa fa-home" aria-hidden="true"></i> Regresar</a>
+       
+        
+         
+      </div>
+    </div>
+    <!-- menu -->
+<center>
+  <div class="logo">
+<img src="{% static 'administracion/contenido/images/logoblanco.jpg' %}" height="100" width="200"></center>
+</div>
+
+<div class="jumbotron">
+	<center><h1>CONTENIDO DE EXAMENES</h1></center>
+</div>
+
+
+
+
+<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table">
+
+						<div class="row header">
+							<div class="cell">
+								Curso
+							</div>
+							<div class="cell">
+								Contenido
+							</div>
+							<div class="cell">
+								Paginas
+							</div>
+							
+						</div>
+							{% for c in contenido %}
+									<div class="row">
+										<div class="cell" data-title="Curso">{{c.curso.Materia}}</div>
+										<div class="cell" data-title="Contenido">{% autoescape off %}{{c.contenido}}{% endautoescape %}</div>
+										<div class="cell" data-title="Paginas">{% autoescape off %}{{c.paginas}}{% endautoescape %}</div>
+								
+									
+									</div>
+									
+									{%endfor%}
+
+
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->	
+	<script src="{% static 'administracion/contenido/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'administracion/contenido/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'administracion/contenido/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'administracion/contenido/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'administracion/contenido/js/main.js' %}"></script>
+</body>
+</html>

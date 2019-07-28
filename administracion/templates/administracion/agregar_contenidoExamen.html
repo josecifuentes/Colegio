@@ -1,0 +1,99 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <div class="advanced-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                   <center> <h1>Ingresar Contenido Examenes</h1></center>
+                                </div>
+                            </div>
+
+<center>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">Grado:</label>
+       </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                    
+            {{ form.Grado }}
+                </div> 
+                                                              
+            </div> 
+            
+        </div>
+        <div>
+            {{ form.Seccion.label_tag }} 
+            {{ form.Seccion }}
+        </div>
+        <div>
+            {{ form.Materias.label_tag }} 
+            {{ form.Materias }}
+        </div>
+         <div>
+            {{ form.contenido.label_tag }} 
+            {{ form.contenido }}
+        </div>
+        <div>
+            {{ form.pagina.label_tag }} 
+            {{ form.pagina }}
+        </div>
+        
+        <button type="submit">Guardar</button>
+    </form>
+    </center>
+    </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $("#id_Seccion").on("change", getMaterias);
+            
+        });
+
+        function getMaterias() {
+
+            var GradoId = $("#id_Grado").val();
+            var seccion = $('input:radio[name=Seccion]:checked').val()
+            
+            if (GradoId) {
+                // Eliminamos las opciones anteriores del select
+                $("#id_Materias").html("");
+                var request = $.ajax({
+                    type: "GET",
+                    url: "{% url 'get_materias' %}",
+                    data: {
+                        "grado_id": GradoId,
+                        "seccion": seccion,
+                    },
+                });
+                request.done(function(response) {
+                    
+                    // Agregamos los resultados al select
+                    $("#id_proceso").html(response.materias);
+                    $("#id_Materias").html(response.materias);
+                    $("#id_Materias").trigger("change");
+                });
+            } else {
+                $("#id_Materias").html("<option value='' selected='selected'>---------</option>");
+            }
+        }    
+
+        
+    </script>
+</body>
+
+{% endblock %}

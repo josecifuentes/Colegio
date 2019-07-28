@@ -1,12 +1,14 @@
 from django import forms
 from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
 from .models import Encargado, Examene,Actividade
-from .models import Encargados_alumnos,Personal
+from .models import Encargados_alumnos,Personal,ContenidoExamen
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.admin import widgets
 import datetime
+
+
 class AlumnoForm(forms.ModelForm):
 
     class Meta:
@@ -284,3 +286,42 @@ class GradonivelForm(forms.Form):
         super(GradonivelForm, self).__init__(*args, **kwargs)
         self.fields['grado'].queryset = Municipio.objects.none()
         self.fields['horas'].queryset = Localidad.objects.none()
+
+Secciones = [
+    ('A', 'A'),
+    ('B', 'B'),
+]
+
+class GradoCursosForm(forms.Form):
+    Grado = forms.ModelChoiceField(
+        label=u'Grado', 
+        queryset=Grado.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control custom-select-value'}),
+    )
+    Seccion = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.RadioSelect,
+        choices=Secciones,
+    )
+    Materias = forms.ModelChoiceField(
+        label=u'Materias', 
+        queryset=Asignacion_Materia.objects.all()
+    )
+    contenido = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off'}))
+    pagina = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off'}))
+
+    def __init__(self, *args, **kwargs):
+        super(GradoCursosForm, self).__init__(*args, **kwargs)
+        self.fields['Materias'].queryset = Asignacion_Materia.objects.none()
+
+class ContenidoExamenForm(forms.ModelForm):
+
+    class Meta:
+        model = ContenidoExamen
+        fields = ('asignacion_materias','Seccion','contenido','pagina')
+        widgets = {
+            'asignacion_materias': forms.TextInput(attrs={'class': 'form-control'}),
+            'Seccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'contenido': forms.TextInput(attrs={'class': 'form-control'}),
+            'pagina': forms.TextInput(attrs={'class': 'form-control'}),
+              }  

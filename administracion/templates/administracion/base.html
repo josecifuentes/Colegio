@@ -168,6 +168,31 @@
                             </ul>
                         </li>
                         {% endif %}
+
+                        
+
+                         {% if "Contenidos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Contenidos</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Contenido_Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Contenidos Examenes" href="{% url 'contenido_examen' %}"><span class="mini-sub-pro">Ver Contenidos Examenes</span></a></li>
+                                 {% endif %}
+                                {% if "Contenido_Unidad" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Contenidos Unidad" href="#"><span class="mini-sub-pro">Ver Contenidos Unidad</span></a></li>
+                                 {% endif %}
+                                {% if "agregar_contenido" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Agregar Contenidos Unidad" href="#"><span class="mini-sub-pro">Agregar Contenidos Unidad</span></a></li>
+                                 {% endif %}
+                                 {% if "agregar_contenidoE" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Agregar Contenidos Examen" href="{% url 'vista_Grados' %}"><span class="mini-sub-pro">Agregar Contenidos Examen</span></a></li>
+                                 {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+
+                
+
                          {% if "Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                              <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Calendario</span></a>
@@ -756,6 +781,27 @@
                             </ul>
                         </li>
                         {% endif %}
+
+                {% if "Contenidos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Contenidos</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Contenido_Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Contenidos Examenes" href="{% url 'contenido_examen' %}"><span class="mini-sub-pro">Ver Contenidos Examenes</span></a></li>
+                                 {% endif %}
+                                {% if "Contenido_Unidad" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Ver Contenidos Unidad" href="#"><span class="mini-sub-pro">Ver Contenidos Unidad</span></a></li>
+                                 {% endif %}
+                                 {% if "agregar_contenido" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Agregar Contenidos Unidad" href="#"><span class="mini-sub-pro">Agregar Contenidos Unidad</span></a></li>
+                                 {% endif %}
+                                 {% if "agregar_contenidoE" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Agregar Contenidos Examen" href="{% url 'vista_Grados' %}"><span class="mini-sub-pro">Agregar Contenidos Examen</span></a></li>
+                                 {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+
                          {% if "Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                              <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Calendario</span></a>

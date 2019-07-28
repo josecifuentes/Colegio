@@ -40,6 +40,7 @@
                                       	{% for nota in notas %}
                                       	{%if nota.alumno == alumno.pk%}
                                       	 <td 
+                                          {%if nota
                                       	 {%if nota.nota == 0 %}
                                       	 
                                       	 {%elif nota.nota < 60 %}
@@ -52,7 +53,7 @@
                                       	 class="warning"
                                       	 {%endif%}
                                       	 ><center>
-										 {%if nota.nota == 0 %}
+										                      {%if nota.nota == 0 %}
                                       	  <font color="black">
                                       	 {%elif nota.nota < 60 %}
                                       	 <font color="red">
@@ -63,9 +64,9 @@
                                       	 {%elif nota.nota == 100 %}
                                       	 <font color="orange">
                                       	 {%endif%}
-									{% if nota.nota == 100 %}
-                                    <img src="{% static 'administracion/img/start.png'%}" width="15%">
-                                    {% endif %}
+									                       {% if nota.nota == 100 %}
+                                        <img src="{% static 'administracion/img/start.png'%}" width="15%">
+                                        {% endif %}
                                       	 {{nota.nota}}
                                       	 </font>
 

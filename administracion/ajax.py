@@ -1,35 +1,20 @@
 from django.http import JsonResponse
+from .models import Asignacion_Materia
 
-from .models import Grado, horas
 
-
-def get_grados(request):
+def get_materias(request):
     grado_id = request.GET.get('grado_id')
-    grados = Grado.objects.none()
+    seccion = request.GET.get('seccion')
+    print(seccion)
+    materias = Asignacion_Materia.objects.none()
     options = '<option value="" selected="selected">---------</option>'
     if grado_id:
-        grados = Grado.objects.filter(pk=grado_id)   
-    for grado in grados:
+        materias = Asignacion_Materia.objects.filter(Grado_id=grado_id,Seccion=seccion)   
+    for materia in materias:
         options += '<option value="%s">%s</option>' % (
-            grado.pk,
-            grado.Nombre_Grado
+            materia.pk,
+            materia.Materia
         )
     response = {}
-    response['grados'] = options
-    return JsonResponse(response)
-
-
-def get_localidades(request):
-    municipio_id = request.GET.get('municipio_id')
-    localidades = Localidad.objects.none()
-    options = '<option value="" selected="selected">---------</option>'
-    if municipio_id:
-        localidades = Localidad.objects.filter(municipio_id=municipio_id)   
-    for localidad in localidades:
-        options += '<option value="%s">%s</option>' % (
-            localidad.pk,
-            localidad.localidad
-        )
-    response = {}
-    response['localidades'] = options
+    response['materias'] = options
     return JsonResponse(response)
