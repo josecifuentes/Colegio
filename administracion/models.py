@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.utils import timezone
 #alumnos
 class Aula(models.Model):
     Nombre_Aula  =   models.CharField(max_length=130)
@@ -407,6 +407,24 @@ class Asignacion_Punteo (models.Model):
     Nota= models.IntegerField(
         default=0,
         )
+    def __str__(self):
+        return '%s %s %s' % (self.Asignacion_Acividades,self.Alumno, self.Nota)
+    class Meta:
+        unique_together = (("Asignacion_Acividades", "Alumno"),)
+
+class Estados_materia(models.Model):
+    asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
+    Unidades = (
+    ('uni1', 'Primera Unidad'),
+    ('uni2', 'Segunda Unidad'),
+    ('uni3', 'Tercera Unidad'),
+    ('uni4', 'Cuarta Unidad'),
+    )
+    Unidad = models.CharField(
+        max_length=20,
+        choices=Unidades,
+        default='Primera Unidad',
+    )
     Estados = (
         ('Pendiente', 'Pendiente'),
         ('No_Aprobado', 'No Aprobado'),
@@ -418,9 +436,10 @@ class Asignacion_Punteo (models.Model):
         default='No Aprobado',
         )
     def __str__(self):
-        return '%s %s %s' % (self.Asignacion_Acividades,self.Alumno, self.Nota)
+        return '%s %s %s' % (self.asignacion_materias, self.Unidad)
     class Meta:
-        unique_together = (("Asignacion_Acividades", "Alumno"),)
+        unique_together = (("asignacion_materias", "Unidad"),)
+                
 class Actividade (models.Model):
     Titulo = models.CharField(max_length=120)
     Descripcion = models.CharField(max_length=300)
@@ -580,6 +599,17 @@ class HorarioExamen(models.Model):
 
 class ContenidoExamen(models.Model):
     asignacion_materias = models.ForeignKey(Asignacion_Materia, on_delete=models.DO_NOTHING)
+    Unidades = (
+    ('uni1', 'Primera Unidad'),
+    ('uni2', 'Segunda Unidad'),
+    ('uni3', 'Tercera Unidad'),
+    ('uni4', 'Cuarta Unidad'),
+    )
+    Unidad = models.CharField(
+        max_length=20,
+        choices=Unidades,
+        default='Primera Unidad',
+    )
     SECCIONES = (
         ('A', 'A'),
         ('B', 'B'),
@@ -596,6 +626,30 @@ class ContenidoExamen(models.Model):
     class Meta:
         unique_together = (("asignacion_materias","contenido"))
 
+class Reportes(models.Model):
+    Alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    Personal  = models.ForeignKey(Personal, on_delete=models.CASCADE)
+    Tipos = (
+    ('Conducta', 'Conducta'),
+    ('Tarea', 'Tarea'),
+    ('Otros', 'Otros'),
+    )
+    Estados = (
+    ('Revision', 'Conducta'),
+    ('Tarea', 'Tarea'),
+    ('Otros', 'Otros'),
+    )
+    Descripcion = models.CharField(max_length=200, blank=True, null=True)
+    Solucion = models.CharField(max_length=200, blank=True, null=True)
+    Tipo = models.CharField(
+        max_length=20,
+        choices=Tipos,
+        default='Otros',
+    )
+    Fecha_Ingreso = models.DateTimeField(default=timezone.now,blank=True, null=True)
+    def __str__(self):
+        return '%s %s %s' % (self.Alumno, self.Tipo, self.Solucion)
+        
 class Asignacion_MateriaInLine(admin.TabularInline):
 
     model = Asignacion_Materia

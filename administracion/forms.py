@@ -161,11 +161,10 @@ class Asignacion_notasForm(forms.ModelForm):
 
     class Meta:
         model = Asignacion_Punteo
-        fields = ('Alumno','Nota','Estado')
+        fields = ('Alumno','Nota')
         widgets = {
             'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
             'Nota': forms.TextInput(attrs={'class': 'touchspin1'}),
-            'Estado': forms.Select(attrs={'class': 'form-control custom-select-value'}),
         }  
 
 class Asignacion_PermisoForm(forms.ModelForm):
@@ -300,15 +299,16 @@ class GradoCursosForm(forms.Form):
     )
     Seccion = forms.MultipleChoiceField(
         required=False,
-        widget=forms.RadioSelect,
+        widget=forms.Select(attrs={'class': 'form-control custom-select-value'}),
         choices=Secciones,
     )
     Materias = forms.ModelChoiceField(
         label=u'Materias', 
-        queryset=Asignacion_Materia.objects.all()
+        queryset=Asignacion_Materia.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control custom-select-value'}),
     )
-    contenido = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off'}))
-    pagina = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off'}))
+    contenido = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class': 'form-control'}))
+    pagina = forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class': 'form-control'}))
 
     def __init__(self, *args, **kwargs):
         super(GradoCursosForm, self).__init__(*args, **kwargs)

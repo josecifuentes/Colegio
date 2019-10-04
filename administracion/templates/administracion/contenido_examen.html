@@ -29,7 +29,10 @@
 
 
 <style type="text/css">
-
+img, video, object, embed {
+  max-width:100%;      /* Aquí el tamaño máximo de tus imágenes */
+  height:auto;         /* No es necesario, sólo para clarificar */
+}
   .logo{
     background-color: white;
   }
@@ -61,43 +64,64 @@ body {
 <div class="jumbotron">
     <center><h1>CONTENIDO DE EXAMENES</h1></center>
 </div>
+{{grado}}
+        <div class="container">
+            <center>
+                <iframe src="
 
-
-
-
-<div class="limiter">
-        <div class="container-table100">
-            <div class="wrap-table100">
-                    <div class="table">
-
-                        <div class="row header">
-                            <div class="cell">
-                                Curso
-                            </div>
-                            <div class="cell">
-                                Contenido
-                            </div>
-                            <div class="cell">
-                                Paginas
-                            </div>
-                            
-                        </div>
-                            {% for c in contenido %}
-                                    <div class="row">
-                                        <div class="cell" data-title="Curso">{{c.curso.Materia}}</div>
-                                        <div class="cell" data-title="Contenido">{% autoescape off %}{{c.contenido}}{% endautoescape %}</div>
-                                        <div class="cell" data-title="Paginas">{% autoescape off %}{{c.paginas}}{% endautoescape %}</div>
-                                
+                {% ifequal grado|stringformat:'s' 'Primero Basico' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B1A.pdf' %}
+                    {%endif%}
+                    {%if Seccion == 'B'%}
+                    {% static 'administracion/contenidos/B1B.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                 {% ifequal grado|stringformat:'s' 'Segundo Basico' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B2A.pdf' %}
+                    {%endif%}
+                    {%if Seccion == 'B'%}
+                    {% static 'administracion/contenidos/B2B.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                {% ifequal grado|stringformat:'s' 'Tercero Basico' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B3A.pdf' %}
+                    {%endif%}
+                    {%if Seccion == 'B'%}
+                    {% static 'administracion/contenidos/B3B.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                {% ifequal grado|stringformat:'s' 'Cuarto Salud Diversificado' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B4 SALUD.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                {% ifequal grado|stringformat:'s' 'Cuarto Electrónica Diversificado' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B4 ELECTRONICA.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                 {% ifequal grado|stringformat:'s' 'Cuarto Ciencias y Letras Diversificado' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B4 ELECTRONICA.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                {% ifequal grado|stringformat:'s' 'Cuarto Computación Diversificado' %}
+                    {%if Seccion == 'A'%}
+                    {% static 'administracion/contenidos/B4 Compu.pdf' %}
+                    {%endif%}
+                {%endifequal%}
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+            </center>                       
                                     
-                                    </div>
                                     
-                                    {%endfor%}
+                                  
 
-
-                    </div>
-            </div>
+    
         </div>
-    </div>
+   
 
 
 

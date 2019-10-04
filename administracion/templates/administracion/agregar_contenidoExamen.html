@@ -4,7 +4,6 @@
 
 
 
-<body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <div class="advanced-form-area mg-b-15">
             <div class="container-fluid">
@@ -17,10 +16,11 @@
                                 </div>
                             </div>
 
+
 <center>
     <form method="POST">
         {% csrf_token %}
-        <div>
+         <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">Grado:</label>
        </div>
@@ -33,24 +33,80 @@
             </div> 
             
         </div>
-        <div>
-            {{ form.Seccion.label_tag }} 
-            {{ form.Seccion }}
-        </div>
-        <div>
-            {{ form.Materias.label_tag }} 
-            {{ form.Materias }}
-        </div>
-         <div>
-            {{ form.contenido.label_tag }} 
-            {{ form.contenido }}
-        </div>
-        <div>
-            {{ form.pagina.label_tag }} 
-            {{ form.pagina }}
-        </div>
         
-        <button type="submit">Guardar</button>
+          <br>
+        <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">{{ form.Seccion.label_tag }}</label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                    
+            {{ form.Seccion }} 
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+         <br>
+          <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">{{ form.Materias.label_tag }}</label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                     {{ form.Materias }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+        <br>
+         <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} "> {{ form.contenido.label_tag }} </label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                     {{ form.contenido }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+         <br>
+        <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} "> {{ form.pagina.label_tag }}</label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                       
+            {{ form.pagina }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+       <br>
+       
+        <button type="submit" class="save btn btn-default">Guardar</button>
     </form>
     </center>
     </div>
@@ -58,16 +114,22 @@
                 </div>   
             </div>   
         </div>
+        <script src="{% static 'administracion/js/icheck/icheck.min.js' %}"></script>
+    
     <script type="text/javascript">
+        $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
         $( document ).ready(function() {
-            $("#id_Seccion").on("change", getMaterias);
-            
+            $("#id_Seccion").change(getMaterias);
+            $("#id_Grado").change(getMaterias);
         });
-
+       
         function getMaterias() {
 
             var GradoId = $("#id_Grado").val();
-            var seccion = $('input:radio[name=Seccion]:checked').val()
+            var seccion = $('#id_Seccion').val()
             
             if (GradoId) {
                 // Eliminamos las opciones anteriores del select
@@ -94,6 +156,15 @@
 
         
     </script>
-</body>
+      
+    <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'administracion/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
+    
+
 
 {% endblock %}
