@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Contenido Examenes</title>
+    <title>HORARIOS de Examenes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->  
@@ -49,7 +49,7 @@ body {
     
 <div id="menu" class="col-md-12 text-right">
      <div class="container">
-        <a class="btn btn-primary" href="..\.."><i class="fa fa-home" aria-hidden="true"></i> Regresar</a>
+        <a class="btn btn-primary" href="..\"><i class="fa fa-home" aria-hidden="true"></i> Regresar</a>
        
         
          
@@ -62,59 +62,58 @@ body {
 </div>
 
 <div class="jumbotron">
-    <center><h1>CONTENIDO DE EXAMENES {{grado}}</h1></center>
+    <center><h1>HORARIOS DE EXAMENES</h1></center>
 </div>
         <div class="container">
             <center>
                 <iframe src="
-
                 {% ifequal grado|stringformat:'s' 'Primero Basico' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B1A.pdf' %}
+                    {% static 'administracion/horarios/B1A.pdf' %}
                     {%endif%}
                     {%if Seccion == 'B'%}
-                    {% static 'administracion/contenidos/B1B.pdf' %}
+                    {% static 'administracion/horarios/B1B.pdf' %}
                     {%endif%}
                 {%endifequal%}
                  {% ifequal grado|stringformat:'s' 'Segundo Basico' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B2A.pdf' %}
+                    {% static 'administracion/horarios/B2A.pdf' %}
                     {%endif%}
                     {%if Seccion == 'B'%}
-                    {% static 'administracion/contenidos/B2B.pdf' %}
+                    {% static 'administracion/horarios/B2B.pdf' %}
                     {%endif%}
                 {%endifequal%}
                 {% ifequal grado|stringformat:'s' 'Tercero Basico' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B3A.pdf' %}
+                    {% static 'administracion/horarios/B3A.pdf' %}
                     {%endif%}
                     {%if Seccion == 'B'%}
-                    {% static 'administracion/contenidos/B3B.pdf' %}
+                    {% static 'administracion/horarios/B3B.pdf' %}
                     {%endif%}
                 {%endifequal%}
                 {% ifequal grado|stringformat:'s' 'Cuarto Salud Diversificado' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B4 SALUD.pdf' %}
+                    {% static 'administracion/horarios/B4 SALUD.pdf' %}
                     {%endif%}
                 {%endifequal%}
-                {% ifequal grado|stringformat:'s' 'Cuarto Diseño Diversificado' %}
+                 {% ifequal grado|stringformat:'s' 'Cuarto Diseño Diversificado' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B4 DISEÑO.pdf' %}
+                    {% static 'administracion/horarios/B4 DISEÑO.pdf' %}
                     {%endif%}
                 {%endifequal%}
                 {% ifequal grado|stringformat:'s' 'Cuarto Electrónica Diversificado' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B4 ELECTRONICA.pdf' %}
+                    {% static 'administracion/horarios/B4 ELECTRONICA.pdf' %}
                     {%endif%}
                 {%endifequal%}
                  {% ifequal grado|stringformat:'s' 'Cuarto Ciencias y Letras Diversificado' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B4 ELECTRONICA.pdf' %}
+                    {% static 'administracion/horarios/B4 ELECTRONICA.pdf' %}
                     {%endif%}
                 {%endifequal%}
                 {% ifequal grado|stringformat:'s' 'Cuarto Computación Diversificado' %}
                     {%if Seccion == 'A'%}
-                    {% static 'administracion/contenidos/B4 Compu.pdf' %}
+                    {% static 'administracion/horarios/B4 Compu.pdf' %}
                     {%endif%}
                 {%endifequal%}
                 " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>

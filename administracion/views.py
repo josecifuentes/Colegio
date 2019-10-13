@@ -41,7 +41,7 @@ def vista_Grados(request):
 def days_between(d1, d2):
     return abs(d2 - d1).days
 
-locale.setlocale(locale.LC_ALL, 'Spanish_Spain.1252')
+
 @login_required
 def inicio(request):
     alumno=Alumno.objects.get(Usuario=request.user)
@@ -72,7 +72,7 @@ def dashboard(request):
             reportes=Reportes.objects.filter(Solucion=None)
             return render(request, 'administracion/dashboard_Administracion.html',{'reportes': reportes})
         if g.name=="Secretaria":
-            alumnos=Alumno.objects.filter(estado="Activo")
+            alumnos=Alumno.objects.all()
             return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
         if g.name=="Alumno":
             try:
@@ -841,6 +841,8 @@ def contenido_examen(request):
 
 @login_required
 def horario_examen(request):
+    grado = Alumno.objects.get(Usuario=request.user).Grado
+    Seccion = Alumno.objects.get(Usuario=request.user).Seccion
     today = datetime.datetime.now() 
     perfil = Alumno.objects.get(Usuario=request.user)
     hora = horas.objects.filter(Nivel=perfil.Grado.Nivel)
@@ -872,7 +874,7 @@ def horario_examen(request):
             else:
                 asignado = False
             periodos.append(p)
-    return render(request, 'administracion/horarios_examenes.html', {'hora': hora,'periodos': periodos})
+    return render(request, 'administracion/horarioexamen.html', {'hora': hora,'periodos': periodos,'grado':grado,'Seccion':Seccion})
 
 @login_required
 def perfil(request):

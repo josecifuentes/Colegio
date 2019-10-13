@@ -123,3 +123,4 @@ STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = '/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join('static')
+

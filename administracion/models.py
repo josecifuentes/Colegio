@@ -492,7 +492,7 @@ class Asignacion_Permiso (models.Model):
         default='Activo',
         )
     def __str__(self):
-        return '%s' % (self.Permiso)
+        return '%s %s' % (self.Permiso,self.Usuario)
     class Meta:
         unique_together = (("Permiso", "Usuario"),)
 
