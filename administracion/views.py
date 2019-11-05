@@ -957,6 +957,8 @@ def ver_pagos(request):
 
 @login_required
 def asignacion_pagos(request):
+    errores=None
+    mensajes=None
     if request.method == "POST":
         form = asignacion_pagosForm(request.POST)
         if form.is_valid():
@@ -964,47 +966,60 @@ def asignacion_pagos(request):
             if post.Tipo_Pago == "Inscripcion":
                 modificar= AlumnoForm(instance=post.Alumno)
                 al = modificar.save(commit=False)
-                al.estado="Activo"
+                al.estado="Registro"
                 al.save()
             post.save()
-            return redirect('ver_pagos')
+            mensajes="Se ha agregado el pago correctamente!"
+            form = asignacion_pagosForm()
+            return render(request, 'administracion/asignacion_pago.html', {'form': form,'errores':errores,'mensajes':mensajes})
+        else:
+            errores="No se ha podido agregar el pago, revise los campos para continuar..."
     else:
         form = asignacion_pagosForm()
-    return render(request, 'administracion/asignacion_pago.html', {'form': form})
+    return render(request, 'administracion/asignacion_pago.html', {'form': form,'errores':errores,'mensajes':mensajes})
 
 @login_required
 def agregar_examenes(request):
     a=False
+    errores=None
+    mensajes=None
+    alumnos = Alumno.objects.filter(estado="PendienteExamen")
     if request.method == "POST":
         form = agregar_examenesForm(request.POST)
         if form.is_valid():
+            al = request.POST['alumno']
             post = form.save(commit=False)
+            alumno = Alumno.objects.get(pk=al)
             try:
-                pago= Pago.objects.filter(Alumno=post.Alumno)
+                pago= Pago.objects.filter(Alumno=alumno)
                 for p in pago:
                     if p.Tipo_Pago == "Examen":
                         a=True
             except Pago.DoesNotExist:
-                return redirect('no_pago')
+                errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
             if a == True:
                 if post.Estado_Examen == "Aprobado":
-                    modificar= AlumnoForm(instance=post.Alumno)
+                    modificar= AlumnoForm(instance=alumno)
                     al = modificar.save(commit=False)
                     al.estado="PendienteInscripcion"
                     al.save()
                 if post.Estado_Examen == "Reprobado":
-                    modificar= AlumnoForm(instance=post.Alumno)
+                    modificar= AlumnoForm(instance=alumno)
                     al = modificar.save(commit=False)
                     al.estado="Inactivo"
                     al.save()
+                post.Alumno = alumno
                 post.fechaingreso = timezone.now()
                 post.save()
-                return redirect('ver_examenes')
+                form = agregar_examenesForm()
+                return render(request, 'administracion/agregar_examenes.html', {'form': form,'alumnos':alumnos,'errores':errores,'mensajes':mensajes})
             else:
-                return redirect('no_pago')
+                errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
+        else:
+            errores="No se ha podido agregar el examen, revise los campos para continuar..."
     else:
         form = agregar_examenesForm()
-    return render(request, 'administracion/agregar_examenes.html', {'form': form})
+    return render(request, 'administracion/agregar_examenes.html', {'form': form,'alumnos':alumnos,'errores':errores,'mensajes':mensajes})
 
 def error(request):
     form = MyForm()
@@ -1072,6 +1087,8 @@ def estudiante(request, pk):
 
 @login_required
 def nuevo_alumno(request):
+    errores=None
+    mensajes=None
     grados = Grado.objects.all()
     if request.method == "POST":
         form = AlumnoForm(request.POST)
@@ -1079,12 +1096,17 @@ def nuevo_alumno(request):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
+            post.estado = "PendienteExamen"
             post.save()
-            return redirect('../../alumno/nuevo/')
+            mensajes = "Se ha agreado con exito el alumno!"
+            form = AlumnoForm()
+            return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados,'errores':errores,'mensajes':mensajes})
+        else:
+            errores = "No se ha podido ingresar el alumno con exito porfvaro revise los campos para continuar..."
 
     else:
         form = AlumnoForm()
-    return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados})
+    return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados,'errores':errores,'mensajes':mensajes})
 
 @login_required
 def nuevo_encargado(request):
@@ -1093,6 +1115,7 @@ def nuevo_encargado(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.published_date = timezone.now()
+            post.estado = "PendienteExamen"
             post.save()
             return redirect('encargado', pk=post.pk)
     else:

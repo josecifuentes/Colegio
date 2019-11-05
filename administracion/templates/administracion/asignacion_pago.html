@@ -1,5 +1,29 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
+{% load static %}
+
+      
+<script type="text/javascript">
+    window.onload = function() {
+    {% if errores %}
+    Lobibox.notify('error', {
+                    showClass: 'zoomInUp',
+                    hideClass: 'zoomOutDown',
+                    delay: 2500,
+                    msg: '{{errores}}'
+                });
+    {% endif %}
+    {% if mensajes %}
+        Lobibox.notify('success', {
+                    showClass: 'rollIn',
+                    hideClass: 'rollOut',
+                    msg: '{{mensajes}}'
+                });                        
+     {% endif %}
+    
+};
+</script>
+
     <div class="basic-form-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -21,13 +45,89 @@
                             </div>
                         </div>
                               {% endif %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Guardar</button>
-    </form>
-    </div>
+                                  <div class="form-group-inner">
+                                                        <div class="row">
+
+
+                                                           <!---codigo  --->
+                                                           
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Boleta: </label>   
+                                                        </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <div class="input-mark-inner mg-b-22">
+                                                        
+                                                        {{form.Boleta}}
+
+                                                                </div>
+                                                            </div>
+                                                             <!---Alumno---><br><br><br>
+                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Alumno: </label>   
+                                                        </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                              <div class="chosen-select-single mg-b-20">
+                                                                    
+                                                                         {{ form.Alumno }}
+                                                                    
+                                                                      
+                                                              </div>
+                                                            
+                                                            </div>
+                                                            <!---Cantidad---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Cantidad.id_for_label }}">Cantidad:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Cantidad}}
+                                                            </div>
+                                                            <!---Tipo De pago---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Tipo_Pago.id_for_label }}">Tipo de Pago:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                 <div class="form-select-list">
+                                                                    {{ form.Tipo_Pago }}
+                                                                </div> 
+                                                              
+                                                            </div>  
+                                                             <!---Comentario---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Comentario.id_for_label }}">Comentario:</label>
+                                                            </div>    
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                {{form.Comentario}}
+                                                            </div>
+                                                            
+                                                     <div class="form-group-inner">
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3"></div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </form>
+                            <!--- fin form :)--->     
+                        </div>
                     </div>
                 </div>   
             </div>   
         </div>
 
+<!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+         <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
 {% endblock %}
