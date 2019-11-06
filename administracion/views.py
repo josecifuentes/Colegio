@@ -62,6 +62,12 @@ def inicio(request):
     return render(request, 'administracion/inicio.html',{'form':form,'alumno':alumno,'maestro':maestro})
 
 @login_required
+def pre(request):
+    alumno=Alumno.objects.get(Usuario=request.user)
+    return render(request, 'administracion/inicio_principal.html',{'alumno':alumno})
+
+
+@login_required
 def dashboard(request):
     today = datetime.datetime.now() 
     query_set = Group.objects.filter(user = request.user)
@@ -90,6 +96,8 @@ def dashboard(request):
                 alumno=Alumno.objects.get(Usuario=request.user)
                 if(alumno.estado=="Registro"):
                     return redirect('inicio')
+                if(alumno.estado=="PendienteExamen"):
+                    return redirect('pre')
                 materias= Asignacion_Materia.objects.filter(Grado=alumno.Grado)
                 try:
                     maestro= Asignacion_Grado.objects.get(Grado=alumno.Grado)
@@ -1097,7 +1105,18 @@ def nuevo_alumno(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.estado = "PendienteExamen"
+            usuario = User.objects.create_user(username=post.Codigo,password="Colegio123")
+            post.Usuario = User.objects.get(username=post.Codigo)
             post.save()
+            g = Group.objects.get(name='Alumno') 
+            g.user_set.add(User.objects.get(username=post.Codigo))
+            for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                permisos=Asignacion_PermisoForm()
+                pe = permisos.save(commit=False)
+                pe.Permiso=Permiso.objects.get(Nombre=x)
+                pe.Usuario=User.objects.get(username=post.Codigo)
+                pe.Estado = "Activo"
+                pe.save()
             mensajes = "Se ha agreado con exito el alumno!"
             form = AlumnoForm()
             return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados,'errores':errores,'mensajes':mensajes})
@@ -1159,6 +1178,15 @@ def agregar_papeleria(request, pk):
     return render(request, 'administracion/estudiante.html', {'form': form})
 
 @login_required  
+def restaurar_alumno(request, pk):
+    alumno = get_object_or_404(Alumno, pk=pk)
+    modificar = AlumnoForm(instance=alumno)
+    j = modificar.save(commit=False)
+    j.estado = "Registro"
+    j.save()
+    return redirect('ver_alumnos')
+
+@login_required  
 def alumno_editar(request, pk):
     alumno = get_object_or_404(Alumno, pk=pk)
     encargados=Encargados_alumnos.objects.filter(alumno=alumno).distinct()
@@ -1166,7 +1194,7 @@ def alumno_editar(request, pk):
         papeleria= Papeleria.objects.get(Alumno=alumno)
     except Papeleria.DoesNotExist:
         papeleria=None
-
+    print("HOLA")
     if request.method == "POST":
         form = AlumnoForm(request.POST, instance=alumno)
         if form.is_valid():
@@ -1174,7 +1202,7 @@ def alumno_editar(request, pk):
             alumno.author = request.user
             alumno.published_date = timezone.now()
             alumno.save()
-            return redirect('dashboard')
+            return redirect('ver_alumnos')
     else:
         form = AlumnoForm(instance=alumno)
         form1 = asignacion_encargadoForm(instance=alumno)
@@ -1361,6 +1389,11 @@ def permisos_estudiante(request):
     else:
         form = MyForm()
     return render(request, 'administracion/buscar_alumno.html', {'form': form})
+
+@login_required
+def ver_alumnos(request):
+    alumnos = Alumno.objects.all()
+    return render(request, 'administracion/ver_alumnos.html', {'alumnos': alumnos})
 
 @login_required
 def ver_alumnos_grados(request):

@@ -1,6 +1,6 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
- 
+ {% load static %}
                                                         
 
    <!-- VER EDITAR Y ASIGNAR ENCARGADO--->
@@ -191,16 +191,6 @@
                                                                  {{form.telefono2}}
                                                                 </div>
                                                             </div>
-                                                            <!---ESTADO---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.estado.id_for_label }}">Estado Del Alumno:</label>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                 <div class="form-select-list">
-                                                                    {{form.estado}}
-                                                                </div>
-                                                               
-                                                            </div>
                                                             
                                                     </div>
 
@@ -210,8 +200,11 @@
                                                                 <div class="col-lg-3"></div>
                                                                 <div class="col-lg-9">
                                                                     <div class="login-horizental cancel-wp pull-left form-bc-ele">
+
                                                                        <a href="..\..\"> <button class="btn btn-white">Cancelar</button></a>
                                                                         <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar Cambios</button>
+                                                                        <a href="{% url 'restaurar_alumno' pk=alumno.pk %}" class="btn btn-sm btn-primary login-submit-cs" > Restaurar Registro</a>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -448,4 +441,27 @@
             </div>
         </div>
         <!-- fiiiiiiiiiiiiiiiiiiiiiiiiiiiiinn-->
+
+<!-- notification JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
+    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
+ <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
+ <!-- datapicker JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script type="text/javascript">
+        $('#data_3 .input-group.date').datepicker({
+        startView: 2,
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+
+    </script>
 {% endblock %}

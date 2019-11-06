@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+
 #alumnos
 class Aula(models.Model):
     Nombre_Aula  =   models.CharField(max_length=130)
@@ -66,7 +67,7 @@ class Materia(models.Model):
 	    choices=Estados,
 	    default='Activo',
 	    )
-    Fecha_Ingreso = models.DateTimeField(blank=True, null=True)
+    Fecha_Ingreso = models.DateTimeField(default=timezone.now,blank=True, null=True)
 	
     def publish(self):
     	self.Fecha_Ingreso = timezone.now()

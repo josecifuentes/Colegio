@@ -260,7 +260,7 @@
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Estudiantes</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Todos Los Estudiantes" href="{% url 'dashboard' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
+                                <li><a title="Todos Los Estudiantes" href="{% url 'ver_alumnos' %}"><span class="mini-sub-pro">Ver Estudiantes</span></a></li>
                                      {% endif %}
                                 {% if "Ver Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Alumnos grados" href="{% url 'ver_alumnos_grados' %}"><span class="mini-sub-pro">Ver Estudiantes por Grado</span></a></li>
