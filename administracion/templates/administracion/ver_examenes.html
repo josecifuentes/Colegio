@@ -27,17 +27,17 @@
                                         <thead>
                                             <tr>
                                                 <th data-field="state" data-checkbox="true"></th>
-                                                <th data-field="palumno">Alumno:</th>
-                                                <th data-field="pboleta" data-editable="true">Nota Idioma:</th>
-                                                <th data-field="date" data-editable="true">Comentario Idioma:</th>
-                                                <th data-field="tcasa" data-editable="true">Resultado:</th>
-                                                <th data-field="pboleta" data-editable="true">Nota Matematicas:</th>
-                                                <th data-field="date" data-editable="true">Comentario Matematicas:</th>
-                                                <th data-field="tcasa" data-editable="true">Resultado:</th>
-                                                <th data-field="pboleta" data-editable="true">Nota Ingles:</th>
-                                                <th data-field="date" data-editable="true">Comentario Ingles:</th>
-                                                <th data-field="tcasa" data-editable="true">Resultado:</th>
-                                                <th data-field="pboleta" data-editable="true">Boleta:</th>
+                                                <th data-field="palumno">Alumno: Codigo/Nombres/Grado</th>
+                                                <th >Nota Idioma:</th>
+                                                <th>Comentario Idioma:</th>
+                                                <th>Resultado:</th>
+                                                <th >Nota Matematicas:</th>
+                                                <th>Comentario Matematicas:</th>
+                                                <th >Resultado:</th>
+                                                <th >Nota Ingles:</th>
+                                                <th >Comentario Ingles:</th>
+                                                <th>Resultado:</th>
+                         
                                                 <th data-field="date" data-editable="true">Comentario:</th>
                                                 <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
                                                 <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
@@ -49,7 +49,18 @@
                                             <tr>
                                                 <td></td>
                                                <td>{{ examen.Alumno }}</td>
-                                                <td>{{ examen.Boleta }}</td>
+                                               <td>{{ examen.Nota_Idioma }}</td>
+                                               <td>{{ examen.Comentario_Idioma }}</td>
+                                               <td>{{ examen.Estado_Idioma }}</td>
+
+                                               <td>{{ examen.Nota_Matematicas }}</td>
+                                               <td>{{ examen.Comentario_Matematicas }}</td>
+                                               <td>{{ examen.Estado_Matematicas }}</td>
+                                                <td>{{ examen.Nota_Ingles }}</td>
+                                               <td>{{ examen.Comentario_Ingles }}</td>
+                                               <td>{{ examen.Estado_Ingles }}</td>
+                                              
+                                               
                                                 <td>{{ examen.Comentario }}</td>
                                                 <td>{{ examen.Estado_Examen }}</td>
                                                 <td>{{ examen.fechaingreso }}</td>
