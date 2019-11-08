@@ -124,11 +124,18 @@ class agregar_examenesForm(forms.ModelForm):
 
     class Meta:
         model = Examene
-        fields = ('Boleta','Comentario','Estado_Examen')
+        fields = ('Boleta','Nota_Idioma','Comentario_Idioma','Estado_Idioma','Nota_Matematicas','Comentario_Matematicas','Estado_Matematicas','Nota_Ingles','Comentario_Ingles','Estado_Ingles')
         widgets = {
             'Boleta': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba La Boleta De Pago Del Alumno'}),
-            'Comentario': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Comentario Al Pago Del Alumno'}),
-            'Estado_Examen': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione El Pago...'}),
+            'Nota_Idioma': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
+            'Comentario_Idioma': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
+            'Estado_Idioma': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione el estado de la nota...'}),
+            'Nota_Matematicas': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
+            'Comentario_Matematicas': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
+            'Estado_Matematicas': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione el estado de la nota...'}),
+            'Nota_Ingles': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
+            'Comentario_Ingles': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
+            'Estado_Ingles': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione el estado de la nota...'}),
         }  
 
 class MyForm(forms.Form): #Notar que no hereda de forms.ModelForm

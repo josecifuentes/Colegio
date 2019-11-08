@@ -1003,6 +1003,7 @@ def agregar_examenes(request):
                 for p in pago:
                     if p.Tipo_Pago == "Examen":
                         a=True
+                        print("SI LO TIENE")
             except Pago.DoesNotExist:
                 errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
             if a == True:
@@ -1020,6 +1021,7 @@ def agregar_examenes(request):
                 post.fechaingreso = timezone.now()
                 post.save()
                 form = agregar_examenesForm()
+                mensajes="Se ha ingresado los examenes del alumno con exito!"
                 return render(request, 'administracion/agregar_examenes.html', {'form': form,'alumnos':alumnos,'errores':errores,'mensajes':mensajes})
             else:
                 errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."

@@ -165,12 +165,44 @@ class Encargado(models.Model):
 class Examene(models.Model):
     Alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE)
     Boleta = models.CharField(max_length=200)
+    Estados_materia = (
+    ('Pendiente', 'Pendiente'),
+    ('Aprobado', 'Aprobado'),
+    ('Nivelacion', 'Nivelacion'),
+    )
+    Nota_Idioma =  models.IntegerField(
+                    default=0,
+                    )
+    Comentario_Idioma =  models.CharField(max_length=200, blank=True, null=True)
+    Estado_Idioma = models.CharField(
+        max_length=20,
+        choices=Estados_materia,
+        default='Pendiente',
+    )
+    Nota_Matematicas =  models.IntegerField(
+                    default=0,
+                    )
+    Comentario_Matematicas = models.CharField(max_length=200, blank=True, null=True)
+    Estado_Matematicas = models.CharField(
+        max_length=20,
+        choices=Estados_materia,
+        default='Pendiente',
+    )
+    Nota_Ingles= models.IntegerField(
+                    default=0,
+                    )
+    Comentario_Ingles=  models.CharField(max_length=200, blank=True, null=True)
+    Estado_Ingles = models.CharField(
+        max_length=20,
+        choices=Estados_materia,
+        default='Pendiente',
+    )
+    Comentario = models.CharField(max_length=200, blank=True, null=True)
     Estados = (
     ('Pendiente', 'Pendiente'),
     ('Aprobado', 'Aprobado'),
     ('Reprobado', 'Reprobado'),
     )
-    Comentario = models.CharField(max_length=200, blank=True, null=True)
     Estado_Examen = models.CharField(
         max_length=20,
         choices=Estados,
