@@ -124,9 +124,8 @@ class agregar_examenesForm(forms.ModelForm):
 
     class Meta:
         model = Examene
-        fields = ('Boleta','Nota_Idioma','Comentario_Idioma','Estado_Idioma','Nota_Matematicas','Comentario_Matematicas','Estado_Matematicas','Nota_Ingles','Comentario_Ingles','Estado_Ingles')
+        fields = ('Nota_Idioma','Comentario_Idioma','Estado_Idioma','Nota_Matematicas','Comentario_Matematicas','Estado_Matematicas','Nota_Ingles','Comentario_Ingles','Estado_Ingles')
         widgets = {
-            'Boleta': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba La Boleta De Pago Del Alumno'}),
             'Nota_Idioma': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
             'Comentario_Idioma': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
             'Estado_Idioma': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione el estado de la nota...'}),
