@@ -1000,23 +1000,13 @@ def agregar_examenes(request):
             alumno = Alumno.objects.get(pk=al)
             try:
                 pago= Pago.objects.filter(Alumno=alumno)
+                print(pago)
                 for p in pago:
                     if p.Tipo_Pago == "Examen":
                         a=True
-                        print("SI LO TIENE")
             except Pago.DoesNotExist:
                 errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
             if a == True:
-                if post.Estado_Examen == "Aprobado":
-                    modificar= AlumnoForm(instance=alumno)
-                    al = modificar.save(commit=False)
-                    al.estado="PendienteInscripcion"
-                    al.save()
-                if post.Estado_Examen == "Reprobado":
-                    modificar= AlumnoForm(instance=alumno)
-                    al = modificar.save(commit=False)
-                    al.estado="Inactivo"
-                    al.save()
                 post.Alumno = alumno
                 post.fechaingreso = timezone.now()
                 post.save()
@@ -1030,6 +1020,54 @@ def agregar_examenes(request):
     else:
         form = agregar_examenesForm()
     return render(request, 'administracion/agregar_examenes.html', {'form': form,'alumnos':alumnos,'errores':errores,'mensajes':mensajes})
+
+@login_required
+def examenes_editar(request,pk):
+    a=False
+    errores=None
+    mensajes=None
+    examen = Examene.objects.get(pk=pk)
+    alumnos = examen.Alumno
+    if request.method == "POST":
+        form = agregar_examenesForm(request.POST,instance=examen)
+        if form.is_valid():
+            al = alumnos.pk
+            post = form.save(commit=False)
+            alumno = Alumno.objects.get(pk=al)
+            try:
+                pago= Pago.objects.filter(Alumno=alumno)
+                for p in pago:
+                    if p.Tipo_Pago == "Examen":
+                        a=True
+                        print("SI LO TIENE")
+            except Pago.DoesNotExist:
+                errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
+            if a == True:
+                if request.POST['estadoFinal'] == "Aprobado":
+                    modificar= AlumnoForm(instance=alumno)
+                    al = modificar.save(commit=False)
+                    al.estado="PendienteInscripcion"
+                    al.save()
+                if request.POST['estadoFinal'] == "Reprobado":
+                    modificar= AlumnoForm(instance=alumno)
+                    al = modificar.save(commit=False)
+                    al.estado="Inactivo"
+                    al.save()
+                post.Alumno = alumno
+                post.Estado_Examen = request.POST['estadoFinal']
+                post.fechaingreso = timezone.now()
+                post.save()
+                form = agregar_examenesForm(instance=examen)
+                mensajes="Se ha ingresado los examenes del alumno con exito!"
+                return redirect('ver_examenes_pendientes')
+            else:
+                errores="No se ha podido agregar el examen, El alumno no tiene el pago del examen..."
+        else:
+            errores="No se ha podido agregar el examen, revise los campos para continuar..."
+    else:
+        
+        form = agregar_examenesForm(instance=examen)
+    return render(request, 'administracion/editar_examen.html', {'form': form,'alumnos':alumnos,'errores':errores,'mensajes':mensajes})
 
 def error(request):
     form = MyForm()
@@ -1083,7 +1121,14 @@ def papelerias(request, pk):
 @login_required
 def ver_examenes(request):
     examenes = Examene.objects.all()
-    return render(request, 'administracion/ver_examenes.html', {'examenes': examenes})
+    pendiente = False
+    return render(request, 'administracion/ver_examenes.html', {'examenes': examenes,'pendiente':pendiente})
+
+@login_required
+def ver_examenes_pendientes(request):
+    examenes = Examene.objects.filter(Estado_Examen="Pendiente")
+    pendiente = True
+    return render(request, 'administracion/ver_examenes.html', {'examenes': examenes,'pendiente':pendiente})
 
 @login_required
 def pago(request, pk):

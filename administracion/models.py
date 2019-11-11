@@ -167,6 +167,7 @@ class Examene(models.Model):
     Boleta = models.CharField(max_length=200)
     Estados_materia = (
     ('Pendiente', 'Pendiente'),
+    ('Reprobado', 'Reprobado'),
     ('Aprobado', 'Aprobado'),
     ('Nivelacion', 'Nivelacion'),
     )

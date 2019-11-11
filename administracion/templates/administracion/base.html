@@ -282,6 +282,9 @@
                                 {% if "Todos Los Examenes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los Examenes" href="{% url 'ver_examenes' %}"><span class="mini-sub-pro">Todos Los Examenes</span></a></li>
                                  {% endif %}
+                                 {% if "Examenes_Pendientes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Examenes" href="{% url 'ver_examenes_pendientes' %}"><span class="mini-sub-pro">Ver examenes pendientes</span></a></li>
+                                 {% endif %}
                                 {% if "Realizar Un Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Add Courses" href="{% url 'agregar_examenes' %}"><span class="mini-sub-pro">Realizar Un Examen</span></a></li>
                                 {% endif %}

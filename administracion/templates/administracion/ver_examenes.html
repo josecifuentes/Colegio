@@ -41,6 +41,9 @@
                                                 <th data-field="date" data-editable="true">Comentario:</th>
                                                 <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
                                                 <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
+                                                {%if pendiente %}
+                                                <th data-field="acciones">Acciones</th>
+                                                {%endif%}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -64,6 +67,9 @@
                                                 <td>{{ examen.Comentario }}</td>
                                                 <td>{{ examen.Estado_Examen }}</td>
                                                 <td>{{ examen.fechaingreso }}</td>
+                                                {%if pendiente %}
+                                                <td><a target="_blank" href="{% url 'examenes_editar' pk=examen.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Actualizar</a></td>
+                                                {%endif%}
                                             </tr>
                                         {% endfor %}
                                         </tbody>

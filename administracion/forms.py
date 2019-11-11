@@ -124,7 +124,7 @@ class agregar_examenesForm(forms.ModelForm):
 
     class Meta:
         model = Examene
-        fields = ('Nota_Idioma','Comentario_Idioma','Estado_Idioma','Nota_Matematicas','Comentario_Matematicas','Estado_Matematicas','Nota_Ingles','Comentario_Ingles','Estado_Ingles')
+        fields = ('Nota_Idioma','Comentario_Idioma','Estado_Idioma','Nota_Matematicas','Comentario_Matematicas','Estado_Matematicas','Nota_Ingles','Comentario_Ingles','Estado_Ingles','Comentario')
         widgets = {
             'Nota_Idioma': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
             'Comentario_Idioma': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
@@ -135,6 +135,7 @@ class agregar_examenesForm(forms.ModelForm):
             'Nota_Ingles': forms.TextInput(attrs={'class': 'form-control','data-mask': '999','placeholder': 'Máximo 3 dígitos...'}),
             'Comentario_Ingles': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agrege un Comentario a la nota del examen'}),
             'Estado_Ingles': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione el estado de la nota...'}),
+            'Comentario': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Agregar un Comentario general'}),
         }  
 
 class MyForm(forms.Form): #Notar que no hereda de forms.ModelForm

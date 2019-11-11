@@ -53,18 +53,12 @@
                                                        <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Alumno: </label>   
                                                         </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                              <div class="chosen-select-single mg-b-20">
-                                                                    
-                                                                        <select data-placeholder="Seleccione Un alumno..." class="chosen-select" name="alumno">
-                                                                        {% for alumno in alumnos %}
-                                                                        <option value="{{alumno.pk}}"> {{alumno.Primer_Nombre}} {{alumno.Primer_Apellido}} {{alumno.Grado}} {{alumno.Seccion}}</option>
-                                                                        {%endfor%}
-                                                                        </select>
-                                                                    
+                                                              
+                                                                
+                                                                 <input type="input" name="alumnofinal" value="{{alumnos}}" class="form-control" disabled="true">
                                                                       
                                                               </div>
                                                             
-                                                            </div>
                                                             <!---Nota  ---><br><br><br>
                                                            
                                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -159,6 +153,19 @@
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.Comentario}}
                                                             </div>
+                                                            <!---Estado Examen---><br><br><br>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Estado_Ingles.id_for_label }}" style="color:red">Estado del examen:</label>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <select name="estadoFinal" class="form-control">
+                                                                        <option value="none" selected="" disabled="">Seleccione el estado final del examen</option>
+                                                                        <option value="Pendiente">Pendiente</option>
+                                                                        <option value="Aprobado">Aprobado</option>
+                                                                        <option value="Reprobado">Reprobado</option>
+                                                                    </select>
+                                                              
+                                                            </div>  
                                                             <br>
                                                             <br>
                                                             <br>
