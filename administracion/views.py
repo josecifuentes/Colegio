@@ -69,6 +69,7 @@ def pre(request):
 
 @login_required
 def dashboard(request):
+    request.session['mensajes']=None
     today = datetime.datetime.now() 
     query_set = Group.objects.filter(user = request.user)
     actual=[]
@@ -1255,8 +1256,11 @@ def alumno_editar(request, pk):
             al=Alumno.objects.get(pk=alumno.pk)
             user = User.objects.get(username = al.Codigo)
             try:
-                errores = "No se ha podido editar el alumno, el codigo ya existe!"
-                check = User.objects.get(username=alumno.Codigo)
+                if(alumno.Codigo!=al.Codigo):
+                    errores = "No se ha podido editar el alumno, el codigo ya existe!"
+                    check = User.objects.get(username=alumno.Codigo)
+                else:
+                    check = User.objects.get(username="00000")
             except User.DoesNotExist:
                 user.username = alumno.Codigo
                 user.save()
@@ -1458,7 +1462,8 @@ def permisos_estudiante(request):
 def ver_alumnos(request):
     errores = None
     mensajes = None
-
+    if(request.session['mensajes']):
+        mensajes=request.session['mensajes']
     alumnos = Alumno.objects.all()
     return render(request, 'administracion/ver_alumnos.html', {'alumnos': alumnos})
 
