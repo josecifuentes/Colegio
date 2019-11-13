@@ -1152,20 +1152,24 @@ def nuevo_alumno(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.estado = "PendienteExamen"
-            usuario = User.objects.create_user(username=post.Codigo,password="Colegio123")
-            post.Usuario = User.objects.get(username=post.Codigo)
-            post.save()
-            g = Group.objects.get(name='Alumno') 
-            g.user_set.add(User.objects.get(username=post.Codigo))
-            for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
-                permisos=Asignacion_PermisoForm()
-                pe = permisos.save(commit=False)
-                pe.Permiso=Permiso.objects.get(Nombre=x)
-                pe.Usuario=User.objects.get(username=post.Codigo)
-                pe.Estado = "Activo"
-                pe.save()
-            mensajes = "Se ha agreado con exito el alumno!"
-            form = AlumnoForm()
+            try:
+                check = User.objects.get(username=post.Codigo)
+                errores = "No se ha podido ingresar el alumno el codigo ya existe!"
+            except User.DoesNotExist:
+                usuario = User.objects.create_user(username=post.Codigo,password="Colegio123")
+                post.Usuario = User.objects.get(username=post.Codigo)
+                post.save()
+                g = Group.objects.get(name='Alumno') 
+                g.user_set.add(User.objects.get(username=post.Codigo))
+                for x in ("Inicio","Principal","Calendario","Ver Calendario","Horarios","Horarios de clase","Horarios de consulta"):
+                    permisos=Asignacion_PermisoForm()
+                    pe = permisos.save(commit=False)
+                    pe.Permiso=Permiso.objects.get(Nombre=x)
+                    pe.Usuario=User.objects.get(username=post.Codigo)
+                    pe.Estado = "Activo"
+                    pe.save()
+                mensajes = "Se ha agreado con exito el alumno!"
+                form = AlumnoForm()
             return render(request, 'administracion/nuevo_alumno.html', {'form': form, 'grados': grados,'errores':errores,'mensajes':mensajes})
         else:
             errores = "No se ha podido ingresar el alumno con exito porfvaro revise los campos para continuar..."
@@ -1235,26 +1239,39 @@ def restaurar_alumno(request, pk):
 
 @login_required  
 def alumno_editar(request, pk):
+    errores = None
     alumno = get_object_or_404(Alumno, pk=pk)
     encargados=Encargados_alumnos.objects.filter(alumno=alumno).distinct()
     try:
         papeleria= Papeleria.objects.get(Alumno=alumno)
     except Papeleria.DoesNotExist:
         papeleria=None
-    print("HOLA")
     if request.method == "POST":
         form = AlumnoForm(request.POST, instance=alumno)
+        form1 = asignacion_encargadoForm(instance=alumno)
+        form2 = agregar_papeleriaForm(instance=papeleria)
         if form.is_valid():
             alumno = form.save(commit=False)
-            alumno.author = request.user
-            alumno.published_date = timezone.now()
-            alumno.save()
-            return redirect('ver_alumnos')
+            al=Alumno.objects.get(pk=alumno.pk)
+            user = User.objects.get(username = al.Codigo)
+            try:
+                errores = "No se ha podido editar el alumno, el codigo ya existe!"
+                check = User.objects.get(username=alumno.Codigo)
+            except User.DoesNotExist:
+                user.username = alumno.Codigo
+                user.save()
+                alumno.author = request.user
+                alumno.published_date = timezone.now()
+                alumno.save()
+                request.session['mensajes'] = "Se ha modificado exitosamente el alumno!"
+                return redirect('ver_alumnos')
+        else:
+            errores = "No se ha podido editar el alumno, porfavor revise los campos para continuar..."
     else:
         form = AlumnoForm(instance=alumno)
         form1 = asignacion_encargadoForm(instance=alumno)
-        form2= agregar_papeleriaForm(instance=papeleria)
-    return render(request, 'administracion/estudiante.html', {'form': form,'form1': form1,'form2': form2,'alumno': alumno,'encargados': encargados})
+        form2 = agregar_papeleriaForm(instance=papeleria)
+    return render(request, 'administracion/estudiante.html', {'form': form,'form1': form1,'form2': form2,'alumno': alumno,'encargados': encargados,'errores':errores})
 
 @login_required
 def nueva_asignacion_encargado(request):
@@ -1439,6 +1456,9 @@ def permisos_estudiante(request):
 
 @login_required
 def ver_alumnos(request):
+    errores = None
+    mensajes = None
+
     alumnos = Alumno.objects.all()
     return render(request, 'administracion/ver_alumnos.html', {'alumnos': alumnos})
 

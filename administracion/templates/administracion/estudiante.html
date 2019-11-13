@@ -2,6 +2,26 @@
 {% block content %}
  {% load static %}
                                                         
+<script type="text/javascript">
+    window.onload = function() {
+    {% if errores %}
+    Lobibox.notify('error', {
+                    showClass: 'zoomInUp',
+                    hideClass: 'zoomOutDown',
+                    delay: 5500,
+                    msg: '{{errores}}'
+                });
+    {% endif %}
+    {% if mensajes %}
+        Lobibox.notify('success', {
+                    showClass: 'rollIn',
+                    hideClass: 'rollOut',
+                    msg: '{{mensajes}}'
+                });                        
+     {% endif %}
+    
+};
+</script>
 
    <!-- VER EDITAR Y ASIGNAR ENCARGADO--->
    <!--CUADRO IZQUIERDA-->
