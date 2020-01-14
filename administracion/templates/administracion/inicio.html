@@ -21,9 +21,11 @@
         <!-- CSS Files -->
         <link href="{% static 'inicio/css/bootstrap.min.css' %}" rel="stylesheet" />
         <link href="{% static 'inicio//css/material-bootstrap-wizard.css' %}" rel="stylesheet" />
-
+        <link rel="stylesheet" type="text/css" href="{% static 'administracion/logs/css/bootstrap-tour-standalone.min.css' %}">
+    
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="{% static 'inicio/css/demo.css' %}" rel="stylesheet" />
+
     </head>
 
     <body>
@@ -49,6 +51,14 @@
                                         </h3>
                                         <h5>Esta información nos ayudara a iniciar correctamente su perfil y comprobar que los datos que nosotros tenemos son los correctos. </h5>
                                         <h5>Así que manos a la obra, te guiaremos en cada una de las pestañas para que compruebes o agregues información sobre tu hijo(a)</h5>
+
+                       <center><button type="button" class="btn btn-success btn-wd" onclick="tours();">
+            <span>
+                                                            <i class="material-icons">star</i>
+                                                        </span> AYUDA
+                </button>
+            </center>
+                   
                                     </div>
                                     <div class="wizard-navigation">
                                         <ul>
@@ -78,7 +88,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">face</i>
                                                         </span>
-                                                        <div class="form-group label-floating">
+                                                        <div class="form-group label-floating" id="names">
                                                             <label class="control-label">Primer nombre <small>(*)</small></label>
                                                             {{form.Primer_Nombre}}
                                                         </div>
@@ -289,5 +299,46 @@
 
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
     <script src="{% static 'inicio/js/jquery.validate.min.js' %}"></script>
+
+    <script src="{% static 'administracion/logs/js/bootstrap-tour-standalone.min.js' %}"></script>
+
+
+    <script >
+        var tour;
+        var init=0;
+        
+        $( window ).on( "load", function() {
+            tour = new Tour({
+          steps: [
+          {
+            element: "#acerca",
+            title: "Bienvenido!",
+            content: "Esta es la información de su hijo(a), aquí podrá confirmarla o modificarla"
+          },
+          {
+            element: "#names",
+            title: "Nombres",
+            content: "Aquí vera los nombres de su hijo(a), si desea modificarlos puede hacerlo en dirección."
+          },
+          
+        ],
+        template: "<div class='popover tour'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>« Anterior</button><span data-role='separator'></span><button class='btn btn-default' data-role='next'>Siguiente »</button></div><center><button class='btn btn-default' data-role='end'>Terminar</button></center></div>",
+        }
+
+        );
+    });
+        
+       
+        function tours() {   
+            tour.init();
+            tour.restart(true);
+          tour.start(true);
+          
+        
+            
+              
+         
+        }
+    </script>
 
 </html>

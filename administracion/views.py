@@ -1258,7 +1258,16 @@ def alumno_editar(request, pk):
             try:
                 if(alumno.Codigo!=al.Codigo):
                     errores = "No se ha podido editar el alumno, el codigo ya existe!"
-                    check = User.objects.get(username=alumno.Codigo)
+                    try:
+                        check = User.objects.get(username=alumno.Codigo)
+                    except User.DoesNotExist:
+                        user.username = alumno.Codigo
+                        user.save()
+                        alumno.author = request.user
+                        alumno.published_date = timezone.now()
+                        alumno.save()
+                        request.session['mensajes'] = "Se ha modificado exitosamente el alumno!"
+                        return redirect('ver_alumnos')
                 else:
                     check = User.objects.get(username="00000")
             except User.DoesNotExist:

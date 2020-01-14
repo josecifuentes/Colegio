@@ -25,10 +25,14 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'administracion/logs/css/util.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'administracion/logs/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'administracion/logs/css/bootstrap-tour-standalone.min.css' %}">
+
+
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
     
@@ -41,11 +45,17 @@
 
                 <form class="login100-form validate-form" method="post" action="{% url 'login' %}"> 
                    {% csrf_token %}
+                   <div style="position: relative;top: -50px;">
+                       <center><button type="button" class="btn btn-default btn-default" onclick="tours();">
+            <span class="glyphicon glyphicon-star"></span> AYUDA
+                </button>
+            </center>
+                   </div>
                     <span class="login100-form-title">
                         Iniciar Session
                     </span>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Se Nesecita Un Usuario: ejemplo@colegionuevomundo.edu.gt">
+                    <div class="wrap-input100 validate-input" data-validate = "Se nesecita un codigo" id="code">
                         {{ form.username|add_class:"input100"|attr:"placeholder:Tu codigo escribelo aquí" }}
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
@@ -53,7 +63,7 @@
                         </span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Contraseña Requerida">
+                    <div class="wrap-input100 validate-input" data-validate = "Contraseña Requerida" id="password">
                         {{ form.password|add_class:"input100"|attr:"placeholder:Ingrese Su Contraseña" }}
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
@@ -62,7 +72,7 @@
                     </div>
                     
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
+                        <button id="button" class="login100-form-btn">
                             Ingresar
                         </button>
                     </div>
@@ -81,11 +91,14 @@
         <strong>Error!</strong> Tu Usuario y/o Contraseña No Son Las Correctas, Por favor Intentalo De Nuevo. 
     </div>
     {% endif %}
+  
                     <div class="text-center p-t-136">
                         <a class="txt2" href="..\..\">
                             Regresar Al Inicio
                             <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                         </a>
+                    </div>
+                    <div class="text-center p-t-136">
                     </div>
                 </form>
             </div>
@@ -106,13 +119,54 @@
     <script src="{% static 'administracion/logs/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
     <script src="{% static 'administracion/logs/vendor/tilt/tilt.jquery.min.js' %}"></script>
+
+    <script src="{% static 'administracion/logs/js/bootstrap-tour-standalone.min.js' %}"></script>
+
+
     <script >
+        var tour;
+        var init=0;
         $('.js-tilt').tilt({
             scale: 1.1
-        })
+        });
+        $( window ).on( "load", function() {
+            tour = new Tour({
+          steps: [
+          {
+            element: "#code",
+            title: "Bienvenido!",
+            content: "Para iniciar sesión, primero deberá ingresar su código, éste código es el proporcionado por dirección, con el que se realiza el pago de colegiatura Ej.202000."
+          },
+          {
+            element: "#password",
+            title: "Contraseña",
+            content: "Aquí deberá ingresar su contraseña, si es la primera vez que inicia sesión, la contarseña será Colegio123, la letra C deberá colocarse mayúscula."
+          } ,
+          {
+            element: "#button",
+            title: "Contraseña",
+            content: "Al completar los campos anteriores con su código y contraseña, deberá presionar el botón INGRESAR."
+          } 
+        ],
+        template: "<div class='popover tour'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>« Anterior</button><span data-role='separator'></span><button class='btn btn-default' data-role='next'>Siguiente »</button></div><center><button class='btn btn-default' data-role='end'>Terminar</button></center></div>",
+        }
+
+        );
+    });
+        
+       
+        function tours() {   
+            tour.init();
+            tour.restart(true);
+          tour.start(true);
+          
+        
+            
+              
+         
+        }
     </script>
 <!--===============================================================================================-->
-    <script src="{% static 'logs/js/main.js' %}"></script>
-
+ 
 </body>
 </html>
