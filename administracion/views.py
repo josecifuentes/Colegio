@@ -849,6 +849,78 @@ def contenido_examen(request):
     return render(request, 'administracion/contenido_examen.html',{'cursos':cursos,'contenido':contenido,'grado':grado,'Seccion':Seccion})
 
 @login_required
+def contenido_unidad(request):
+    query_set = Group.objects.filter(user = request.user)
+    actual=[]
+    a = False;
+    for g in query_set:
+        if g.name=="Administracion":
+            grados=[]
+            secciones = []
+            secciones.append("A")
+            secciones.append("B")
+            g = Grado.objects.all()
+            act = 0
+            for grado in g:
+                for secc in secciones:
+                    actividad={}
+                    actividad['Nivel']=grado.Nivel
+                    actividad['Nombre_Grado'] = grado.Nombre_Grado
+                    actividad['Seccion'] = secc
+                    actividad['pk'] = grado.pk
+                    materia = Asignacion_Materia.objects.filter(Grado=grado,Seccion=secc)
+                    for a in materia:
+                        asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
+                        act = act + asig.count()
+                    maestros = materia.values('Personal').distinct().count()
+                    actividad['Maestros'] = maestros
+                    cursos = materia.values('Materia').distinct().count()
+                    actividad['Cursos'] = cursos
+                    actividad['Actividad'] = act
+                    grados.append(actividad)
+            return render(request, 'administracion/listado_contenidos.html', {'secciones':secciones,'grados':grados})
+        if g.name=="Secretaria":
+            alumnos=Alumno.objects.filter(estado="Activo")
+            return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
+        if g.name=="Alumno":
+            grado = Alumno.objects.get(Usuario=request.user).Grado
+            Seccion = Alumno.objects.get(Usuario=request.user).Seccion
+            cursos = Asignacion_Materia.objects.filter(Grado=grado,Seccion=Seccion)
+            contenido = []
+            for curso in cursos:
+                p = {}
+                conteni = ContenidoExamen.objects.filter(asignacion_materias=curso)
+                if conteni.count()<1 :
+                    p['curso'] = curso
+                    p['contenido'] = "No Asignado"
+                    p['paginas'] = "No Asignado"
+                    contenido.append(p) 
+                c = None    
+                contador = 0
+                for cont in conteni:
+                    if c == cont.asignacion_materias:
+                        p['curso'] = cont.asignacion_materias
+                        p['contenido'] = p['contenido'] + " <br> " + cont.contenido
+                        if cont.pagina != None:
+                            p['paginas'] = p['paginas'] + " <br> " + cont.pagina
+                            contador = contador + 1
+                        else:
+                            p['paginas'] = p['paginas'] + " <br> " + "-"
+                            contador = contador + 1
+                    else:
+                        if (contador == 0 and p != None) or contador>1:
+                            contenido.append(p)
+                            contador = 0
+                        p['curso'] = cont.asignacion_materias
+                        p['contenido'] = cont.contenido
+                        if cont.pagina == None:
+                            p['paginas'] = " "
+                        else:
+                            p['paginas'] = cont.pagina
+                    c = cont.asignacion_materias  
+    return render(request, 'administracion/contenido_unidad.html',{'cursos':cursos,'contenido':contenido,'grado':grado,'Seccion':Seccion})
+
+@login_required
 def horario_examen(request):
     grado = Alumno.objects.get(Usuario=request.user).Grado
     Seccion = Alumno.objects.get(Usuario=request.user).Seccion

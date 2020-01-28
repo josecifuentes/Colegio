@@ -67,6 +67,7 @@ urlpatterns = [
     path('notas/grados/<int:pk>/<slug:sec>', views.notas_grados, name='notas_grados'), 
     path('usuarios/formato/', views.formato_usuarios, name='formato_usuarios'), 
     path('contenidos/examen/', views.contenido_examen, name='contenido_examen'), 
+    path('contenidos/unidad/', views.contenido_unidad, name='contenido_unidad'), 
     path('contenidos/examenes/', views.vista_Grados, name='vista_Grados'),
     url(r'^ajax/get_materias/$', get_materias, name='get_materias'),
 

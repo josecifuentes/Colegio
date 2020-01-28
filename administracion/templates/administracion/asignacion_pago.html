@@ -24,104 +24,153 @@
 };
 </script>
 
-    <div class="basic-form-area mg-b-15">
+ <!-- Advanced Form Start -->
+        <div class="advanced-form-area mg-b-15">
             <div class="container-fluid">
+
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                        <div class="sparkline8-list mt-b-30">
-                            <div class="sparkline8-hd">
-                                <div class="main-sparkline8-hd">
-                                    <h1>Asignacion De Pagos A Alumnos</h1>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline10-list mg-tb-30 responsive-mg-t-0 table-mg-t-pro-n dk-res-t-pro-0 nk-ds-n-pro-t-0">
+                            <div class="sparkline10-hd">
+                                <div class="main-sparkline10-hd">
+                                    <center><h1>Asignacion De Pagos A Alumnos</h1></center>
                                 </div>
                             </div>
- 
-    <form method="POST" class="post-form">{% csrf_token %}
-        {% if form.errors %}
-                                <div class="alert-icon shadow-inner wrap-alert-b">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div class="chosen-select-single">
+                                        <center><label>Seleccione los pagos que desea realizar</label></center>
+                                         <center>{{ form.Tipo_Pago }}</center>
+                                        
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ <form method="POST" class="post-form">{% csrf_token %}
+        <div id="contenedor">
+            
+                    {% if form.errors %}
+                        <div class="alert-icon shadow-inner wrap-alert-b">
                             <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
                                 <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
                                 <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
                                 <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
                             </div>
                         </div>
-                              {% endif %}
-                                  <div class="form-group-inner">
-                                                        <div class="row">
+                    {% endif %}
 
+        <div class="basic-form-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
 
-                                                           <!---codigo  --->
-                                                           
-                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Boleta: </label>   
-                                                        </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                <div class="input-mark-inner mg-b-22">
-                                                        
-                                                        {{form.Boleta}}
+                    <div id="boleta1">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="sparkline8-list mt-b-30">
+                                    <div class="sparkline8-hd">
+                                        <div class="main-sparkline8-hd">
+                                            <center><h1></h1></center>
+                                        </div>
+                                    </div>
+         
 
-                                                                </div>
-                                                            </div>
-                                                             <!---Alumno---><br><br><br>
-                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Alumno: </label>   
-                                                        </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                              <div class="chosen-select-single mg-b-20">
-                                                                    
-                                                                         {{ form.Alumno }}
-                                                                    
-                                                                      
-                                                              </div>
-                                                            
-                                                            </div>
-                                                            <!---Cantidad---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Cantidad.id_for_label }}">Cantidad:</label>
-                                                            </div>    
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                {{form.Cantidad}}
-                                                            </div>
-                                                            <!---Tipo De pago---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Tipo_Pago.id_for_label }}">Tipo de Pago:</label>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                 <div class="form-select-list">
-                                                                    {{ form.Tipo_Pago }}
-                                                                </div> 
-                                                              
-                                                            </div>  
-                                                             <!---Comentario---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Comentario.id_for_label }}">Comentario:</label>
-                                                            </div>    
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                {{form.Comentario}}
-                                                            </div>
-                                                            
-                                                     <div class="form-group-inner">
-                                                        <div class="login-btn-inner">
+                                          <div class="form-group-inner">
+                                        
+
                                                             <div class="row">
-                                                                <div class="col-lg-3"></div>
-                                                                <div class="col-lg-9">
-                                                                    <div class="login-horizental cancel-wp pull-left form-bc-ele">
-                                                                        <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
-                                                                        <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+
+
+                                                               <!---codigo  --->
+                                                               
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                           <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Boleta: </label>   
+                                                            </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                    <div class="input-mark-inner mg-b-22">
+                                                            
+                                                           <input type="text" name="" class="form-control" placeholder="Escriba la boleta de pago del alumno">
+
+                                                                    </div>
+                                                                </div>
+                                                                 <!---Alumno---><br><br><br>
+                                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                           <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Alumno: </label>   
+                                                            </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                  <div class="chosen-select-single mg-b-20">
+                                                                        
+                                                                            <select data-placeholder="Seleccioné un alumno" class="chosen-select" multiple="" tabindex="-1">
+                                                                            <option value="">Select</option>
+                                                                                
+                                                                            </select>
+                                                                        
+                                                                          
+                                                                  </div>
+                                                                
+                                                                </div>
+                                                                <!---Cantidad---><br><br><br>
+                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                    <label class="login2 pull-right pull-right-pro"for=" {{ form.Cantidad.id_for_label }}">Cantidad:</label>
+                                                                </div>    
+                                                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                    <input type="number" name="" class="form-control" placeholder="Escriba la cantidad total del pago">
+                                                                    
+                                                                </div>
+                                                                
+                                                                 <!---Comentario---><br><br><br>
+                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                    <label class="login2 pull-right pull-right-pro"for=" {{ form.Comentario.id_for_label }}">Comentario:</label>
+                                                                </div>    
+                                                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                    <input type="text" name="" class="form-control" placeholder="Comentario al pago del alumno">
+                                                                    
+                                                                </div>
+                                                                
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                
+                             
+                        </div>
+<!---- AQUI VA LA PROGRA -->
+
+
+                         
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="sparkline8-list mt-b-30">
+                                    <div class="form-group-inner">
+                                                            <div class="login-btn-inner">
+                                                                <div class="row">
+                                                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                        <div class="login-horizental cancel-wp pull-left form-bc-ele" style="ce">
+                                                                            <button class="btn btn-white" type="submit">Guardar y Añadir Nuevo</button>
+                                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Guardar</button>
+                                                                        </div>
+                                                                     </div>  
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                </form>
-                            <!--- fin form :)--->     
+                                </div>
                         </div>
                     </div>
                 </div>   
             </div>   
         </div>
-
+        </form>
+         <!--- fin form :)--->   
+<button onclick="myFunction()">Click me</button>
 <!-- notification JS
         ============================================ -->
     <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
@@ -130,4 +179,10 @@
         ============================================ -->
     <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
     <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
+<script type="text/javascript">
+    
+  
+   
+</script>
+
 {% endblock %}
