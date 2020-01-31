@@ -85,9 +85,9 @@
 
                                                             <div class="row">
 
-
+                                                               <center> <h2 id="nombre">Inscripcion</h2></center>
                                                                <!---codigo  --->
-                                                               
+                                                               <br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                            <label class="login2 pull-right pull-right-pro" for="{{ form.Boleta.id_for_label }}"> Boleta: </label>   
                                                             </div>
@@ -106,7 +106,10 @@
                                                                   <div class="chosen-select-single mg-b-20">
                                                                         
                                                                             <select data-placeholder="Seleccioné un alumno" class="chosen-select" multiple="" tabindex="-1">
-                                                                            <option value="">Select</option>
+                                                                                {% for alumno in alumnos %}
+                                                                                <option value="{{ alumno.Codigo }}">{{ alumno }}</option>
+                                                                            {% endfor %}
+                                                                            
                                                                                 
                                                                             </select>
                                                                         
@@ -134,6 +137,8 @@
                                                                 
                                                         
                                                     </div>
+
+
                                                 </div>
 
                                             </div>

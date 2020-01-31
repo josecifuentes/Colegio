@@ -1038,8 +1038,10 @@ def ver_pagos(request):
 
 @login_required
 def asignacion_pagos(request):
+    alumnos = Alumno.objects.all()
     errores=None
     mensajes=None
+    cantidad = 14
     if request.method == "POST":
         form = asignacion_pagosForm(request.POST)
         if form.is_valid():
@@ -1057,7 +1059,7 @@ def asignacion_pagos(request):
             errores="No se ha podido agregar el pago, revise los campos para continuar..."
     else:
         form = asignacion_pagosForm()
-    return render(request, 'administracion/asignacion_pago.html', {'form': form,'errores':errores,'mensajes':mensajes})
+    return render(request, 'administracion/asignacion_pago.html', {cantidad:'cantidad',form': form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
 
 @login_required
 def agregar_examenes(request):

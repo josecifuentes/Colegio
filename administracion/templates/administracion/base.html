@@ -222,7 +222,7 @@
                             <li><a title="Horarios de clase" href="{% url 'horario' %}"><span class="mini-sub-pro">Ver Horarios de clase</span></a></li>
                             {% endif %}
                             {% if "Horarios de clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                            <li><a title="Horarios de examenes" href="{% url 'horario_examen' %}"><span class="mini-sub-pro">Ver Horarios de examen</span></a></li>
+                            <li><a title="Horarios de examenes" href="#"><span class="mini-sub-pro">Ver Horarios de examen</span></a></li>
                             {% endif %}
                              {% if "Eliminar horario clase" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                             <li><a title="Eliminar horario clase" href="#"><span class="mini-sub-pro">Eliminar horarios de clase</span></a></li>
