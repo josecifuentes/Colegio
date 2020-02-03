@@ -8,6 +8,13 @@
     <title>Colegio Nuevo Mundo-Administrador</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- MIO ALEJANDRO
+        ============================================ -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'administracion/css/alumno_nuevo.css' %}">    
+    <link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
     <!-- favicon
         ============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'administracion/img/favicon.ico' %}">
@@ -282,7 +289,7 @@
                                 <li><a title="Alumnos grados" href="{% url 'ver_alumnos_grados' %}"><span class="mini-sub-pro">Ver Estudiantes por Grado</span></a></li>
                                      {% endif %}
                             {% if "Agregar Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
+                                <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="miin-sub-pro">Añadir Estudiantes</span></a></li>
                             {% endif %}
 
                             
