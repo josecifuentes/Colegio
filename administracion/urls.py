@@ -70,5 +70,8 @@ urlpatterns = [
     path('contenidos/unidad/', views.contenido_unidad, name='contenido_unidad'), 
     path('contenidos/examenes/', views.vista_Grados, name='vista_Grados'),
     url(r'^ajax/get_materias/$', get_materias, name='get_materias'),
-
+    path('maestros/nuevo/', views.nuevo_maestro, name='nuevo_maestro'), 
+    path('maestros/ver/', views.ver_maestros, name='ver_maestros'),
+    path('asignar/Cursos/', views.asignar_curso, name='asignar_curso'),
+    
 ]

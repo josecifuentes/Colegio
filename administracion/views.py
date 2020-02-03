@@ -1059,8 +1059,16 @@ def asignacion_pagos(request):
             errores="No se ha podido agregar el pago, revise los campos para continuar..."
     else:
         form = asignacion_pagosForm()
-    return render(request, 'administracion/asignacion_pago.html', {cantidad:'cantidad',form': form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
-
+    return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
+@login_required
+def ver_maestros(request):
+    return render(request, 'administracion/vacio.html')
+@login_required
+def nuevo_maestro(request):
+    return render(request, 'administracion/vacio.html')
+@login_required
+def asignar_curso(request):
+    return render(request, 'administracion/vacio.html')
 @login_required
 def agregar_examenes(request):
     a=False

@@ -118,7 +118,9 @@
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/data-table/bootstrap-table.css' %}">
     <link rel="stylesheet" href="{% static 'administracion/css/data-table/bootstrap-editable.css' %}">
-
+    <!-- Preloader CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'administracion/css/preloader/preloader-style.css' %}">
 </head>
 
 <body>
@@ -200,7 +202,7 @@
                              <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Calendario</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                             {% if "Ver Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Todos Los Encargados" href="{% url 'calendario' %}"><span class="mini-sub-pro">Ver Calendario</span></a></li>
+                                <li><a title="Ver calendario" href="{% url 'calendario' %}"><span class="mini-sub-pro">Ver Calendario</span></a></li>
                                  {% endif %}
                                 {% if "Agregar Calendario" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Calendario" href="{% url 'agregar_calendario' %}"><span class="mini-sub-pro">Añadir Calendario</span></a></li>
@@ -255,6 +257,20 @@
                             </ul>
                         </li>
                         {% endif %}
+                        {% if "Maestros" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Maestros</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                            {% if "Ver Maestros" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los maestros" href="{% url 'ver_maestros' %}"><span class="mini-sub-pro">Ver Maestros</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar maestro" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Maestro" href="{% url 'nuevo_maestro' %}"><span class="mini-sub-pro">Añadir Maestro</span></a></li>
+                                 {% endif %}
+                              
+                            </ul>
+                        </li>
+                        {% endif %}
                          {% if "Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Estudiantes</span></a>
@@ -304,8 +320,8 @@
                                 {% if "Editar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Editar Materia" href="edit-course.html"><span class="mini-sub-pro">Editar Materia</span></a></li>
                                 {% endif %}
-                                {% if "Asignar Materia" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Asignar Materia" href="course-info.html"><span class="mini-sub-pro">Asignar Materia</span></a></li>
+                                {% if "Asignar maestros" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignar Encargados" href="{% url 'asignar_curso' %}"><span class="mini-sub-pro">Asignar Materias</span></a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -1075,7 +1091,30 @@
                 </div>
             </div>
         </div>
-        
+        <div id="cargando">
+          <div id="ts-preloader-absolute-one01">
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                        <div class="tsperloader10-one"></div>
+                                    </div>
+        <div id="ts-preloader-absolute-two02">
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                        <div class="tsperloader10-two"></div>
+                                    </div>
+        </div>
  <!-- bootstrap JS
         ============================================ -->
     <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
@@ -1108,7 +1147,16 @@
     <!-- main JS
         ============================================ -->
     <script src="{% static 'administracion/js/main.js' %}"></script>
-        
+        <script type="text/javascript">
+            $(window).on('load', function () {
+      setTimeout(function () {
+    $(".loader-page").css({visibility:"hidden",opacity:"0"})
+  }, 2000);
+     
+});
+
+
+        </script>
         
     
      
