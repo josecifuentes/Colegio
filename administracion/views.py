@@ -1062,7 +1062,8 @@ def asignacion_pagos(request):
     return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
 @login_required
 def ver_maestros(request):
-    return render(request, 'administracion/vacio.html')
+    maestros=Personal.objects.all()
+    return render(request, 'administracion/ver_maestros.html',{'maestros':maestros})
 @login_required
 def nuevo_maestro(request):
     return render(request, 'administracion/vacio.html')
@@ -1494,6 +1495,8 @@ def nuevopersonal(request):
         if form.is_valid():
             if(request.POST['Usuario']):
                 usuario = User.objects.create_user(username=request.POST['Usuario'],password="Colegio123")
+                g = Group.objects.get(name='Maestro') 
+                g.user_set.add(usuario)
             post = form.save(commit=False)
             if(request.POST['Usuario']):
                 post.Usuario=User.objects.get(username=request.POST['Usuario'])

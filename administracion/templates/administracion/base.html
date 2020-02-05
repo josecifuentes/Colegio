@@ -121,6 +121,31 @@
     <!-- Preloader CSS
         ============================================ -->
     <link rel="stylesheet" href="{% static 'administracion/css/preloader/preloader-style.css' %}">
+    <style type="text/css">
+        .loader-page {
+    position: fixed;
+    z-index: 25000;
+    background: rgb(255, 255, 255);
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:all .3s ease;
+  }
+  .loader-page::before {
+    content: "";
+    position: absolute;
+    
+   
+  }
+ 
+ 
+
+
+    </style>
 </head>
 
 <body>
@@ -241,22 +266,7 @@
                             </ul>
                         </li>
                          {% endif %}
-                        {% if "Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Encargados</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                            {% if "Ver Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Todos Los Encargados" href="{% url 'ver_encargados' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
-                                 {% endif %}
-                                {% if "Agregar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Encargados</span></a></li>
-                                 {% endif %}
-                            {% if "Asignar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                        {% endif %}
+                        
                         {% if "Maestros" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Maestros</span></a>
@@ -264,9 +274,9 @@
                             {% if "Ver Maestros" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Todos Los maestros" href="{% url 'ver_maestros' %}"><span class="mini-sub-pro">Ver Maestros</span></a></li>
                                  {% endif %}
-                                {% if "Agregar maestro" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Añadir Maestro" href="{% url 'nuevo_maestro' %}"><span class="mini-sub-pro">Añadir Maestro</span></a></li>
-                                 {% endif %}
+                               {% if "Asignar Personal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Agregar Maestro</span></a></li>
+                                {% endif %}
                               
                             </ul>
                         </li>
@@ -285,7 +295,15 @@
                                 <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
                             {% endif %}
 
-                            
+                            {% if "Ver Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Todos Los Encargados" href="{% url 'ver_encargados' %}"><span class="mini-sub-pro">Ver Encargados</span></a></li>
+                                 {% endif %}
+                                {% if "Agregar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Añadir Encargados" href="{% url 'nuevo_encargado' %}"><span class="mini-sub-pro">Añadir Encargados</span></a></li>
+                                 {% endif %}
+                            {% if "Asignar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
+                                {% endif %}
 
                                 
                             </ul>
@@ -401,9 +419,7 @@
                                 {% if "Asignar Permisos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Permisos" href="{% url 'asignar_permisos' %}"><span class="mini-sub-pro">Asignar Permisos</span></a></li>
                                 {% endif %}
-                                {% if "Asignar Personal" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Accordion" href="{% url 'nuevopersonal' %}"><span class="mini-sub-pro">Asignacion De Personal</span></a></li>
-                                {% endif %}
+                                
                                 {% if "Asignar Alumnos" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Accordion" href="{% url 'asignar_usuariosAlumnos' %}"><span class="mini-sub-pro">Asignacion De Alumnos</span></a></li>
                                 {% endif %}
@@ -1091,7 +1107,8 @@
                 </div>
             </div>
         </div>
-        <div id="cargando">
+
+        <div id="cargando" class="loader-page">
           <div id="ts-preloader-absolute-one01">
                                         <div class="tsperloader10-one"></div>
                                         <div class="tsperloader10-one"></div>
@@ -1115,6 +1132,17 @@
                                         <div class="tsperloader10-two"></div>
                                     </div>
         </div>
+        <script type="text/javascript">
+$(document).ready(function(){
+
+          $(window).load(function() {
+            $("#cargando").fadeOut();
+       $("#cargando").delay(700).fadeOut("slow")
+             
+        });
+
+}); 
+        </script>
  <!-- bootstrap JS
         ============================================ -->
     <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
@@ -1146,17 +1174,9 @@
     
     <!-- main JS
         ============================================ -->
-    <script src="{% static 'administracion/js/main.js' %}"></script>
-        <script type="text/javascript">
-            $(window).on('load', function () {
-      setTimeout(function () {
-    $(".loader-page").css({visibility:"hidden",opacity:"0"})
-  }, 2000);
-     
-});
+ 
+           <script src="{% static 'administracion/js/main.js' %}"></script>
 
-
-        </script>
         
     
      
