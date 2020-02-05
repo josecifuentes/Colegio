@@ -26,19 +26,18 @@
 
     <!--- FORMULARIO ALUMNOS-->
         <div class="basic-form-area mg-b-15">
-            <div class="container-fluid">
+            <div class="container ">
            
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row   ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                         <div class="sparkline8-list mt-b-30">
                             <div class="sparkline8-hd">
                                 <div class="main-sparkline8-hd" >
                                         <div class="titulo-formulario">
                                             <br>
-                                            <h1 style="font-size: 180%;  color: #FFFFFF;"><center>Ingresar Alumnos</center></h1>
+                                            <h1 style="font-family: Modern; font-size: 180%; color:white;"><center>Ingresar Alumnos</center></h1>
                                         </div>
                                 </div>
-                              
                             </div>
                             <br>
                             <br>
@@ -55,163 +54,160 @@
                         </div>
                               {% endif %}
         
-                                                    <div class="form-group-inner">
-                                                            <div class="row">
-
-
-                                                           <!---codigo  --->
-                                                           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
-                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                            <div class="etiquetas_formularios">
-                                                                <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Codigo:</label>
-                                                            </div> 
-                                                        </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="input-mark-inner mg-b-22">
-                                                        
-                                                        {{form.Codigo}}
-
-                                                                </div>
-                                                            </div>
-
-                                                            <!---nombres--->
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Primer Nombre:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                {{form.Primer_Nombre}}
-                                                                {% for error in form.Primer_Nombre.errors %}
-                                                                    <p class="help is-danger">{{ error }}</p>
-                                                                {% endfor %}
-                                                            </div>
-                                                                </div>
-                                                                <div class="row">
-                                                            <br>
-                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Segundo Nombre:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-
-                                                                {{ form.Segundo_Nombre }}
-                                                            </div>
-
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Tercer Nombre:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                {{ form.Tercer_Nombre }}
-                                                            </div>
-                                                            </div>
-                                                            <div class="row">
-                                                            <!---apellidos---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Primer Apellido:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                 {{ form.Primer_Apellido }}
-                                                            </div><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Segundo apellido</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                             {{ form.Segundo_Apellido }}
-                                                            </div>
-                                                            <!---GRADO---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Grado</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                              <div class="chosen-select-single mg-b-20">
-                                                                    
-                                                                         {{ form.Grado }}
-                                                                    
-                                                                      
-                                                              </div>
+                                                    <div class="form-group-inner  ">
+                                                            <div class="row ">
+                                                                 <!---codigo  --->
                                                             
-                                                            </div>
-                                                            <!---Seccion---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Seccion:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                 <div class="form-select-list">
-                                                                    {{ form.Seccion }}
-                                                                </div> 
-                                                              
-                                                            </div> 
-                                                            <!---GÉNERO---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Género</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                 <div class="form-select-list">
-                                                                    {{ form.Genero }}
-                                                                </div> 
-                                                              
-                                                            </div> 
-                                                            <!---Fecha de Nacimiento---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Fecha De Nacimiento:</label>
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
-                                                                <div class="input-group date">
-                                                                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                 {{form.nacimiento}}
-                                                                </div>
-                                                            </div> 
-                                                            <!---Dirección---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Dirección:</label>
-                                                                </div>
-                                                            </div>    
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                {{form.direccion}}
-                                                            </div>
-                                                             <!---Teléfono---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Teléfono:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="input-mark-inner mg-b-22">
-                                                                 {{ form.telefono }}
-                                                                </div>
-                                                            </div>
-                                                             <!---Teléfono 2---><br><br><br>
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <div class="etiquetas_formularios">
-                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 100%;">Teléfono 2:</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="input-mark-inner mg-b-22">
-                                                                 {{ form.telefono2 }}
-                                                                </div>
-                                                            </div>
-
-                                                            
+                                                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                               
+                                                                   <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Codigo:</label>
+                                                               
+                                                           </div>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   <div class="input-mark-inner mg-b-22">
                                                            
+                                                           {{form.Codigo}}
+   
+                                                                   </div>
+                                                               </div>
+   
+                                                               <!---nombres---><br> <br> <br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Primer Nombre:</label>
+   
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                   {{form.Primer_Nombre}}
+                                                                   {% for error in form.Primer_Nombre.errors %}
+                                                                       <p class="help is-danger">{{ error }}</p>
+                                                                   {% endfor %}
+                                                               </div>
+                                                               <br><br><br>
+                                                         
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Segundo Nombre:</label>
+                                                                  
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+   
+                                                                   {{ form.Segundo_Nombre }}
+                                                               </div>
+                                                               <br> <br> <br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                  
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Tercer Nombre:</label>
+                                                                   
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                   {{ form.Tercer_Nombre }}
+                                                               </div>
+                                                              
+                                                               <!---apellidos---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                 
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Primer Apellido:</label>
+                                                                
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                    {{ form.Primer_Apellido }}
+                                                               </div><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Segundo apellido:</label>
+                                                                 
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                {{ form.Segundo_Apellido }}
+                                                               </div>
+                                                               <!---GRADO---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                  
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Grado:</label>
+                                                                  
+                                                               </div>
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                 <div class="chosen-select-single mg-b-20">
+                                                                       
+                                                                            {{ form.Grado }}
+                                                                       
+                                                                         
+                                                                 </div>
+                                                               
+                                                               </div>
+                                                               <!---Seccion---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Seccion:</label>
+                                                                   
+                                                               </div>
+                                                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                                                    <div class="form-select-list">
+                                                                       {{ form.Seccion }}
+                                                                   </div> 
+                                                                 
+                                                               </div> 
+                                                               <!---GÉNERO---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                 
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Género:</label>
+                                                                 
+                                                               </div>
+                                                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                                                    <div class="form-select-list">
+                                                                       {{ form.Genero }}
+                                                                   </div> 
+                                                                 
+                                                               </div> 
+                                                               <!---Fecha de Nacimiento---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                 
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Fecha De Nacimiento:</label>
+                                                                
+                                                               </div> 
+                                                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
+                                                                   <div class="input-group date">
+                                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    {{form.nacimiento}}
+                                                                   </div>
+                                                               </div> 
+                                                               <!---Dirección---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                   
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Dirección:</label>
+                                                                  
+                                                               </div>    
+                                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                   {{form.direccion}}
+                                                               </div>
+                                                                <!---Teléfono---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                  
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Teléfono:</label>
+                                                                  
+                                                               </div>
+                                                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                                                   <div class="input-mark-inner mg-b-22">
+                                                                    {{ form.telefono }}
+                                                                   </div>
+                                                               </div>
+                                                                <!---Teléfono 2---><br><br><br>
+                                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                  
+                                                                       <label class="login2 pull-right pull-right-pro" style="font-family: calibri; font-size: 140%;">Teléfono 2:</label>
+                                                                   
+                                                               </div>
+                                                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                                                   <div class="input-mark-inner mg-b-22">
+                                                                    {{ form.telefono2 }}
+                                                                   </div>
+                                                               </div>
+   
+
+                                                          
+                                                            
+                                                            </div>
                                                  </div>
 
 
