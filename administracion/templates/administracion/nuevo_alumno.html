@@ -27,13 +27,17 @@
     <!--- FORMULARIO ALUMNOS-->
         <div class="basic-form-area mg-b-15">
             <div class="container-fluid">
+           
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                         <div class="sparkline8-list mt-b-30">
                             <div class="sparkline8-hd">
                                 <div class="main-sparkline8-hd">
-                                    <h1>Ingresar Alumnos</h1>
+                                        <div class="probando-titulo">
+                                            <h1 style="font-size: 180%;"><center>Ingresar Alumnos</center></h1 s>
+                                        </div>
                                 </div>
+                              
                             </div>
 
                             <!---form--->
@@ -56,7 +60,9 @@
                                                            <!---codigo  --->
                                                            
                                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Codigo.id_for_label }}"> CODIGO: </label>   
+                                                            <div class="cajaspeque">
+                                                                <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Codigo:</label>
+                                                            </div> 
                                                         </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 <div class="input-mark-inner mg-b-22">
@@ -68,7 +74,9 @@
 
                                                             <!---nombres---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.Primer_Nombre.id_for_label }}">Primer Nombre:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Primer Nombre:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.Primer_Nombre}}
@@ -77,7 +85,9 @@
                                                                 {% endfor %}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Segundo_Nombre.id_for_label }}">Segundo Nombre:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Segundo Nombre:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 
@@ -85,27 +95,35 @@
                                                             </div><br><br><br>
 
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Tercer_Nombre.id_for_label }}">Tercer Nombre:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Tercer Nombre:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{ form.Tercer_Nombre }}
                                                             </div>
                                                             <!---apellidos---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Primer_Apellido.id_for_label }}">Primer Apellido:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Primer Apellido:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                  {{ form.Primer_Apellido }}
                                                             </div><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Segundo_Apellido.id_for_label }}">Segundo Apellido:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Segundo apellido</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                              {{ form.Segundo_Apellido }}
                                                             </div>
                                                             <!---GRADO---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro" for=" {{ form.Grado.id_for_label }}">Grado:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Grado</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                               <div class="chosen-select-single mg-b-20">
@@ -118,7 +136,9 @@
                                                             </div>
                                                             <!---Seccion---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Seccion.id_for_label }}">Seccion:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Seccion:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                  <div class="form-select-list">
@@ -128,7 +148,9 @@
                                                             </div> 
                                                             <!---GÉNERO---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.Genero.id_for_label }}">Género:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Género</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                  <div class="form-select-list">
@@ -138,7 +160,9 @@
                                                             </div> 
                                                             <!---Fecha de Nacimiento---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for="{{ form.nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Fecha De Nacimiento:</label>
+                                                                </div>
                                                             </div> 
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" class="form-group data-custon-pick" id="data_3" >    
                                                                 <div class="input-group date">
@@ -148,14 +172,18 @@
                                                             </div> 
                                                             <!---Dirección---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.direccion.id_for_label }}">Dirección:</label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Dirección:</label>
+                                                                </div>
                                                             </div>    
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 {{form.direccion}}
                                                             </div>
                                                              <!---Teléfono---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.telefono.id_for_label }}">Teléfono: </label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Teléfono:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 <div class="input-mark-inner mg-b-22">
@@ -164,7 +192,9 @@
                                                             </div>
                                                              <!---Teléfono 2---><br><br><br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro"for=" {{ form.telefono.id_for_label }}">Teléfono 2: </label>
+                                                                <div class="cajaspeque">
+                                                                    <label class="login2 pull-right pull-right-pro" style="font-size: 150%;">Teléfono 2:</label>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                 <div class="input-mark-inner mg-b-22">
@@ -196,8 +226,10 @@
                             <!--- fin form :)--->     
                         </div>
                     </div>
+                
                 </div>   
-            </div>   
+            </div>
+        
         </div>
 
 
