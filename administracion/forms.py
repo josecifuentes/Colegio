@@ -205,10 +205,10 @@ class PersonalForm(forms.ModelForm):
           'Fecha_Inicio_Labores','Nivel_Academico', 'Titulo', 'Cedula_Docente',
           'Registro_Escalafonario', 'Salario','Hora_Entrada', 'Hora_Salida','email')
         widgets = {
-            'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Nombre Del Alumno'}),
-            'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Nombre Del Alumno'}),
-            'Primer_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Primer Apellido Del Alumno'}),
-            'Segundo_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Segundo Apellido Del Alumno'}),
+            'Primer_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El primer nombre del maestro'}),
+            'Segundo_Nombre': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El segundo nombre del maestro'}),
+            'Primer_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El primer apellido del maestro'}),
+            'Segundo_Apellido': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El segundo apellido del maestro'}),
             'Telefono_Casa': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
             'Telefono_Celular': forms.TextInput(attrs={'class': 'form-control','data-mask': '9999-9999','placeholder': 'Máximo 8 dígitos...'}),
             'Direccion': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ingrese la direccion'}),
