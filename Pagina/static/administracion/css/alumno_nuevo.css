@@ -1,9 +1,9 @@
-.probando-titulo {
-    background-color: lightblue;
-    font-family: 'Patua One', cursive;
-    box-sizing: content-box;
+.titulo-formulario {
+    background-color: #006DF0;
+    height:  70px;
 }
-.cajaspeque {
+.etiquetas_formularios {
+
     font-family: 'Russo One', sans-serif;
     box-sizing: content-box;
 }
