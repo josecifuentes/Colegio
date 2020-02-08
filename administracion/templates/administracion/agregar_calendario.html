@@ -22,118 +22,127 @@
     
 };
 </script>
-<link href="{% static 'calendario/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'calendario/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'calendario/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" media="screen">
+   
+   
+   
     <!--- FORMULARIO ALUMNOS-->
         <div class="basic-form-area mg-b-15">
-            <div class="container-fluid">
+            
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline8-list mt-b-30">
+                            
                             <div class="sparkline8-hd">
-                                <div class="main-sparkline8-hd">
-                                    <h1>Agregar al calendario actividades</h1>
-                                </div>
+                                <div class="main-sparkline8-hd titulo-formulario">
+                                    <br>                                    
+                                    <h1 style="font-family: Modern; font-size: 180%; color:white"><center>Agregar Actividad al Calendario</center></h1>
+                                </div>  
                             </div>
-{{calendario.pk}}
+                            
+                            
+                         {{calendario.pk}}
 
                             <!---form--->
-<form action="{% url 'agregar_calendario'%}" method="POST" class="post-form">
+                            <form action="{% url 'agregar_calendario'%}" method="POST" class="post-form">
                                 {% csrf_token %}
                                 
         
-                                                    <div class="form-group-inner">
+                                                    <div class="form-group">
                                                         <div class="row">
-
-
+                                                        <br>
                                                            <!---codigo  --->
                                                            
-                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Grupo.id_for_label }}"> Grupo: </label>   
+                                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                       <label class="login2 pull-right pull-right-pro" for="{{ form.Grupo.id_for_label }}"style="font-family: calibri; font-size: 130%;"> Grupo: </label>   
                                                         </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                 <div class="input-mark-inner mg-b-22">
                                                         
                                                         {{form.Grupo}}
 
                                                                 </div>
                                                             </div>
+                                                        </div>  
+                                                            <br>
+                                                        <div class="row">
 
-                                                            <br><br><br>
-
-
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Titulo Para la actividad:</label>
+                                                             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Titulo Para la actividad:</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                 {{form.Titulo}}
-                                                            </div><br><br><br>
-                        
-                                          
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Descripcion para la actividad:</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        </div><br>
+                        
+                                                        <div class="row">
+                                                             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Descripcion para la actividad:</label>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                 {{form.Descripcion}}
-                                                            </div><br><br><br>
-                        
-                                                             
-    
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Descripcion con detalles para la actividad:</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        </div>
+                                                            <br>
+                                                        <div class="row">
+                                                              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                                <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Descripcion con detalles para la actividad:</label>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                 {{form.Especifico}}
-                                                            </div><br><br><br>
-                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                   <label class="login2 pull-right pull-right-pro">Lugar para la actividad:</label>
+                                                            </div></div><br>
+                                                            <div class="row">
+                                                              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                                 <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Lugar para la actividad:</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                 {{form.Lugar}}
-                                                            </div><br><br><br>
-
-                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                   <label class="login2 pull-right pull-right-pro">Marque el inicio de la fecha de la actividad:</label>
+                                                            </div></div><br>
+                                                            <div class="row">
+                                                             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                                  <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Marque el inicio de fecha para la actividad:</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                                
 
-<div class="input-group date form_datetime col-md-12" data-date="{{hoy}}" data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
+                                                        <div class="input-group date form_datetime col-md-12" data-date="{{hoy}}" data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
                     
                     {{form.Fecha_Inicio}}
                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                 </div>
-				<input type="hidden" id="dtp_input1" value="" /><br/>
+				<input type="hidden" id="dtp_input1" value="" />
 
 
 
 
-                                                            </div><br><br><br>                   
+                                                            </div></div><br>                   
+                                                            <div class="row">
+                                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                          <label class="login2 pull-right pull-right-pro"style="font-family: calibri; font-size: 130%;">Marque el fin de fecha para la actividad:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                        
 
-                                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                   <label class="login2 pull-right pull-right-pro">Marque el fin de la fecha de la actividad:</label>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                               
-
-<div class="input-group date form_datetime col-md-12" data-date="{{hoy}}" data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
-                    
-                    {{form.Fecha_Fin}}
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                </div>
-				<input type="hidden" id="dtp_input1" value="" /><br/>
-
-
+                                                             <div class="input-group date form_datetime col-md-12" data-date="{{hoy}}" data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
+                                
+                                {{form.Fecha_Fin}}
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                      <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                          </div>
+                                               <input type="hidden" id="dtp_input1" value="" /><br/>
 
 
-                                                            </div><br><br><br>                   
+
+
+                                                            </div></div><br>                   
 
 
                                                
                                                             
-                                                 </div>
+                                                
 
 
                                                         
@@ -151,7 +160,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                 </div>
+                                 
     							</form>
                             <!--- fin form :)--->     
                         </div>
