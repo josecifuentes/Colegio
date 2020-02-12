@@ -94,7 +94,6 @@ class asignacion_pagosForm(forms.ModelForm):
             'Alumno': forms.Select(attrs={'class': 'chosen-select','multiple': '','data-placeholder': 'Seleccione Un Alumno...'}),
             'Cantidad': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba La Cantidad Total Del Pago'}),
             'Comentario': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Comentario Al Pago Del Alumno'}),
-            'Tipo_Pago': forms.Select(attrs={'class': 'chosen-select','multiple': '','data-placeholder': 'Seleccione El Pago...'}),
         }  
 
 class agregar_papeleriaForm(forms.ModelForm):

@@ -1038,27 +1038,62 @@ def ver_pagos(request):
 
 @login_required
 def asignacion_pagos(request):
-    alumnos = Alumno.objects.all()
-    errores=None
+    errores=""
     mensajes=None
-    cantidad = 14
+    boleta = ""
+    cantidad = ""
+    Palumnos = ""
+    form = None
+    check = False
+    cerror = 0
+    alumnos = Alumno.objects.all()
     if request.method == "POST":
-        form = asignacion_pagosForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            if post.Tipo_Pago == "Inscripcion":
-                modificar= AlumnoForm(instance=post.Alumno)
-                al = modificar.save(commit=False)
-                al.estado="Registro"
-                al.save()
-            post.save()
-            mensajes="Se ha agregado el pago correctamente!"
-            form = asignacion_pagosForm()
-            return render(request, 'administracion/asignacion_pago.html', {'form': form,'errores':errores,'mensajes':mensajes})
-        else:
-            errores="No se ha podido agregar el pago, revise los campos para continuar..."
+        tipos = request.POST['tipos']
+        pagos = tipos.split(",")
+        c = 0
+        for pago in pagos:
+            boleta = request.POST['boleta'+str(c)]
+            Palumnos = request.POST.getlist('alumno'+str(c))
+            cantidad = request.POST['cantidad'+str(c)]
+            comentario = request.POST['comentario'+str(c)] 
+            print(Palumnos)
+            if(pago==""):
+                errores = "Error debe seleccionar uno o mas pagos a realizar"
+                return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
+            elif(cantidad==""):
+                errores = "Error debe ingresar cantidad para todos los pagos, no puede ser dejado vacio"
+                return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
+            elif(boleta==""):
+                errores = "Error debe ingresar cantidad para todos los pagos, no puede ser dejado vacio"
+                return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
+            elif(len(Palumnos)<=0):
+                errores = "Error debe seleccionar uno o mas alumnos para asignar un pago"
+                return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
+            else:
+                try:
+                    for alumno in Palumnos:
+                        post = None
+                        form = None
+                        form = asignacion_pagosForm()
+                        post = form.save(commit=False)
+                        post.Alumno =  Alumno.objects.get(Codigo=alumno)
+                        post.Boleta = boleta
+                        post.Cantidad = cantidad
+                        post.Comentario = comentario
+                        post.Tipo_Pago = pago
+                        post.save()
+                    mensajes="Se ha ingresado los pagos del alumno con exito!"
+                except Exception as e:
+                    print(e)
+                    cerror = cerror + 1
+                    errores = errores+alumno+"/"+pago+","
+            c = c+1
     else:
         form = asignacion_pagosForm()
+    if(cerror>1):
+        errores="Error al asignar pagos a los siguientes codigos:"+errores+" ya tiene asignado el pago seleccionado"
+    if(cerror==1):
+        errores="Error al asignar el pago a el siguiente codigo:"+errores+" ya tiene asignado el pago seleccionado"
     return render(request, 'administracion/asignacion_pago.html', {'cantidad':cantidad,'form':form,'errores':errores,'mensajes':mensajes,'alumnos':alumnos})
 @login_required
 def ver_maestros(request):

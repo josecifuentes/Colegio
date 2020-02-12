@@ -9,7 +9,7 @@
     Lobibox.notify('error', {
                     showClass: 'zoomInUp',
                     hideClass: 'zoomOutDown',
-                    delay: 2500,
+                    delay: 50000,
                     msg: '{{errores}}'
                 });
     {% endif %}
@@ -23,7 +23,7 @@
     
 };
 </script>
-
+<form method="POST" class="post-form">{% csrf_token %}
  <!-- Advanced Form Start -->
         <div class="advanced-form-area mg-b-15">
             <div class="container-fluid">
@@ -42,9 +42,25 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <div class="chosen-select-single">
                                         <center><label>Seleccione los pagos que desea realizar</label></center>
-                                         <center>{{ form.Tipo_Pago }}</center>
+                        <center><select name="tipo_pago" class='chosen-select' multiple data-placeholder='Seleccione los pagos a efectuar...' id="tipo_pago" onchange="comprobar()">
+                            <option value="Seguro">Seguro</option>
+                            <option value="Examen">Examen</option>
+                            <option value="Inscripcion">Inscripcion</option>
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio">Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        </center>
                                         
-                                            
+        
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +69,7 @@
             </div>
         </div>
 
- <form method="POST" class="post-form">{% csrf_token %}
+ 
         <div id="contenedor">
             
                     {% if form.errors %}
@@ -65,12 +81,12 @@
                             </div>
                         </div>
                     {% endif %}
-
+<input type="text" name="tipos" id="tipos" style="display: none;">
         <div class="basic-form-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-
-                    <div id="boleta1">
+                    {% for o in "abcdefghijklmnop" %}
+                    <div id="boleta{{ forloop.counter0 }}" style="display:none">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="sparkline8-list mt-b-30">
                                     <div class="sparkline8-hd">
@@ -85,7 +101,7 @@
 
                                                             <div class="row">
 
-                                                               <center> <h2 id="nombre">Inscripcion</h2></center>
+                                                               <center> <h2 id="nombre{{ forloop.counter0 }}">-</h2></center>
                                                                <!---codigo  --->
                                                                <br>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -94,7 +110,7 @@
                                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                     <div class="input-mark-inner mg-b-22">
                                                             
-                                                           <input type="text" name="" class="form-control" placeholder="Escriba la boleta de pago del alumno">
+                                                           <input name="boleta{{ forloop.counter0 }}" type="text" name="" class="form-control" placeholder="Escriba la boleta de pago del alumno">
 
                                                                     </div>
                                                                 </div>
@@ -105,7 +121,7 @@
                                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                   <div class="chosen-select-single mg-b-20">
                                                                         
-                                                                            <select data-placeholder="Seleccioné un alumno" class="chosen-select" multiple="" tabindex="-1">
+                                                                            <select data-placeholder="Seleccioné un alumno" class="chosen-select" multiple tabindex="-1" name="alumno{{ forloop.counter0 }}">
                                                                                 {% for alumno in alumnos %}
                                                                                 <option value="{{ alumno.Codigo }}">{{ alumno }}</option>
                                                                             {% endfor %}
@@ -122,7 +138,7 @@
                                                                     <label class="login2 pull-right pull-right-pro"for=" {{ form.Cantidad.id_for_label }}">Cantidad:</label>
                                                                 </div>    
                                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                    <input type="number" name="" class="form-control" placeholder="Escriba la cantidad total del pago">
+                                                                    <input type="number" name="cantidad{{ forloop.counter0 }}" class="form-control" placeholder="Escriba la cantidad total del pago">
                                                                     
                                                                 </div>
                                                                 
@@ -131,7 +147,7 @@
                                                                     <label class="login2 pull-right pull-right-pro"for=" {{ form.Comentario.id_for_label }}">Comentario:</label>
                                                                 </div>    
                                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                    <input type="text" name="" class="form-control" placeholder="Comentario al pago del alumno">
+                                                                    <input type="text" name="comentario{{ forloop.counter0 }}" class="form-control" placeholder="Comentario al pago del alumno">
                                                                     
                                                                 </div>
                                                                 
@@ -146,6 +162,7 @@
                                 
                              
                         </div>
+                        {% endfor %}
 <!---- AQUI VA LA PROGRA -->
 
 
@@ -175,7 +192,7 @@
         </div>
         </form>
          <!--- fin form :)--->   
-<button onclick="myFunction()">Click me</button>
+
 <!-- notification JS
         ============================================ -->
     <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
@@ -185,8 +202,41 @@
     <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
     <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
 <script type="text/javascript">
+    function mostrar($element){
+        document.getElementById($element).style.display = 'block';
+    }
+
+    function ocultar($element){
+        document.getElementById($element).style.display = 'none';
+    }
+  function comprobar()
+  {
+    var val = document.getElementById("tipo_pago");
+    var lista = val.selectedOptions;
+
+    for(var i=0;i<14;i++)
+    {
+        ocultar("boleta"+i);
+    }
+    var list="";
+    for(var i=0;i<lista.length;i++)
+    {
+        valorg=lista[i].value;
+        if(list!="")
+        {
+            list = list+","+valorg;
+        }
+        else
+        {
+            list = valorg;
+        }
+        mostrar("boleta"+i);
+        document.getElementById("nombre"+i).innerHTML = valorg;
+    }
+    $("#tipos").val(list);
+
     
-  
+  }
    
 </script>
 
