@@ -1,57 +1,66 @@
 {% load static %}
 <html lang="es">
 <head>
-<title>Colegio Nuevo Mundo</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Course Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Colegio Nuevo Mundo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course Project">
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- Bootstrap-->
+    
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/bootstrap4/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/news_responsive.css' %}">
-<!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/font-awesome.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/shortcodes.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/jquery-fancybox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/responsive.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/flexslider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/principal.css' %}">
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}">
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styless.css' %}">
 
 
+
+   
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link href="#" rel="shortcut icon">
 </head>
 <body>
-
-<div class="super_container">
-               
-        <header class="header d-flex flex-row">
-        <div class="header_content d-flex flex-row align-items-center">
-            <!-- Logo -->
-            <div class="logo_container">
-                <div class="logo">
-                    <center>
-                    <img src="{% static 'images/logo.png' %}" alt="">
-                    
-                    <font color="Blue" size="4">Colegio </font><font color="Red" size="4">Nuevo</font><font color="Blue" size="4"> Mundo</font>
-                </center>
-                </div>
-            </div>
-
-            <!-- Main Navigation -->
-            <nav class="main_nav_container">
-                <div class="main_nav">
-                    <ul class="main_nav_list">
-                        <li class="main_nav_item"><a href="{% url 'post_list'%}">Inicio</a></li>
-                        <li class="main_nav_item"><a href="#"><font color="red">Actividades</font></a></li>
-                        <li class="main_nav_item"><a href="#">Papelerías</a></li>
-                        <li class="main_nav_item"><a href="#">Noticias</a></li>
-                    
-                        <li class="main_nav_item"><a href="http://virtual.colegionuevomundo.edu.gt">Aula Virtual</a></li>
-                        {% if user.is_authenticated %}
-                        <li class="main_nav_item">
-                        <ul class="nav navbar-nav">
+    <div id="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    <div class="wrap-header  ">
+        <div class="flat-header flat-header-style2 ">
+            <div class="top-bar clearfix ">
+                <div class="container ">
+                    <div class="row  clearfix">
+                        <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                            <ul class="information">
+                                <li class="phone lt-sp003">
+                                    <i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+502 7767 6989"><font color="#FFFFFF   " size="3">+502 7767 6989</font></a> 
+                                </li>
+                                <li class="email">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto: secretaria@colegionuevomundo.edu.gt"><font color="#FFFFFF   " size="3"> secretaria@colegionuevomundo.edu.gt</font></a> 
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                            <ul class="nav-sing">
+                                {% if user.is_authenticated %}
+                        
+                     
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-user"></span> 
@@ -62,12 +71,8 @@
                                             <li>
                                                 <div class="navbar-login">
                                                     <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <p class="text-center">
-                                                                <span class="glyphicon glyphicon-user icon-size"></span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-lg-8">
+                                            
+                                                        <div class="col-lg-12">
                                                             <p class="text-left"><strong>{{ user.username }}</strong></p>
                                                             <p class="text-left small">Administración Colegio Nuevo Mundo</p>
                                                             <p class="text-left">
@@ -81,7 +86,7 @@
                                             <li>
                                                 <div class="navbar-login navbar-login-session">
                                                     <div class="row">
-                                                        <div class="col-lg-12">
+                                                        <div class="col-lg-11">
                                                             <p>
                                                                 <a href="{% url 'logout' %}" class="btn btn-danger btn-block">Cerrar Sesión</a>
                                                             </p>
@@ -91,195 +96,437 @@
                                             </li>
                                         </ul>
                                     </li>
-                                </ul>
-                            </li>
-                            </ul>
-                            
+                               
+                           
+                          
                             {% else %}
                                 <li class="main_nav_item"><a href="{% url 'login' %}">Iniciar Sesión</a></li>
                             {% endif %}
-                             
-                                    </div>
-            </nav>
-        </div>
-        <div class="header_side d-flex flex-row justify-content-center align-items-center">
-            <img src="{% static 'images/phone-call.svg' %}" alt="">
-            <a href="tel:+502 7767 6989"><span>+502 7767 6989</span></a>
-        </div>
-            
-        <!-- Hamburger -->
-        <div class="hamburger_container">
-            <i class="fas fa-bars trans_200"></i>
-        </div>
+                            
+                            </ul>
+                      
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <header class="header menu-bar hv-menu-type2" >
+                <div class="container">
+                    <div class="menu-bar-wrap clearfix ">
+                        <div id="logo" class="logo">
+                            <div class="education-text text-white">
+                            <img src="{% static 'images/logo/logo.png'%}" alt="images" >
+                                 <font color="#04D1FF " size="5">Colegio </font><font color="#FFFFFF  " size="5">Nuevo</font><font color="#04D1FF " size="5"> Mundo</font>
+                                </div>
+                        </div>
+                        <div class="mobile-button"><span></span></div>
+                        <div class="header-menu">
+                            <nav id="main-nav" class="main-nav">
+                                <ul class="menu">
+                                    <li><a href="home2.html">Inicio</a></li>
+                                    <li><a href="course.html">Actividades</a></li>
+                                    <li><a href="course.html">Noticias</a></li>
+                                    <li><a href="#">Imágenes</a></li>
+                                    <li><a href="#">Papelerías</a></li>
+                                    <li><a href="#">Aula Virtual</a></li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div><!-- header -->
+    </div><!-- wrap-header -->
+    <section class="flat-slider style2">
+        <div class="rev_slider_wrapper fullwidthbanner-container">
+            <div id="rev-slider3" class="rev_slider fullwidthabanner">
+                <ul>
+                    <!-- Slide 1 -->
+                    <li data-transition="random">
+                        <!-- Main Image -->
+                        <img src="{% static 'images/home2/pruebaportada1.png' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <div class="overlay"></div>
 
-    </header>
-                
+                        <!-- Layers -->
+                        <div class="tp-caption tp-resizeme education"
+                        data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-161','-100','-80','-50']"
+                        data-fontsize="['70','70','70','30']"
+                        data-lineheight="['90','90','90','35']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on"> <div class="education-text text-white">EDUCACIÓN QUE TRASCIENDE</div> </div> <br>
 
-<div class="menu_container menu_mm">
+                        <div class="tp-caption tp-resizeme text-white complete text-edukin"
+                        data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-70','-10','5','20']"
+                        data-fontsize="['17','17','16','14']"
+                        data-lineheight="['30','30','26','22']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on" 
+                        data-paddingright="['550','155','50','2']" >Colegio Privado Mixto Nuevo Mundo y su Sección de Primaria Mi Pequeño Mundo</div>
+ 
+                    </li>
 
-        <!-- Menu Close Button -->
-        <div class="menu_close_container">
-            <div class="menu_close"></div>
-        </div>
+                    <!-- Slide 2 -->
+                    <li data-transition="random">
+                        <!-- Main Image -->
+                        <img src="{% static 'images/home2/pruebaportada1.png' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <div class="overlay"></div>
 
-        <!-- Menu Items -->
-        <div class="menu_inner menu_mm">
-            <div class="menu menu_mm">
-                <ul class="menu_list menu_mm">
-                    <li class="menu_item menu_mm"><a href="{% url 'post_list'%}">Inicio</a></li>
-                    <li class="menu_item menu_mm"><a href="#">Actividades</a></li>
-                    {% if user.is_authenticated %}
-                        <li class="menu_item menu_mm"><a href="/administracion">Entrar al sistema</a></li>
-                           <li class="menu_item menu_mm"><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                            {% else %}
-                                 <li class="menu_item menu_mm"><a href="{% url 'login' %}">Iniciar Sesión</a></li>
-                            {% endif %}
+                        <!-- Layers -->
+
+                        <div class="tp-caption tp-resizeme font-rubik education education"
+                        data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-161','-100','-80','-50']"
+                        data-fontsize="['70','70','70','30']"
+                        data-lineheight="['90','90','90','35']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on"> <div class="education-text text-white">SU FELICIDAD ES LO MÁS IMPORTANTE</div> </div>
+
+                        <div class="tp-caption tp-resizeme text-white complete text-edukin"
+                        data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-70','-10','5','20']"
+                        data-fontsize="['17','17','16','14']"
+                        data-lineheight="['30','30','26','22']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on" 
+                        data-paddingright="['550','155','50','2']" >Colegio Privado Mixto Nuevo Mundo</div>
+
+         
+                    </li>
+
+               
+                     
                     
                 </ul>
-
-                <!-- Menu Social -->
-                
-                <div class="menu_social_container menu_mm">
-                    <ul class="menu_social menu_mm">
-                        
-                        <li class="menu_social_item menu_mm"><a href="https://www.facebook.com/edumipequenomundo/"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-
-                <div class="menu_copyright menu_mm">Colegio Mi Pequeño Mundo y Nuevo Mundo</div>
             </div>
-
-        </div>
-    </div>
-    
-    <!-- Home -->
-
-    <div class="up">
-
-    </div>    
-    <!------------------------CUADROS DE SLIDER------------------------------------------------------------------->
-
-    
-<!------------------------FIN DE SLIDER------------------------------------------------------------------->
-    <!-- Popular -->
-
-    {% block content %}
-    {% endblock %}
-
-    <!-- Register --->
- 
-<!-- fiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnn -->
-    
-
-
-
-    <footer class="footer">
+        </div> <!-- slider -->
+    </section><!-- flat-slider -->
+    <section class="campus">
         <div class="container">
-            
-        <div class="footer_content">
-                <div class="row">
-
-                    <!-- Footer Column - About -->
-                    <div class="col-lg-3 footer_col">
-
-                        <!-- Logo -->
-                        <div class="logo_container">
-                            <div class="logo">
-                                <img src="{% static 'images/logo.png' %}" alt="">
-                                <span>Colegio Nuevo Mundo</span>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="flat-benefit-style2 clearfix">
+                        <div class="iconbox-benefit iconbox-width50">
+                            <div class="iconbox iconbox-one">
+                                <div class="iconbox-icon">
+                                    <img src="{% static 'images/home2/earth-globe.svg' %}" alt="images" width="80" height="70">
+                                </div>
+                                <div class="iconbox-content ">
+                                    <h3><a href="#">Nuestra Educación</a></h3>
+                                    <p style="text-align:center"  >Promover los valores morales y cívicos, la buena utilización del tiempo y la tecnología, los hábitos de trabajo y la autoestima, y así alcanzar la excelencia.</p>
+                                </div>
                             </div>
                         </div>
-
-                        <p class="footer_about_text">Colegio Privado Mixto Nuevo Mundo y su Sección de Primaria Mi Pequeño Mundo</p>
-
-                    </div>
-
-                    <!-- Footer Column - Menu -->
-
-                    <div class="col-lg-3 footer_col">
-                        <div class="footer_column_title">Menú</div>
-                        <div class="footer_column_content">
-                            <ul>
-                                <li class="footer_list_item"><a href="#">Inicio</a></li>
-                                <li class="footer_list_item"><a href="#">Actividades</a></li>
-                                <li class="footer_list_item"><a href="courses.html">Información</a></li>
-                                <li class="footer_list_item"><a href="news.html">Carreras</a></li>
-                                <li class="footer_list_item"><a href="contact.html">Aula Virtual</a></li>
-                            </ul>
+                        <div class="iconbox-benefit iconbox-width50">
+                            <div class="iconbox iconbox-two">
+                                <div class="iconbox-icon">
+                                    <img src="{% static 'images/home2/exam.svg' %}" alt="images" width="80" height="70">
+                                </div>
+                                <div class="iconbox-content">
+                                    <h3><a href="#">Nivel Académico</a></h3>
+                                    <p style="text-align: center;">Nuestro sistema metodológico permite a nuestros alumnos desarrollar sus habilidades y destrezas, iniciar su conocimiento al medio, desarrollo social y psicomotriz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="iconbox-benefit iconbox-width50">
+                            <div class="iconbox iconbox-three">
+                                <div class="iconbox-icon">
+                                    <img src="{% static 'images/home2/professor.svg' %}" alt="images" width="80" height="70">
+                                </div>
+                                <div class="iconbox-content">
+                                    <h3><a href="#">Maestros</a></h3>
+                                    <p style="text-align: center;">Nuestros maestros están capacitados para brindar la mejor educación a nivel pre-primaria, primaria, básico y diversificado.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="iconbox-benefit iconbox-width50">
+                            <div class="iconbox iconbox-four">
+                                <div class="iconbox-icon">
+                                    <img src="{% static 'images/home2/blackboard.svg' %}" alt="images" width="80" height="80">
+                                </div>
+                                <div class="iconbox-content">
+                                    <h3><a href="#">Olimpiadas</a></h3>
+                                    <p>Las olimpiadas de ciencias y tecnología nos brindan un nivel competitivo que nuestros estudiantes ponen a prueba.</p>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="iconbox-benefit iconbox-width50">
+                            <div class="iconbox iconbox-one">
+                                <div class="iconbox-icon">
+                                    <img src="{% static 'images/home2/mortarboard.svg' %}" alt="images" width="80" height="80">
+                                </div>
+                                <div class="iconbox-content">
+                                    <h3><a href="#">Graduandos</a></h3>
+                                    <p style="text-align: center">Las prácticas para nuestros graduandos son de vital importancia ya que hay es donde se preparan para el siguiente nivel.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Footer Column - Usefull Links -->
-
-                    
-
-                    <!-- Footer Column - Contact -->
-
-                    <div class="col-lg-4 footer_col">
-                        <div class="footer_column_title">Contacto</div>
-                        <div class="footer_column_content">
-                            <ul>
-                                <li class="footer_contact_item">
-                                    <div class="footer_contact_icon">
-                                        <img src="{% static 'images/placeholder.svg' %}" >
-                                    </div>
-                                    <a href="https://www.google.com.gt/maps/place/Colegio+Nuevo+Mundo+%2F+Mi+Peque%C3%B1o+Mundo/@14.8467932,-91.5188437,18.75z/data=!4m12!1m6!3m5!1s0x858e98199adc78eb:0x270a18372bbc8a0b!2sLatam+Hotel+Plaza+Pradera+Quetzaltenango!8m2!3d14.849896!4d-91.536071!3m4!1s0x0:0x7e2f609d219e952c!8m2!3d14.8470119!4d-91.5189672">15 Av. 7-09 Zona 3, Quetzaltenango.</a>
-                                </li>
-                                <li class="footer_contact_item">
-                                    <div class="footer_contact_icon">
-                                        <img src="{% static 'images/smartphone.svg' %}">
-                                    </div>
-                                    <a href="tel:+502 7767 6989">+502 7767 6989</a>
-                                </li>
-                                <li class="footer_contact_item">
-                                    <div class="footer_contact_icon">
-                                        <img src="{% static 'images/envelope.svg' %}" >
-                                    </div>
-                                    <a href="mailto: secretaria@colegionuevomundo.edu.gt"> secretaria@colegionuevomundo.edu.gt</a>
-                                   
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-
-            <!-- Footer Copyright -->
-
-            <div class="footer_bar d-flex flex-column flex-sm-row align-items-center">
-                <div class="footer_copyright">
-                    <span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Derechos Reservados | Colegio Privado Nuevo Mundo
-</span>
-                </div>
-                <div class="footer_social ml-sm-auto">
-                    <ul class="menu_social">
-                        
-                        <li class="menu_social_item"><a href="https://www.facebook.com/edumipequenomundo/"><i class="fab fa-facebook-f"></i></a></li>
-                        
-                    </ul>
-                </div>
-            </div>
-
+               
         </div>
-    </footer>
+    </section><!-- campus -->
+    <section class="flat-introduce flat-introduce-style2 clearfix">
+        <div class="bg"></div>
+        <div class="container-fluid">
+            <div class="section-about-left">
+                <div class="videobox">
+                  <img src="{% static 'images/home2/22.jpg' %}" alt="images">
+                </div>
+            </div>
+            <div class="section-about-right content-introduce">
+                <div class="caption">
+                    ACERCA DE NOSOTROS
+                </div>
+                <div class="title-section">
+                    <div class="flat-title small heading-type1">Nuestra Misión</div>
+                </div>
+                <div class="content-introduce-inner ">
+                    <p style="text-align:justify">Somos un centro educativo con el apego a los valores de libertad e independencia de todos los miembros de la comunidad educativa siendo líder en la formación de ciudadanos responsables convirtiéndoles en adultos conscientes y participes en la construcción de una nueva sociedad, donde impere la justicia, honestidad, equidad e igualdad de derechos.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- flat-benefit -->
+    <section class="testimonial testimonial-style2">
+        <div class="container">
+            <div class="row">
+             
+                <div class="col-lg-12 col-md-12 col-sm-12 max-width100">
+                    <div class="wrap-testimonial">
+                        <div class="title-section">
+                            <div class="flat-title small heading-type5">
+                                INFORMACIÓN
+                            </div>
+                        </div>
+                        <div class="client-style2 clearfix">
+                            <div class="flat-carousel-box data-effect clearfix" data-gap="30" data-column="1" data-column2="1" data-column3="1" data-column4="1" data-dots="true" data-auto="false" data-nav="false">
+                                <div class="owl-carousel">
 
-</div>
+                                    <div class="testimonial-content">
+                                        <div class="text text-white">
+                                            A los padres de familia de pre-primaria se les informa que la reunión programada para el día de hoy 1 de febrero a las 2 de la tarde, se llevará a cabo según programación, Los esperamos a todos.
+                                        </div>
+                                        <div class="author-info">
+                                            <h5>
+                                                <a href="#">T.Mónica Sánchez</a>
+                                            </h5>
+                                            <p class="position">
+                                                Dirección
+                                            </p>
+                                        </div>
+                                    </div>
+                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- testimonial -->
+    <section class="latest-blog latest-blog-type2 latest-blog-style2">
+        <div class="container">
+            <div class="title-section">
+                <div class="flat-title small heading-type7">
+                   Grados
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <article class="post post-style2 box-shadow-type1">
+                        <div class="featured-post">
+                            <img src="{% static 'images/home2/Primaria.jpg' %}" alt="images">
+                        </div>
+                        <div class="post-content">
+                           
+                            <div class="post-title">
+                                <h5>
+                                    <a href="#">Primaria</a>
+                                </h5>
+                            </div>
+                            <div class="post-link">
+                                <p style="text-align: center;">Contamos con toda la sección de Pre-Primaria (Estimulación, Pre-Kinder, Kinder, Preparatoria) y su sección de Primaria (Primero a Sexto).</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <article class="post post-style2 box-shadow-type1">
+                        <div class="featured-post">
+                            <img src="{% static 'images/home2/Basico.jpg' %}" alt="images">
+                        </div>
+                        <div class="post-content">
+                           
+                            <div class="post-title">
+                                <h5>
+                                    <a href="#">Básico</a>
+                                </h5>
+                            </div>
+                            <div class="post-link">
+                                <p style="text-align: center;">En Básico nos enfocamos en su preparación para una correcta orientación en su carrera, ofrecemos de Primero Básico a Tercero Básico.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <article class="post post-style2 box-shadow-type1">
+                        <div class="featured-post">
+                            <img src="{% static 'images/home2/Bachillerato.jpg' %}" alt="images">
+                        </div>
+                        <div class="post-content">
+                        
+                            <div class="post-title">
+                                <h5>
+                                    <a href="#">Bachillerato</a>
+                                </h5>
+                            </div>
+                            <div class="post-link">
+                                <p style="text-align: center;">Contamos con múltiples carreras, Bachillerato en Ciencias y Letras, Computación, Diseño Gráfico, Salud y Electrónica.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- special -->
+    <footer id="footer" class="footer-type3">
 
-<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <div id="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-footer">
+                       <div class="logo-footer">
+                           <img src="{% static 'images/home2/logsin.png' %}" alt="images" width="350" height="150">
+                       </div>
+                    </div>
+                    <div class="col-lg-2 col-company">
+                        <h3 class="widget widget-title text-white">
+                            <font color="Black"> Menú</font>
+                        </h3>
+                        <ul class="widget-nav-menu">
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Actividades</a></li>
+                            <li><a href="#">Noticias</a></li>
+                            <li><a href="#">Papelerías</a></li>
+                            <li><a href="#">Aula Virtual</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-7 col-course">
+                        <h3 class="widget widget-title text-white">
+                            <font color="Black"> Contácto</font>
+                        </h3> 
+                        <ul class="widget-nav-menu">
+                            <li><a href="https://www.google.com.gt/maps/place/Colegio+Nuevo+Mundo+%2F+Mi+Peque%C3%B1o+Mundo/@14.8467932,-91.5188437,18.75z/data=!4m12!1m6!3m5!1s0x858e98199adc78eb:0x270a18372bbc8a0b!2sLatam+Hotel+Plaza+Pradera+Quetzaltenango!8m2!3d14.849896!4d-91.536071!3m4!1s0x0:0x7e2f609d219e952c!8m2!3d14.8470119!4d-91.5189672">15 Av. 7-09 Zona 3, Quetzaltenango.</a></li>
+                            <li><a href="tel:+502 7767 6989">+502 7767 6989</a></li>
+                            <li><a href="mailto: secretaria@colegionuevomundo.edu.gt"> secretaria@colegionuevomundo.edu.gt</a></li>
+                        </ul>
+                        <ul class="widget-social-media">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="bottom" class="bottom-type2 clearfix has-spacer">
+            <div id="bottom-bar-inner" class="container">
+                <div class="bottom-bar-inner-wrap">
+                    <div class="bottom-bar-content">
+                        <div id="copyright">
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Derechos Reservados | Colegio Privado Nuevo Mundo
+                        </div>
+                    </div>
+          
+                </div>
+            </div>
+        </div>
+        <a id="scroll-top" class="show"> </a>
+    </footer><!-- footer -->
+
+    <script src="{% static 'javascript/jquery.min.js' %}"></script>
+    <script src="{% static 'javascript/rev-slider.js' %}"></script>
+    <script src="{% static 'javascript/plugins.js' %}"></script>
+    <script src="{% static 'javascript/jquery-countTo.js' %}"></script>
+    <script src="{% static 'javascript/jquery-ui.js' %}"></script>
+    <script src="{% static 'javascript/jquery-fancybox.js' %}"></script>
+    <script src="{% static 'javascript/flex-slider.min.js' %}"></script>
+    <script src="{% static 'javascript/scroll-img.js' %}"></script>
+    <script src="{% static 'javascript/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'javascript/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'javascript/parallax.js' %}"></script>
+    <script src="{% static 'javascript/jquery-isotope.js' %}"></script>
+    <script src="{% static 'javascript/equalize.min.js' %}"></script>
+    <script src="{% static 'javascript/main.js' %}"></script>
+
+    <!-- slider -->
+    <script src="{% static 'rev-slider/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/jquery.themepunch.revolution.min.js' %}"></script>
+    
+ 
 <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+
 <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
-<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
-<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
-<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
-<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
-<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
-<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
-<script src="{% static 'plugins/easing/easing.js' %}"></script>
-<script src="{% static 'js/custom.js' %}"></script>
+
+
+
+
+    <!-- Load Extensions only on Local File Systems ! The following part can be removed on Server for On Demand Loading -->
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.actions.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.carousel.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.kenburn.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.layeranimation.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.migration.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.navigation.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.parallax.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.slideanims.min.js' %}"></script>
+    <script src="{% static 'rev-slider/js/extensions/extensionsrevolution.extension.video.min.js' %}"></script>
 </body>
 </html>
