@@ -179,54 +179,125 @@
          </div>
                 </div>
 
- <div class="static-table-area">
-            <div class="container-fluid">
-                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="sparkline12-list mg-b-30">
-                            <div class="sparkline12-hd">
-                                <div class="main-sparkline12-hd">
-                                    <center><h1>Tabla de notas no aprobadas</h1></center>
+                <div class="data-table-area mg-b-15">
+                    <div class="container-fluid">
+                        <div class="row">
+        
+        
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="sparkline13-list">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1>Tabla <span class="table-project-n">Alumnos </span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="sparkline13-graph">
+                                        <div class="datatable-dashv1-list custom-datatable-overright">
+                                         
+                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
+                                                data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                                        <th data-field="id">Codigo</th>
+                                                        <th data-field="pnombre" data-editable="true">Nombres</th>
+                                                        <th data-field="snombre" data-editable="true">Apellidos</th>                                          
+                                                        <th data-field="phone" data-editable="true">Numero</th>
+                                                      
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                {% for alumno in alumnos %}
+                                                    <tr>
+                                                        <td></td>
+                                                        {% if perms.administracion.change_alumno %}
+                                                        <td>{{ alumno.Codigo }}</td>
+                                                        {% else %}
+                                                        <td>{{ alumno.Codigo }}</td>
+                                                        {% endif %}
+        
+                                                        <td>{{ alumno.Primer_Nombre }} {{ alumno.Segundo_Nombre }}</td>
+                                                        <td>{{ alumno.Primer_Apellido }} {{ alumno.Segundo_Apellido }}</td>
+                                                        <td>{{ alumno.telefono }}</td>
+                                                       
+                                                      
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="sparkline12-graph">
-                                <div class="static-table-list">
-                                    <table class="table hover-table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mamun</td>
-                                                <td>Roshid</td>
-                                                <td>@Facebook</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Suhag</td>
-                                                <td>Khan</td>
-                                                <td>@Twitter</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sakil</td>
-                                                <td>Shak</td>
-                                                <td>@Linkedin</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="sparkline13-list">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1 >Tabla <span class="table-project-n">maestros</span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="sparkline13-graph">
+                                        <div class="datatable-dashv1-list custom-datatable-overright">
+                                       
+                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
+                                            data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                           
+                                                        <th data-field="pnombre" data-editable="true">Nombres</th>
+                                                        <th data-field="snombre" data-editable="true">Apellidos</th>                                          
+                                                        
+                                                        <th data-field="grado" data-editable="true">Grado encargado</th>
+                                                     
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                {% for maestro in maestros %}
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>{{ maestro.Primer_Nombre }} 
+                                                        {% if maestro.Segundo_Nombre != "N/A" %}
+                                                        {{ maestro.Segundo_Nombre }}
+                                                        {% endif %}
+                                                        </td>
+                                                        <td>{{ maestro.Primer_Apellido }} 
+                                                        {% if maestro.Segundo_Apellido != "N/A" %}
+                                                        {{ maestro.Segundo_Apellido }}
+                                                        {% endif %}
+        
+                                                        </td>
+                                                      
+                                                        <td>{{ alumno.Grado }}</td>
+                                                       
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
-         </div>
                 </div>
+        
+
+
+
+                <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
+                <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
+            
 
 
 <style type="text/css">
@@ -320,4 +391,5 @@
     
 })(jQuery);
 </script>
+
 {% endblock %}
