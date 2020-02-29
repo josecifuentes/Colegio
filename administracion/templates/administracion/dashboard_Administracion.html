@@ -131,14 +131,61 @@
     </div>
 </div>
 
-   <div class="data-table-area mg-b-15">
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <center><h1>Tabla <span class="table-project-n">Reportes Alumnos</span></h1></center>
+                        </div>
+                    </div>
+            <div class="responsiveTbl">
+                    <table>
+                      <thead>
+                        <tr>
+                         <th><center>#</center> </th>
+                          <th><center>Alumno</center> </th>
+                          <th><center>Grado</center> </th>
+                          <th><center>Seccion</center> </th>
+                          <th><center>Maestro</center> </th>
+                          <th><center>Tipo</center> </th>
+                          <th><center>Descripcion</center> </th>
+                          <th><center>Fecha</center> </th>
+                          <th><center>Accion</center> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {%for reporte in reportes %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{reporte.Alumno.Primer_Nombre}} {{reporte.Alumno.Primer_Apellido}}</td>
+                          <td><span class="price">{{reporte.Alumno.Grado}} </span></td>
+                          <td>{{reporte.Alumno.Seccion}}</td>
+                          <td>{{reporte.Personal}}</td>
+                          <td>{{reporte.Tipo}}</td>
+                          <td>{{reporte.Descripcion}}</td>
+                          <td>{{reporte.Fecha_Ingreso}}</td>
+                          <td><a href="#" class="btn">Solucion</a></td>
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+ </div>
+        </div>
+        <div class="data-table-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                    <center><h1>Tabla <span class="table-project-n">Reportes Alumnos</span></h1></center>
+                                    <center><h1>Tabla <span class="table-project-n">Reportes Maestros</span></h1></center>
                                 </div>
                             </div>
                     <div class="responsiveTbl">
@@ -146,10 +193,10 @@
                               <thead>
                                 <tr>
                                  <th><center>#</center> </th>
-                                  <th><center>Alumno</center> </th>
-                                  <th><center>Grado</center> </th>
-                                  <th><center>Seccion</center> </th>
                                   <th><center>Maestro</center> </th>
+                                  <th><center>Grado Encargado </center> </th>
+                                  <th><center>Seccion</center> </th>
+                                  
                                   <th><center>Tipo</center> </th>
                                   <th><center>Descripcion</center> </th>
                                   <th><center>Fecha</center> </th>
@@ -163,7 +210,7 @@
                                   <td>{{reporte.Alumno.Primer_Nombre}} {{reporte.Alumno.Primer_Apellido}}</td>
                                   <td><span class="price">{{reporte.Alumno.Grado}} </span></td>
                                   <td>{{reporte.Alumno.Seccion}}</td>
-                                  <td>{{reporte.Personal}}</td>
+                                 
                                   <td>{{reporte.Tipo}}</td>
                                   <td>{{reporte.Descripcion}}</td>
                                   <td>{{reporte.Fecha_Ingreso}}</td>
@@ -188,7 +235,7 @@
                                 <div class="sparkline13-list">
                                     <div class="sparkline13-hd">
                                         <div class="main-sparkline13-hd">
-                                            <h1>Tabla <span class="table-project-n">Alumnos </span></h1>
+                                            <center><h1>Tabla <span class="table-project-n">Alumnos</span></h1></center>
                                         </div>
                                     </div>
                                     <div class="sparkline13-graph">
@@ -235,7 +282,7 @@
                                 <div class="sparkline13-list">
                                     <div class="sparkline13-hd">
                                         <div class="main-sparkline13-hd">
-                                            <h1 >Tabla <span class="table-project-n">maestros</span></h1>
+                                            <center><h1>Tabla <span class="table-project-n"> Maestros</span></h1></center>
                                         </div>
                                     </div>
                                     <div class="sparkline13-graph">
@@ -286,9 +333,89 @@
                     </div>
                 </div>
         
+                <div class="data-table-area mg-b-15">
+                    <div class="container-fluid">
+                        <div class="row">
+        
+        
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="sparkline13-list">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <center><h1>Tabla <span class="table-project-n">Exámenes Pendientes</span></h1></center>
+                                        </div>
+                                    </div>
+                                    <div class="sparkline13-graph">
+                                        <div class="datatable-dashv1-list custom-datatable-overright">
+                                   
+                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
+                                            data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                                        <th data-field="palumno">Alumno: Codigo/Nombres/Grado</th>
+                                                        <th >Nota Idioma:</th>
+                                                        <th>Comentario Idioma:</th>
+                                                        <th>Resultado:</th>
+                                                        <th >Nota Matematicas:</th>
+                                                        <th>Comentario Matematicas:</th>
+                                                        <th >Resultado:</th>
+                                                        <th >Nota Ingles:</th>
+                                                        <th >Comentario Ingles:</th>
+                                                        <th>Resultado:</th>
+                                 
+                                                        <th data-field="date" data-editable="true">Comentario:</th>
+                                                        <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
+                                                        <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
+                                                        {%if pendiente %}
+                                                        <th data-field="acciones">Acciones</th>
+                                                        {%endif%}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                {% for examen in examenes %}
+                                                    <tr>
+                                                        <td></td>
+                                                       <td>{{ examen.Alumno }}</td>
+                                                       <td>{{ examen.Nota_Idioma }}</td>
+                                                       <td>{{ examen.Comentario_Idioma }}</td>
+                                                       <td>{{ examen.Estado_Idioma }}</td>
+        
+                                                       <td>{{ examen.Nota_Matematicas }}</td>
+                                                       <td>{{ examen.Comentario_Matematicas }}</td>
+                                                       <td>{{ examen.Estado_Matematicas }}</td>
+                                                        <td>{{ examen.Nota_Ingles }}</td>
+                                                       <td>{{ examen.Comentario_Ingles }}</td>
+                                                       <td>{{ examen.Estado_Ingles }}</td>
+                                                      
+                                                       
+                                                        <td>{{ examen.Comentario }}</td>
+                                                        <td>{{ examen.Estado_Examen }}</td>
+                                                        <td>{{ examen.fechaingreso }}</td>
+                                                        {%if pendiente %}
+                                                        <td><a target="_blank" href="{% url 'examenes_editar' pk=examen.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Actualizar</a></td>
+                                                        {%endif%}
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                      
 
 
+                        </div>
+                    </div>
+                </div>
+        
 
+                
+
+                <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
                 <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
                 <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
                 <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
