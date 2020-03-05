@@ -36,7 +36,7 @@ def vista_Grados(request):
         post.save()
     return render(request, 'administracion/agregar_contenidoExamen.html', {
         'form': form
-    })
+        })
 
 def days_between(d1, d2):
     return abs(d2 - d1).days
@@ -1072,6 +1072,7 @@ def asignacion_pagos(request):
             else:
                 try:
                     for alumno in Palumnos:
+                        
                         post = None
                         form = None
                         form = asignacion_pagosForm()
@@ -1603,10 +1604,12 @@ def ver_alumnos_grados(request):
         secc=request.POST['seccion']
         if grado:
             try:
-                alumnos = Alumno.objects.filter(Grado=Grado.objects.get(pk=grado), Seccion=secc)
+                alumnos = Alumno.objects.filter(Grado=Grado.objects.get(pk=grado), Seccion=secc).order_by('Primer_Apellido')
+                alumnos = alumnos.filter(estado = "Activo" or "Registro")
+                print(alumnos.count())
             except Exception as e:
-                print("NO")
                 alumnos= None
+                print(e)
             return render(request, 'administracion/alumnos_grado.html', {'alumnos': alumnos})
     else:
         grados= Grado.objects.all()

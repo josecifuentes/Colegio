@@ -67,9 +67,9 @@
                                             <strong>{{ user.username }}</strong>
                                             <span class="glyphicon glyphicon-chevron-down"></span>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu" id="menu">
                                             <li>
-                                                <div class="navbar-login">
+                                                <div class="navbar-login" style="padding-left: 30px;">
                                                     <div class="row">
                                             
                                                         <div class="col-lg-12">
@@ -78,22 +78,14 @@
                                                             <p class="text-left">
                                                                 <a href="/administracion" class="btn btn-primary btn-block btn-sm">Entrar Sistema</a>
                                                             </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <div class="navbar-login navbar-login-session">
-                                                    <div class="row">
-                                                        <div class="col-lg-11">
                                                             <p>
-                                                                <a href="{% url 'logout' %}" class="btn btn-danger btn-block">Cerrar Sesión</a>
+                                                                <a href="{% url 'logout' %}" class="btn btn-danger btn-block btn-sm">Cerrar Sesión</a>
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
+                                        
                                         </ul>
                                     </li>
                                
@@ -116,20 +108,19 @@
                         <div id="logo" class="logo">
                             <div class="education-text text-white">
                             <img src="{% static 'images/logo/logo.png'%}" alt="images" >
-                                 <font color="#04D1FF " size="5">Colegio </font><font color="#FFFFFF  " size="5">Nuevo</font><font color="#04D1FF " size="5"> Mundo</font>
+                                 <font color="#0951A2 " size="5">Colegio </font><font color="#FFFFFF  " size="5">Nuevo</font><font color="#0951A2 " size="5"> Mundo</font>
                                 </div>
                         </div>
                         <div class="mobile-button"><span></span></div>
                         <div class="header-menu">
                             <nav id="main-nav" class="main-nav">
                                 <ul class="menu">
-                                    <li><a href="home2.html">Inicio</a></li>
-                                    <li><a href="course.html">Actividades</a></li>
-                                    <li><a href="course.html">Noticias</a></li>
-                                    <li><a href="#">Imágenes</a></li>
-                                    <li><a href="#">Papelerías</a></li>
-                                    <li><a href="#">Aula Virtual</a></li>
-                                    
+                                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                                    <li><a href="{% url 'grade' %}">Grados</a></li>
+                                    <li><a href="{% url 'news' %}">Noticias</a></li>
+                                    <li><a href="{% url 'downloads' %}">Descargas</a></li>
+                                    <li><a href="{% url 'about' %}">Organizacion</a></li>
+                                    <li><a href="{% url 'contact' %}">Contáctanos</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -145,13 +136,13 @@
                     <!-- Slide 1 -->
                     <li data-transition="random">
                         <!-- Main Image -->
-                        <img src="{% static 'images/home2/pruebaportada1.png' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <img src="{% static 'images/home2/P1.jpg' %}" alt="" data-bgposition="center center" data-no-retina>
                         <div class="overlay"></div>
 
                         <!-- Layers -->
                         <div class="tp-caption tp-resizeme education"
                         data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
-                        data-y="['middle','middle','middle','middle']" data-voffset="['-161','-100','-80','-50']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['90','-100','-80','-50']"
                         data-fontsize="['70','70','70','30']"
                         data-lineheight="['90','90','90','35']"
                         data-width="full"
@@ -169,7 +160,7 @@
 
                         <div class="tp-caption tp-resizeme text-white complete text-edukin"
                         data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
-                        data-y="['middle','middle','middle','middle']" data-voffset="['-70','-10','5','20']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['150','-10','5','20']"
                         data-fontsize="['17','17','16','14']"
                         data-lineheight="['30','30','26','22']"
                         data-width="full"
@@ -191,14 +182,14 @@
                     <!-- Slide 2 -->
                     <li data-transition="random">
                         <!-- Main Image -->
-                        <img src="{% static 'images/home2/pruebaportada1.png' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <img src="{% static 'images/home2/P2.jpg' %}" alt="" data-bgposition="center center" data-no-retina>
                         <div class="overlay"></div>
 
                         <!-- Layers -->
 
                         <div class="tp-caption tp-resizeme font-rubik education education"
                         data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
-                        data-y="['middle','middle','middle','middle']" data-voffset="['-161','-100','-80','-50']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-50','-100','-80','-50']"
                         data-fontsize="['70','70','70','30']"
                         data-lineheight="['90','90','90','35']"
                         data-width="full"
@@ -212,11 +203,11 @@
                         data-start="1000" 
                         data-splitin="none" 
                         data-splitout="none" 
-                        data-responsive_offset="on"> <div class="education-text text-white">SU FELICIDAD ES LO MÁS IMPORTANTE</div> </div>
+                        data-responsive_offset="on"> <div class="education-text text-white" >SU FELICIDAD ES LO MÁS IMPORTANTE</div> </div>
 
                         <div class="tp-caption tp-resizeme text-white complete text-edukin"
                         data-x="['left','left','left','center']" data-hoffset="['0','4','4','15']"
-                        data-y="['middle','middle','middle','middle']" data-voffset="['-70','-10','5','20']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['50','-10','5','20']"
                         data-fontsize="['17','17','16','14']"
                         data-lineheight="['30','30','26','22']"
                         data-width="full"
@@ -236,13 +227,106 @@
          
                     </li>
 
-               
+               <!-- Slide 3 -->
+                    <li data-transition="random">
+                        <!-- Main Image -->
+                        <img src="{% static 'images/home2/P3.jpeg' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <div class="overlay"></div>
+
+                        <!-- Layers -->
+
+                        <div class="tp-caption tp-resizeme font-rubik education education"
+                        data-x="['left','left','left','center']" data-hoffset="['160','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-50','-100','-80','-50']"
+                        data-fontsize="['70','70','70','30']"
+                        data-lineheight="['90','90','90','35']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on"> <div class="education-text text-white " >El mejor medio para hacer buenos a los niños es hacerlos felices.</div> </div>
+
+                        <div class="tp-caption tp-resizeme text-white  complete text-edukin"
+                        data-x="['left','left','left','center']" data-hoffset="['160','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['90','-10','5','20']"
+                        data-fontsize="['17','17','16','14']"
+                        data-lineheight="['30','30','26','22']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on" 
+                        data-paddingright="['550','155','50','2']" style="color:red;">Colegio Privado Mixto Nuevo Mundo</div>
+
+         
+                    </li>
                      
-                    
+                    <!-- Slide 3 -->
+                    <li data-transition="random">
+                        <!-- Main Image -->
+                        <img src="{% static 'images/home2/P4.jpg' %}" alt="" data-bgposition="center center" data-no-retina>
+                        <div class="overlay"></div>
+
+                        <!-- Layers -->
+
+                        <div class="tp-caption tp-resizeme font-rubik education education"
+                        data-x="['left','left','left','center']" data-hoffset="['160','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-120','-100','-80','-50']"
+                        data-fontsize="['70','70','70','30']"
+                        data-lineheight="['90','90','90','35']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on"> <div class="education-text text-white " >Lo único que interfiere con mi aprendizaje es mi educación.</div> </div>
+
+                        <div class="tp-caption tp-resizeme text-white complete text-edukin text1"
+                        data-x="['left','left','left','center']" data-hoffset="['160','4','4','15']"
+                        data-y="['middle','middle','middle','middle']" data-voffset="['-20','-10','5','20']"
+                        data-fontsize="['17','17','16','14']"
+                        data-lineheight="['30','30','26','22']"
+                        data-width="full"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
+                        data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+                        data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+                        data-mask_in="x:0px;y:[100%];" 
+                        data-mask_out="x:inherit;y:inherit;" 
+                        data-start="1000" 
+                        data-splitin="none" 
+                        data-splitout="none" 
+                        data-responsive_offset="on" 
+                        data-paddingright="['550','155','50','2']" style="color:red; ">Colegio Privado Mixto Nuevo Mundo</div>
+
+         
+                    </li>
                 </ul>
             </div>
         </div> <!-- slider -->
     </section><!-- flat-slider -->
+    <div style="height: 25%;"></div>
     <section class="campus">
         <div class="container">
             <div class="row">
@@ -292,28 +376,19 @@
                                 </div>
                             </div>
                         </div> 
-                        <div class="iconbox-benefit iconbox-width50">
-                            <div class="iconbox iconbox-one">
-                                <div class="iconbox-icon">
-                                    <img src="{% static 'images/home2/mortarboard.svg' %}" alt="images" width="80" height="80">
-                                </div>
-                                <div class="iconbox-content">
-                                    <h3><a href="#">Graduandos</a></h3>
-                                    <p style="text-align: center">Las prácticas para nuestros graduandos son de vital importancia ya que hay es donde se preparan para el siguiente nivel.</p>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                
         </div>
+        <div style="height: 15%;"></div>
     </section><!-- campus -->
     <section class="flat-introduce flat-introduce-style2 clearfix">
         <div class="bg"></div>
         <div class="container-fluid">
             <div class="section-about-left">
                 <div class="videobox">
-                  <img src="{% static 'images/home2/22.jpg' %}" alt="images">
+                  <img src="{% static 'images/home2/card2.jpg' %}" alt="images">
                 </div>
             </div>
             <div class="section-about-right content-introduce">
@@ -331,6 +406,60 @@
             </div>
         </div>
     </section>
+    <section class="flat-services-style2 clearfix">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="flat-imagebox imagebox-services themesflat-content-box" data-padding="0% 0% 0% 3.6%" data-mobipadding="0% 0% 0% 0%" data-smobipadding="0% 0% 0% 0%">
+                        <div class="imagebox-content">
+                            <center><img src="{% static 'images/home2/25.png' %}" alt="images"></center>
+                            <h5 class="text-one text-white">La mejor educación</h5>
+                            <p class="text-white">
+                              Contamos con los mejores docentes, para garantizar que, nuestra educación es la mejor.  
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="flat-imagebox imagebox-services themesflat-content-box" data-padding="3% 0% 0% 3%" data-mobipadding="0% 0% 0% 0%" data-smobipadding="0% 0% 0% 0%">
+                        <div class="imagebox-content">
+                            <center><img src="{% static 'images/home2/13.png' %}" alt="images"></center>
+                            <h5 class="text-two text-white">Exito en aprendizaje</h5>
+                            <p class="text-white">
+                               Brindamos atención personalizada esto aumenta la curva de su aprendizaje.
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="flat-imagebox imagebox-services themesflat-content-box" data-padding="0% 0% 0% 2.5%" data-mobipadding="0% 0% 0% 0%" data-smobipadding="0% 0% 0% 0%">
+                        <div class="imagebox-content">
+                            <center><img src="{% static 'images/home2/26.png' %}" alt="images"></center>
+                            <h5 class="text-three text-white">El mejor contenido</h5>
+                            <p class="text-white">
+                               Buscamos siempre el mejor contenido y transmitirlo de la mejor forma.
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="flat-imagebox imagebox-services themesflat-content-box" data-padding="0% 0% 0% 2.2%" data-mobipadding="0% 0% 0% 0%" data-smobipadding="0% 0% 0% 0%">
+                        <div class="imagebox-content">
+                            <center><img src="{% static 'images/home2/14.png' %}" alt="images"></center>
+                            <h5 class="text-four text-white">Preparacion Pre-Universitaria</h5>
+                            <p class="text-white">
+                                Estamos siempre actualizados, contamos con múltiples opciones en carreras.
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- flat-services -->
     <!-- flat-benefit -->
     <section class="testimonial testimonial-style2">
         <div class="container">
@@ -340,7 +469,7 @@
                     <div class="wrap-testimonial">
                         <div class="title-section">
                             <div class="flat-title small heading-type5">
-                                INFORMACIÓN
+                                CITAS
                             </div>
                         </div>
                         <div class="client-style2 clearfix">
@@ -349,14 +478,14 @@
 
                                     <div class="testimonial-content">
                                         <div class="text text-white">
-                                            A los padres de familia de pre-primaria se les informa que la reunión programada para el día de hoy 1 de febrero a las 2 de la tarde, se llevará a cabo según programación, Los esperamos a todos.
+                                           Nunca consideres el estudio como una obligación, sino como una oportunidad para penetrar en el bello y maravilloso mundo del saber.
                                         </div>
                                         <div class="author-info">
                                             <h5>
-                                                <a href="#">T.Mónica Sánchez</a>
+                                                <a href="#">Albert Einstein</a>
                                             </h5>
                                             <p class="position">
-                                                Dirección
+                                                Cientifico
                                             </p>
                                         </div>
                                     </div>
@@ -369,80 +498,80 @@
             </div>
         </div>
     </section><!-- testimonial -->
-    <section class="latest-blog latest-blog-type2 latest-blog-style2">
+    <section class="flat-benefit style22">
         <div class="container">
-            <div class="title-section">
-                <div class="flat-title small heading-type7">
-                   Grados
-                </div>
-            </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <article class="post post-style2 box-shadow-type1">
-                        <div class="featured-post">
-                            <img src="{% static 'images/home2/Primaria.jpg' %}" alt="images">
+                <div class="col-lg-5">
+                    <div class="title-section">
+                        <div class="flat-title small heading-type5">
+                           ¿Porque escogernos? 
                         </div>
-                        <div class="post-content">
-                           
-                            <div class="post-title">
-                                <h5>
-                                    <a href="#">Primaria</a>
-                                </h5>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="iconbox-benefit">
+                                <div class="iconbox">
+                                    <div class="iconbox-icon">
+                                        <img src="{% static 'images/home2/17.png' %}" alt="images">
+                                    </div>
+                                    <div class="iconbox-content iconbox-content-style22">
+                                        <h3><a href="#">Metas</a></h3>
+                                        <p>
+                                           Tenemos los mejores métodos de enseñanza para alcanzar todas sus metas de estudio.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="post-link">
-                                <p style="text-align: center;">Contamos con toda la sección de Pre-Primaria (Estimulación, Pre-Kinder, Kinder, Preparatoria) y su sección de Primaria (Primero a Sexto).</p>
+                        </li>
+                        <li>
+                            <div class="iconbox-benefit">
+                                <div class="iconbox">
+                                    <div class="iconbox-icon">
+                                        <img src="{% static 'images/home2/18.png' %}" alt="images">
+                                    </div>
+                                    <div class="iconbox-content iconbox-content-style22">
+                                        <h3><a href="#">Carreras</a></h3>
+                                        <p>
+                                           Contamos con la mejor formacion en pre-primaria, primaria, basico y diversificado.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </li>
+                        <li>
+                            <div class="iconbox-benefit">
+                                <div class="iconbox">
+                                    <div class="iconbox-icon">
+                                        <img src="{% static 'images/home2/19.png' %}" alt="images">
+                                    </div>
+                                    <div class="iconbox-content iconbox-content-style22">
+                                        <h3><a href="#">Metodos de Estudio</a></h3>
+                                        <p>
+                                          Tenemos las mejores tutorías en todos los niveles para garantizar el mejor aprendizaje.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-4 col-md-4">
-                    <article class="post post-style2 box-shadow-type1">
-                        <div class="featured-post">
-                            <img src="{% static 'images/home2/Basico.jpg' %}" alt="images">
-                        </div>
-                        <div class="post-content">
-                           
-                            <div class="post-title">
-                                <h5>
-                                    <a href="#">Básico</a>
-                                </h5>
-                            </div>
-                            <div class="post-link">
-                                <p style="text-align: center;">En Básico nos enfocamos en su preparación para una correcta orientación en su carrera, ofrecemos de Primero Básico a Tercero Básico.</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <article class="post post-style2 box-shadow-type1">
-                        <div class="featured-post">
-                            <img src="{% static 'images/home2/Bachillerato.jpg' %}" alt="images">
-                        </div>
-                        <div class="post-content">
-                        
-                            <div class="post-title">
-                                <h5>
-                                    <a href="#">Bachillerato</a>
-                                </h5>
-                            </div>
-                            <div class="post-link">
-                                <p style="text-align: center;">Contamos con múltiples carreras, Bachillerato en Ciencias y Letras, Computación, Diseño Gráfico, Salud y Electrónica.</p>
-                            </div>
-                        </div>
-                    </article>
+                <div class="col-lg-7">
+                    <div class="featured-post">
+                        <img src="{% static 'images/home2/card1.jpg' %}" alt="images" style="border-radius:150px;">
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section><!-- flat-benefit -->
     <!-- special -->
     <footer id="footer" class="footer-type3">
 
         <div id="footer-widget">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-footer">
+                    <div class="col-lg-4 col-footer">
                        <div class="logo-footer">
-                           <img src="{% static 'images/home2/logsin.png' %}" alt="images" width="350" height="150">
+                        <img src="{% static 'images/home2/logsin.png' %}" alt="images" width="350" height="150" id="logo1">
                        </div>
                     </div>
                     <div class="col-lg-2 col-company">
@@ -458,7 +587,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-7 col-course">
+                    <div class="col-lg-6 col-course">
                         <h3 class="widget widget-title text-white">
                             <font color="Black"> Contácto</font>
                         </h3> 
@@ -477,7 +606,7 @@
             <div id="bottom-bar-inner" class="container">
                 <div class="bottom-bar-inner-wrap">
                     <div class="bottom-bar-content">
-                        <div id="copyright">
+                        <div id="copyright" style="color: white;">
                             Copyright &copy;<script>document.write(new Date().getFullYear());</script> Derechos Reservados | Colegio Privado Nuevo Mundo
                         </div>
                     </div>

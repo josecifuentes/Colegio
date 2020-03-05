@@ -60,6 +60,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+
+
+@media only screen and (max-width: 600px) {
+  #menu {
+    position: absolute; 
+    left: -40%;
+  }
+  #text1
+  {
+    position: absolute;
+    padding-bottom: 20%;
+  }
+}
+@media only screen and (min-width: 650px) {
+  #menu {
+    position: absolute; 
+    left: -100%;
+  }
+  #logo1
+  {
+    position: absolute;
+    padding-left: 20%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 .icon-icons8-list-filled-480:before {
   content: "\e90f";
 }
@@ -282,7 +318,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #fbb545;
+    color: #0951A2;
     text-decoration: none;
     outline: 0;
     -webkit-transition: all 0.3s ease-in-out;
@@ -451,7 +487,7 @@ input::-webkit-input-placeholder {
 #bottom .bottom-bar-content #copyright .license a:hover,
 .flat-event-style3 .content-event-style3 .featured .place a:hover,
 .course-grid .flat-portfolio .flat-filter-isotype li a:hover{
-    color: #fbb545;
+    color: #0951A2;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
@@ -469,7 +505,7 @@ input::-webkit-input-placeholder {
 .transparent-head-style5 .wrap-transparent .btn-edu ul .bt-copy a:hover,
 .transparent-head-style5 .wrap-transparent .btn-edu ul .bt-get a:hover,
 .imagebox-courses-type2 .info-courses .package a:hover{
-    background: #fbb545;
+    background: #0951A2;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
@@ -533,8 +569,8 @@ input::-webkit-input-placeholder {
 .quick-link-style4 .btn-apply-link ul li .btn-request:hover,
 .quick-link-style5 .btn-apply-link ul li .btn-request:hover{
     color: #fff;
-    background: #fbb545;
-    border-color: #fbb545;
+    background: #0951A2;
+    border-color: #0951A2;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
@@ -551,13 +587,13 @@ input::-webkit-input-placeholder {
     transition: all 0.3s ease;
 }
 #footer .form-send input:focus{
-    border: 1px solid #fbb545;
+    border: 1px solid #0951A2;
 }
 #footer #footer-widget .widget-nav-menu li a:hover{
     margin-left: 15px;
 }
 .header-style1 .header-menu .main-nav .menu li.nav-sing a.sing-up:hover{
-    background: #fbb545;
+    background: #0951A2;
     color: #fff;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -611,7 +647,7 @@ input::-webkit-input-placeholder {
 .mobile-button:before,
 .mobile-button:after,
 .mobile-button span {
-    background-color: #fbb545;
+    background-color: #0951A2;
     -webkit-transition:all ease 0.3s;
     -moz-transition:all ease 0.3s;
     transition:all ease 0.3s;
@@ -907,7 +943,7 @@ input::-webkit-input-placeholder {
     background-color: #ff5f60;
 }
 .bg-clfbb545{
-    background-color: #fbb545;
+    background-color: #0951A2;
 }
 .bg-clff9819{
     background-color: #ff9819;
@@ -969,7 +1005,7 @@ input::-webkit-input-placeholder {
     color: #fe5e5f;     
 }
 .cl-fbb545{
-    color: #fbb545;     
+    color: #0951A2;     
 }
 .cl-667eea{
     color: #667eea;
@@ -1155,7 +1191,7 @@ input::-webkit-input-placeholder {
     -webkit-animation: preloader-wave 1.6s linear infinite;
     animation: preloader-wave 1.6s linear infinite; 
     border-radius: 50%;
-    background: #fbb545;
+    background: #0951A2;
 }
 #loading-overlay .loader:after {
     -webkit-animation-delay: -.8s;
@@ -1240,7 +1276,7 @@ input::-webkit-input-placeholder {
 }
 .menu-bar .menu-bar-wrap{
     border-top: 1px solid #d0d0d0; 
-    background: rgba(255,255,255, 0.2);
+    background: rgba(255,255,255, 0.6);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 0 30px;
@@ -1450,7 +1486,7 @@ input::-webkit-input-placeholder {
 }
 .site-content .post-blog .content-post .post-meta .clendar-wrap{
     padding: 21px 27px 16px 21px;
-    background: #fbb545;
+    background: #0951A2;
     color: #fff;
     border-radius: 2px;
 }
@@ -1472,7 +1508,7 @@ input::-webkit-input-placeholder {
     font-weight: 600;
 }
 .site-content .post-blog .content-post-inner .poster a{
-    color: #fbb545;
+    color: #0951A2;
     font-size: 14px;
 }
 .site-content .post-blog .content-post-inner .entry-title a{
@@ -1638,7 +1674,7 @@ input::-webkit-input-placeholder {
     font-size: 14px;
     font-weight: 600;
     padding: 11px 18px 9px 20px;
-    background: #fbb545;
+    background: #0951A2;
     color: #fff;
     display: inline-block;
     letter-spacing: 0.5px;
@@ -1711,7 +1747,7 @@ input::-webkit-input-placeholder {
     text-transform: none;
 }
 #footer .form-send .send-button-type1:hover{
-    color: #fbb545;
+    color: #0951A2;
     background-color: #333;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -1943,7 +1979,7 @@ input::-webkit-input-placeholder {
 }
 .comments .btn-post-comment{
     padding: 10px 28px;
-    background: #fbb545;
+    background: #0951A2;
     color: #fff;
     font-size: 14px;
     font-weight: 500;
@@ -1979,7 +2015,7 @@ input::-webkit-input-placeholder {
 }
 .related-posts-wrap .content-related-post .read-more a{
     font-size: 14px;
-    color: #fbb545;
+    color: #0951A2;
 }
 
 /*home1*/
@@ -2399,7 +2435,7 @@ input::-webkit-input-placeholder {
 }
 
 .flat-slider.style2 .tp-caption a.btn-styl1{
-    background: #fbb545;
+    background: #0951A2;
 }
 .flat-slider.style2 .tp-caption a.btn-styl1{
     padding: 13px 32px 10px 32px;
@@ -2458,7 +2494,7 @@ input::-webkit-input-placeholder {
     margin-left: -9px;
 }
 .flat-introduce-style2 .section-about-left .videobox a.fancybox:before{
-    background-color: #fbb545;
+    background-color: #0951A2;
     right: 0;
     top: 45.4%;
     margin-right: -32px;
@@ -2529,7 +2565,7 @@ input::-webkit-input-placeholder {
     padding: 155px 0 0 0;
 }
 .testimonial-style2 .flat-title .heading{
-    color: #fbb545;
+    color: #0951A2;
 }
 .testimonial-style2 .featured-post{
     margin-left: 4px;
@@ -2541,7 +2577,7 @@ input::-webkit-input-placeholder {
     margin-bottom: 48px;
 }
 .testimonial-style2 .wrap-testimonial .title-section .flat-title{
-    color: #fbb545;
+    color: #0951A2;
 }
 .testimonial-style2 .testimonial-content .text{
     margin-bottom: 20px;
@@ -2550,7 +2586,7 @@ input::-webkit-input-placeholder {
     letter-spacing: -0.13px;
 }
 .testimonial-style2 .testimonial-content .author-info a{
-    color: #fbb545;
+    color: #0951A2;
 }
 .testimonial-style2 .testimonial-content .author-info{
     margin-top: 20px;
@@ -2678,7 +2714,7 @@ input::-webkit-input-placeholder {
 .flat-event-bg .content-event-right .flat-button a.btn-become{
     padding: 10px 22px 13px 23px;
     border-radius: 34px;
-    background: #fbb545;
+    background: #0951A2;
     display: inline-block;
     color: #fff;
     font-size: 17px;
@@ -2768,7 +2804,7 @@ input::-webkit-input-placeholder {
     border-top-right-radius: 50px;
 }
 .special-style2 .cl333 .bg{
-    background: #fbb545;
+    background: #0951A2;
     padding: 51px 40px 59px 40px;
     text-align: center;
     color: #fff;
@@ -3379,7 +3415,7 @@ input::-webkit-input-placeholder {
 .flat-introduce-style4 .videobox a.fancybox:before{
     bottom: 0;
     right: 0;
-    background: #fbb545;
+    background: #0951A2;
 }
 .flat-introduce-style4 .fancybox img{
     border-bottom-right-radius: 30px;
@@ -3388,13 +3424,13 @@ input::-webkit-input-placeholder {
     margin-bottom: 54px;
 }
 .flat-introduce-style4 .title-section .sub-title{
-    color: #fbb545;
+    color: #0951A2;
     margin-bottom: 16px;
 }
 
 .quick-link-style4 .heading-lf,
 .quick-link-style4 .heading-rg span:before{
-    color: #fbb545;
+    color: #0951A2;
 }
 
 .online-courses-style4{
@@ -3489,10 +3525,10 @@ input::-webkit-input-placeholder {
 .latest-blog.cl-dots2 .owl-carousel .owl-dots button.owl-dot.active{
     width: 39px;
     height: 39px;
-    color: #fbb545 !important;
+    color: #0951A2 !important;
     border-radius: 50%;
     background: none;
-    border: 1px solid #fbb545 !important; 
+    border: 1px solid #0951A2 !important; 
 }
 
 .flat-event-style4{
@@ -3542,7 +3578,7 @@ input::-webkit-input-placeholder {
 .header-style5 .header-menu .main-nav .menu li.nav-sing a.sing-in{
     padding: 11px 32px 11px 33px;
     border-radius: 36px;
-    background: #fbb545;
+    background: #0951A2;
     margin-right: 0;
     display: unset;
 }
@@ -3775,7 +3811,7 @@ input::-webkit-input-placeholder {
 
 .quick-link-style5 .heading-lf,
 .quick-link-style5 .heading-rg span:before{
-    color: #fbb545;
+    color: #0951A2;
 }
 
 .event-bg2 .content-event-left{
@@ -3900,7 +3936,7 @@ input::-webkit-input-placeholder {
     font-weight: 600;
     display: inline-block;
     letter-spacing: 0.3px;
-    background: #fbb545;
+    background: #0951A2;
     padding: 3px 23px 1px 24px;
     text-transform: capitalize;
 } 
@@ -4084,7 +4120,7 @@ input::-webkit-input-placeholder {
 }
 .team-box-layout-h1:hover .item-content {
     bottom: 0;
-    background-color: #fbb545;   
+    background-color: #0951A2;   
 }
 .team-box-layout-h1:hover .item-content .item-title a{
     color: #fff;
@@ -4237,7 +4273,7 @@ input::-webkit-input-placeholder {
     color: #333;
 }
 .course-grid .flat-portfolio .flat-filter-isotype li.active a{
-    color: #fbb545;
+    color: #0951A2;
 }
 .course-grid .flat-portfolio{
     width: 100%;
@@ -4356,7 +4392,7 @@ input::-webkit-input-placeholder {
     position: relative;
     padding: 10px 15px;
     display: inline-block;
-    background: #fbb545;
+    background: #0951A2;
     font-size: 16px;
     line-height: 20px;
     font-weight: 600;
@@ -4389,7 +4425,7 @@ input::-webkit-input-placeholder {
 
 /*course-single*/
 .courses-single-page .course-single .videobox a.fancybox:before{
-    background: #fbb545;
+    background: #0951A2;
     border: none;
     left: 46%;
     top: 43%;
@@ -4443,7 +4479,7 @@ input::-webkit-input-placeholder {
     margin-top: 5px;
 }
 .course-single .content .author-price .author .info .list-star i{
-    color: #fbb545;
+    color: #0951A2;
     font-size: 12px;
     margin-right: 2px;
 }
@@ -4454,7 +4490,7 @@ input::-webkit-input-placeholder {
     font-size: 17px;
     line-height: 20px;
     font-weight: 600;
-    color: #fbb545;
+    color: #0951A2;
 }
 .price-course-single .price{
     float: left;
@@ -4480,7 +4516,7 @@ input::-webkit-input-placeholder {
 }
 .price-course-single .btn-buynow a{
     padding: 10px 28px 10px 29px;
-    background: #fbb545;
+    background: #0951A2;
     color: #fff;
     border-radius: 4px;
     font-weight: 600;
@@ -4557,7 +4593,7 @@ input::-webkit-input-placeholder {
 .tab-content-wrap .item-content .text .request li:before{
     content: '\f00c';
     font-family: "FontAwesome";
-    color: #fbb545;
+    color: #0951A2;
     position: absolute;
     left: 0;
 }
@@ -4586,7 +4622,7 @@ input::-webkit-input-placeholder {
 .certificate .certificate-wrap .list-certificate li:before{
     content: '\f111';
     font-family: "FontAwesome";
-    color: #fbb545;
+    color: #0951A2;
     font-size: 10px;
     position: absolute;
     left: 0;
@@ -4618,7 +4654,7 @@ input::-webkit-input-placeholder {
 .courses-single-page .sidebar-right .widget-features .features li:before{
     font-family: 'fontawesome';
     margin-right: 20px;
-    color: #fbb545;
+    color: #0951A2;
 }
 .courses-single-page .sidebar-right .widget-features .features li:nth-child(1):before {   
     content: '\f016';

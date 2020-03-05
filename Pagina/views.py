@@ -21,9 +21,23 @@ def acti(request, pk):
         list.append(i)
     return render(request, 'Pagina/actividades.html', {'actividad': actividad,'inicio': inicio,'fin': fin,'list': list,'pag': pag})
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'Pagina/inicio.html', {'posts': posts})
+def home(request):
+    return render(request, 'Pagina/inicio.html')
+
+def grade(request):
+    return render(request, 'Pagina/inicio.html')
+
+def news(request):
+    return render(request, 'Pagina/inicio.html')
+
+def downloads(request):
+    return render(request, 'Pagina/inicio.html')
+
+def about(request):
+    return render(request, 'Pagina/inicio.html')
+
+def contact(request):
+    return render(request, 'Pagina/inicio.html')
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
