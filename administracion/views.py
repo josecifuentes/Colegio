@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
-from .models import Reportes,ContenidoExamen,Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
+from .models import Estados_materia,Reportes,ContenidoExamen,Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
 from .forms import ContenidoExamenForm,AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
-from .forms import GradoCursosForm,Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
+from .forms import Estados_materiaForm,GradoCursosForm,Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, Template
@@ -235,7 +235,6 @@ def actividades_cursos(request):
                     for a in materia:
                         asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
                         act = act + asig.count()
-                        estado = estado + Asignacion_Punteo.objects.filter(Asignacion_Acividades = asig[:1],Estado="Aprobado").values('Estado').distinct().count()
                     maestros = materia.values('Personal').distinct().count()
                     actividad['Maestros'] = maestros
                     cursos = materia.values('Materia').distinct().count()
@@ -376,7 +375,6 @@ def notas(request):
                 for a in materia:
                     asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
                     act = act + asig.count()
-                    estado = estado + Asignacion_Punteo.objects.filter(Asignacion_Acividades = asig[:1],Estado="Aprobado").values('Estado').distinct().count()
                 maestros = materia.values('Personal').distinct().count()
                 actividad['Maestros'] = maestros
                 cursos = materia.values('Materia').distinct().count()
@@ -445,24 +443,18 @@ def notas(request):
 def asignar_notas(request,pk,act):
     curso = Asignacion_Materia.objects.get(pk=pk)
     unidad = request.session['unidad']
-    alumnos = Alumno.objects.filter(Grado=curso.Grado,Seccion=curso.Seccion)
     if act==1:
         estado="No Aprobado"
     if act==2:
         estado="Pendiente"
     if act==3:
         estado="Aprobado"
-    for alumno in alumnos:
-        actividades = Asignacion_Acividade.objects.filter(Asignacion_Materia=curso,Unidad=unidad)
-        for actividad in actividades:
-            try:
-                nota=Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad,Alumno=alumno)
-                estados=Asignacion_notasForm(instance=nota)
-                pe = estados.save(commit=False)
-                pe.Estado = estado
-                pe.save()
-            except Exception as e:
-                a=None
+    estad = Estados_materia.objects.get(asignacion_materias=curso)
+    if(estad):
+        estados=Estados_materiaForm(instance=estad)
+        pe = estados.save(commit=False)
+        pe.Estado = estado
+        pe.save()
     return redirect('asignacion_notas',pk=pk)
 
 @login_required
@@ -490,6 +482,16 @@ def asignacion_notas(request, pk):
         total = []
         tot=int(0)
         estado="No Aprobado"
+        estados = Estados_materia.objects.get(asignacion_materias=curso)
+        if(not estados):
+            estados=Estados_materiaForm()
+            pe = estados.save(commit=False)
+            pe.asignacion_materias=curso
+            pe.Unidad=a
+            pe.Estado = estado
+            pe.save()
+        else:
+            estado=estados.Estado
         for alumno in alumnos:
             for actividad in actividades:
                 nota = {}
@@ -500,20 +502,14 @@ def asignacion_notas(request, pk):
                     punteo = Asignacion_Punteo.objects.get(Asignacion_Acividades=actividad, Alumno=alumno)
                     nota['pk'] = punteo.pk
                     nota['Punteo'] = punteo.Nota
-                    nota['estado'] = punteo.Estado
                 except Asignacion_Punteo.DoesNotExist:
                     nota['pk']="0"
                     nota['Punteo'] ="0"
-                    nota['estado'] = "No Aprobado"
                 tot=int(tot)+int(nota['Punteo'])
                 Notas.append(nota)
             total.append(tot)
             tot=0
-        for x in Notas:
-            if x['estado'] == "Pendiente":
-                estado="Pendiente"
-            if x['estado'] == "Aprobado":
-                estado="Aprobado"
+
     except Asignacion_Acividade.DoesNotExist:
             actividades=None
     return render(request, 'administracion/asignacion_notas.html', {'curso': curso, 'actividades': actividades, 'alumnos': alumnos,'Notas' : Notas,'total' : total,'unidad' : unidad,'Estado' : estado})
@@ -1605,8 +1601,6 @@ def ver_alumnos_grados(request):
         if grado:
             try:
                 alumnos = Alumno.objects.filter(Grado=Grado.objects.get(pk=grado), Seccion=secc).order_by('Primer_Apellido')
-                alumnos = alumnos.filter(estado = "Activo" or "Registro")
-                print(alumnos.count())
             except Exception as e:
                 alumnos= None
                 print(e)

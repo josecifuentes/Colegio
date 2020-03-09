@@ -461,7 +461,7 @@ class Estados_materia(models.Model):
     )
     Estados = (
         ('Pendiente', 'Pendiente'),
-        ('No_Aprobado', 'No Aprobado'),
+        ('No Aprobado', 'No Aprobado'),
         ('Aprobado', 'Aprobado'),
         )
     Estado = models.CharField(
@@ -470,7 +470,7 @@ class Estados_materia(models.Model):
         default='No Aprobado',
         )
     def __str__(self):
-        return '%s %s %s' % (self.asignacion_materias, self.Unidad)
+        return '%s %s %s' % (self.asignacion_materias, self.Unidad, self.Estado)
     class Meta:
         unique_together = (("asignacion_materias", "Unidad"),)
                 

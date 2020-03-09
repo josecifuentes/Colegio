@@ -1,5 +1,5 @@
 from django import forms
-from .models import Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
+from .models import Estados_materia,Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
 from .models import Encargado, Examene,Actividade
 from .models import Encargados_alumnos,Personal,ContenidoExamen
 from django.contrib.auth.forms import AuthenticationForm
@@ -75,15 +75,17 @@ class asignacion_alumnoForm(forms.ModelForm):
             'alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Encargado...'}),
             'parentesco': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Parentesco Del Alumno Con El Encargado'}),
         }   
-class asignacion_alumnoForm(forms.ModelForm):
+class Estados_materiaForm(forms.ModelForm):
 
     class Meta:
-        model = Encargados_alumnos
-        fields = ('alumno','parentesco')
+        model = Estados_materia
+        fields = ('asignacion_materias','Unidad','Estado')
         widgets = {
-            'alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Encargado...'}),
-            'parentesco': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Parentesco Del Alumno Con El Encargado'}),
-        }  
+            'asignacion_materias': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Encargado...'}),
+            'Unidad': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Parentesco Del Alumno Con El Encargado'}),
+            'Estado': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Parentesco Del Alumno Con El Encargado'}),
+        } 
+
 class asignacion_pagosForm(forms.ModelForm):
 
     class Meta:
@@ -160,6 +162,16 @@ class Asignacion_PunteoForm(forms.ModelForm):
         widgets = {
             'Alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Alumno...'}),
             'Nota': forms.TextInput(attrs={'class': 'touchspin1'}),
+        } 
+
+class asignacion_alumnoForm(forms.ModelForm):
+
+    class Meta:
+        model = Encargados_alumnos
+        fields = ('alumno','parentesco')
+        widgets = {
+            'alumno': forms.Select(attrs={'class': 'chosen-select','data-placeholder': 'Seleccione Un Encargado...'}),
+            'parentesco': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba El Parentesco Del Alumno Con El Encargado'}),
         } 
 
 class Asignacion_notasForm(forms.ModelForm):

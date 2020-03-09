@@ -1,5 +1,5 @@
 from django.contrib import admin
-from administracion.models import Reportes,ContenidoExamen,HorarioExamen,Periodo,horas,Asignacion_Punteo,Asignacion_Grado,Asignacion_Permiso,Permiso,Aula, Grado, Materia, GradoAdmin, MateriaAdmin, Alumno, Encargado, EncargadoAdmin, AlumnoAdmin, Examene, Pago, Papeleria, Personal, Asignacion_Materia, Asignacion_Acividade,Actividade
+from administracion.models import Estados_materia,Reportes,ContenidoExamen,HorarioExamen,Periodo,horas,Asignacion_Punteo,Asignacion_Grado,Asignacion_Permiso,Permiso,Aula, Grado, Materia, GradoAdmin, MateriaAdmin, Alumno, Encargado, EncargadoAdmin, AlumnoAdmin, Examene, Pago, Papeleria, Personal, Asignacion_Materia, Asignacion_Acividade,Actividade
 
 
 
@@ -36,3 +36,4 @@ admin.site.register(Periodo)
 admin.site.register(HorarioExamen)
 admin.site.register(ContenidoExamen)
 admin.site.register(Reportes)
+admin.site.register(Estados_materia)

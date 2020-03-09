@@ -1,4 +1,4 @@
-Nombre_Grado{% extends 'administracion/base.html' %}
+{% extends 'administracion/base.html' %}
 {% block content %}
 {% load static %}
 {% load index %}
@@ -7,7 +7,16 @@ Nombre_Grado{% extends 'administracion/base.html' %}
         ============================================ -->
     
 <script>
+    function cambio(pkal,pkact,newValue)
+    {
+        var total=0;
+       total=$('#total'+pkal).html();
+       act = $('#Nota'+pkal+pkact).html();
+       var total1 = parseInt(total)+parseInt(newValue-act);
+       $('#total'+pkal).text(total1)
+    }    
         $(document).ready(function() {
+    
 
      
     //toggle `popup` / `inline` mode
@@ -30,7 +39,10 @@ Nombre_Grado{% extends 'administracion/base.html' %}
                 return response.responseText;
             },
             success: function(response, newValue) {
-                if(!response.success) return response.error_msg;
+                if(!response.success) 
+                    return response.error_msg;
+                else
+                    cambio("{{ alumno.pk }}","{{ nota.Actividad }}",newValue);
             }
         
         });
@@ -41,6 +53,12 @@ Nombre_Grado{% extends 'administracion/base.html' %}
 
 
     </script>
+    
+
+
+
+
+
       <div class="data-table-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -70,6 +88,13 @@ Nombre_Grado{% extends 'administracion/base.html' %}
                            {%endif%}
                         </div>
                     </div>
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Estado Notas</h2>
+                           <font color="green"></font>{{Estado}}
+                        </div>
+                    </div>
+                
                 </div>
                 {%elif Estado == "No Aprobado" %}
                 <div class="row">
@@ -78,21 +103,31 @@ Nombre_Grado{% extends 'administracion/base.html' %}
                             <h2>Publicar Notas</h2>
 
                            <div class="modal-area-button">
-                                <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModalhdbgcl">Publicar todas las notas</a>
+                                <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModal">Publicar todas las notas</a>
                             </div> 
                         </div>
                     </div>
-                </div>
-                {%else%}
-                <div class="row">
+
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details shadow-reset">
                             <h2>Estado Notas</h2>
-                           {{Estado}}
+                          <font color="red"> {{Estado}}</font>
                         </div>
                     </div>
+                
+                </div>
+                {%elif Estado == "Pendiente" %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tab-content-details shadow-reset">
+                            <h1>Estado Notas</h1>
+                         <h2 style="color:green;"> {{Estado}}</font></h2>
+                        </div>
+                    </div>
+                
                 </div>
                 {%endif%}
+
 {% if "Super Usuario" in Permisos|stringformat:"s"%}
 <center>
                 {%if Estado != "Aprobado" %}
@@ -107,7 +142,7 @@ Nombre_Grado{% extends 'administracion/base.html' %}
 </center>
 {%endif%}
 
-                <div id="PrimaryModalhdbgcl" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                <div id="PrimaryModal" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header header-color-modal bg-color-1">
@@ -125,7 +160,7 @@ Nombre_Grado{% extends 'administracion/base.html' %}
                                     </div>
                                     <div class="modal-footer">
                                         <a data-dismiss="modal" href="#">Cancelar</a>
-                                        <a href="{% url 'asignar_notas' pk=curso.pk act=2%}">Asignar Notas</a>
+                                        <a href="{% url 'asignar_notas' pk=curso.pk act=2 %}">Asignar Notas</a>
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +288,7 @@ Nombre_Grado{% extends 'administracion/base.html' %}
                             </td>
                             {%endif%}
                                             {% endfor %}
-                                               <td>{{total|index:forloop.counter0}}</td>
+                                               <td id="total{{ alumno.pk }}">{{total|index:forloop.counter0}}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
@@ -273,32 +308,11 @@ Nombre_Grado{% extends 'administracion/base.html' %}
             </div>
         </div>
          </body> 
-    
-    <!--  editable JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/editable/jquery.mockjax.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/mock-active.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/select2.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/moment.min.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/bootstrap-datetimepicker.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/bootstrap-editable.js' %}"></script>
-    <script src="{% static 'administracion/js/editable/xediable-active.js' %}"></script>
- 
+     
 
-    <!-- data table JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
-    <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
- <!-- notification JS
-        ============================================ -->
-    <script src="{% static 'administracion/js/notifications/Lobibox.js' %}"></script>
-    <script src="{% static 'administracion/js/notifications/notification-active.js' %}"></script>
-
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> 
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
 {% endblock %}
