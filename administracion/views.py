@@ -482,16 +482,16 @@ def asignacion_notas(request, pk):
         total = []
         tot=int(0)
         estado="No Aprobado"
-        estados = Estados_materia.objects.get(asignacion_materias=curso)
-        if(not estados):
+        try:
+            estados = Estados_materia.objects.get(asignacion_materias=curso)
+            estado=estados.Estado
+        except Estados_materia.DoesNotExist:
             estados=Estados_materiaForm()
             pe = estados.save(commit=False)
             pe.asignacion_materias=curso
             pe.Unidad=a
             pe.Estado = estado
-            pe.save()
-        else:
-            estado=estados.Estado
+            pe.save()           
         for alumno in alumnos:
             for actividad in actividades:
                 nota = {}
