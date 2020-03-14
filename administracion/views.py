@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.db.models import Q
 from .models import Estados_materia,Reportes,ContenidoExamen,Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
 from .forms import ContenidoExamenForm,AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
@@ -66,6 +67,27 @@ def pre(request):
     alumno=Alumno.objects.get(Usuario=request.user)
     return render(request, 'administracion/inicio_principal.html',{'alumno':alumno})
 
+def meses(mes):
+    if(mes==1):
+        return "Enero"
+    if(mes==2):
+        return "Febrero"
+    if(mes==3):
+        return "Marzo"
+    if(mes==4):
+        return "Abril"
+    if(mes==5):
+        return "Mayo"
+    if(mes==6):
+        return "Junio"
+    if(mes==7):
+        return "Julio"
+    if(mes==8):
+        return "Agosto"
+    if(mes==9):
+        return "Septiembre"
+    if(mes==10):
+        return "Octubre"
 
 @login_required
 def dashboard(request):
@@ -76,8 +98,44 @@ def dashboard(request):
     a = False;
     for g in query_set:
         if g.name=="Administracion":
+            pagos = {}
+            mes = today.month
             reportes=Reportes.objects.filter(Solucion=None)
-            return render(request, 'administracion/dashboard_Administracion.html',{'reportes': reportes})
+            prepa=Pago.objects.filter(Alumno__Grado__Nivel="Pre-Primaria",Tipo_Pago=meses(mes))
+            alumnos = Alumno.objects.filter(Grado__Nivel="Pre-Primaria")
+            pre = prepa.count()
+            preal = alumnos.count()
+            percentegepre = (pre*100)/preal
+            pagos['pre']=pre
+            pagos['preal']=preal
+            pagos['percentegepre']=percentegepre
+            primar=Pago.objects.filter(Alumno__Grado__Nivel="Primaria",Tipo_Pago=meses(mes))
+            alumnos = Alumno.objects.filter(Grado__Nivel="Primaria")
+            prima = primar.count()
+            primaal = alumnos.count()
+            percentegepri = (prima*100)/primaal
+            pagos['prima']=prima
+            pagos['primaal']=primaal
+            pagos['percentegepri']=percentegepri
+            basico=Pago.objects.filter(Alumno__Grado__Nivel="Basico",Tipo_Pago=meses(mes))
+            alumnos = Alumno.objects.filter(Grado__Nivel="Basico")
+            basic = basico.count()
+            basicoal = alumnos.count()
+            percentegebasico = (basic*100)/basicoal
+            pagos['basic']=basic
+            pagos['basicoal']=basicoal
+            pagos['percentegebasico']=percentegebasico
+            bach=Pago.objects.filter(Alumno__Grado__Nivel="Diversificado",Tipo_Pago=meses(mes))
+            alumnos = Alumno.objects.filter(Grado__Nivel="Diversificado")
+            diver = bach.count()
+            diveral = alumnos.count()
+            percentegediver = (diver*100)/diveral
+            pagos['diver']=diver
+            pagos['diveral']=diveral
+            pagos['percentegediver']=percentegediver
+            estados = Estados_materia.objects.filter(Estado="Pendiente")
+            examenes = Examene.objects.filter(Estado_Examen="Pendiente")
+            return render(request, 'administracion/dashboard_Administracion.html',{'reportes': reportes,'mes':mes,'pagos':pagos,'estados':estados,'examenes':examenes})
         if g.name=="Secretaria":
             alumnos=Alumno.objects.all()
             return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
@@ -806,6 +864,8 @@ def contenido_examen(request):
         if g.name=="Secretaria":
             alumnos=Alumno.objects.filter(estado="Activo")
             return render(request, 'administracion/dashboard_Secretaria.html',{'alumnos': alumnos})
+        if g.name=="Maestro":
+            return redirect('dashboard')
         if g.name=="Alumno":
             grado = Alumno.objects.get(Usuario=request.user).Grado
             Seccion = Alumno.objects.get(Usuario=request.user).Seccion

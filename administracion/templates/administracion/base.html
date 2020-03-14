@@ -209,9 +209,9 @@
                         <li>
                              <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Contenidos</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                            {% if "Contenido_Examen" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
-                                <li><a title="Ver Contenidos Examenes" href="#"><span class="mini-sub-pro">Ver Contenidos Examenes</span></a></li>
-                                 {% endif %}
+                            
+                                <li><a title="Ver Contenidos Examenes" href="{% url 'contenido_examen' %}"><span class="mini-sub-pro">Ver Contenidos Examenes</span></a></li>
+                                 
                                 
                                 <li><a title="Ver Contenidos Unidad" href="{% url 'contenido_unidad' %}"><span class="mini-sub-pro">Ver Contenidos Unidad</span></a></li>
                                 

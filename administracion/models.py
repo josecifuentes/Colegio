@@ -469,6 +469,13 @@ class Estados_materia(models.Model):
         choices=Estados,
         default='No Aprobado',
         )
+    fechaingreso = models.DateTimeField(
+        blank=True, null=True)
+    
+    def publish(self):
+        self.fechaingreso = timezone.now()
+        self.save()
+
     def __str__(self):
         return '%s %s %s' % (self.asignacion_materias, self.Unidad, self.Estado)
     class Meta:

@@ -1,6 +1,7 @@
 {% extends 'administracion/base.html' %}
 {% block content %}
 {% load static %}
+{% load index %}
  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
   <!-- importing reset and custom css -->
 
@@ -14,26 +15,10 @@
                         <div class="skill">
                             <div class="progress">
                                 <div class="lead-content">
-                                    <h3><span class="counter">0</span>%</h3>
-                                    <p>Pagos Pre-primaria Agosto</p>
+                                    <h3><span class="counter">{{pagos.percentegepre|floatformat:2}}</span>%</h3>
+                                    <p>Pagos Pre-primaria {{mes|mes}}</p>
                                 </div>
-                                <div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="analytics-edu-wrap ant-res-b-30 reso-mg-b-30">
-                    <div class="skill-content-3 analytics-edu">
-                        <div class="skill">
-                            <div class="progress">
-                                <div class="lead-content">
-                                    <h3><span class="counter">0</span>%</h3>
-                                    <p>Pagos Primaria Agosto</p>
-                                </div>
-                                <div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>0%</span>
+                                <div class="progress-bar wow fadeInLeft" data-progress="{{pagos.percentegepre|floatformat:2}}%" style="width: {{pagos.percentegepre|floatformat:2}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>{{pagos.percentegepre|floatformat:2}}%</span>
                                 </div>
                             </div>
                         </div>
@@ -46,10 +31,10 @@
                         <div class="skill">
                             <div class="progress">
                                 <div class="lead-content">
-                                    <h3><span class="counter">0</span>%</h3>
-                                    <p>Pagos Basico Agosto</p>
+                                    <h3><span class="counter">{{pagos.percentegepri|floatformat:2}}</span>%</h3>
+                                    <p>Pagos Primaria {{mes|mes}}</p>
                                 </div>
-                                <div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>0%</span>
+                                <div class="progress-bar wow fadeInLeft" data-progress="{{pagos.percentegepri|floatformat:2}}%" style="width: {{pagos.percentegepri|floatformat:2}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>{{pagos.percentegepri|floatformat:2}}%</span>
                                 </div>
                             </div>
                         </div>
@@ -62,10 +47,26 @@
                         <div class="skill">
                             <div class="progress">
                                 <div class="lead-content">
-                                    <h3><span class="counter">0</span>%</h3>
-                                    <p>Pagos Diversificado Agosto</p>
+                                    <h3><span class="counter">{{pagos.percentegebasico|floatformat:2}}</span>%</h3>
+                                    <p>Pagos Basico {{mes|mes}}</p>
                                 </div>
-                                <div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>0%</span>
+                                <div class="progress-bar wow fadeInLeft" data-progress="{{pagos.percentegebasico|floatformat:2}}%" style="width: {{pagos.percentegebasico|floatformat:2}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>{{pagos.percentegebasico|floatformat:2}}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="analytics-edu-wrap ant-res-b-30 reso-mg-b-30">
+                    <div class="skill-content-3 analytics-edu">
+                        <div class="skill">
+                            <div class="progress">
+                                <div class="lead-content">
+                                    <h3><span class="counter">{{pagos.percentegediver|floatformat:2}}</span>%</h3>
+                                    <p>Pagos Diversificado {{mes|mes}}</p>
+                                </div>
+                                <div class="progress-bar wow fadeInLeft" data-progress="{{pagos.percentegediver|floatformat:2}}%" style="width: {{pagos.percentegediver|floatformat:2}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>{{pagos.percentegediver|floatformat:2}}%</span>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +88,7 @@
                 <div class="analytics-rounded reso-mg-b-30">
                     <div class="analytics-rounded-content">
                         <h5>Pendientes de pago Pre-Primaria</h5>
-                        <h2><span class="counter">0</span>/0</h2>
+                        <h2><span class="counter">{{pagos.pre}}</span>/{{pagos.preal}}</h2>
                             <div class="text-center">
                                 <div id="Pre-Primaria"></div>
                             </div>
@@ -97,8 +98,8 @@
              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="analytics-rounded reso-mg-b-30">
                     <div class="analytics-rounded-content">
-                        <h5>Pendientes de pago Primaria</h5>
-                        <h2><span class="counter">0</span>/0</h2>
+                        <h5>Pendientes de pago Primaria {{mes|mes}}</h5>
+                        <h2><span class="counter">{{pagos.prima}}</span>/{{pagos.primaal}}</h2>
                             <div class="text-center">
                                 <div id="Primaria"></div>
                             </div>
@@ -108,8 +109,8 @@
              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="analytics-rounded reso-mg-b-30">
                     <div class="analytics-rounded-content">
-                        <h5>Pendientes de pago Basico</h5>
-                        <h2><span class="counter">0</span>/0</h2>
+                        <h5>Pendientes de pago Basico {{mes|mes}}</h5>
+                        <h2><span class="counter">{{pagos.basic}}</span>/{{pagos.basicoal}}</h2>
                         <div class="text-center">
                             <div id="Basico"></div>
                         </div>
@@ -119,8 +120,8 @@
              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="analytics-rounded reso-mg-b-30">
                     <div class="analytics-rounded-content">
-                        <h5>Pendientes de pago Diversificado</h5>
-                        <h2><span class="counter">0</span>/0</h2>
+                        <h5>Pendientes de pago Diversificado {{mes|mes}}</h5>
+                        <h2><span class="counter">{{pagos.diver}}</span>/{{pagos.diveral}}</h2>
                             <div class="text-center">
                                 <div id="Diversificado"></div>
                             </div>
@@ -178,160 +179,53 @@
         </div>
  </div>
         </div>
-        <div class="data-table-area mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="sparkline13-list">
-                            <div class="sparkline13-hd">
-                                <div class="main-sparkline13-hd">
-                                    <center><h1>Tabla <span class="table-project-n">Reportes Maestros</span></h1></center>
-                                </div>
-                            </div>
-                    <div class="responsiveTbl">
-                            <table>
-                              <thead>
-                                <tr>
-                                 <th><center>#</center> </th>
-                                  <th><center>Maestro</center> </th>
-                                  <th><center>Grado Encargado </center> </th>
-                                  <th><center>Seccion</center> </th>
-                                  
-                                  <th><center>Tipo</center> </th>
-                                  <th><center>Descripcion</center> </th>
-                                  <th><center>Fecha</center> </th>
-                                  <th><center>Accion</center> </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {%for reporte in reportes %}
-                                <tr>
-                                  <td>{{forloop.counter}}</td>
-                                  <td>{{reporte.Alumno.Primer_Nombre}} {{reporte.Alumno.Primer_Apellido}}</td>
-                                  <td><span class="price">{{reporte.Alumno.Grado}} </span></td>
-                                  <td>{{reporte.Alumno.Seccion}}</td>
-                                 
-                                  <td>{{reporte.Tipo}}</td>
-                                  <td>{{reporte.Descripcion}}</td>
-                                  <td>{{reporte.Fecha_Ingreso}}</td>
-                                  <td><a href="#" class="btn">Solucion</a></td>
-                                </tr>
-                                {%endfor%}
-                              </tbody>
-                            </table>
-                          </div>
+        
+
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <center><h1>Tabla <span class="table-project-n">Notas pendientes de aprovacion (I unidad)</span></h1></center>
                         </div>
                     </div>
+            <div class="responsiveTbl">
+                    <table>
+                      <thead>
+                        <tr>
+                         <th><center>#</center> </th>
+                          <th><center>Grado</center> </th>
+                          <th><center>Seccion</center> </th>
+                          <th><center>Maestro</center> </th>
+                          <th><center>Materia</center> </th>
+                          <th><center>Fecha</center> </th>
+                          <th><center>Accion</center> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {%for estado in estados %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <center><td><span class="price">{{estado.asignacion_materias.Grado}} </span></td>
+                          <td>{{estado.asignacion_materias.Seccion}}</td>
+                          <td>{{estado.asignacion_materias.Personal}}</td>
+                          <td>{{estado.asignacion_materias.Materia}}</td>
+                          <td>{{estado.fechaingreso}}</td>
+                          <td><a href="{% url 'asignacion_notas' pk=estado.asignacion_materias.pk %}" class="btn">Ver notas</a></td>
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-         </div>
-                </div>
-
-                <div class="data-table-area mg-b-15">
-                    <div class="container-fluid">
-                        <div class="row">
+            </div>
+        </div>
+ </div>
+        </div>
         
-        
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <div class="sparkline13-list">
-                                    <div class="sparkline13-hd">
-                                        <div class="main-sparkline13-hd">
-                                            <center><h1>Tabla <span class="table-project-n">Alumnos</span></h1></center>
-                                        </div>
-                                    </div>
-                                    <div class="sparkline13-graph">
-                                        <div class="datatable-dashv1-list custom-datatable-overright">
-                                         
-                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
-                                                data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-field="state" data-checkbox="true"></th>
-                                                        <th data-field="id">Codigo</th>
-                                                        <th data-field="pnombre" data-editable="true">Nombres</th>
-                                                        <th data-field="snombre" data-editable="true">Apellidos</th>                                          
-                                                        <th data-field="phone" data-editable="true">Numero</th>
-                                                      
-                                                       
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
-                                                {% for alumno in alumnos %}
-                                                    <tr>
-                                                        <td></td>
-                                                        {% if perms.administracion.change_alumno %}
-                                                        <td>{{ alumno.Codigo }}</td>
-                                                        {% else %}
-                                                        <td>{{ alumno.Codigo }}</td>
-                                                        {% endif %}
-        
-                                                        <td>{{ alumno.Primer_Nombre }} {{ alumno.Segundo_Nombre }}</td>
-                                                        <td>{{ alumno.Primer_Apellido }} {{ alumno.Segundo_Apellido }}</td>
-                                                        <td>{{ alumno.telefono }}</td>
-                                                       
-                                                      
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <div class="sparkline13-list">
-                                    <div class="sparkline13-hd">
-                                        <div class="main-sparkline13-hd">
-                                            <center><h1>Tabla <span class="table-project-n"> Maestros</span></h1></center>
-                                        </div>
-                                    </div>
-                                    <div class="sparkline13-graph">
-                                        <div class="datatable-dashv1-list custom-datatable-overright">
-                                       
-                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
-                                            data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-field="state" data-checkbox="true"></th>
-                                           
-                                                        <th data-field="pnombre" data-editable="true">Nombres</th>
-                                                        <th data-field="snombre" data-editable="true">Apellidos</th>                                          
-                                                        
-                                                        <th data-field="grado" data-editable="true">Grado encargado</th>
-                                                     
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
-                                                {% for maestro in maestros %}
-                                                    <tr>
-                                                        <td></td>
-                                                        <td>{{ maestro.Primer_Nombre }} 
-                                                        {% if maestro.Segundo_Nombre != "N/A" %}
-                                                        {{ maestro.Segundo_Nombre }}
-                                                        {% endif %}
-                                                        </td>
-                                                        <td>{{ maestro.Primer_Apellido }} 
-                                                        {% if maestro.Segundo_Apellido != "N/A" %}
-                                                        {{ maestro.Segundo_Apellido }}
-                                                        {% endif %}
-        
-                                                        </td>
-                                                      
-                                                        <td>{{ alumno.Grado }}</td>
-                                                       
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
+                
         
                 <div class="data-table-area mg-b-15">
                     <div class="container-fluid">
@@ -339,71 +233,79 @@
         
         
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="sparkline13-list">
-                                    <div class="sparkline13-hd">
-                                        <div class="main-sparkline13-hd">
-                                            <center><h1>Tabla <span class="table-project-n">Exámenes Pendientes</span></h1></center>
-                                        </div>
-                                    </div>
-                                    <div class="sparkline13-graph">
-                                        <div class="datatable-dashv1-list custom-datatable-overright">
-                                   
-                                            <table id="table" data-toggle="table" data-pagination="false" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true"
-                                            data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-field="state" data-checkbox="true"></th>
-                                                        <th data-field="palumno">Alumno: Codigo/Nombres/Grado</th>
-                                                        <th >Nota Idioma:</th>
-                                                        <th>Comentario Idioma:</th>
-                                                        <th>Resultado:</th>
-                                                        <th >Nota Matematicas:</th>
-                                                        <th>Comentario Matematicas:</th>
-                                                        <th >Resultado:</th>
-                                                        <th >Nota Ingles:</th>
-                                                        <th >Comentario Ingles:</th>
-                                                        <th>Resultado:</th>
-                                 
-                                                        <th data-field="date" data-editable="true">Comentario:</th>
-                                                        <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
-                                                        <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
-                                                        {%if pendiente %}
-                                                        <th data-field="acciones">Acciones</th>
-                                                        {%endif%}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
-                                                {% for examen in examenes %}
-                                                    <tr>
-                                                        <td></td>
-                                                       <td>{{ examen.Alumno }}</td>
-                                                       <td>{{ examen.Nota_Idioma }}</td>
-                                                       <td>{{ examen.Comentario_Idioma }}</td>
-                                                       <td>{{ examen.Estado_Idioma }}</td>
-        
-                                                       <td>{{ examen.Nota_Matematicas }}</td>
-                                                       <td>{{ examen.Comentario_Matematicas }}</td>
-                                                       <td>{{ examen.Estado_Matematicas }}</td>
-                                                        <td>{{ examen.Nota_Ingles }}</td>
-                                                       <td>{{ examen.Comentario_Ingles }}</td>
-                                                       <td>{{ examen.Estado_Ingles }}</td>
-                                                      
-                                                       
-                                                        <td>{{ examen.Comentario }}</td>
-                                                        <td>{{ examen.Estado_Examen }}</td>
-                                                        <td>{{ examen.fechaingreso }}</td>
-                                                        {%if pendiente %}
-                                                        <td><a target="_blank" href="{% url 'examenes_editar' pk=examen.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Actualizar</a></td>
-                                                        {%endif%}
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1>Tabla <span class="table-project-n">Examenes Alumnos</span></h1>
                                 </div>
                             </div>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control dt-tb">
+                                            <option value="">Exportar Normal</option>
+                                            <option value="all">Exportar Todo</option>
+                                            <option value="selected">Exportar Seleccionados</option>
+                                        </select>
+                                    </div>
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" data-height="420">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="state" data-checkbox="true"></th>
+                                                <th>Acciones</th>
+                                                <th data-field="palumno">Alumno: Codigo/Nombres/Grado</th>
+                                                <th >Nota Idioma:</th>
+                                                <th>Comentario Idioma:</th>
+                                                <th>Resultado:</th>
+                                                <th >Nota Matematicas:</th>
+                                                <th>Comentario Matematicas:</th>
+                                                <th >Resultado:</th>
+                                                <th >Nota Ingles:</th>
+                                                <th >Comentario Ingles:</th>
+                                                <th>Resultado:</th>
+                         
+                                                <th data-field="date" data-editable="true">Comentario:</th>
+                                                <th data-field="tcasa" data-editable="true">Resultado Del Examen:</th>
+                                                <th data-field="fecha" data-editable="true">Fecha Del Examen:</th>
+                                                {%if pendiente %}
+                                                <th data-field="acciones">Acciones</th>
+                                                {%endif%}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        {% for examen in examenes %}
+                                            <tr>
+                                                <td></td>
+                                                <td><button type="button" class="btn btn-custon-rounded-two btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Aprobar</button> <button type="button" class="btn btn-custon-rounded-two btn-primary"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i>Detalles</button><button type="button" class="btn btn-custon-rounded-two btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Reprobar</button></td>
+                                               <td>{{ examen.Alumno }}</td>
+                                               <td>{{ examen.Nota_Idioma }}</td>
+                                               <td>{{ examen.Comentario_Idioma }}</td>
+                                               <td>{{ examen.Estado_Idioma }}</td>
+
+                                               <td>{{ examen.Nota_Matematicas }}</td>
+                                               <td>{{ examen.Comentario_Matematicas }}</td>
+                                               <td>{{ examen.Estado_Matematicas }}</td>
+                                                <td>{{ examen.Nota_Ingles }}</td>
+                                               <td>{{ examen.Comentario_Ingles }}</td>
+                                               <td>{{ examen.Estado_Ingles }}</td>
+                                              
+                                               
+                                                <td>{{ examen.Comentario }}</td>
+                                                <td>{{ examen.Estado_Examen }}</td>
+                                                <td>{{ examen.fechaingreso }}</td>
+                                                {%if pendiente %}
+                                                <td><a target="_blank" href="{% url 'examenes_editar' pk=examen.pk %}" class="verhorario btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i> Actualizar</a></td>
+                                                {%endif%}
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                       
 
@@ -480,22 +382,22 @@
 (function ($) {
  "use strict";
     var sparklineCharts = function(){
-         $("#Pre-Primaria").sparkline([20, 100], {
+         $("#Pre-Primaria").sparkline([{{pagos.pre}}, ({{pagos.preal}}-{{pagos.pre}})], {
              type: 'pie',
              height: '140',
              sliceColors: ['#006DF0', '#ebebeb']
          });
-        $("#Primaria").sparkline([1, 4], {
+        $("#Primaria").sparkline([{{pagos.prima}}, ({{pagos.primaal}}-{{pagos.prima}})], {
              type: 'pie',
              height: '140',
              sliceColors: ['#006DF0', '#ebebeb']
          });
-        $("#Basico").sparkline([1, 4], {
+        $("#Basico").sparkline([{{pagos.basic}}, ({{pagos.basicoal}}-{{pagos.basic}})], {
              type: 'pie',
              height: '140',
              sliceColors: ['#006DF0', '#ebebeb']
          });
-        $("#Diversificado").sparkline([1, 4], {
+        $("#Diversificado").sparkline([{{pagos.diver}}, ({{pagos.diveral}}-{{pagos.diver}})], {
              type: 'pie',
              height: '140',
              sliceColors: ['#006DF0', '#ebebeb']
@@ -518,5 +420,12 @@
     
 })(jQuery);
 </script>
-
+  <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
 {% endblock %}
