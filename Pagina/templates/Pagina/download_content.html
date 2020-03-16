@@ -1,0 +1,98 @@
+{% extends 'Pagina/base.html' %}
+{% load static %}
+{% block content %}
+<img src="{% static 'images/home2/1.png' %}">
+<script src="/lib/jquery-1.12.2.min.js"></script>
+  <script src="/lib/bootstrap.min.js"></script>
+<div class="page-title page-title-blog" style="position: relative;top: -50%;">
+                <div class="page-title-inner">
+                    <div class="breadcrumbs breadcrumbs-blog text-left">
+                        <div class="container">
+                            <div class="breadcrumbs-wrap">
+                                <ul class="breadcrumbs-inner">
+                                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                                    <li><a href="{% url 'downloads' %}">Descargas</a></li>
+                                </ul>
+                                <div class="title">
+                                    Descargas por grado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="container" style="position: relative;top: -35%;">
+		{% if content != ""  %}   
+            <center>
+            	<h1 style="color: black;font-size: 35px;">
+
+            		{% if content != "cursos/guiamaes.pdf"  %} 
+            	<a href="" data-toggle="collapse" data-target="#demo" style="font-size: 50px;">Cursos por grado</a>
+            	{%else%}
+            	Guia maestros
+            	{%endif%}
+            </h1>
+                <iframe id="demo"  src="
+                    {% static content %}
+                   
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+            </center>                       
+             {% endif %}                       
+                                    
+        
+    {% if content != "cursos/guiamaes.pdf"  %}                              
+<center>
+	<br><br><br>
+	<a href="" data-toggle="collapse" data-target="#demo1" style="font-size: 50px;">GUIA PARA INICIAR EN CLASSROM</a>
+                <br>
+                <br>
+
+                <iframe  id="demo1" class="collapse" src="
+                    {% static 'cursos/guia.pdf' %}
+                   
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+            </center>   
+    	{% endif %}
+{% if content == "cursos/guiamaes.pdf"  %}                              
+<center>
+	<br><br><br>
+	<a href="" data-toggle="collapse" data-target="#demo1" style="font-size: 50px;">GUIA PARA SUBIR TAREAS EN CLASSROM </a>
+                <br>
+                <br>
+
+                <iframe  id="demo1" class="collapse" src="
+                    {% static 'cursos/guia_tareas_maestros.pdf' %}
+                   
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+                
+            </center>   
+    	{% endif %}
+    	{% if content != "cursos/guiamaes.pdf"  %}        
+    	<center>
+	<br><br><br>
+	<a href="" data-toggle="collapse" data-target="#demo2" style="font-size: 50px;">GUIA PARA ENTREGAR TAREAS</a>
+                <br>
+                <br>
+
+                <iframe  id="demo2" class="collapse" src="
+                    {% static 'cursos/guia_tareas.pdf' %}
+                   
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+            </center>   
+        
+        <center>
+	<br><br><br>
+	<a href="" data-toggle="collapse" data-target="#demo3" style="font-size: 50px;">VIDEO COMO UTILIZAR CLASSROM EN GENERAL</a>
+	<br><br>
+                <iframe id="demo3" class="collapse" width="1000" height="750" src="https://www.youtube.com/embed/Gxkc8lo79hQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </center>   
+            {% endif %}
+</div>
+
+
+
+
+{% endblock %}

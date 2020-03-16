@@ -31,7 +31,43 @@ def news(request):
     return render(request, 'Pagina/inicio.html')
 
 def downloads(request):
-    return render(request, 'Pagina/inicio.html')
+    return render(request, 'Pagina/downloads.html')
+
+def download_content(request, pk):
+    content = ""
+    if(pk==1):
+        content="cursos/1a.pdf"
+    if(pk==2):
+        content="cursos/1b.pdf"
+    if(pk==3):
+        content="cursos/2a.pdf"
+    if(pk==4):
+        content="cursos/2b.pdf"
+    if(pk==5):
+        content="cursos/3a.pdf"
+    if(pk==6):
+        content="cursos/3b.pdf"
+    if(pk==7):
+        content="cursos/4tosalud.pdf"
+    if(pk==8):
+        content="cursos/4todiseno.pdf"
+    if(pk==9):
+        content="cursos/4tojuridicas.pdf"
+    if(pk==10):
+        content="cursos/4tocompu.pdf"
+    if(pk==11):
+        content="cursos/5tocompu.pdf"
+    if(pk==12):
+        content="cursos/5toelectronica.pdf"
+    if(pk==13):
+        content="cursos/5tosalud.pdf"
+    if(pk==14):
+        content="cursos/5todiseno.pdf"
+    if(pk==15):
+        content="cursos/guiamaes.pdf"
+    if(pk==16):
+        content=""
+    return render(request, 'Pagina/download_content.html',{'content':content})
 
 def about(request):
     return render(request, 'Pagina/inicio.html')

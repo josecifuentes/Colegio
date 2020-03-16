@@ -1,0 +1,567 @@
+{% extends 'Pagina/base.html' %}
+{% load static %}
+{% block content %}
+<img src="{% static 'images/home2/1.png' %}">
+<div class="page-title page-title-blog" style="position: relative;top: -50%;">
+                <div class="page-title-inner">
+                    <div class="breadcrumbs breadcrumbs-blog text-left">
+                        <div class="container">
+                            <div class="breadcrumbs-wrap">
+                                <ul class="breadcrumbs-inner">
+                                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                                    <li><a href="{% url 'downloads' %}">Descargas</a></li>
+                                </ul>
+                                <div class="title">
+                                    Descargas por grado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <style type="text/css">
+  .boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #1883ba;
+
+  }
+  .boton_personalizado:hover{
+    color: #1883ba;
+    background-color: #ffffff;
+  }
+</style>
+    <div class="course-grid" style="position: relative;top: -40%;" >
+        <div class="container">
+            <div class="flat-portfolio">
+                <ul class="flat-filter-isotype">
+                    <li class="active"><a href="#" data-filter="*">Mostrar todos</a></li>
+                    <li><a href="#" data-filter=".Basico">Basico</a></li>
+                    <li><a href="#" data-filter=".4todiver"> 4to Diversificado </a></li>
+                    <li><a href="#" data-filter=".5todiver"> 5to Diversificado </a></li>
+                </ul>
+            </div>
+            <div class="flat-courses clearfix isotope-courses">
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=1 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=1 %}">Primero Basico Secc. A </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=1 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=2 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=2 %}">Primero Basico Secc. B </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=2 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=3 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=3 %}">Segundo Basico Secc. A </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=3 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=4 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=4 %}">Segundo Basico Secc. B </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=4 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=5 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=5 %}">Tercero Basico Secc. A </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=5 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course Basico">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/basico1.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=6 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=6 %}">Tercero Basico Secc. B </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=6 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course 4todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=7 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=7 %}">4to Salud </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=7 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course 4todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=8 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=8 %}">4to Diseño </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=8 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course 4todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=9 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=9 %}">4to Juridicas </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=9 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course 4todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=10 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=10 %}">4to Computacion </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=10 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+          	
+          	<div class="course 5todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=11 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=11 %}">5to Computacion </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=11 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course 5todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=12 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=12 %}">5to Electronica </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=12 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course 5todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=13 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=13 %}">5to Salud </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=13 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course 5todiver">    
+                    <div class="flat-course">
+                        <div class="featured-post post-media">
+                            <div class="entry-image pic">
+                                <img src="{% static 'images/home2/Diversificado.jpg' %}" alt="images">
+                                <div class="hover-effect"></div>
+                                <div class="links">
+                                    <a href="{% url 'download_content' pk=14 %}">Ver contenido</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content clearfix">
+                            <div class="wrap-course-content">
+                                <h4>
+                                    <a href="{% url 'download_content' pk=14 %}">5to Diseño </a>
+                                </h4>
+                                <p>
+                                    Disponible gias y manuales, listado de codigos de cada materia.
+                                </p>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Colegio nuevo mundo
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="wrap-rating-price">
+                               	 <div class="links">
+                                <center>   <a href="{% url 'download_content' pk=14 %}" class="boton_personalizado">Ver contenido</a></center> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div><!-- course-grid -->
+
+    <div class="cta-cr parallax parallax3">
+        <div class="overlay183251"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                    <div class="cta-content">
+                        <div class="caption">Como registrarse a las clases?</div>
+                        <h3>
+                            Puede descargar la guia para inciar secion en classrom y apuntarse a una clase.
+                        </h3>
+                        <div class="btn-about-become">
+                            <a href="{% url 'download_content' pk=16 %}">Descargar la guia</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                    <div class="cta-information">
+                        <div class="phone">
+                            +502 7767 6989
+                        </div>
+                        <div class="email">
+                            ¿No tienes usuario? escribenos:
+                        </div>
+                        <div class="email">
+                            colenmundo@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- cta-cr -->
+
+{% endblock %}
