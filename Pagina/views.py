@@ -35,6 +35,7 @@ def downloads(request):
 
 def download_content(request, pk):
     content = ""
+    correos = ""
     if(pk==1):
         content="cursos/1a.pdf"
     if(pk==2):
@@ -50,8 +51,10 @@ def download_content(request, pk):
     if(pk==7):
         content="cursos/4tosalud.pdf"
     if(pk==8):
+        correos = "cursos/4todiseno_correos.pdf"
         content="cursos/4todiseno.pdf"
     if(pk==9):
+        correos = "cursos/4tojuridicas_correos.pdf"
         content="cursos/4tojuridicas.pdf"
     if(pk==10):
         content="cursos/4tocompu.pdf"
@@ -62,12 +65,13 @@ def download_content(request, pk):
     if(pk==13):
         content="cursos/5tosalud.pdf"
     if(pk==14):
+        correos = "cursos/5todiseno_correos.pdf"
         content="cursos/5todiseno.pdf"
     if(pk==15):
         content="cursos/guiamaes.pdf"
     if(pk==16):
         content=""
-    return render(request, 'Pagina/download_content.html',{'content':content})
+    return render(request, 'Pagina/download_content.html',{'content':content,'correos':correos})
 
 def about(request):
     return render(request, 'Pagina/inicio.html')
