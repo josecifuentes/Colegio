@@ -1,0 +1,235 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Detalle del reporte</a></li>
+                                <li><a href="#reviews"> Reportes recientes</a></li>
+                                <li><a href="#INFORMATION">Historial de reportes</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad addcoursepro">
+                                                  
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                               <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="lead-head">
+                                        <h3>Reporte {{reporte.Fecha_Ingreso}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="coment-area">
+
+                                      <form action="{% url 'reportes_alumnos' pk=reporte.pk %}" method="POST" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                        {% csrf_token %}
+                                           {% if form.errors %}
+                                            <div class="alert-icon shadow-inner wrap-alert-b">
+                                        <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+                                            <i class="fa fa-window-close edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                            <i class="fa fa-times edu-danger-error admin-check-pro" aria-hidden="true"></i>
+                                            <p class="message-mg-rt"><strong><center>{{ form.errors }}</center></strong> </p>
+                                        </div>
+                                    </div>
+                                          {% endif %}
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 blog-res-mg-bt">
+                                            <div class="form-group">
+                                            	<h4>Alumno:</h4>
+                                                <input name="name" class="responsive-mg-b-10" type="text" value="{{reporte.Alumno.Primer_Nombre}} {{reporte.Alumno.Segundo_Nombre}} {{reporte.Alumno.Primer_Apellido}} {{reporte.Alumno.Segundo_Apellido}}" readonly="true" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 blog-res-mg-bt">
+                                            <div class="form-group">
+                                            	<h4>Grado:</h4>
+                                                <input name="grade" class="responsive-mg-b-10" type="text" value="{{reporte.Alumno.Grado}} " readonly="true" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                            	<h4>Maestro:</h4>
+                                                <input name="name" class="responsive-mg-b-10" type="text" value="{{reporte.Personal}}" readonly="true" />
+                                            </div>
+                                        </div>
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                            	<h4>Tipo:</h4>
+                                                <input name="name" class="responsive-mg-b-10" type="text" value="{{reporte.Tipo}}" readonly="true" />
+                                            </div>
+                                        </div>
+                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                            	<h4>Descripcion:</h4>
+                                                <input name="name" class="responsive-mg-b-10" type="text" value="{{reporte.Descripcion}}" readonly="true" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                            	<h4>Solucion:</h4>
+                                                <textarea name="solucion" id="solucion" cols="30" rows="10" placeholder="Escriba aqui la solucion al problema" >{{reporte.Solucion}}</textarea>
+                                            </div>
+                                           
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                                                               
+                                                            </div>
+                                                           
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="payment-adress">
+                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Actualizar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="reviews">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="devit-card-custom">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="lead-head">
+                                        <h3>Reportes del catedratico: <strong>{{reporte.Personal}}</strong> </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="sparkline8-graph">
+                                <div class="static-table-list">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tipo</th>
+                                                <th>Descripcion</th>
+                                                <th>Solucion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for reporte_personal in reportes_personal %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{reporte_personal.Tipo}}</td>
+                                                <td>{{reporte_personal.Descripcion}}</td>
+                                                <td>{{reporte_personal.Solucion}}</td>
+                                            </tr>
+                                            {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="devit-card-custom">
+															<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control dt-tb">
+                                            <option value="">Exportar Normal</option>
+                                            <option value="all">Exportar Todo</option>
+                                            <option value="selected">Exportar Seleccionados</option>
+                                        </select>
+                                    </div>
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="state" data-checkbox="true"></th>
+                                                <th data-field="id">Alumno</th>
+                                                <th data-field="pnombre" >Grado</th>
+                                                <th data-field="snombre" >Maestro</th>                                          
+                                                <th data-field="phone" >Tipo</th>
+                                                <th data-field="date" >Descripcion</th>
+                                                <th data-field="grado" >Fecha de creacion</th>
+                                                <th data-field="sapellido">Estado</th> 
+                                                <th data-field="solucion">Solucion</th>
+                                                <th data-field="action">Fecha solucion</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        {% for reporte in reportes %}
+                                            <tr>
+                                                <td></td>
+                                                <td>{{ reporte.Alumno.Primer_Nombre }} {{ reporte.Alumno.Segundo_Nombre }} {{ reporte.Alumno.Primer_Apellido }} {{ reporte.Alumno.Segundo_Apellido }}</td>
+                                                <td>{{ reporte.Alumno.Grado }}</td>
+                                                <td>{{ reporte.Personal }}</td>
+                                                <td>{{ reporte.Tipo }}</td>
+                                                <td>{{ reporte.Descripcion }}</td>
+                                                <td>{{ reporte.Fecha_Ingreso }}</td>
+                                                <td>{%if reporte.Solucion != None %}
+                                                    <button class="pd-setting">Solucionado</button>
+                                                    {%else%}
+                                                    <button class="ds-setting">No Solucionado</button>
+                                                    {%endif%}</td>
+                                                <td>{{ reporte.Solucion }}</td>
+                                               <td>{{ reporte.Fecha_Solucion }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+														</div>
+													</div>
+												</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- data table JS
+        ============================================ -->
+   
+
+    <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
+{% endblock %}

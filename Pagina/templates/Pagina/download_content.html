@@ -24,6 +24,19 @@
         </div>
 
 <div class="container" style="position: relative;top: -35%;">
+    {% if calendario != ""  %}   
+     <center>
+                <h1 style="color: black;font-size: 35px;">
+
+                <a href="" data-toggle="collapse" data-target="#demo" style="font-size: 50px;">Calendario de Examenes</a>
+                
+            </h1>
+                <iframe id="demo"  src="
+                    {% static calendario %}
+                   
+                " width="1000" height="750" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+            </center>                       
+       {% endif %} 
 	{% if correos != ""  %}   
 	 <center>
             	<h1 style="color: black;font-size: 35px;">

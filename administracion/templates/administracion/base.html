@@ -309,7 +309,12 @@
                             {% if "Asignar Encargados" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Asignar Encargados" href="{% url 'nueva_asignacion_encargado' %}"><span class="mini-sub-pro">Asignar Encargados</span></a></li>
                                 {% endif %}
-
+                                {% if "Reportes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Reportes Estudiantes" href="{% url 'ver_reportes' %}"><span class="mini-sub-pro">Ver reportes</span></a></li>
+                                {% if "AgregarReportes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                 <li><a title="Agregar Reportes Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Agregar reportes</span></a></li>
+                                {% endif %}
+                            {% endif %}
                                 
                             </ul>
                         </li>
@@ -917,9 +922,14 @@
                             {% if "Agregar Estudiantes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
                                 <li><a title="Añadir Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Añadir Estudiantes</span></a></li>
                             {% endif %}
-
+                            {% if "Reportes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                <li><a title="Reportes Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Ver reportes</span></a></li>
+                                {% if "AgregarReportes" in Permisos|stringformat:"s" or "Super Usuario" in Permisos|stringformat:"s" %}
+                                 <li><a title="Agregar Reportes Estudiantes" href="{% url 'nuevo_alumno' %}"><span class="mini-sub-pro">Agregar reportes</span></a></li>
+                                {% endif %}
+                            {% endif %}
                             
-
+                            
                                 
                             </ul>
                         </li>

@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models import Q
 from .models import Estados_materia,Reportes,ContenidoExamen,Periodo,Alumno, Grado, Encargado,Encargados_alumnos,Pago,Examene,Papeleria,Actividade,Permiso,Asignacion_Permiso,Asignacion_Materia,Asignacion_Grado,Personal,Asignacion_Acividade,Asignacion_Punteo,horas,HorarioExamen
-from .forms import ContenidoExamenForm,AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
+from .forms import ReportesForm,ContenidoExamenForm,AlumnoForm,agregar_papeleriaForm,Asignacion_PunteoForm,Asignacion_PermisoForm,InicioForm,permisoForm
 from .forms import EncargadoForm,agregar_examenesForm,Asignacion_AcividadeForm,horasForm,PersonalForm,calendarioForm
 from .forms import Estados_materiaForm,GradoCursosForm,Asignacion_notasForm,MyForm,asignacion_encargadoForm, nueva_asignacion_encargadoForm,asignacion_alumnoForm,asignacion_pagosForm,GradonivelForm
 from django.contrib.auth.decorators import login_required
@@ -66,6 +66,23 @@ def inicio(request):
 def pre(request):
     alumno=Alumno.objects.get(Usuario=request.user)
     return render(request, 'administracion/inicio_principal.html',{'alumno':alumno})
+
+@login_required
+def ver_reportes(request):
+    reportes=Reportes.objects.all()
+    return render(request, 'administracion/reportes.html',{'reportes':reportes})
+@login_required
+def reportes_alumnos(request,pk):
+    reporte=Reportes.objects.get(pk=pk)
+    if request.method == "POST":
+        modificar= ReportesForm(instance=reporte)
+        al = modificar.save(commit=False)
+        al.Solucion=request.POST['solucion']
+        al.Fecha_Solucion = datetime.datetime.now() 
+        al.save()
+    reportes_personal = Reportes.objects.filter(Personal=reporte.Personal) 
+    reportes = Reportes.objects.filter(Alumno=reporte.Alumno)
+    return render(request, 'administracion/reporte_alumno.html',{'reporte':reporte,'reportes_personal':reportes_personal,'reportes':reportes})
 
 def meses(mes):
     if(mes==1):
@@ -275,31 +292,8 @@ def actividades_cursos(request):
         try:
             cursos = Asignacion_Materia.objects.filter(Personal=Personal.objects.get(Usuario=request.user))
         except Personal.DoesNotExist:
-            grados=[]
-            secciones = []
-            secciones.append("A")
-            secciones.append("B")
-            g = Grado.objects.all()
-            act = 0
-            estado = 0
-            for grado in g:
-                for secc in secciones:
-                    actividad={}
-                    actividad['Nivel']=grado.Nivel
-                    actividad['Nombre_Grado'] = grado.Nombre_Grado
-                    actividad['Seccion'] = secc
-                    actividad['pk'] = grado.pk
-                    materia = Asignacion_Materia.objects.filter(Grado=grado,Seccion=secc)
-                    for a in materia:
-                        asig = Asignacion_Acividade.objects.filter(Asignacion_Materia=a)
-                        act = act + asig.count()
-                    maestros = materia.values('Personal').distinct().count()
-                    actividad['Maestros'] = maestros
-                    cursos = materia.values('Materia').distinct().count()
-                    actividad['Cursos'] = cursos
-                    actividad['Actividad'] = act
-                    grados.append(actividad)
-            return render(request, 'administracion/listado_actividades.html', {'secciones':secciones,'grados':grados})
+            grados = Grado.objects.all()
+            return render(request, 'administracion/listado_actividades.html', {'grados':grados})
         Datos = []
         asignacion = []
         for curso in cursos:

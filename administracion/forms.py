@@ -1,5 +1,5 @@
 from django import forms
-from .models import Estados_materia,Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
+from .models import Reportes,Estados_materia,Alumno, Grado, Pago, Papeleria,Asignacion_Acividade,Asignacion_Punteo,Asignacion_Permiso,horas,Permiso,Asignacion_Materia
 from .models import Encargado, Examene,Actividade
 from .models import Encargados_alumnos,Personal,ContenidoExamen
 from django.contrib.auth.forms import AuthenticationForm
@@ -331,6 +331,8 @@ class GradoCursosForm(forms.Form):
         super(GradoCursosForm, self).__init__(*args, **kwargs)
         self.fields['Materias'].queryset = Asignacion_Materia.objects.none()
 
+
+
 class ContenidoExamenForm(forms.ModelForm):
 
     class Meta:
@@ -341,4 +343,16 @@ class ContenidoExamenForm(forms.ModelForm):
             'Seccion': forms.TextInput(attrs={'class': 'form-control'}),
             'contenido': forms.TextInput(attrs={'class': 'form-control'}),
             'pagina': forms.TextInput(attrs={'class': 'form-control'}),
+              }  
+
+class ReportesForm(forms.ModelForm):
+
+    class Meta:
+        model = Reportes
+        fields = ('Descripcion','Solucion','Tipo','Fecha_Solucion')
+        widgets = {
+            'Descripcion': forms.TextInput(attrs={'class': 'form-control'}),
+            'Solucion': forms.TextInput(attrs={'class': 'form-control'}),
+            'Tipo': forms.TextInput(attrs={'class': 'form-control'}),
+            'Fecha_Solucion': forms.TextInput(attrs={'class': 'form-control'}),
               }  

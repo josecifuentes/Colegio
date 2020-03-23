@@ -36,28 +36,39 @@ def downloads(request):
 def download_content(request, pk):
     content = ""
     correos = ""
+    calendario = ""
     if(pk==1):
         content="cursos/1a.pdf"
+        calendario = "horarios/B1A.pdf"
     if(pk==2):
         content="cursos/1b.pdf"
+        calendario = "horarios/B1B.pdf"
     if(pk==3):
         content="cursos/2a.pdf"
+        calendario = "horarios/B2A.pdf"
     if(pk==4):
         content="cursos/2b.pdf"
+        calendario = "horarios/B2B.pdf"
     if(pk==5):
         content="cursos/3a.pdf"
+        calendario = "horarios/B3A.pdf"
     if(pk==6):
         content="cursos/3b.pdf"
+        calendario = "horarios/B3B.pdf"
     if(pk==7):
         content="cursos/4tosalud.pdf"
+        calendario = "horarios/4toEsalud.pdf"
     if(pk==8):
         correos = "cursos/4todiseno_correos.pdf"
         content="cursos/4todiseno.pdf"
+        calendario = "horarios/4toEdiseno.pdf"
     if(pk==9):
         correos = "cursos/4tojuridicas_correos.pdf"
         content="cursos/4tojuridicas.pdf"
+        calendario = "horarios/4toEJuridicas.pdf"
     if(pk==10):
         content="cursos/4tocompu.pdf"
+        calendario = "horarios/4toEComputacion.pdf"
     if(pk==11):
         content="cursos/5tocompu.pdf"
     if(pk==12):
@@ -71,7 +82,7 @@ def download_content(request, pk):
         content="cursos/guiamaes.pdf"
     if(pk==16):
         content=""
-    return render(request, 'Pagina/download_content.html',{'content':content,'correos':correos})
+    return render(request, 'Pagina/download_content.html',{'content':content,'correos':correos,'calendario':calendario})
 
 def about(request):
     return render(request, 'Pagina/inicio.html')

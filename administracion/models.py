@@ -687,6 +687,7 @@ class Reportes(models.Model):
         choices=Tipos,
         default='Otros',
     )
+    Fecha_Solucion = models.DateTimeField(blank=True, null=True)
     Fecha_Ingreso = models.DateTimeField(default=timezone.now,blank=True, null=True)
     def __str__(self):
         return '%s %s %s' % (self.Alumno, self.Tipo, self.Solucion)

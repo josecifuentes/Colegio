@@ -146,7 +146,7 @@
                     <table>
                       <thead>
                         <tr>
-                         <th><center>#</center> </th>
+                         <th><center>No.</center> </th>
                           <th><center>Alumno</center> </th>
                           <th><center>Grado</center> </th>
                           <th><center>Seccion</center> </th>
@@ -168,7 +168,7 @@
                           <td>{{reporte.Tipo}}</td>
                           <td>{{reporte.Descripcion}}</td>
                           <td>{{reporte.Fecha_Ingreso}}</td>
-                          <td><a href="#" class="btn">Solucion</a></td>
+                          <td><a href="{% url 'reportes_alumnos' pk=reporte.pk %}" class="btn">Solucion</a></td>
                         </tr>
                         {%endfor%}
                       </tbody>

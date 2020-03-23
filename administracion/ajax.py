@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from .models import Asignacion_Materia
+from .models import Asignacion_Materia,Grado
 
 
 def get_materias(request):
@@ -17,4 +17,21 @@ def get_materias(request):
         )
     response = {}
     response['materias'] = options
+    return JsonResponse(response)
+
+def get_grados(request):
+    nivel = request.GET.get('nivelid')
+
+    grados = Grado.objects.none()
+    options = '<option value="" selected="Seleccione un grado">---------</option>'
+    if nivel:
+        grados = Grado.objects.filter(Nivel=nivel)   
+        print(grados)
+    for grado in grados:
+        options += '<option value="%s">%s</option>' % (
+            grado.pk,
+            grado
+        )
+    response = {}
+    response['grados'] = options
     return JsonResponse(response)

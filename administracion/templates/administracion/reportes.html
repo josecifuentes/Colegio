@@ -1,0 +1,93 @@
+{% extends 'administracion/base.html' %}
+{% block content %}
+{% load static %}
+<div class="data-table-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                   <center> <h1>Administracion <span class="table-project-n">Reportes reportes</span></h1></center>
+                                </div>
+                            </div>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control dt-tb">
+                                            <option value="">Exportar Normal</option>
+                                            <option value="all">Exportar Todo</option>
+                                            <option value="selected">Exportar Seleccionados</option>
+                                        </select>
+                                    </div>
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="state" data-checkbox="true"></th>
+                                                 <th data-field="acciones">Acciones</th>
+                                                <th data-field="id">Alumno</th>
+                                                <th data-field="pnombre" >Grado</th>
+                                                <th data-field="snombre" >Maestro</th>                                          
+                                                <th data-field="phone" >Tipo</th>
+                                                <th data-field="date" >Descripcion</th>
+                                                <th data-field="grado" >Fecha de creacion</th>
+                                                <th data-field="sapellido">Estado</th> 
+                                                <th data-field="solucion">Solucion</th>
+                                                <th data-field="action">Fecha solucion</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        {% for reporte in reportes %}
+                                            <tr>
+                                                <td></td>
+                                                <td>
+								                    <button onclick="location='{% url 'reportes_alumnos' pk=reporte.pk %}'" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+								                   <button onclick="location='{% url 'reportes_alumnos' pk=reporte.pk %}'" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+								                </td>
+                                                <td>{{ reporte.Alumno.Primer_Nombre }} {{ reporte.Alumno.Segundo_Nombre }} {{ reporte.Alumno.Primer_Apellido }} {{ reporte.Alumno.Segundo_Apellido }}</td>
+                                                <td>{{ reporte.Alumno.Grado }}</td>
+                                                <td>{{ reporte.Personal }}</td>
+                                                <td>{{ reporte.Tipo }}</td>
+                                                <td>{{ reporte.Descripcion }}</td>
+                                                <td>{{ reporte.Fecha_Ingreso }}</td>
+                                                <td>
+                                                    {%if reporte.Solucion != None %}
+                                                    <button class="pd-setting">Solucionado</button>
+                                                    {%else%}
+                                                    <button class="ds-setting">No Solucionado</button>
+                                                    {%endif%}
+                                                </td>
+                                                <td>{{ reporte.Solucion }}</td>
+                                               <td>{{ reporte.Fecha_Solucion }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- data table JS
+        ============================================ -->
+   
+
+    <script src="{% static 'administracion/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'administracion/js/data-table/bootstrap-table-export.js' %}"></script>
+
+    {% endblock %}

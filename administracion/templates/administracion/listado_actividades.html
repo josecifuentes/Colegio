@@ -3,96 +3,171 @@
 {% load static %}
 
 
-<div class="courses-area">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <div class="advanced-form-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-                    {% for grado in grados %}
-
-
-                    {% if grado.Nivel == "Diversificado" and grado.Seccion == "B" %}
-
-                    {%else%}
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-b-30">
-                          <center>
-                            <div class="courses-title">
-                                {% if grado.Nivel == "Diversificado" %}
-                                <img  src="{% static 'administracion/img/courses/diversificado.jpg' %}" alt=""></a>
-                                <h2>{{grado.Nombre_Grado}}</h2>
-                                {%endif%}
-                                {% if grado.Nivel == "Basico" %}
-                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/basico.jpg' %}" alt=""></a>
-
-                                <h2>{{grado.Nombre_Grado}} {{grado.Nivel}} "{{grado.Seccion}}" </h2>
-                                {%endif%}
-                                {% if grado.Nivel == "Primaria" %}
-                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
-                                <h2>{{grado.Nombre_Grado}} {{grado.Nivel}} "{{grado.Seccion}}" </h2>
-                                {%endif%}
-                                {% if grado.Nivel == "Pre-Primaria" %}
-                                <img class="img-circle m-b" src="{% static 'administracion/img/courses/primaria.jpg' %}" alt=""></a>
-                                <h2>{{grado.Nombre_Grado}} "{{grado.Seccion}}"</h2>
-                                {%endif%}
-
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-users"></i></span> Maestros: {{grado.Maestros}}</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-book"></i></span> Cursos: {{grado.Cursos}}</span>
-                                
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-tasks"></i></span> <b>Actividades:</b> {{grado.Actividad}}</p>
-                                <p><span><i class="fa fa-list-ol"></i></span> <b>No. notas asignadas:</b> 0</p>
-                                
-                            </div>
-                            <p>
-                                    <div class="form-select-list">
-                                                <center><h3>UNIDAD:</h3></center>
-
-<form method = "POST" action = "{% url 'actividades_grados' pk=grado.pk sec=grado.Seccion%}">
-{% csrf_token %}
-                        <select class="form-control custom-select-value" name="unidad">
-                                                <option value="uni1">Primera Unidad</option>
-                                                <option value="uni2">Segunda Unidad</option>
-                                                   <option value="uni3">Tercera Unidad</option>
-                                                   <option value="uni4">Cuarta Unidad</option>
-                        </select>
-                                                                
-                                            </div>
-                                </p>
-                            
-                        <div class="product-buttons">
-                                <center>
-                    <button type = "submit" class="button-default cart-btn">Ver Actividades</button>
-                                </center>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline8-list mt-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                   <center> <h1>Listar actividades por Grado y Curso</h1></center>
+                                </div>
                             </div>
 
-</form>
-                   
-                            </center>
-                        
-                    </div>
-<p></p>
 
-</div>
-
-
-
-
-
-
-
-                    {%endif%}
-              
-                    {% endfor %}
+<center>
+    <form method="POST">
+        {% csrf_token %}
+         <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">Nivel:</label>
+       </div>
+             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="form-select-list">
                     
-                   
-                </div>
-                <div class="row mg-b-15">
-                  
-                    </div>
-                </div>
-            </div>
+            <select data-placeholder="Seleccione un nivel" class="chosen-select" tabindex="-1" id="nivel" name="nivel">
+                                                        <option value="">Seleccione un nivel</option>
+                                                        
+                                                        <option value="Pre-Primaria">Pre-Primaria</option>
+                                                        <option value="Primaria">Primaria</option>
+                                                        <option value="Basico">Basico</option>
+                                                        <option value="Diversificado">Diversificado</option>
+                                                    </select>
+                </div> 
+                                                              
+            </div> 
+            
         </div>
+        
+          <br>
+        <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">Grado:</label>
+       </div>
+             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="form-select-list">
+                    
+            <select data-placeholder="Seleccione un nivel" class="chosen-select" tabindex="-1" id="grado" name="grado">
+                                                        <option value="">Seleccione un grado</option>
+                                                        
+                                                    </select>
+                </div> 
+                                                              
+            </div> 
+            
+        </div>
+         <br>
+          <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} ">{{ form.Materias.label_tag }}</label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                     {{ form.Materias }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+        <br>
+         <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} "> {{ form.contenido.label_tag }} </label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                     {{ form.contenido }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+         <br>
+        <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <label class="login2 pull-right pull-right-pro"for="{{ form.Grado.label }} "> {{ form.pagina.label_tag }}</label>
+            </div>
+                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class="form-select-list">
+                       
+            {{ form.pagina }}
+                </div> 
+                                                              
+            </div> 
+            
+                                               
+           
+           
+           
+        </div>
+       <br>
+       
+        <button type="submit" class="save btn btn-default">Guardar</button>
+    </form>
+    </center>
+    </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>
+        <script src="{% static 'administracion/js/icheck/icheck.min.js' %}"></script>
+    
+    <script type="text/javascript">
+        $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+        $( document ).ready(function() {
+            $("#nivel").change(getGrados);
+        });
+       
+        function getGrados() {
+
+            var nivelid = $("#nivel").val();
+            
+            if (nivelid) {
+                // Eliminamos las opciones anteriores del select
+                $("#grado").html("");
+                var request = $.ajax({
+                    type: "GET",
+                    url: "{% url 'get_grados' %}",
+                    data: {
+                        "nivelid": nivelid,
+                    },
+                });
+                request.done(function(response) {
+                    // Agregamos los resultados al select
+                    $("#grado").html(response.grados);
+                    $("#grado").trigger("change");
+                });
+            } else {
+                $("#grado").html("<option value='' selected='selected'>---------</option>");
+            }
+        }    
+
+        
+    </script>
+      
+    <script src="{% static 'administracion/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'administracion/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/bootstrap.min.js' %}"></script>
+    <!-- chosen JS
+        ============================================ -->
+    <script src="{% static 'administracion/js/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'administracion/js/chosen/chosen-active.js' %}"></script>
 
 {% endblock %}

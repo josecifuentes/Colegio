@@ -2373,6 +2373,15 @@ ul.two-part-sp li{
     border-radius: 3px;
 	outline:none;
 }
+.pd-setting {
+    border: none;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 15px;
+    background: #006DF0;
+    border-radius: 3px;
+	outline:none;
+}
 .product-status-wrap .ps-setting {
     border: none;
     color: #fff;
@@ -2383,6 +2392,15 @@ ul.two-part-sp li{
 	outline:none;
 }
 .product-status-wrap .ds-setting {
+    border: none;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 15px;
+    background: #D80027;
+    border-radius: 3px;
+	outline:none;
+}
+ .ds-setting {
     border: none;
     color: #fff;
     padding: 5px 15px;
