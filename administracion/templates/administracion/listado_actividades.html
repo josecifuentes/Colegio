@@ -49,7 +49,7 @@
              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="form-select-list">
                     
-            <select data-placeholder="Seleccione un nivel" class="chosen-select" tabindex="-1" id="grado" name="grado">
+            <select data-placeholder="Seleccione un nivel" class="chosen-select" id="grado" name="grado">
                                                         <option value="">Seleccione un grado</option>
                                                         
                                                     </select>
@@ -148,7 +148,7 @@
                 request.done(function(response) {
                     // Agregamos los resultados al select
                     $("#grado").html(response.grados);
-                    $("#grado").trigger("change");
+                    $("#grado").trigger("chosen:updated");
                 });
             } else {
                 $("#grado").html("<option value='' selected='selected'>---------</option>");
